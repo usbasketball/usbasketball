@@ -1,11 +1,4 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
-
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-});
+import type {Metadata} from "next";
 
 export const metadata: Metadata = {
   title: {
@@ -21,9 +14,5 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
-    <html>
-      <body className={`${inter.variable} antialiased`}>{children}</body>
-    </html>
-  );
+  return children;
 }

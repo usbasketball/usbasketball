@@ -1,4 +1,4 @@
-import type { Locale } from "./types";
+import type {Locale} from "./types";
 
 const dictionaries = {
   nl: {
@@ -22,81 +22,76 @@ const dictionaries = {
     },
     home: {
       heroSubtitle: "Amsterdam \u2022 Amstelcampushal",
-      registerBtn: "Aanmelden",
-      aboutBtn: "Over ons",
-      welcome: "Welkom",
-      welcomeTitle: "Welkom bij U.S. Basketball",
+      registerBtn: "Doe mee!",
+      aboutBtn: "Wie zijn wij?",
+      welcome: "Welkom bij de familie",
+      welcomeTitle: "Basketbal, bier & ballen",
       welcomeText:
-        "De Amstelcampushal is het tweede thuis voor US-leden. Hier schieten we zowel op het veld als in de kantine hoopjes. Met zes dames- (damUS) en zes herenteams vind je altijd een gezellige groep op jouw niveau (18+).",
+        "De Amstelcampushal is ons tweede thuis \u2014 en eerlijk gezegd voelt het soms meer als ons eerste. Hier schieten we hoopjes op \u00e9n naast het veld. Met zes dames- en zes herenteams vind je altijd je mensen (18+, maar jong van geest).",
       teams: "Teams",
       womensTeams: "Dames teams",
       mensTeams: "Heren teams",
       season: "Seizoen",
       news: "Nieuws",
       usNews: "US Nieuws",
-      allNews: "Alle nieuws \u2192",
+      allNews: "Meer nieuws \u2192",
       photo: "Foto",
-      newSeason: "Nieuw seizoen!",
-      newSeasonText: "Aanmelden voor het seizoen 2024\u20132025 is open.",
-      registerNow: "Aanmelden nu",
-    },
-    nieuws: {
-      title: "Nieuws",
-      subtitle: "Blijf op de hoogte van het laatste US nieuws.",
-      image: "Afbeelding",
+      newSeason: "Het seizoen is open!",
+      newSeasonText:
+        "Nieuw seizoen, nieuwe kansen, zelfde gezelligheid. Schrijf je in voor 2024\u20132025!",
+      registerNow: "Join US!",
     },
     informatie: {
       title: "Informatie",
-      subtitle: "Alles over U.S. Basketball Amsterdam \u2014 van clubgeschiedenis tot teamindelingen.",
-      placeholder: "Hier komt informatie over de club, de teams, het bestuur en de faciliteiten.",
-    },
-    contact: {
-      title: "Contact",
-      subtitle: "Vragen, opmerkingen of interesse? Neem gerust contact op.",
-      address: "Adres",
-      socialMedia: "Social media",
-      sendMessage: "Stuur een bericht",
-      name: "Naam",
-      emailField: "E-mail",
-      message: "Bericht",
-      formComingSoon: "Formulier komt binnenkort",
+      subtitle:
+        "Alles wat je wil weten over US \u2014 en een paar dingen die je niet wist dat je wou weten.",
+      placeholder:
+        "Van clubgeschiedenis tot teamindelingen, van het bestuur tot de kantine \u2014 alles over US komt hier.",
     },
     trainingschema: {
       title: "Trainingschema",
-      subtitle: "Trainingstijden en locaties voor alle dames- en herenteams.",
-      placeholder: "Hier komen de trainingstijden per team voor het seizoen 2024-2025.",
+      subtitle: "Wanneer en waar we zweten. Geen excuses meer!",
+      placeholder:
+        "De trainingstijden per team voor seizoen 2024\u20132025 verschijnen hier binnenkort. Rek je alvast uit.",
     },
     takenschema: {
       title: "Takenschema",
-      subtitle: "Het overzicht van vrijwilligerstaken voor dit seizoen.",
-      placeholder: "Hier staat het takenschema \u2014 wie welke taak heeft bij thuiswedstrijden en andere activiteiten.",
+      subtitle: "Een club draait op vrijwilligers \u2014 en op jou!",
+      placeholder:
+        "Hier zie je straks wie wanneer welke taak heeft bij thuiswedstrijden. Samen maken we er iets moois van.",
     },
     helpUs: {
       title: "Help US",
-      subtitle: "Steun de club als sponsor, vrijwilliger of via onze partnerwinkels.",
-      placeholder: "Hier vind je informatie over hoe je de club kunt ondersteunen \u2014 sponsoring, donaties en fundraising via partnerwinkels.",
+      subtitle:
+        "Houd van het spel? Houd van US! Steun ons als sponsor of vrijwilliger.",
+      placeholder:
+        "Hier vind je binnenkort alle manieren om US te steunen \u2014 van sponsorpakketten tot shoppen via onze partnerwinkels. Elke euro telt!",
     },
     vertrouwenspersoon: {
       title: "Vertrouwenspersoon",
-      subtitle: "Bij U.S. Basketball kun je altijd terecht bij onze vertrouwenspersoon.",
-      text1: "Heb je iets meegemaakt binnen de club dat niet ok\u00e9 voelde? Of wil je ergens over praten in vertrouwen? Onze vertrouwenspersoon is er voor alle leden.",
-      text2: "Je kunt contact opnemen via:",
+      subtitle:
+        "Soms moet je gewoon even met iemand praten. Dat kan altijd bij US.",
+      text1:
+        "Heb je iets meegemaakt binnen de club dat niet ok\u00e9 voelde? Of wil je ergens over praten in vertrouwen? Onze vertrouwenspersoon is er voor alle leden \u2014 zonder oordeel, zonder drempel.",
+      text2: "Neem contact op via:",
       moreInfo: "Meer informatie volgt binnenkort op deze pagina.",
     },
     aanmelden: {
       title: "Aanmelden",
-      subtitle: "Word lid van U.S. Basketball Amsterdam \u2014 voor dames en heren vanaf 18 jaar.",
-      intro: "Wil je lid worden van U.S. Basketball? Vul het aanmeldformulier in en we nemen zo snel mogelijk contact met je op.",
+      subtitle:
+        "Je eerste stap naar het beste team van Amsterdam. Welkom thuis!",
+      intro:
+        "Klaar om deel uit te maken van de US-familie? Vul het formulier in en we nemen zo snel mogelijk contact met je op. Spoiler: je gaat er geen spijt van krijgen.",
       firstName: "Voornaam",
       lastName: "Achternaam",
       emailField: "E-mailadres",
       phone: "Telefoonnummer",
       birthDate: "Geboortedatum",
       teamPreference: "Team voorkeur",
-      formComingSoon: "Aanmeldformulier komt binnenkort",
+      formComingSoon: "Aanmeldformulier komt er snel aan \u2014 check back!",
     },
     placeholder: {
-      underConstruction: "Pagina in aanbouw",
+      underConstruction: "Komt eraan! \u{1F3C0}",
     },
     footer: {
       vertrouwenspersoon: "Vertrouwenspersoon",
@@ -123,81 +118,75 @@ const dictionaries = {
     },
     home: {
       heroSubtitle: "Amsterdam \u2022 Amstelcampushal",
-      registerBtn: "Register",
-      aboutBtn: "About us",
-      welcome: "Welcome",
-      welcomeTitle: "Welcome to U.S. Basketball",
+      registerBtn: "Join US!",
+      aboutBtn: "Who are we?",
+      welcome: "Welcome to the family",
+      welcomeTitle: "Basketball, beer & good vibes",
       welcomeText:
-        "The Amstelcampushal is the second home for US members. Here we shoot hoops both on the court and in the canteen. With six women\u2019s (damUS) and six men\u2019s teams, you\u2019ll always find a fun group at your level (18+).",
+        "The Amstelcampushal is our second home \u2014 honestly, it might be our first. We shoot hoops on the court and in the canteen. With six women\u2019s and six men\u2019s teams, you\u2019ll always find your people here (18+, young at heart).",
       teams: "Teams",
       womensTeams: "Women\u2019s teams",
       mensTeams: "Men\u2019s teams",
       season: "Season",
       news: "News",
       usNews: "US News",
-      allNews: "All news \u2192",
+      allNews: "More news \u2192",
       photo: "Photo",
-      newSeason: "New season!",
-      newSeasonText: "Registration for the 2024\u20132025 season is open.",
-      registerNow: "Register now",
-    },
-    nieuws: {
-      title: "News",
-      subtitle: "Stay up to date with the latest US news.",
-      image: "Image",
+      newSeason: "The season is open!",
+      newSeasonText:
+        "New season, new chances, same great crew. Sign up for 2024\u20132025!",
+      registerNow: "Join US!",
     },
     informatie: {
       title: "About",
-      subtitle: "Everything about U.S. Basketball Amsterdam \u2014 from club history to team divisions.",
-      placeholder: "Here you will find information about the club, teams, board, and facilities.",
-    },
-    contact: {
-      title: "Contact",
-      subtitle: "Questions, comments, or interested? Feel free to get in touch.",
-      address: "Address",
-      socialMedia: "Social media",
-      sendMessage: "Send a message",
-      name: "Name",
-      emailField: "Email",
-      message: "Message",
-      formComingSoon: "Form coming soon",
+      subtitle:
+        "Everything you want to know about US \u2014 and a few things you didn\u2019t know you needed.",
+      placeholder:
+        "From club history to team divisions, from the board to the canteen \u2014 everything about US comes here.",
     },
     trainingschema: {
       title: "Training Schedule",
-      subtitle: "Training times and locations for all women\u2019s and men\u2019s teams.",
-      placeholder: "Training times per team for the 2024-2025 season will appear here.",
+      subtitle: "When and where we sweat. No excuses!",
+      placeholder:
+        "Training times per team for the 2024\u20132025 season will appear here soon. Start stretching.",
     },
     takenschema: {
       title: "Task Schedule",
-      subtitle: "Overview of volunteer tasks for this season.",
-      placeholder: "The task schedule will appear here \u2014 who does what at home games and other activities.",
+      subtitle: "A club runs on volunteers \u2014 and that means you!",
+      placeholder:
+        "Here you\u2019ll soon see who does what at home games. Together we make it happen.",
     },
     helpUs: {
       title: "Help US",
-      subtitle: "Support the club as a sponsor, volunteer, or through our partner stores.",
-      placeholder: "Here you will find information about how to support the club \u2014 sponsoring, donations, and fundraising through partner stores.",
+      subtitle: "Love the game? Love US! Support us as a sponsor or volunteer.",
+      placeholder:
+        "All the ways to support US are coming here soon \u2014 from sponsorship packages to shopping through our partner stores. Every bit counts!",
     },
     vertrouwenspersoon: {
       title: "Confidential Counselor",
-      subtitle: "At U.S. Basketball you can always reach out to our confidential counselor.",
-      text1: "Have you experienced something within the club that didn\u2019t feel right? Or do you want to talk about something in confidence? Our confidential counselor is here for all members.",
-      text2: "You can get in touch via:",
+      subtitle:
+        "Sometimes you just need to talk to someone. At US, you always can.",
+      text1:
+        "Has something happened within the club that didn\u2019t feel right? Or do you want to talk about something in confidence? Our confidential counselor is here for all members \u2014 no judgment, no barriers.",
+      text2: "Get in touch via:",
       moreInfo: "More information will follow shortly on this page.",
     },
     aanmelden: {
       title: "Register",
-      subtitle: "Become a member of U.S. Basketball Amsterdam \u2014 for women and men aged 18+.",
-      intro: "Want to become a member of U.S. Basketball? Fill in the registration form and we will contact you as soon as possible.",
+      subtitle:
+        "Your first step toward the best team in Amsterdam. Welcome home!",
+      intro:
+        "Ready to become part of the US family? Fill in the form and we\u2019ll be in touch as soon as possible. Spoiler: you won\u2019t regret it.",
       firstName: "First name",
       lastName: "Last name",
       emailField: "Email address",
       phone: "Phone number",
       birthDate: "Date of birth",
       teamPreference: "Team preference",
-      formComingSoon: "Registration form coming soon",
+      formComingSoon: "Registration form coming soon \u2014 check back!",
     },
     placeholder: {
-      underConstruction: "Page under construction",
+      underConstruction: "Coming soon! \u{1F3C0}",
     },
     footer: {
       vertrouwenspersoon: "Confidential Counselor",

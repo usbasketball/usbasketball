@@ -1,15 +1,17 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { locales } from "@/lib/i18n";
-import type { Locale } from "@/lib/i18n";
+import {usePathname} from "next/navigation";
+import {locales} from "@/lib/i18n";
+import type {Locale} from "@/lib/i18n";
 
 interface LanguageSwitcherProps {
   currentLocale: Locale;
 }
 
-export default function LanguageSwitcher({ currentLocale }: LanguageSwitcherProps) {
+export default function LanguageSwitcher({
+  currentLocale,
+}: LanguageSwitcherProps) {
   const pathname = usePathname();
 
   function getLocalePath(locale: Locale) {

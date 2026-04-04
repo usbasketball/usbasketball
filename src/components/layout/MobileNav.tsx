@@ -2,8 +2,8 @@
 
 import NavLink from "./NavLink";
 import LanguageSwitcher from "./LanguageSwitcher";
-import { getNavItems } from "@/lib/constants";
-import type { Locale, Dictionary } from "@/lib/i18n";
+import {getNavItems} from "@/lib/constants";
+import type {Locale, Dictionary} from "@/lib/i18n";
 
 interface MobileNavProps {
   isOpen: boolean;
@@ -12,7 +12,12 @@ interface MobileNavProps {
   dict: Dictionary;
 }
 
-export default function MobileNav({ isOpen, onClose, locale, dict }: MobileNavProps) {
+export default function MobileNav({
+  isOpen,
+  onClose,
+  locale,
+  dict,
+}: MobileNavProps) {
   const navItems = getNavItems(locale, dict);
 
   return (
@@ -20,7 +25,9 @@ export default function MobileNav({ isOpen, onClose, locale, dict }: MobileNavPr
       {/* Backdrop */}
       <div
         className={`fixed inset-0 z-40 bg-black/70 transition-opacity duration-300 lg:hidden ${
-          isOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+          isOpen
+            ? "opacity-100 pointer-events-auto"
+            : "opacity-0 pointer-events-none"
         }`}
         onClick={onClose}
         aria-hidden="true"
@@ -45,7 +52,16 @@ export default function MobileNav({ isOpen, onClose, locale, dict }: MobileNavPr
             aria-label="Close menu"
             className="text-us-white hover:text-us-gold transition-colors p-1"
           >
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
               <line x1="18" y1="6" x2="6" y2="18" />
               <line x1="6" y1="6" x2="18" y2="18" />
             </svg>

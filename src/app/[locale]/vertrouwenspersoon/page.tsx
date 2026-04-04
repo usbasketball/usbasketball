@@ -1,29 +1,29 @@
-import type { Metadata } from "next";
-import { notFound } from "next/navigation";
+import type {Metadata} from "next";
+import {notFound} from "next/navigation";
 import PageHeader from "@/components/ui/PageHeader";
-import { CONTACT_EMAIL } from "@/lib/constants";
-import { isValidLocale, getDictionary } from "@/lib/i18n";
-import type { Locale } from "@/lib/i18n";
+import {CONTACT_EMAIL} from "@/lib/constants";
+import {isValidLocale, getDictionary} from "@/lib/i18n";
+import type {Locale} from "@/lib/i18n";
 
 export async function generateStaticParams() {
-  return [{ locale: "nl" }, { locale: "en" }];
+  return [{locale: "nl"}, {locale: "en"}];
 }
 
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ locale: Locale }>;
+  params: Promise<{locale: Locale}>;
 }): Promise<Metadata> {
-  const { locale } = await params;
-  return { title: getDictionary(locale).vertrouwenspersoon.title };
+  const {locale} = await params;
+  return {title: getDictionary(locale).vertrouwenspersoon.title};
 }
 
 export default async function Vertrouwenspersoon({
   params,
 }: {
-  params: Promise<{ locale: string }>;
+  params: Promise<{locale: string}>;
 }) {
-  const { locale } = await params;
+  const {locale} = await params;
   if (!isValidLocale(locale)) notFound();
   const t = getDictionary(locale).vertrouwenspersoon;
 
@@ -35,7 +35,10 @@ export default async function Vertrouwenspersoon({
           <p className="text-us-white/70 text-sm leading-relaxed">{t.text1}</p>
           <p className="text-us-white/70 text-sm leading-relaxed">
             {t.text2}{" "}
-            <a href={`mailto:${CONTACT_EMAIL}`} className="text-us-gold hover:underline">
+            <a
+              href={`mailto:${CONTACT_EMAIL}`}
+              className="text-us-gold hover:underline"
+            >
               {CONTACT_EMAIL}
             </a>
           </p>

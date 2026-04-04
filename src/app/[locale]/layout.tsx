@@ -1,20 +1,24 @@
-import type { Metadata } from "next";
-import { notFound } from "next/navigation";
+import type {Metadata} from "next";
+import {notFound} from "next/navigation";
+import {Inter} from "next/font/google";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
-import { isValidLocale, getDictionary } from "@/lib/i18n";
-import type { Locale } from "@/lib/i18n";
+import {isValidLocale, getDictionary} from "@/lib/i18n";
+import type {Locale} from "@/lib/i18n";
+import "../globals.css";
+
+const inter = Inter({variable: "--font-inter", subsets: ["latin"]});
 
 export async function generateStaticParams() {
-  return [{ locale: "nl" }, { locale: "en" }];
+  return [{locale: "nl"}, {locale: "en"}];
 }
 
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ locale: Locale }>;
+  params: Promise<{locale: Locale}>;
 }): Promise<Metadata> {
-  const { locale } = await params;
+  const {locale} = await params;
   const isNl = locale === "nl";
   return {
     title: {
@@ -36,16 +40,18 @@ export default async function LocaleLayout({
   params,
 }: {
   children: React.ReactNode;
-  params: Promise<{ locale: string }>;
+  params: Promise<{locale: string}>;
 }) {
-  const { locale } = await params;
+  const {locale} = await params;
   if (!isValidLocale(locale)) notFound();
 
   const dict = getDictionary(locale);
 
   return (
     <html lang={locale}>
-      <body className="antialiased flex flex-col min-h-screen">
+      <body
+        className={`${inter.variable} antialiased flex flex-col min-h-screen`}
+      >
         <Header locale={locale} dict={dict} />
         <main className="flex-1">{children}</main>
         <Footer locale={locale} dict={dict} />

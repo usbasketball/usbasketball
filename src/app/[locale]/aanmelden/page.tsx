@@ -1,37 +1,37 @@
-import type { Metadata } from "next";
-import { notFound } from "next/navigation";
+import type {Metadata} from "next";
+import {notFound} from "next/navigation";
 import PageHeader from "@/components/ui/PageHeader";
-import { isValidLocale, getDictionary } from "@/lib/i18n";
-import type { Locale } from "@/lib/i18n";
+import {isValidLocale, getDictionary} from "@/lib/i18n";
+import type {Locale} from "@/lib/i18n";
 
 export async function generateStaticParams() {
-  return [{ locale: "nl" }, { locale: "en" }];
+  return [{locale: "nl"}, {locale: "en"}];
 }
 
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ locale: Locale }>;
+  params: Promise<{locale: Locale}>;
 }): Promise<Metadata> {
-  const { locale } = await params;
-  return { title: getDictionary(locale).aanmelden.title };
+  const {locale} = await params;
+  return {title: getDictionary(locale).aanmelden.title};
 }
 
 export default async function Aanmelden({
   params,
 }: {
-  params: Promise<{ locale: string }>;
+  params: Promise<{locale: string}>;
 }) {
-  const { locale } = await params;
+  const {locale} = await params;
   if (!isValidLocale(locale)) notFound();
   const t = getDictionary(locale).aanmelden;
 
   const fields = [
-    { label: t.firstName, type: "text" },
-    { label: t.lastName, type: "text" },
-    { label: t.emailField, type: "email" },
-    { label: t.phone, type: "tel" },
-    { label: t.birthDate, type: "date" },
+    {label: t.firstName, type: "text"},
+    {label: t.lastName, type: "text"},
+    {label: t.emailField, type: "email"},
+    {label: t.phone, type: "tel"},
+    {label: t.birthDate, type: "date"},
   ];
 
   return (

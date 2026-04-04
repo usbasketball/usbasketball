@@ -3,7 +3,7 @@ interface PageHeaderProps {
   subtitle?: string;
 }
 
-export default function PageHeader({ title, subtitle }: PageHeaderProps) {
+export default function PageHeader({title, subtitle}: PageHeaderProps) {
   return (
     <div className="bg-us-gray border-b border-us-gray-light py-10 px-4 sm:px-6">
       <div className="max-w-7xl mx-auto">

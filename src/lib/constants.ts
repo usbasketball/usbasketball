@@ -1,4 +1,4 @@
-import type { Locale, Dictionary } from "@/lib/i18n";
+import type {Locale, Dictionary} from "@/lib/i18n";
 
 export const SITE_NAME = "U.S. Basketball";
 export const SITE_TAGLINE = "If you can't beat US, Join US!";
@@ -20,13 +20,10 @@ export const SOCIAL = {
 
 export function getNavItems(locale: Locale, dict: Dictionary) {
   return [
-    { label: dict.nav.home, href: `/${locale}` },
-    { label: dict.nav.informatie, href: `/${locale}/informatie` },
-    { label: dict.nav.nieuws, href: `/${locale}/nieuws` },
-    { label: dict.nav.trainingschema, href: `/${locale}/trainingschema` },
-    { label: dict.nav.takenschema, href: `/${locale}/takenschema` },
-    { label: dict.nav.helpUs, href: `/${locale}/help-us` },
-    { label: dict.nav.contact, href: `/${locale}/contact` },
-    { label: dict.nav.aanmelden, href: `/${locale}/aanmelden` },
+    {label: dict.nav.home, href: `/${locale}`},
+    {label: dict.nav.informatie, href: `/${locale}/informatie`},
+    {label: dict.nav.trainingschema, href: `/${locale}/trainingschema`},
+    {label: dict.nav.takenschema, href: `/${locale}/takenschema`},
+    {label: dict.nav.aanmelden, href: `/${locale}/aanmelden`},
   ] as const;
 }
