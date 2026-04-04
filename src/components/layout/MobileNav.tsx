@@ -1,14 +1,20 @@
 "use client";
 
 import NavLink from "./NavLink";
-import { NAV_ITEMS } from "@/lib/constants";
+import LanguageSwitcher from "./LanguageSwitcher";
+import { getNavItems } from "@/lib/constants";
+import type { Locale, Dictionary } from "@/lib/i18n";
 
 interface MobileNavProps {
   isOpen: boolean;
   onClose: () => void;
+  locale: Locale;
+  dict: Dictionary;
 }
 
-export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
+export default function MobileNav({ isOpen, onClose, locale, dict }: MobileNavProps) {
+  const navItems = getNavItems(locale, dict);
+
   return (
     <>
       {/* Backdrop */}
@@ -31,7 +37,9 @@ export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
       >
         {/* Close button */}
         <div className="flex items-center justify-between px-6 py-5 border-b border-us-gray-light">
-          <span className="text-us-gold font-bold tracking-widest text-sm uppercase">Menu</span>
+          <span className="text-us-gold font-bold tracking-widest text-sm uppercase">
+            {dict.common.menu}
+          </span>
           <button
             onClick={onClose}
             aria-label="Close menu"
@@ -45,13 +53,18 @@ export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
         </div>
 
         {/* Nav items */}
-        <nav className="flex flex-col gap-1 p-6">
-          {NAV_ITEMS.map((item) => (
+        <nav className="flex flex-col gap-1 p-6 flex-1">
+          {navItems.map((item) => (
             <div key={item.href} className="py-3 border-b border-us-gray-light">
               <NavLink href={item.href} label={item.label} onClick={onClose} />
             </div>
           ))}
         </nav>
+
+        {/* Language switcher at bottom */}
+        <div className="px-6 py-5 border-t border-us-gray-light">
+          <LanguageSwitcher currentLocale={locale} />
+        </div>
       </div>
     </>
   );

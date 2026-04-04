@@ -1,7 +1,13 @@
 import Link from "next/link";
 import { ADDRESS, CONTACT_EMAIL, SITE_NAME, SITE_TAGLINE, SOCIAL } from "@/lib/constants";
+import type { Locale, Dictionary } from "@/lib/i18n";
 
-export default function Footer() {
+interface FooterProps {
+  locale: Locale;
+  dict: Dictionary;
+}
+
+export default function Footer({ locale, dict }: FooterProps) {
   return (
     <footer className="bg-us-gray border-t border-us-gray-light mt-auto">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -44,7 +50,9 @@ export default function Footer() {
 
         {/* Contact */}
         <div className="flex flex-col gap-2">
-          <h3 className="text-us-gold text-xs font-bold uppercase tracking-widest mb-1">Contact</h3>
+          <h3 className="text-us-gold text-xs font-bold uppercase tracking-widest mb-1">
+            {dict.common.contact}
+          </h3>
           <a
             href={ADDRESS.mapsUrl}
             target="_blank"
@@ -67,15 +75,26 @@ export default function Footer() {
 
         {/* Links */}
         <div className="flex flex-col gap-2">
-          <h3 className="text-us-gold text-xs font-bold uppercase tracking-widest mb-1">Links</h3>
-          <Link href="/aanmelden" className="text-us-white/70 hover:text-us-white text-sm transition-colors">
-            Aanmelden
+          <h3 className="text-us-gold text-xs font-bold uppercase tracking-widest mb-1">
+            {dict.common.links}
+          </h3>
+          <Link
+            href={`/${locale}/aanmelden`}
+            className="text-us-white/70 hover:text-us-white text-sm transition-colors"
+          >
+            {dict.nav.aanmelden}
           </Link>
-          <Link href="/vertrouwenspersoon" className="text-us-white/70 hover:text-us-white text-sm transition-colors">
-            Vertrouwenspersoon
+          <Link
+            href={`/${locale}/vertrouwenspersoon`}
+            className="text-us-white/70 hover:text-us-white text-sm transition-colors"
+          >
+            {dict.footer.vertrouwenspersoon}
           </Link>
-          <Link href="/help-us" className="text-us-white/70 hover:text-us-white text-sm transition-colors">
-            Help US
+          <Link
+            href={`/${locale}/help-us`}
+            className="text-us-white/70 hover:text-us-white text-sm transition-colors"
+          >
+            {dict.nav.helpUs}
           </Link>
         </div>
       </div>

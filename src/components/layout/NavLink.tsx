@@ -11,7 +11,8 @@ interface NavLinkProps {
 
 export default function NavLink({ href, label, onClick }: NavLinkProps) {
   const pathname = usePathname();
-  const isActive = pathname === href;
+  // Active if exact match or sub-path (but not root clashing with sub-pages)
+  const isActive = pathname === href || (href !== "/" && pathname.startsWith(href + "/"));
 
   return (
     <Link
