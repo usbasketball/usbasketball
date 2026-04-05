@@ -30,9 +30,9 @@ export function middleware(request: NextRequest) {
   // Redirect to the locale-prefixed path
   const url = request.nextUrl.clone();
   url.pathname = `/${locale}${pathname}`;
-  return NextResponse.redirect(url);
+  return NextResponse.redirect(url, 308);
 }
 
 export const config = {
-  matcher: ["/((?!_next|api|favicon\\.ico|images).*)"],
+  matcher: ["/((?!_next|api|favicon\\.ico|robots\\.txt|sitemap\\.xml|images).*)"],
 };

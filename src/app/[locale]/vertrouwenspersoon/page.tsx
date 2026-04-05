@@ -4,6 +4,7 @@ import PageHeader from "@/components/ui/PageHeader";
 import {CONTACT_EMAIL} from "@/lib/constants";
 import {isValidLocale, getDictionary} from "@/lib/i18n";
 import type {Locale} from "@/lib/i18n";
+import {getAlternates} from "@/lib/seo";
 
 export async function generateStaticParams() {
   return [{locale: "nl"}, {locale: "en"}];
@@ -15,7 +16,12 @@ export async function generateMetadata({
   params: Promise<{locale: Locale}>;
 }): Promise<Metadata> {
   const {locale} = await params;
-  return {title: getDictionary(locale).vertrouwenspersoon.title};
+  const t = getDictionary(locale).vertrouwenspersoon;
+  return {
+    title: t.title,
+    description: t.subtitle,
+    alternates: getAlternates(locale, "/vertrouwenspersoon"),
+  };
 }
 
 export default async function Vertrouwenspersoon({

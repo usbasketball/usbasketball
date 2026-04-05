@@ -3,6 +3,7 @@ import {notFound} from "next/navigation";
 import PageHeader from "@/components/ui/PageHeader";
 import {isValidLocale, getDictionary} from "@/lib/i18n";
 import type {Locale} from "@/lib/i18n";
+import {getAlternates} from "@/lib/seo";
 
 export async function generateStaticParams() {
   return [{locale: "nl"}, {locale: "en"}];
@@ -14,7 +15,12 @@ export async function generateMetadata({
   params: Promise<{locale: Locale}>;
 }): Promise<Metadata> {
   const {locale} = await params;
-  return {title: getDictionary(locale).aanmelden.title};
+  const t = getDictionary(locale).aanmelden;
+  return {
+    title: t.title,
+    description: t.subtitle,
+    alternates: getAlternates(locale, "/aanmelden"),
+  };
 }
 
 export default async function Aanmelden({

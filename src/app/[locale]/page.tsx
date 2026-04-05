@@ -4,6 +4,7 @@ import {notFound} from "next/navigation";
 import {SITE_TAGLINE} from "@/lib/constants";
 import {isValidLocale, getDictionary} from "@/lib/i18n";
 import type {Locale} from "@/lib/i18n";
+import {getAlternates} from "@/lib/seo";
 
 export async function generateStaticParams() {
   return [{locale: "nl"}, {locale: "en"}];
@@ -21,6 +22,7 @@ export async function generateMetadata({
     description: isNl
       ? "Basketbal, bier & ballen — U.S. Basketball Amsterdam heeft 12 teams voor dames en heren (18+). If you can't beat US, join US!"
       : "Basketball, beer & good vibes — U.S. Basketball Amsterdam has 12 teams for women and men (18+). If you can't beat US, join US!",
+    alternates: getAlternates(locale),
   };
 }
 

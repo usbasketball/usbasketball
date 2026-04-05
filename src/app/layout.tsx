@@ -1,6 +1,7 @@
 import type {Metadata} from "next";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.usbasketball.nl"),
   title: {
     default: "U.S. Basketball Amsterdam",
     template: "%s | U.S. Basketball Amsterdam",
