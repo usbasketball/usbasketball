@@ -7,6 +7,11 @@ export const metadata: Metadata = {
   },
   description:
     "U.S. Basketball Amsterdam — basketball club with women's and men's teams for players 18+.",
+  icons: {
+    icon: "/icon.png",
+    apple: "/apple-touch-icon.png",
+    shortcut: "/shortcut-icon.png",
+  },
 };
 
 export default function RootLayout({
