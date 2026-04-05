@@ -1,8 +1,8 @@
-import { NextRequest, NextResponse } from "next/server";
-import { locales, defaultLocale, isValidLocale } from "@/lib/i18n";
+import {NextRequest, NextResponse} from "next/server";
+import {locales, defaultLocale, isValidLocale} from "@/lib/i18n";
 
 export function middleware(request: NextRequest) {
-  const { pathname } = request.nextUrl;
+  const {pathname} = request.nextUrl;
 
   // Check if the pathname already has a valid locale
   const pathnameLocale = pathname.split("/")[1];
@@ -22,7 +22,7 @@ export function middleware(request: NextRequest) {
   // Try to detect preferred locale from Accept-Language header
   const acceptLanguage = request.headers.get("accept-language") ?? "";
   const preferredLocale = locales.find((locale) =>
-    acceptLanguage.toLowerCase().includes(locale)
+    acceptLanguage.toLowerCase().includes(locale),
   );
 
   const locale = preferredLocale ?? defaultLocale;
