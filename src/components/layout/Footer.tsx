@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import {
   ADDRESS,
@@ -15,17 +16,23 @@ interface FooterProps {
 
 export default function Footer({locale, dict}: FooterProps) {
   return (
-    <footer className="bg-us-gray border-t border-us-gray-light mt-auto">
+    <footer className="bg-gray-900 mt-auto">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {/* Brand */}
         <div className="flex flex-col gap-3">
-          <div className="flex items-center gap-2">
-            <span className="text-us-red font-black text-xl">U.S.</span>
-            <span className="text-us-white font-bold text-base uppercase tracking-wide">
-              Basketball
+          <div className="flex items-center gap-2.5">
+            <Image
+              src="/us_logo_png.avif"
+              alt="U.S. Basketball"
+              width={28}
+              height={28}
+              className="h-7 w-7 brightness-0 invert"
+            />
+            <span className="text-white font-black text-base uppercase tracking-wide">
+              U.S. Basketball
             </span>
           </div>
-          <p className="text-us-white/60 text-sm italic">{SITE_TAGLINE}</p>
+          <p className="text-gray-400 text-sm italic">{SITE_TAGLINE}</p>
           <div className="flex items-center gap-4 mt-1">
             {/* Instagram */}
             <a
@@ -33,7 +40,7 @@ export default function Footer({locale, dict}: FooterProps) {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Instagram"
-              className="text-us-white/60 hover:text-us-gold transition-colors"
+              className="text-gray-400 hover:text-white transition-colors"
             >
               <svg
                 width="20"
@@ -56,7 +63,7 @@ export default function Footer({locale, dict}: FooterProps) {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Facebook"
-              className="text-us-white/60 hover:text-us-gold transition-colors"
+              className="text-gray-400 hover:text-white transition-colors"
             >
               <svg
                 width="20"
@@ -72,14 +79,14 @@ export default function Footer({locale, dict}: FooterProps) {
 
         {/* Contact */}
         <div className="flex flex-col gap-2">
-          <h3 className="text-us-gold text-xs font-bold uppercase tracking-widest mb-1">
+          <h3 className="text-gray-300 text-xs font-bold uppercase tracking-widest mb-1">
             {dict.common.contact}
           </h3>
           <a
             href={ADDRESS.mapsUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-us-white/70 hover:text-us-white text-sm transition-colors"
+            className="text-gray-400 hover:text-white text-sm transition-colors"
           >
             {ADDRESS.name}
             <br />
@@ -89,7 +96,7 @@ export default function Footer({locale, dict}: FooterProps) {
           </a>
           <a
             href={`mailto:${CONTACT_EMAIL}`}
-            className="text-us-white/70 hover:text-us-white text-sm transition-colors mt-1"
+            className="text-gray-400 hover:text-white text-sm transition-colors mt-1"
           >
             {CONTACT_EMAIL}
           </a>
@@ -97,33 +104,39 @@ export default function Footer({locale, dict}: FooterProps) {
 
         {/* Links */}
         <div className="flex flex-col gap-2">
-          <h3 className="text-us-gold text-xs font-bold uppercase tracking-widest mb-1">
+          <h3 className="text-gray-300 text-xs font-bold uppercase tracking-widest mb-1">
             {dict.common.links}
           </h3>
           <Link
             href={`/${locale}/aanmelden`}
-            className="text-us-white/70 hover:text-us-white text-sm transition-colors"
+            className="text-gray-400 hover:text-white text-sm transition-colors"
           >
             {dict.nav.aanmelden}
           </Link>
           <Link
             href={`/${locale}/vertrouwenspersoon`}
-            className="text-us-white/70 hover:text-us-white text-sm transition-colors"
+            className="text-gray-400 hover:text-white text-sm transition-colors"
           >
             {dict.footer.vertrouwenspersoon}
           </Link>
           <Link
             href={`/${locale}/help-us`}
-            className="text-us-white/70 hover:text-us-white text-sm transition-colors"
+            className="text-gray-400 hover:text-white text-sm transition-colors"
           >
             {dict.nav.helpUs}
+          </Link>
+          <Link
+            href={`/${locale}/privacy`}
+            className="text-gray-400 hover:text-white text-sm transition-colors"
+          >
+            {dict.footer.privacy}
           </Link>
         </div>
       </div>
 
-      <div className="border-t border-us-gray-light">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 text-center text-us-white/30 text-xs">
-          &copy; {new Date().getFullYear()} {SITE_NAME} &mdash; Amsterdam
+      <div className="border-t border-gray-800">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 text-center text-gray-600 text-xs">
+          &copy; {new Date().getFullYear()} {SITE_NAME}
         </div>
       </div>
     </footer>

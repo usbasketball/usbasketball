@@ -25,13 +25,13 @@ export default function LanguageSwitcher({
     <div className="flex items-center gap-1 text-xs font-bold uppercase tracking-widest">
       {locales.map((locale, i) => (
         <span key={locale} className="flex items-center gap-1">
-          {i > 0 && <span className="text-us-gray-light">/</span>}
+          {i > 0 && <span className="text-gray-300">/</span>}
           {locale === currentLocale ? (
-            <span className="text-us-gold">{locale.toUpperCase()}</span>
+            <span className="text-gray-900">{locale.toUpperCase()}</span>
           ) : (
             <Link
               href={getLocalePath(locale)}
-              className="text-us-white/50 hover:text-us-white transition-colors"
+              className="text-gray-400 hover:text-gray-900 transition-colors"
             >
               {locale.toUpperCase()}
             </Link>

@@ -21,7 +21,7 @@ export default function NavLink({href, label, onClick}: NavLinkProps) {
       onClick={onClick}
       className={`
         text-sm font-medium tracking-wide uppercase transition-colors duration-150
-        ${isActive ? "text-us-gold" : "text-us-white hover:text-us-gold"}
+        ${isActive ? "text-gray-900 font-semibold" : "text-gray-500 hover:text-gray-900"}
       `}
     >
       {label}

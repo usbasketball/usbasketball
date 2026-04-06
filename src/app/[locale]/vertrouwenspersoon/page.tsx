@@ -37,18 +37,18 @@ export default async function Vertrouwenspersoon({
     <>
       <PageHeader title={t.title} subtitle={t.subtitle} />
       <section className="max-w-2xl mx-auto px-4 sm:px-6 py-12">
-        <div className="bg-us-gray border border-us-gray-light rounded p-6 flex flex-col gap-4">
-          <p className="text-us-white/70 text-sm leading-relaxed">{t.text1}</p>
-          <p className="text-us-white/70 text-sm leading-relaxed">
+        <div className="bg-white shadow-sm rounded-xl border border-gray-100 p-8 flex flex-col gap-4">
+          <p className="text-gray-600 text-sm leading-relaxed">{t.text1}</p>
+          <p className="text-gray-600 text-sm leading-relaxed">
             {t.text2}{" "}
             <a
               href={`mailto:${CONTACT_EMAIL}`}
-              className="text-us-gold hover:underline"
+              className="text-gray-900 font-medium hover:underline"
             >
               {CONTACT_EMAIL}
             </a>
           </p>
-          <p className="text-us-white/40 text-xs mt-2">{t.moreInfo}</p>
+          <p className="text-gray-400 text-xs mt-2">{t.moreInfo}</p>
         </div>
       </section>
     </>

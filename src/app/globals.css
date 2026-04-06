@@ -1,17 +1,9 @@
 @import "tailwindcss";
 
 @theme {
-  --color-us-black: #0a0a0a;
-  --color-us-gray: #1a1a1a;
-  --color-us-gray-light: #2a2a2a;
-  --color-us-red: #c8102e;
-  --color-us-orange: #e85d26;
-  --color-us-gold: #f2a900;
-  --color-us-white: #ffffff;
-
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
 }
 
 body {
-  @apply bg-us-black text-us-white;
+  @apply bg-white text-gray-900;
 }

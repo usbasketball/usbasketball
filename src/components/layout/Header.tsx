@@ -1,6 +1,7 @@
 "use client";
 
 import {useState} from "react";
+import Image from "next/image";
 import Link from "next/link";
 import NavLink from "./NavLink";
 import MobileNav from "./MobileNav";
@@ -19,18 +20,22 @@ export default function Header({locale, dict}: HeaderProps) {
 
   return (
     <>
-      <header className="sticky top-0 z-30 bg-us-black border-b border-us-gray-light">
+      <header className="sticky top-0 z-30 bg-white/80 backdrop-blur-md shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between h-16">
           {/* Logo */}
           <Link
             href={`/${locale}`}
-            className="flex items-center gap-2 shrink-0"
+            className="flex items-center gap-2.5 shrink-0"
           >
-            <span className="text-us-red font-black text-xl tracking-tight leading-none">
-              U.S.
-            </span>
-            <span className="text-us-white font-bold text-base tracking-wide leading-none uppercase">
-              Basketball
+            <Image
+              src="/us_logo_png.avif"
+              alt="U.S. Basketball"
+              width={36}
+              height={36}
+              className="h-9 w-9"
+            />
+            <span className="text-gray-900 font-black text-base tracking-wide leading-none uppercase">
+              U.S. Basketball
             </span>
           </Link>
 
@@ -41,14 +46,14 @@ export default function Header({locale, dict}: HeaderProps) {
                 <NavLink key={item.href} href={item.href} label={item.label} />
               ))}
             </nav>
-            <div className="border-l border-us-gray-light pl-5">
+            <div className="border-l border-gray-200 pl-5">
               <LanguageSwitcher currentLocale={locale} />
             </div>
           </div>
 
           {/* Hamburger (mobile) */}
           <button
-            className="lg:hidden text-us-white hover:text-us-gold transition-colors p-2 -mr-2"
+            className="lg:hidden text-gray-700 hover:text-gray-900 transition-colors p-2 -mr-2"
             onClick={() => setMenuOpen(true)}
             aria-label="Open menu"
             aria-expanded={menuOpen}

@@ -9,6 +9,7 @@ const routes = [
   "/aanmelden",
   "/help-us",
   "/vertrouwenspersoon",
+  "/privacy",
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {

@@ -95,6 +95,7 @@ const dictionaries = {
     },
     footer: {
       vertrouwenspersoon: "Vertrouwenspersoon",
+      privacy: "Privacyverklaring",
     },
   },
   en: {
@@ -190,6 +191,7 @@ const dictionaries = {
     },
     footer: {
       vertrouwenspersoon: "Confidential Counselor",
+      privacy: "Privacy Policy",
     },
   },
 } as const;

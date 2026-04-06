@@ -44,27 +44,27 @@ export default async function Aanmelden({
     <>
       <PageHeader title={t.title} subtitle={t.subtitle} />
       <section className="max-w-2xl mx-auto px-4 sm:px-6 py-12">
-        <div className="bg-us-gray border border-us-gray-light rounded p-6 flex flex-col gap-5">
-          <p className="text-us-white/70 text-sm leading-relaxed">{t.intro}</p>
+        <div className="bg-white shadow-sm rounded-xl border border-gray-100 p-8 flex flex-col gap-5">
+          <p className="text-gray-600 text-sm leading-relaxed">{t.intro}</p>
 
           {fields.map((field) => (
             <div key={field.label} className="flex flex-col gap-1">
-              <label className="text-us-white/50 text-xs uppercase tracking-wide">
+              <label className="text-gray-500 text-xs uppercase tracking-wide">
                 {field.label}
               </label>
-              <div className="h-11 bg-us-gray-light rounded border border-us-gray-light" />
+              <div className="h-11 bg-gray-50 rounded-lg border border-gray-200" />
             </div>
           ))}
 
           <div className="flex flex-col gap-1">
-            <label className="text-us-white/50 text-xs uppercase tracking-wide">
+            <label className="text-gray-500 text-xs uppercase tracking-wide">
               {t.teamPreference}
             </label>
-            <div className="h-11 bg-us-gray-light rounded border border-us-gray-light" />
+            <div className="h-11 bg-gray-50 rounded-lg border border-gray-200" />
           </div>
 
-          <div className="h-12 bg-us-red/40 rounded flex items-center justify-center mt-2">
-            <span className="text-us-white/40 text-xs uppercase tracking-wide">
+          <div className="h-12 bg-gray-100 border border-gray-200 rounded-lg flex items-center justify-center mt-2">
+            <span className="text-gray-400 text-xs uppercase tracking-wide">
               {t.formComingSoon}
             </span>
           </div>
