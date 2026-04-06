@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import {usePathname} from "next/navigation";
 
 interface NavLinkProps {
   href: string;
@@ -9,9 +9,11 @@ interface NavLinkProps {
   onClick?: () => void;
 }
 
-export default function NavLink({ href, label, onClick }: NavLinkProps) {
+export default function NavLink({href, label, onClick}: NavLinkProps) {
   const pathname = usePathname();
-  const isActive = pathname === href;
+  // Active if exact match or sub-path (but not root clashing with sub-pages)
+  const isActive =
+    pathname === href || (href !== "/" && pathname.startsWith(href + "/"));
 
   return (
     <Link
@@ -19,7 +21,7 @@ export default function NavLink({ href, label, onClick }: NavLinkProps) {
       onClick={onClick}
       className={`
         text-sm font-medium tracking-wide uppercase transition-colors duration-150
-        ${isActive ? "text-us-gold" : "text-us-white hover:text-us-gold"}
+        ${isActive ? "text-gray-900 font-semibold" : "text-gray-500 hover:text-gray-900"}
       `}
     >
       {label}

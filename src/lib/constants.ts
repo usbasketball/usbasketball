@@ -1,3 +1,5 @@
+import type {Locale, Dictionary} from "@/lib/i18n";
+
 export const SITE_NAME = "U.S. Basketball";
 export const SITE_TAGLINE = "If you can't beat US, Join US!";
 export const CONTACT_EMAIL = "bestuur@usbasketball.nl";
@@ -16,13 +18,12 @@ export const SOCIAL = {
   facebook: "https://facebook.com/usbasketbal",
 };
 
-export const NAV_ITEMS = [
-  { label: "Home", href: "/" },
-  { label: "Informatie", href: "/informatie" },
-  { label: "Nieuws", href: "/nieuws" },
-  { label: "Trainingschema", href: "/trainingschema" },
-  { label: "Takenschema", href: "/takenschema" },
-  { label: "Help US", href: "/help-us" },
-  { label: "Contact", href: "/contact" },
-  { label: "Aanmelden", href: "/aanmelden" },
-] as const;
+export function getNavItems(locale: Locale, dict: Dictionary) {
+  return [
+    {label: dict.nav.home, href: `/${locale}`},
+    {label: dict.nav.informatie, href: `/${locale}/informatie`},
+    {label: dict.nav.trainingschema, href: `/${locale}/trainingschema`},
+    {label: dict.nav.takenschema, href: `/${locale}/takenschema`},
+    {label: dict.nav.aanmelden, href: `/${locale}/aanmelden`},
+  ] as const;
+}

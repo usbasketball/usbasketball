@@ -1,24 +1,17 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
-
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-});
+import type {Metadata} from "next";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.usbasketball.nl"),
   title: {
     default: "U.S. Basketball Amsterdam",
     template: "%s | U.S. Basketball Amsterdam",
   },
   description:
-    "U.S. Basketball Amsterdam — basketbalclub met dames- en herenteams voor spelers 18+. Thuis in de Amstelcampushal.",
-  openGraph: {
-    siteName: "U.S. Basketball Amsterdam",
-    locale: "nl_NL",
+    "U.S. Basketball Amsterdam — basketball club with women's and men's teams for players 18+.",
+  icons: {
+    icon: "/icon.png",
+    apple: "/apple-touch-icon.png",
+    shortcut: "/shortcut-icon.png",
   },
 };
 
@@ -27,13 +20,5 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
-    <html lang="nl">
-      <body className={`${inter.variable} antialiased flex flex-col min-h-screen`}>
-        <Header />
-        <main className="flex-1">{children}</main>
-        <Footer />
-      </body>
-    </html>
-  );
+  return children;
 }
