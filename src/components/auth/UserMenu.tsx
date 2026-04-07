@@ -52,7 +52,7 @@ export default function UserMenu({dict, locale}: UserMenuProps) {
     <div ref={ref} className="relative">
       <button
         onClick={() => setOpen((o) => !o)}
-        className="flex items-center cursor-pointer focus:outline-none hover:opacity-80 transition-opacity"
+        className="flex items-center cursor-pointer focus:outline-none rounded-full ring-2 ring-transparent hover:ring-4 hover:ring-gray-100 transition-all"
         aria-label={dict.login.account}
         aria-expanded={open}
         aria-haspopup="true"
