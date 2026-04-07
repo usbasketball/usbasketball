@@ -38,7 +38,7 @@ const dictionaries = {
       photo: "Foto",
       newSeason: "Het seizoen is open!",
       newSeasonText:
-        "Nieuw seizoen, nieuwe kansen, zelfde gezelligheid. Schrijf je in voor 2024\u20132025!",
+        "Nieuw seizoen, nieuwe kansen, zelfde gezelligheid. Schrijf je in voor 2026\u20132027!",
       registerNow: "Join US!",
     },
     informatie: {
@@ -52,7 +52,7 @@ const dictionaries = {
       title: "Trainingschema",
       subtitle: "Wanneer en waar we zweten. Geen excuses meer!",
       placeholder:
-        "De trainingstijden per team voor seizoen 2024\u20132025 verschijnen hier binnenkort. Rek je alvast uit.",
+        "De trainingstijden per team voor seizoen 2026\u20132027 verschijnen hier binnenkort. Rek je alvast uit.",
     },
     takenschema: {
       title: "Takenschema",
@@ -91,7 +91,7 @@ const dictionaries = {
       lastLevel: "Laatste speelniveau",
       lastLevelPlaceholder: "bijv. Eerste klasse, Recreatief",
       lastSeason: "Laatste seizoen gespeeld",
-      lastSeasonPlaceholder: "bijv. 2023\u20132024",
+      lastSeasonPlaceholder: "bijv. 2024\u20132025",
       position: "Positie",
       positionGuard: "Guard",
       positionForward: "Forward",
@@ -162,7 +162,7 @@ const dictionaries = {
       photo: "Photo",
       newSeason: "The season is open!",
       newSeasonText:
-        "New season, new chances, same great crew. Sign up for 2024\u20132025!",
+        "New season, new chances, same great crew. Sign up for 2026\u20132027!",
       registerNow: "Join US!",
     },
     informatie: {
@@ -176,7 +176,7 @@ const dictionaries = {
       title: "Training Schedule",
       subtitle: "When and where we sweat. No excuses!",
       placeholder:
-        "Training times per team for the 2024\u20132025 season will appear here soon. Start stretching.",
+        "Training times per team for the 2026\u20132027 season will appear here soon. Start stretching.",
     },
     takenschema: {
       title: "Task Schedule",
@@ -214,7 +214,7 @@ const dictionaries = {
       lastLevel: "Last level played",
       lastLevelPlaceholder: "e.g. First division, Recreational",
       lastSeason: "Last season played",
-      lastSeasonPlaceholder: "e.g. 2023\u20132024",
+      lastSeasonPlaceholder: "e.g. 2024\u20132025",
       position: "Position",
       positionGuard: "Guard",
       positionForward: "Forward",
