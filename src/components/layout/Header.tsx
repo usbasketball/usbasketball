@@ -3,7 +3,8 @@
 import {useState} from "react";
 import Image from "next/image";
 import Link from "next/link";
-import {Show, SignInButton, UserButton} from "@clerk/nextjs";
+import {useUser} from "@auth0/nextjs-auth0";
+import UserMenu from "@/components/auth/UserMenu";
 import NavLink from "./NavLink";
 import MobileNav from "./MobileNav";
 import LanguageSwitcher from "./LanguageSwitcher";
@@ -17,11 +18,14 @@ interface HeaderProps {
 
 export default function Header({locale, dict}: HeaderProps) {
   const [menuOpen, setMenuOpen] = useState(false);
-  const navItems = getNavItems(locale, dict);
+  const {user} = useUser();
+  const navItems = getNavItems(locale, dict).filter(
+    (item) => !item.membersOnly || !!user,
+  );
 
   return (
     <>
-      <header className="sticky top-0 z-30 bg-white/80 backdrop-blur-md shadow-sm">
+      <header className="sticky top-0 z-30 bg-white shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between h-16">
           {/* Logo */}
           <Link
@@ -43,22 +47,19 @@ export default function Header({locale, dict}: HeaderProps) {
           {/* Desktop nav + language switcher + auth */}
           <div className="hidden lg:flex items-center gap-6">
             <nav className="flex items-center gap-6">
-              {navItems.map((item) => (
-                <NavLink key={item.href} href={item.href} label={item.label} />
-              ))}
+              {navItems
+                .filter((item) => !item.href.includes("/aanmelden"))
+                .map((item) => (
+                  <NavLink
+                    key={item.href}
+                    href={item.href}
+                    label={item.label}
+                  />
+                ))}
             </nav>
-            <div className="border-l border-gray-200 pl-5 flex items-center gap-4">
-              <Show when="signed-out">
-                <SignInButton mode="modal">
-                  <button className="text-sm font-semibold tracking-wide uppercase text-gray-700 hover:text-gray-900 transition-colors">
-                    {dict.login.login}
-                  </button>
-                </SignInButton>
-              </Show>
+            <div className="flex items-center gap-4">
               <LanguageSwitcher currentLocale={locale} />
-              <Show when="signed-in">
-                <UserButton />
-              </Show>
+              <UserMenu dict={dict} locale={locale} />
             </div>
           </div>
 

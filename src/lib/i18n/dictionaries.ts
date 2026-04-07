@@ -125,6 +125,8 @@ const dictionaries = {
       logout: "Uitloggen",
       membersOnly: "Alleen voor leden",
       notMember: "Geen lid? Neem contact op met het bestuur.",
+      account: "Mijn account",
+      loggedInAs: "Ingelogd als",
     },
     footer: {
       vertrouwenspersoon: "Vertrouwenspersoon",
@@ -254,6 +256,8 @@ const dictionaries = {
       logout: "Log Out",
       membersOnly: "Members only",
       notMember: "Not a member? Contact the board.",
+      account: "My Account",
+      loggedInAs: "Logged in as",
     },
     footer: {
       vertrouwenspersoon: "Confidential Counselor",

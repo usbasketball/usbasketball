@@ -1,7 +1,8 @@
 import type {Metadata} from "next";
 import {notFound} from "next/navigation";
 import {Inter} from "next/font/google";
-import {ClerkProvider} from "@clerk/nextjs";
+import {Auth0Provider} from "@auth0/nextjs-auth0";
+import {auth0} from "@/lib/auth0";
 import {SpeedInsights} from "@vercel/speed-insights/next";
 import {Analytics} from "@vercel/analytics/next";
 import Header from "@/components/layout/Header";
@@ -68,28 +69,22 @@ export default async function LocaleLayout({
   if (!isValidLocale(locale)) notFound();
 
   const dict = getDictionary(locale);
+  const session = await auth0.getSession();
 
   return (
-    <ClerkProvider
-      appearance={{
-        variables: {
-          colorPrimary: "#111827",
-          fontFamily: "var(--font-inter), Inter, sans-serif",
-        },
-      }}
-    >
-      <html lang={locale}>
-        <body
-          className={`${inter.variable} antialiased flex flex-col min-h-screen`}
-        >
+    <html lang={locale}>
+      <body
+        className={`${inter.variable} antialiased flex flex-col min-h-screen`}
+      >
+        <Auth0Provider user={session?.user}>
           <JsonLd locale={locale} />
           <Header locale={locale} dict={dict} />
           <main className="flex-1">{children}</main>
-          <Footer locale={locale} dict={dict} />
+          <Footer locale={locale} dict={dict} loggedIn={!!session} />
           <SpeedInsights />
           <Analytics />
-        </body>
-      </html>
-    </ClerkProvider>
+        </Auth0Provider>
+      </body>
+    </html>
   );
 }

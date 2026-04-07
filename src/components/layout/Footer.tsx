@@ -12,9 +12,10 @@ import type {Locale, Dictionary} from "@/lib/i18n";
 interface FooterProps {
   locale: Locale;
   dict: Dictionary;
+  loggedIn?: boolean;
 }
 
-export default function Footer({locale, dict}: FooterProps) {
+export default function Footer({locale, dict, loggedIn}: FooterProps) {
   return (
     <footer className="bg-gray-900 mt-auto">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -110,7 +111,14 @@ export default function Footer({locale, dict}: FooterProps) {
           {[
             {link: "aanmelden", text: dict.nav.aanmelden},
             {link: "help-us", text: dict.nav.helpUs},
-            {link: "vertrouwenspersoon", text: dict.footer.vertrouwenspersoon},
+            ...(loggedIn
+              ? [
+                  {
+                    link: "vertrouwenspersoon",
+                    text: dict.footer.vertrouwenspersoon,
+                  },
+                ]
+              : []),
             {link: "privacy", text: dict.footer.privacy},
           ].map(({link, text}) => (
             <Link

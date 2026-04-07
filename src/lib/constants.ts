@@ -20,9 +20,20 @@ export const SOCIAL = {
 
 export function getNavItems(locale: Locale, dict: Dictionary) {
   return [
-    {label: dict.nav.informatie, href: `/${locale}/informatie`},
-    {label: dict.nav.trainingschema, href: `/${locale}/trainingschema`},
-    {label: dict.nav.takenschema, href: `/${locale}/takenschema`},
-    {label: dict.nav.aanmelden, href: `/${locale}/aanmelden`},
-  ] as const;
+    {
+      label: dict.nav.informatie,
+      href: `/${locale}/informatie`,
+      membersOnly: false,
+    },
+    {
+      label: dict.nav.trainingschema,
+      href: `/${locale}/trainingschema`,
+      membersOnly: true,
+    },
+    {
+      label: dict.nav.takenschema,
+      href: `/${locale}/takenschema`,
+      membersOnly: true,
+    },
+  ];
 }

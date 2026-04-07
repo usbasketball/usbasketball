@@ -2,7 +2,7 @@ import Button from "@/components/ui/Button";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import {Inter} from "next/font/google";
-import {ClerkProvider} from "@clerk/nextjs";
+import {Auth0Provider} from "@auth0/nextjs-auth0";
 import {defaultLocale, getDictionary} from "@/lib/i18n";
 import "./globals.css";
 
@@ -13,7 +13,7 @@ const dict = getDictionary(locale);
 
 export default function NotFound() {
   return (
-    <ClerkProvider>
+    <Auth0Provider>
       <html lang={locale}>
         <body
           className={`${inter.variable} antialiased flex flex-col min-h-screen`}
@@ -52,6 +52,6 @@ export default function NotFound() {
           <Footer locale={locale} dict={dict} />
         </body>
       </html>
-    </ClerkProvider>
+    </Auth0Provider>
   );
 }
