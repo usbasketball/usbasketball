@@ -1,6 +1,6 @@
 "use client";
 
-import {Show, SignInButton, UserButton} from "@clerk/nextjs";
+import AuthButtons from "@/components/auth/AuthButtons";
 import NavLink from "./NavLink";
 import LanguageSwitcher from "./LanguageSwitcher";
 import {getNavItems} from "@/lib/constants";
@@ -80,16 +80,7 @@ export default function MobileNav({
 
         {/* Auth + language switcher at bottom */}
         <div className="px-6 py-5 border-t border-gray-100 flex items-center justify-between">
-          <Show when="signed-out">
-            <SignInButton mode="modal">
-              <button className="text-sm font-semibold tracking-wide uppercase text-gray-700 hover:text-gray-900 transition-colors">
-                {dict.login.login}
-              </button>
-            </SignInButton>
-          </Show>
-          <Show when="signed-in">
-            <UserButton />
-          </Show>
+          <AuthButtons dict={dict} locale={locale} />
           <LanguageSwitcher currentLocale={locale} />
         </div>
       </div>

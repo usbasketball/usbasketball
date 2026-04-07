@@ -1,25 +1,14 @@
-import {clerkMiddleware, createRouteMatcher} from "@clerk/nextjs/server";
+import {auth0} from "@/lib/auth0";
 import {NextResponse} from "next/server";
+import type {NextRequest} from "next/server";
 import {locales, defaultLocale, isValidLocale} from "@/lib/i18n";
 
-const isProtectedRoute = createRouteMatcher([
-  "/:locale/takenschema(.*)",
-  "/:locale/trainingschema(.*)",
-  "/:locale/vertrouwenspersoon(.*)",
-]);
-
-export default clerkMiddleware(async (auth, request) => {
+export async function middleware(request: NextRequest) {
   const {pathname} = request.nextUrl;
 
-  // Protect GDPR-sensitive routes — redirect to Clerk sign-in if not authenticated
-  if (isProtectedRoute(request)) {
-    await auth.protect();
-  }
-
-  // Check if the pathname already has a valid locale
-  const pathnameLocale = pathname.split("/")[1];
-  if (isValidLocale(pathnameLocale)) {
-    return NextResponse.next();
+  // Delegate all /auth/* routes to the Auth0 SDK (login, logout, callback, profile, etc.)
+  if (pathname.startsWith("/auth")) {
+    return await auth0.middleware(request);
   }
 
   // Skip internal Next.js paths and static files
@@ -29,6 +18,12 @@ export default clerkMiddleware(async (auth, request) => {
     pathname.includes(".")
   ) {
     return NextResponse.next();
+  }
+
+  // If pathname already has a valid locale, call auth0.middleware for session rolling
+  const pathnameLocale = pathname.split("/")[1];
+  if (isValidLocale(pathnameLocale)) {
+    return await auth0.middleware(request);
   }
 
   // Try to detect preferred locale from Accept-Language header
@@ -43,7 +38,7 @@ export default clerkMiddleware(async (auth, request) => {
   const url = request.nextUrl.clone();
   url.pathname = `/${locale}${pathname}`;
   return NextResponse.redirect(url, 308);
-});
+}
 
 export const config = {
   matcher: [

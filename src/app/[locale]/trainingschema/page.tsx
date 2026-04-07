@@ -1,6 +1,6 @@
 import type {Metadata} from "next";
 import {notFound, redirect} from "next/navigation";
-import {auth} from "@clerk/nextjs/server";
+import {auth0} from "@/lib/auth0";
 import PageHeader from "@/components/ui/PageHeader";
 import PlaceholderContent from "@/components/ui/PlaceholderContent";
 import {isValidLocale, getDictionary} from "@/lib/i18n";
@@ -30,8 +30,8 @@ export default async function Trainingschema({
 }) {
   const {locale} = await params;
   if (!isValidLocale(locale)) notFound();
-  const {userId} = await auth();
-  if (!userId) redirect(`/${locale}`);
+  const session = await auth0.getSession();
+  if (!session) redirect(`/auth/login?returnTo=/${locale}/trainingschema`);
   const t = getDictionary(locale).trainingschema;
   return (
     <>
