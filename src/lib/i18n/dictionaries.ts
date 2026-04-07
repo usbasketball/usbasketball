@@ -115,6 +115,7 @@ const dictionaries = {
       required: "Dit veld is verplicht",
       invalidEmail: "Vul een geldig e-mailadres in",
       underage: "Je moet minimaal 18 jaar oud zijn om je aan te melden",
+      recaptchaError: "Verificatie mislukt. Probeer het opnieuw.",
     },
     placeholder: {
       underConstruction: "Komt eraan! \u{1F3C0}",
@@ -237,6 +238,7 @@ const dictionaries = {
       required: "This field is required",
       invalidEmail: "Please enter a valid email address",
       underage: "You must be at least 18 years old to register",
+      recaptchaError: "Verification failed. Please try again.",
     },
     placeholder: {
       underConstruction: "Coming soon! \u{1F3C0}",

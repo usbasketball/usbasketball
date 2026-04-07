@@ -28,12 +28,28 @@ function validate(body: Record<string, unknown>): string | null {
   return null;
 }
 
+async function verifyRecaptcha(token: unknown): Promise<boolean> {
+  if (!token || typeof token !== "string") return false;
+  const res = await fetch("https://www.google.com/recaptcha/api/siteverify", {
+    method: "POST",
+    headers: {"Content-Type": "application/x-www-form-urlencoded"},
+    body: `secret=${process.env.RECAPTCHA_SECRET_KEY}&response=${token}`,
+  });
+  const data = await res.json() as {success: boolean; score?: number};
+  return data.success && (data.score ?? 0) >= 0.5;
+}
+
 export async function POST(req: NextRequest) {
   let body: Record<string, unknown>;
   try {
     body = await req.json();
   } catch {
     return NextResponse.json({error: "Invalid JSON"}, {status: 400});
+  }
+
+  const captchaOk = await verifyRecaptcha(body.recaptchaToken);
+  if (!captchaOk) {
+    return NextResponse.json({error: "reCAPTCHA verification failed"}, {status: 400});
   }
 
   const validationError = validate(body);

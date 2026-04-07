@@ -1,7 +1,10 @@
 "use client";
 
 import {useState} from "react";
+import Script from "next/script";
 import type {Dictionary} from "@/lib/i18n";
+
+const SITE_KEY = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY ?? "";
 
 type AanmeldenDict = Dictionary["aanmelden"];
 
@@ -39,7 +42,7 @@ const inputClass =
 const labelClass = "text-gray-500 text-xs font-bold uppercase tracking-wide";
 const errorClass = "text-red-500 text-xs mt-1";
 
-export default function RegistrationForm({t, locale}: Props) {
+export default function InterestForm({t, locale}: Props) {
   const [data, setData] = useState<FormData>(EMPTY);
   const [errors, setErrors] = useState<Partial<FormData>>({});
   const [status, setStatus] = useState<
@@ -74,10 +77,15 @@ export default function RegistrationForm({t, locale}: Props) {
     if (!validate()) return;
     setStatus("loading");
     try {
+      const recaptchaToken: string = await new Promise((resolve, reject) => {
+        const gr = (window as unknown as {grecaptcha?: {execute: (key: string, opts: {action: string}) => Promise<string>}}).grecaptcha;
+        if (!gr) return reject(new Error("reCAPTCHA not loaded"));
+        gr.execute(SITE_KEY, {action: "register"}).then(resolve).catch(reject);
+      });
       const res = await fetch("/api/register", {
         method: "POST",
         headers: {"Content-Type": "application/json"},
-        body: JSON.stringify({...data, locale}),
+        body: JSON.stringify({...data, locale, recaptchaToken}),
       });
       if (!res.ok) throw new Error();
       setStatus("success");
@@ -112,6 +120,11 @@ export default function RegistrationForm({t, locale}: Props) {
   }
 
   return (
+    <>
+    <Script
+      src={`https://www.google.com/recaptcha/api.js?render=${SITE_KEY}`}
+      strategy="lazyOnload"
+    />
     <form
       onSubmit={handleSubmit}
       noValidate
@@ -268,5 +281,6 @@ export default function RegistrationForm({t, locale}: Props) {
         {status === "loading" ? t.submitting : t.submit}
       </button>
     </form>
+    </>
   );
 }
