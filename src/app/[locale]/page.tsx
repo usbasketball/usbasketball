@@ -1,12 +1,14 @@
 import type {Metadata} from "next";
 import Image from "next/image";
-import Link from "next/link";
+import Button from "@/components/ui/Button";
+import HeroParallax from "@/components/ui/HeroParallax";
 import {notFound} from "next/navigation";
 import {SITE_TAGLINE} from "@/lib/constants";
 import {isValidLocale, getDictionary} from "@/lib/i18n";
 import type {Locale} from "@/lib/i18n";
 import {getAlternates} from "@/lib/seo";
 import heroImage from "@/../public/kampioenschap-heren1.webp";
+import InstagramFeed from "@/components/ui/InstagramFeed";
 
 export async function generateStaticParams() {
   return [{locale: "nl"}, {locale: "en"}];
@@ -41,18 +43,27 @@ export default async function Home({
   return (
     <>
       {/* Hero */}
-      <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden">
-        <Image
-          src={heroImage}
-          alt=""
-          fill
-          priority
-          placeholder="blur"
-          className="object-cover"
-          sizes="100vw"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/70" />
-        <div className="relative z-10 px-4 sm:px-6 py-20 sm:py-28 text-center max-w-2xl flex flex-col items-center">
+      <HeroParallax
+        background={
+          <>
+            <Image
+              src={heroImage}
+              alt=""
+              fill
+              priority
+              placeholder="blur"
+              className="object-cover hero-image"
+              sizes="100vw"
+            />
+            {/* Vignette + gradient overlay */}
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_transparent_0%,_rgba(0,0,0,0.5)_70%,_rgba(0,0,0,0.8)_100%)]" />
+            <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/70" />
+            {/* Soft glow behind content */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-white/[0.03] rounded-full blur-3xl pointer-events-none" />
+          </>
+        }
+      >
+        <div className="px-4 sm:px-6 py-20 sm:py-28 text-center max-w-2xl flex flex-col items-center">
           <Image
             src="/us_logo_png.avif"
             alt="U.S. Basketball Amsterdam"
@@ -68,21 +79,15 @@ export default async function Home({
           </h1>
           <p className="text-white/60 text-lg mb-8 italic">{SITE_TAGLINE}</p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <Link
-              href={`/${locale}/aanmelden`}
-              className="inline-flex items-center justify-center h-12 px-6 bg-white text-gray-900 font-bold text-sm uppercase tracking-wide rounded-lg hover:bg-gray-100 hover:shadow-md hover:-translate-y-0.5 transition-all"
-            >
+            <Button href={`/${locale}/aanmelden`} variant="secondary">
               {t.registerBtn}
-            </Link>
-            <Link
-              href={`/${locale}/informatie`}
-              className="inline-flex items-center justify-center h-12 px-6 border border-white/30 text-white font-bold text-sm uppercase tracking-wide rounded-lg hover:border-white hover:bg-white/10 transition-all"
-            >
+            </Button>
+            <Button href={`/${locale}/informatie`} variant="outline">
               {t.aboutBtn}
-            </Link>
+            </Button>
           </div>
         </div>
-      </section>
+      </HeroParallax>
 
       {/* Welcome */}
       <section className="bg-gray-50 px-4 sm:px-6 py-16">
@@ -97,6 +102,13 @@ export default async function Home({
         </div>
       </section>
 
+      {/* Instagram */}
+      <section className="bg-gray-50 px-4 sm:px-6 py-16">
+        <div className="max-w-xl mx-auto">
+          <InstagramFeed />
+        </div>
+      </section>
+
       {/* CTA banner */}
       <section className="bg-gradient-to-r from-gray-900 to-gray-800 px-4 sm:px-6 py-12">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left">
@@ -106,12 +118,13 @@ export default async function Home({
             </h2>
             <p className="text-white/70 text-sm mt-1">{t.newSeasonText}</p>
           </div>
-          <Link
+          <Button
             href={`/${locale}/aanmelden`}
-            className="inline-flex items-center justify-center h-12 px-6 bg-white text-gray-900 font-bold text-sm uppercase tracking-wide rounded-lg hover:bg-gray-100 transition-all shrink-0"
+            variant="secondary"
+            className="shrink-0"
           >
             {t.registerNow}
-          </Link>
+          </Button>
         </div>
       </section>
     </>

@@ -1,7 +1,7 @@
-import Link from "next/link";
-import {Inter} from "next/font/google";
+import Button from "@/components/ui/Button";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import {Inter} from "next/font/google";
 import {defaultLocale, getDictionary} from "@/lib/i18n";
 import "./globals.css";
 
@@ -18,22 +18,34 @@ export default function NotFound() {
       >
         <Header locale={locale} dict={dict} />
         <main className="flex-1 flex flex-col items-center justify-center px-4 py-24 text-center">
-          <p className="text-gray-900 font-black text-6xl sm:text-8xl leading-none mb-4">
-            404
+          {/* Basketball icon */}
+          <div className="relative mb-8 select-none">
+            <span
+              className="text-8xl sm:text-9xl"
+              role="img"
+              aria-label="basketball"
+            >
+              🏀
+            </span>
+            <span className="absolute -top-2 -right-4 bg-gray-900 text-white text-xs font-black px-2 py-0.5 uppercase tracking-wide rotate-12">
+              Air ball
+            </span>
+          </div>
+
+          <p className="text-gray-400 text-xs font-bold uppercase tracking-widest mb-3">
+            Error 404
           </p>
-          <h1 className="text-gray-900 font-black text-2xl sm:text-3xl uppercase tracking-tight mb-3">
-            Page not found
+          <h1 className="text-gray-900 font-black text-3xl sm:text-4xl uppercase tracking-tight mb-3">
+            Shot missed.
           </h1>
-          <p className="text-gray-500 text-sm max-w-sm mb-8">
-            The page you&apos;re looking for doesn&apos;t exist or has been
-            moved.
+          <p className="text-gray-500 text-sm max-w-xs mb-8">
+            This page doesn&apos;t exist — even Steph Curry misses sometimes.
+            Let&apos;s get you back on the court.
           </p>
-          <Link
-            href="/"
-            className="inline-flex items-center justify-center h-11 px-6 bg-gray-900 text-white font-bold text-sm uppercase tracking-wide rounded-lg hover:bg-gray-700 transition-all"
-          >
+
+          <Button href="/" size="md">
             Back to home
-          </Link>
+          </Button>
         </main>
         <Footer locale={locale} dict={dict} />
       </body>

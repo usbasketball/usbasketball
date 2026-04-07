@@ -20,7 +20,6 @@ export const SOCIAL = {
 
 export function getNavItems(locale: Locale, dict: Dictionary) {
   return [
-    {label: dict.nav.home, href: `/${locale}`},
     {label: dict.nav.informatie, href: `/${locale}/informatie`},
     {label: dict.nav.trainingschema, href: `/${locale}/trainingschema`},
     {label: dict.nav.takenschema, href: `/${locale}/takenschema`},
