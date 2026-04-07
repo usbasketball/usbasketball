@@ -2,15 +2,16 @@
 
 import {useRef, useState, useEffect} from "react";
 import Image from "next/image";
+import Link from "next/link";
 import {useUser} from "@auth0/nextjs-auth0";
 import type {Dictionary} from "@/lib/i18n";
 
-interface AuthButtonsProps {
+interface UserMenuProps {
   dict: Dictionary;
   locale: string;
 }
 
-export default function AuthButtons({dict, locale}: AuthButtonsProps) {
+export default function UserMenu({dict, locale}: UserMenuProps) {
   const {user, isLoading} = useUser();
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -29,12 +30,21 @@ export default function AuthButtons({dict, locale}: AuthButtonsProps) {
 
   if (!user) {
     return (
-      <a
-        href={`/auth/login?returnTo=/${locale}`}
-        className="text-sm font-semibold tracking-wide uppercase text-gray-700 hover:text-gray-900 transition-colors"
-      >
-        {dict.login.login}
-      </a>
+      <div className="flex items-center gap-3">
+        {}
+        <a
+          href={`/auth/login?returnTo=/${locale}`}
+          className="inline-flex items-center justify-center h-9 px-4 border border-gray-300 text-sm font-bold uppercase tracking-wide text-gray-700 hover:border-gray-900 hover:text-gray-900 transition-colors"
+        >
+          {dict.login.login}
+        </a>
+        <Link
+          href={`/${locale}/aanmelden`}
+          className="inline-flex items-center justify-center h-9 px-4 bg-gray-900 text-white text-sm font-bold uppercase tracking-wide hover:bg-gray-700 transition-colors"
+        >
+          {dict.nav.aanmelden}
+        </Link>
+      </div>
     );
   }
 

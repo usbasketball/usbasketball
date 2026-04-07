@@ -4,7 +4,7 @@ import {useState} from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {useUser} from "@auth0/nextjs-auth0";
-import AuthButtons from "@/components/auth/AuthButtons";
+import UserMenu from "@/components/auth/UserMenu";
 import NavLink from "./NavLink";
 import MobileNav from "./MobileNav";
 import LanguageSwitcher from "./LanguageSwitcher";
@@ -25,7 +25,7 @@ export default function Header({locale, dict}: HeaderProps) {
 
   return (
     <>
-      <header className="sticky top-0 z-30 bg-white/80 backdrop-blur-md shadow-sm">
+      <header className="sticky top-0 z-30 bg-white shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between h-16">
           {/* Logo */}
           <Link
@@ -47,13 +47,19 @@ export default function Header({locale, dict}: HeaderProps) {
           {/* Desktop nav + language switcher + auth */}
           <div className="hidden lg:flex items-center gap-6">
             <nav className="flex items-center gap-6">
-              {navItems.map((item) => (
-                <NavLink key={item.href} href={item.href} label={item.label} />
-              ))}
+              {navItems
+                .filter((item) => !item.href.includes("/aanmelden"))
+                .map((item) => (
+                  <NavLink
+                    key={item.href}
+                    href={item.href}
+                    label={item.label}
+                  />
+                ))}
             </nav>
-            <div className="border-l border-gray-200 pl-5 flex items-center gap-4">
+            <div className="flex items-center gap-4">
               <LanguageSwitcher currentLocale={locale} />
-              <AuthButtons dict={dict} locale={locale} />
+              <UserMenu dict={dict} locale={locale} />
             </div>
           </div>
 

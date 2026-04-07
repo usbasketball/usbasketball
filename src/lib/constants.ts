@@ -35,10 +35,5 @@ export function getNavItems(locale: Locale, dict: Dictionary) {
       href: `/${locale}/takenschema`,
       membersOnly: true,
     },
-    {
-      label: dict.nav.aanmelden,
-      href: `/${locale}/aanmelden`,
-      membersOnly: false,
-    },
   ];
 }

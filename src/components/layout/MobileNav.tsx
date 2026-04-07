@@ -1,7 +1,7 @@
 "use client";
 
 import {useUser} from "@auth0/nextjs-auth0";
-import AuthButtons from "@/components/auth/AuthButtons";
+import UserMenu from "@/components/auth/UserMenu";
 import NavLink from "./NavLink";
 import LanguageSwitcher from "./LanguageSwitcher";
 import {getNavItems} from "@/lib/constants";
@@ -84,7 +84,7 @@ export default function MobileNav({
 
         {/* Auth + language switcher at bottom */}
         <div className="px-6 py-5 border-t border-gray-100 flex items-center justify-between">
-          <AuthButtons dict={dict} locale={locale} />
+          <UserMenu dict={dict} locale={locale} />
           <LanguageSwitcher currentLocale={locale} />
         </div>
       </div>
