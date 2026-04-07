@@ -1,5 +1,6 @@
 "use client";
 
+import {useUser} from "@auth0/nextjs-auth0";
 import AuthButtons from "@/components/auth/AuthButtons";
 import NavLink from "./NavLink";
 import LanguageSwitcher from "./LanguageSwitcher";
@@ -19,7 +20,10 @@ export default function MobileNav({
   locale,
   dict,
 }: MobileNavProps) {
-  const navItems = getNavItems(locale, dict);
+  const {user} = useUser();
+  const navItems = getNavItems(locale, dict).filter(
+    (item) => !item.membersOnly || !!user,
+  );
 
   return (
     <>

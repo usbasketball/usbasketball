@@ -3,6 +3,7 @@
 import {useState} from "react";
 import Image from "next/image";
 import Link from "next/link";
+import {useUser} from "@auth0/nextjs-auth0";
 import AuthButtons from "@/components/auth/AuthButtons";
 import NavLink from "./NavLink";
 import MobileNav from "./MobileNav";
@@ -17,7 +18,10 @@ interface HeaderProps {
 
 export default function Header({locale, dict}: HeaderProps) {
   const [menuOpen, setMenuOpen] = useState(false);
-  const navItems = getNavItems(locale, dict);
+  const {user} = useUser();
+  const navItems = getNavItems(locale, dict).filter(
+    (item) => !item.membersOnly || !!user,
+  );
 
   return (
     <>
@@ -48,8 +52,8 @@ export default function Header({locale, dict}: HeaderProps) {
               ))}
             </nav>
             <div className="border-l border-gray-200 pl-5 flex items-center gap-4">
-              <AuthButtons dict={dict} locale={locale} />
               <LanguageSwitcher currentLocale={locale} />
+              <AuthButtons dict={dict} locale={locale} />
             </div>
           </div>
 
