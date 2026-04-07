@@ -30,7 +30,7 @@ export default function NotFound() {
           </p>
           <Link
             href="/"
-            className="inline-flex items-center justify-center h-11 px-6 bg-gray-900 text-white font-bold text-sm uppercase tracking-wide rounded-lg hover:bg-gray-700 transition-all"
+            className="inline-flex items-center justify-center h-11 px-6 bg-gray-900 text-white font-bold text-sm uppercase tracking-wide hover:bg-gray-700 transition-all"
           >
             Back to home
           </Link>

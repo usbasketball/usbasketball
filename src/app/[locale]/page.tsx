@@ -7,6 +7,7 @@ import {isValidLocale, getDictionary} from "@/lib/i18n";
 import type {Locale} from "@/lib/i18n";
 import {getAlternates} from "@/lib/seo";
 import heroImage from "@/../public/kampioenschap-heren1.webp";
+import InstagramFeed from "@/components/ui/InstagramFeed";
 
 export async function generateStaticParams() {
   return [{locale: "nl"}, {locale: "en"}];
@@ -70,13 +71,13 @@ export default async function Home({
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Link
               href={`/${locale}/aanmelden`}
-              className="inline-flex items-center justify-center h-12 px-6 bg-white text-gray-900 font-bold text-sm uppercase tracking-wide rounded-lg hover:bg-gray-100 hover:shadow-md hover:-translate-y-0.5 transition-all"
+              className="inline-flex items-center justify-center h-12 px-6 bg-white text-gray-900 font-bold text-sm uppercase tracking-wide hover:bg-gray-100 hover:shadow-md hover:-translate-y-0.5 transition-all"
             >
               {t.registerBtn}
             </Link>
             <Link
               href={`/${locale}/informatie`}
-              className="inline-flex items-center justify-center h-12 px-6 border border-white/30 text-white font-bold text-sm uppercase tracking-wide rounded-lg hover:border-white hover:bg-white/10 transition-all"
+              className="inline-flex items-center justify-center h-12 px-6 border border-white/30 text-white font-bold text-sm uppercase tracking-wide hover:border-white hover:bg-white/10 transition-all"
             >
               {t.aboutBtn}
             </Link>
@@ -97,6 +98,13 @@ export default async function Home({
         </div>
       </section>
 
+      {/* Instagram */}
+      <section className="bg-gray-50 px-4 sm:px-6 py-16">
+        <div className="max-w-xl mx-auto">
+          <InstagramFeed />
+        </div>
+      </section>
+
       {/* CTA banner */}
       <section className="bg-gradient-to-r from-gray-900 to-gray-800 px-4 sm:px-6 py-12">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left">
@@ -108,7 +116,7 @@ export default async function Home({
           </div>
           <Link
             href={`/${locale}/aanmelden`}
-            className="inline-flex items-center justify-center h-12 px-6 bg-white text-gray-900 font-bold text-sm uppercase tracking-wide rounded-lg hover:bg-gray-100 transition-all shrink-0"
+            className="inline-flex items-center justify-center h-12 px-6 bg-white text-gray-900 font-bold text-sm uppercase tracking-wide hover:bg-gray-100 transition-all shrink-0"
           >
             {t.registerNow}
           </Link>
