@@ -1,6 +1,6 @@
 import type {Metadata} from "next";
 import Image from "next/image";
-import Link from "next/link";
+import Button from "@/components/ui/Button";
 import {notFound} from "next/navigation";
 import {SITE_TAGLINE} from "@/lib/constants";
 import {isValidLocale, getDictionary} from "@/lib/i18n";
@@ -69,18 +69,12 @@ export default async function Home({
           </h1>
           <p className="text-white/60 text-lg mb-8 italic">{SITE_TAGLINE}</p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <Link
-              href={`/${locale}/aanmelden`}
-              className="inline-flex items-center justify-center h-12 px-6 bg-white text-gray-900 font-bold text-sm uppercase tracking-wide hover:bg-gray-100 hover:shadow-md hover:-translate-y-0.5 transition-all"
-            >
+            <Button href={`/${locale}/aanmelden`} variant="secondary">
               {t.registerBtn}
-            </Link>
-            <Link
-              href={`/${locale}/informatie`}
-              className="inline-flex items-center justify-center h-12 px-6 border border-white/30 text-white font-bold text-sm uppercase tracking-wide hover:border-white hover:bg-white/10 transition-all"
-            >
+            </Button>
+            <Button href={`/${locale}/informatie`} variant="outline">
               {t.aboutBtn}
-            </Link>
+            </Button>
           </div>
         </div>
       </section>
@@ -114,12 +108,9 @@ export default async function Home({
             </h2>
             <p className="text-white/70 text-sm mt-1">{t.newSeasonText}</p>
           </div>
-          <Link
-            href={`/${locale}/aanmelden`}
-            className="inline-flex items-center justify-center h-12 px-6 bg-white text-gray-900 font-bold text-sm uppercase tracking-wide hover:bg-gray-100 transition-all shrink-0"
-          >
+          <Button href={`/${locale}/aanmelden`} variant="secondary" className="shrink-0">
             {t.registerNow}
-          </Link>
+          </Button>
         </div>
       </section>
     </>

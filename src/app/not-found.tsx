@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Button from "@/components/ui/Button";
 import {Inter} from "next/font/google";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
@@ -28,12 +28,9 @@ export default function NotFound() {
             The page you&apos;re looking for doesn&apos;t exist or has been
             moved.
           </p>
-          <Link
-            href="/"
-            className="inline-flex items-center justify-center h-11 px-6 bg-gray-900 text-white font-bold text-sm uppercase tracking-wide hover:bg-gray-700 transition-all"
-          >
+          <Button href="/" size="md">
             Back to home
-          </Link>
+          </Button>
         </main>
         <Footer locale={locale} dict={dict} />
       </body>

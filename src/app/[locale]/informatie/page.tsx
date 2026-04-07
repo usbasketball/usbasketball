@@ -1,7 +1,7 @@
 import type {Metadata} from "next";
-import Link from "next/link";
 import {notFound} from "next/navigation";
 import PageHeader from "@/components/ui/PageHeader";
+import Button from "@/components/ui/Button";
 import {isValidLocale, getDictionary} from "@/lib/i18n";
 import type {Locale} from "@/lib/i18n";
 import {getAlternates} from "@/lib/seo";
@@ -251,12 +251,9 @@ export default async function Informatie({
                     </svg>
                   </a>
                 ) : (
-                  <Link
-                    href={`/${locale}${section.cta.href}`}
-                    className="inline-flex items-center justify-center h-10 px-5 bg-gray-900 text-white font-bold text-sm uppercase tracking-wide hover:bg-gray-700 transition-colors"
-                  >
+                  <Button href={`/${locale}${section.cta.href}`} size="sm">
                     {section.cta.text}
-                  </Link>
+                  </Button>
                 )}
               </div>
             )}

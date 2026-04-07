@@ -2,6 +2,7 @@
 
 import {useState} from "react";
 import Script from "next/script";
+import Button from "@/components/ui/Button";
 import type {Dictionary} from "@/lib/i18n";
 
 const SITE_KEY = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY ?? "";
@@ -273,13 +274,9 @@ export default function InterestForm({t, locale}: Props) {
         <p className="text-red-500 text-sm">{t.errorText}</p>
       )}
 
-      <button
-        type="submit"
-        disabled={status === "loading"}
-        className="h-12 px-6 bg-gray-900 text-white font-bold text-sm uppercase tracking-wide hover:bg-gray-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed mt-2"
-      >
+      <Button type="submit" disabled={status === "loading"} className="mt-2">
         {status === "loading" ? t.submitting : t.submit}
-      </button>
+      </Button>
     </form>
     </>
   );
