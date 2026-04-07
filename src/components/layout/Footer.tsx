@@ -107,30 +107,20 @@ export default function Footer({locale, dict}: FooterProps) {
           <h3 className="text-gray-300 text-xs font-bold uppercase tracking-widest mb-1">
             {dict.common.links}
           </h3>
-          <Link
-            href={`/${locale}/aanmelden`}
-            className="text-gray-400 hover:text-white text-sm transition-colors"
-          >
-            {dict.nav.aanmelden}
-          </Link>
-          <Link
-            href={`/${locale}/vertrouwenspersoon`}
-            className="text-gray-400 hover:text-white text-sm transition-colors"
-          >
-            {dict.footer.vertrouwenspersoon}
-          </Link>
-          <Link
-            href={`/${locale}/help-us`}
-            className="text-gray-400 hover:text-white text-sm transition-colors"
-          >
-            {dict.nav.helpUs}
-          </Link>
-          <Link
-            href={`/${locale}/privacy`}
-            className="text-gray-400 hover:text-white text-sm transition-colors"
-          >
-            {dict.footer.privacy}
-          </Link>
+          {[
+            {link: "aanmelden", text: dict.nav.aanmelden},
+            {link: "help-us", text: dict.nav.helpUs},
+            {link: "vertrouwenspersoon", text: dict.footer.vertrouwenspersoon},
+            {link: "privacy", text: dict.footer.privacy},
+          ].map(({link, text}) => (
+            <Link
+              key={link}
+              href={`/${locale}/${link}`}
+              className="text-gray-400 hover:text-white text-sm transition-colors"
+            >
+              {text}
+            </Link>
+          ))}
         </div>
       </div>
 
