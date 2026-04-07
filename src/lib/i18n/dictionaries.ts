@@ -120,6 +120,12 @@ const dictionaries = {
     placeholder: {
       underConstruction: "Komt eraan! \u{1F3C0}",
     },
+    login: {
+      login: "Inloggen",
+      logout: "Uitloggen",
+      membersOnly: "Alleen voor leden",
+      notMember: "Geen lid? Neem contact op met het bestuur.",
+    },
     footer: {
       vertrouwenspersoon: "Vertrouwenspersoon",
       privacy: "Privacyverklaring",
@@ -242,6 +248,12 @@ const dictionaries = {
     },
     placeholder: {
       underConstruction: "Coming soon! \u{1F3C0}",
+    },
+    login: {
+      login: "Log In",
+      logout: "Log Out",
+      membersOnly: "Members only",
+      notMember: "Not a member? Contact the board.",
     },
     footer: {
       vertrouwenspersoon: "Confidential Counselor",

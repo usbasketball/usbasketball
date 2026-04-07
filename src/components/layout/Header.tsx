@@ -3,6 +3,7 @@
 import {useState} from "react";
 import Image from "next/image";
 import Link from "next/link";
+import {Show, SignInButton, UserButton} from "@clerk/nextjs";
 import NavLink from "./NavLink";
 import MobileNav from "./MobileNav";
 import LanguageSwitcher from "./LanguageSwitcher";
@@ -39,15 +40,25 @@ export default function Header({locale, dict}: HeaderProps) {
             </span>
           </Link>
 
-          {/* Desktop nav + language switcher */}
+          {/* Desktop nav + language switcher + auth */}
           <div className="hidden lg:flex items-center gap-6">
             <nav className="flex items-center gap-6">
               {navItems.map((item) => (
                 <NavLink key={item.href} href={item.href} label={item.label} />
               ))}
             </nav>
-            <div className="border-l border-gray-200 pl-5">
+            <div className="border-l border-gray-200 pl-5 flex items-center gap-4">
+              <Show when="signed-out">
+                <SignInButton mode="modal">
+                  <button className="text-sm font-semibold tracking-wide uppercase text-gray-700 hover:text-gray-900 transition-colors">
+                    {dict.login.login}
+                  </button>
+                </SignInButton>
+              </Show>
               <LanguageSwitcher currentLocale={locale} />
+              <Show when="signed-in">
+                <UserButton />
+              </Show>
             </div>
           </div>
 
