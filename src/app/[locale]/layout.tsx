@@ -1,6 +1,7 @@
 import type {Metadata} from "next";
 import {notFound} from "next/navigation";
 import {Inter} from "next/font/google";
+import {ClerkProvider} from "@clerk/nextjs";
 import {SpeedInsights} from "@vercel/speed-insights/next";
 import {Analytics} from "@vercel/analytics/next";
 import Header from "@/components/layout/Header";
@@ -69,17 +70,26 @@ export default async function LocaleLayout({
   const dict = getDictionary(locale);
 
   return (
-    <html lang={locale}>
-      <body
-        className={`${inter.variable} antialiased flex flex-col min-h-screen`}
-      >
-        <JsonLd locale={locale} />
-        <Header locale={locale} dict={dict} />
-        <main className="flex-1">{children}</main>
-        <Footer locale={locale} dict={dict} />
-        <SpeedInsights />
-        <Analytics />
-      </body>
-    </html>
+    <ClerkProvider
+      appearance={{
+        variables: {
+          colorPrimary: "#111827",
+          fontFamily: "var(--font-inter), Inter, sans-serif",
+        },
+      }}
+    >
+      <html lang={locale}>
+        <body
+          className={`${inter.variable} antialiased flex flex-col min-h-screen`}
+        >
+          <JsonLd locale={locale} />
+          <Header locale={locale} dict={dict} />
+          <main className="flex-1">{children}</main>
+          <Footer locale={locale} dict={dict} />
+          <SpeedInsights />
+          <Analytics />
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }

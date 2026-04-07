@@ -1,8 +1,20 @@
-import {NextRequest, NextResponse} from "next/server";
+import {clerkMiddleware, createRouteMatcher} from "@clerk/nextjs/server";
+import {NextResponse} from "next/server";
 import {locales, defaultLocale, isValidLocale} from "@/lib/i18n";
 
-export function middleware(request: NextRequest) {
+const isProtectedRoute = createRouteMatcher([
+  "/:locale/takenschema(.*)",
+  "/:locale/trainingschema(.*)",
+  "/:locale/vertrouwenspersoon(.*)",
+]);
+
+export default clerkMiddleware(async (auth, request) => {
   const {pathname} = request.nextUrl;
+
+  // Protect GDPR-sensitive routes — redirect to Clerk sign-in if not authenticated
+  if (isProtectedRoute(request)) {
+    await auth.protect();
+  }
 
   // Check if the pathname already has a valid locale
   const pathnameLocale = pathname.split("/")[1];
@@ -31,8 +43,11 @@ export function middleware(request: NextRequest) {
   const url = request.nextUrl.clone();
   url.pathname = `/${locale}${pathname}`;
   return NextResponse.redirect(url, 308);
-}
+});
 
 export const config = {
-  matcher: ["/((?!_next|api|favicon\\.ico|robots\\.txt|sitemap\\.xml|images).*)"],
+  matcher: [
+    "/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)",
+    "/(api|trpc)(.*)",
+  ],
 };

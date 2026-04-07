@@ -1,14 +1,13 @@
 import type {Metadata} from "next";
-import {notFound} from "next/navigation";
+import {notFound, redirect} from "next/navigation";
+import {auth} from "@clerk/nextjs/server";
 import PageHeader from "@/components/ui/PageHeader";
 import {CONTACT_EMAIL} from "@/lib/constants";
 import {isValidLocale, getDictionary} from "@/lib/i18n";
 import type {Locale} from "@/lib/i18n";
 import {getAlternates} from "@/lib/seo";
 
-export async function generateStaticParams() {
-  return [{locale: "nl"}, {locale: "en"}];
-}
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata({
   params,
@@ -31,6 +30,8 @@ export default async function Vertrouwenspersoon({
 }) {
   const {locale} = await params;
   if (!isValidLocale(locale)) notFound();
+  const {userId} = await auth();
+  if (!userId) redirect(`/${locale}`);
   const t = getDictionary(locale).vertrouwenspersoon;
 
   return (
