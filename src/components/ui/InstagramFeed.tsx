@@ -10,12 +10,7 @@ export default function InstagramFeed() {
     <>
       <Script
         src="https://www.instagram.com/embed.js"
-        strategy="lazyOnload"
-        onLoad={() => {
-          (
-            window as unknown as {instgrm?: {Embeds: {process: () => void}}}
-          ).instgrm?.Embeds.process();
-        }}
+        strategy="afterInteractive"
       />
       <blockquote
         className="instagram-media"
