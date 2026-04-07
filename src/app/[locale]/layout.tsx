@@ -1,6 +1,8 @@
 import type {Metadata} from "next";
 import {notFound} from "next/navigation";
 import {Inter} from "next/font/google";
+import {SpeedInsights} from "@vercel/speed-insights/next";
+import {Analytics} from "@vercel/analytics/next";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import JsonLd from "@/components/seo/JsonLd";
@@ -75,6 +77,8 @@ export default async function LocaleLayout({
         <Header locale={locale} dict={dict} />
         <main className="flex-1">{children}</main>
         <Footer locale={locale} dict={dict} />
+        <SpeedInsights />
+        <Analytics />
       </body>
     </html>
   );
