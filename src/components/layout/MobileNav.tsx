@@ -84,7 +84,7 @@ export default function MobileNav({
 
         {/* Auth + language switcher at bottom */}
         <div className="px-6 py-5 border-t border-gray-100 flex items-center justify-between">
-          <UserMenu dict={dict} locale={locale} />
+          <UserMenu dict={dict} locale={locale} mobile />
           <LanguageSwitcher currentLocale={locale} />
         </div>
       </div>
