@@ -1,5 +1,6 @@
 import type {Locale, Dictionary} from "@/lib/i18n";
 import {getUserRoles} from "@/lib/auth0";
+import {User} from "@auth0/nextjs-auth0/types";
 
 export const SITE_NAME = "U.S. Basketball";
 export const SITE_TAGLINE = "If you can't beat US, Join US!";
@@ -30,7 +31,7 @@ export const SOCIAL = {
  */
 export function isNavItemVisible(
   visibility: string,
-  user: {[key: string]: unknown} | undefined,
+  user: User | undefined,
 ): boolean {
   if (visibility === "public") return true;
   if (visibility === "guest") return !user;
@@ -67,7 +68,7 @@ export function getNavItems(locale: Locale, dict: Dictionary) {
       label: dict.nav.dashboard,
       href: `/${locale}/dashboard`,
       visibility: "role:bestuur",
-      disabled: true,
+      disabled: false,
     },
   ];
 }
