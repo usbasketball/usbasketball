@@ -6,16 +6,18 @@ import {
   SITE_NAME,
   SITE_TAGLINE,
   SOCIAL,
+  isNavItemVisible,
 } from "@/lib/constants";
 import type {Locale, Dictionary} from "@/lib/i18n";
+import {User} from "@auth0/nextjs-auth0/types";
 
 interface FooterProps {
   locale: Locale;
   dict: Dictionary;
-  loggedIn?: boolean;
+  user?: User;
 }
 
-export default function Footer({locale, dict, loggedIn}: FooterProps) {
+export default function Footer({locale, dict, user}: FooterProps) {
   return (
     <footer className="bg-gray-900 mt-auto">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -111,7 +113,7 @@ export default function Footer({locale, dict, loggedIn}: FooterProps) {
           {[
             {link: "aanmelden", text: dict.nav.aanmelden},
             {link: "help-us", text: dict.nav.helpUs},
-            ...(loggedIn
+            ...(isNavItemVisible("authenticated", user)
               ? [
                   {
                     link: "vertrouwenspersoon",

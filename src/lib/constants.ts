@@ -1,4 +1,5 @@
 import type {Locale, Dictionary} from "@/lib/i18n";
+import {getUserRoles} from "@/lib/auth0";
 
 export const SITE_NAME = "U.S. Basketball";
 export const SITE_TAGLINE = "If you can't beat US, Join US!";
@@ -18,22 +19,55 @@ export const SOCIAL = {
   facebook: "https://facebook.com/usbasketbal",
 };
 
+/**
+ * Determines whether a nav item should be visible given the current user.
+ *
+ * visibility values:
+ *   "public"        — visible to everyone
+ *   "guest"         — visible only when NOT logged in
+ *   "authenticated" — visible to any logged-in user
+ *   "role:<name>"   — visible to users with the named Auth0 role (e.g. "role:bestuur")
+ */
+export function isNavItemVisible(
+  visibility: string,
+  user: {[key: string]: unknown} | undefined,
+): boolean {
+  if (visibility === "public") return true;
+  if (visibility === "guest") return !user;
+  if (visibility === "authenticated") return !!user;
+  if (visibility.startsWith("role:")) {
+    return getUserRoles(user).includes(visibility.slice(5));
+  }
+  return false;
+}
+
 export function getNavItems(locale: Locale, dict: Dictionary) {
   return [
     {
       label: dict.nav.informatie,
       href: `/${locale}/informatie`,
-      membersOnly: false,
+      visibility: "public",
     },
     {
       label: dict.nav.trainingschema,
       href: `/${locale}/trainingschema`,
-      membersOnly: true,
+      visibility: "authenticated",
     },
     {
       label: dict.nav.takenschema,
       href: `/${locale}/takenschema`,
-      membersOnly: true,
+      visibility: "authenticated",
+    },
+    {
+      label: dict.nav.aanmelden,
+      href: `/${locale}/aanmelden`,
+      visibility: "guest",
+    },
+    {
+      label: dict.nav.dashboard,
+      href: `/${locale}/dashboard`,
+      visibility: "role:bestuur",
+      disabled: true,
     },
   ];
 }

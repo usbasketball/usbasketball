@@ -8,7 +8,7 @@ import UserMenu from "@/components/auth/UserMenu";
 import NavLink from "./NavLink";
 import MobileNav from "./MobileNav";
 import LanguageSwitcher from "./LanguageSwitcher";
-import {getNavItems} from "@/lib/constants";
+import {getNavItems, isNavItemVisible} from "@/lib/constants";
 import type {Locale, Dictionary} from "@/lib/i18n";
 
 interface HeaderProps {
@@ -19,8 +19,8 @@ interface HeaderProps {
 export default function Header({locale, dict}: HeaderProps) {
   const [menuOpen, setMenuOpen] = useState(false);
   const {user} = useUser();
-  const navItems = getNavItems(locale, dict).filter(
-    (item) => !item.membersOnly || !!user,
+  const navItems = getNavItems(locale, dict).filter((item) =>
+    isNavItemVisible(item.visibility, user ?? undefined),
   );
 
   return (
@@ -54,6 +54,7 @@ export default function Header({locale, dict}: HeaderProps) {
                     key={item.href}
                     href={item.href}
                     label={item.label}
+                    disabled={item.disabled}
                   />
                 ))}
             </nav>

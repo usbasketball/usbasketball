@@ -1,10 +1,9 @@
 "use client";
 
 import {useUser} from "@auth0/nextjs-auth0";
-import UserMenu from "@/components/auth/UserMenu";
 import NavLink from "./NavLink";
 import LanguageSwitcher from "./LanguageSwitcher";
-import {getNavItems} from "@/lib/constants";
+import {getNavItems, isNavItemVisible} from "@/lib/constants";
 import type {Locale, Dictionary} from "@/lib/i18n";
 
 interface MobileNavProps {
@@ -21,8 +20,8 @@ export default function MobileNav({
   dict,
 }: MobileNavProps) {
   const {user} = useUser();
-  const navItems = getNavItems(locale, dict).filter(
-    (item) => !item.membersOnly || !!user,
+  const navItems = getNavItems(locale, dict).filter((item) =>
+    isNavItemVisible(item.visibility, user ?? undefined),
   );
 
   return (
@@ -77,16 +76,69 @@ export default function MobileNav({
         <nav className="flex flex-col gap-1 p-6 flex-1">
           {navItems.map((item) => (
             <div key={item.href} className="py-3 border-b border-gray-100">
-              <NavLink href={item.href} label={item.label} onClick={onClose} />
+              <NavLink href={item.href} label={item.label} onClick={onClose} disabled={item.disabled} />
             </div>
           ))}
         </nav>
 
-        {/* Auth + language switcher at bottom */}
-        <div className="px-6 py-5 border-t border-gray-100 flex items-center justify-between">
-          <UserMenu dict={dict} locale={locale} />
-          <LanguageSwitcher currentLocale={locale} />
-        </div>
+        {/* Bottom: auth + language switcher */}
+        {user ? (
+          <>
+            {/* Logged-in: user info + logout inline */}
+            <div className="px-6 py-4 border-t border-gray-100 flex items-center gap-3">
+              <span className="h-8 w-8 shrink-0 rounded-full bg-gray-900 text-white text-xs font-bold flex items-center justify-center uppercase">
+                {String(user.name ?? user.email ?? "?").charAt(0)}
+              </span>
+              <div className="min-w-0">
+                {user.name && (
+                  <p className="text-gray-900 font-semibold text-sm truncate">
+                    {String(user.name)}
+                  </p>
+                )}
+                {user.email && (
+                  <p className="text-gray-400 text-xs truncate">
+                    {String(user.email)}
+                  </p>
+                )}
+              </div>
+            </div>
+            <div className="px-6 py-4 border-t border-gray-100 flex items-center justify-between">
+              {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
+              <a
+                href="/auth/logout"
+                className="flex items-center gap-2 text-sm text-gray-600 hover:text-gray-900 transition-colors"
+              >
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                  <polyline points="16 17 21 12 16 7" />
+                  <line x1="21" y1="12" x2="9" y2="12" />
+                </svg>
+                {dict.login.logout}
+              </a>
+              <LanguageSwitcher currentLocale={locale} />
+            </div>
+          </>
+        ) : (
+          /* Not logged in: login button + language switcher */
+          <div className="px-6 py-5 border-t border-gray-100 flex items-center justify-between">
+            <a
+              href={`/auth/login?returnTo=/${locale}`}
+              className="inline-flex items-center justify-center h-9 px-4 border border-gray-300 text-sm font-bold uppercase tracking-wide text-gray-700 hover:border-gray-900 hover:text-gray-900 transition-colors"
+            >
+              {dict.login.login}
+            </a>
+            <LanguageSwitcher currentLocale={locale} />
+          </div>
+        )}
       </div>
     </>
   );

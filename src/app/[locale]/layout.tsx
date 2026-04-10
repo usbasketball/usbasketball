@@ -80,7 +80,7 @@ export default async function LocaleLayout({
           <JsonLd locale={locale} />
           <Header locale={locale} dict={dict} />
           <main className="flex-1">{children}</main>
-          <Footer locale={locale} dict={dict} loggedIn={!!session} />
+          <Footer locale={locale} dict={dict} user={session?.user} />
           <SpeedInsights />
           <Analytics />
         </Auth0Provider>
