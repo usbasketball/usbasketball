@@ -3,7 +3,7 @@
 import {useUser} from "@auth0/nextjs-auth0";
 import NavLink from "./NavLink";
 import LanguageSwitcher from "./LanguageSwitcher";
-import {getNavItems} from "@/lib/constants";
+import {getNavItems, isNavItemVisible} from "@/lib/constants";
 import type {Locale, Dictionary} from "@/lib/i18n";
 
 interface MobileNavProps {
@@ -20,8 +20,8 @@ export default function MobileNav({
   dict,
 }: MobileNavProps) {
   const {user} = useUser();
-  const navItems = getNavItems(locale, dict).filter(
-    (item) => (!item.membersOnly || !!user) && (!item.guestOnly || !user),
+  const navItems = getNavItems(locale, dict).filter((item) =>
+    isNavItemVisible(item.visibility, user ?? undefined),
   );
 
   return (
