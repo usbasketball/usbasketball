@@ -7,13 +7,21 @@ interface NavLinkProps {
   href: string;
   label: string;
   onClick?: () => void;
+  disabled?: boolean;
 }
 
-export default function NavLink({href, label, onClick}: NavLinkProps) {
+export default function NavLink({href, label, onClick, disabled}: NavLinkProps) {
   const pathname = usePathname();
-  // Active if exact match or sub-path (but not root clashing with sub-pages)
   const isActive =
     pathname === href || (href !== "/" && pathname.startsWith(href + "/"));
+
+  if (disabled) {
+    return (
+      <span className="text-sm font-medium tracking-wide uppercase text-gray-300 cursor-not-allowed select-none">
+        {label}
+      </span>
+    );
+  }
 
   return (
     <Link

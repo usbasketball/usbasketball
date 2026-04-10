@@ -9,11 +9,12 @@ import {
   isNavItemVisible,
 } from "@/lib/constants";
 import type {Locale, Dictionary} from "@/lib/i18n";
+import {User} from "@auth0/nextjs-auth0/types";
 
 interface FooterProps {
   locale: Locale;
   dict: Dictionary;
-  user?: {[key: string]: unknown};
+  user?: User;
 }
 
 export default function Footer({locale, dict, user}: FooterProps) {

@@ -54,6 +54,7 @@ export default function Header({locale, dict}: HeaderProps) {
                     key={item.href}
                     href={item.href}
                     label={item.label}
+                    disabled={item.disabled}
                   />
                 ))}
             </nav>

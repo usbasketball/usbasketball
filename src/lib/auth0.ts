@@ -13,7 +13,7 @@ export const auth0 = new Auth0Client();
 // };
 //
 // Then create roles (e.g. "admin") in Dashboard → User Management → Roles
-// and assign them to users. Nav items with visibility "role:admin" will
+// and assign them to users. Nav items with visibility "role:bestuur" will
 // automatically appear for those users.
 
 const ROLES_CLAIM = "https://usbasketball.nl/roles";

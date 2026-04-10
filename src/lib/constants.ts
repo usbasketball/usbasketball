@@ -26,7 +26,7 @@ export const SOCIAL = {
  *   "public"        — visible to everyone
  *   "guest"         — visible only when NOT logged in
  *   "authenticated" — visible to any logged-in user
- *   "role:<name>"   — visible to users with the named Auth0 role (e.g. "role:admin")
+ *   "role:<name>"   — visible to users with the named Auth0 role (e.g. "role:bestuur")
  */
 export function isNavItemVisible(
   visibility: string,
@@ -62,6 +62,12 @@ export function getNavItems(locale: Locale, dict: Dictionary) {
       label: dict.nav.aanmelden,
       href: `/${locale}/aanmelden`,
       visibility: "guest",
+    },
+    {
+      label: dict.nav.dashboard,
+      href: `/${locale}/dashboard`,
+      visibility: "role:bestuur",
+      disabled: true,
     },
   ];
 }
