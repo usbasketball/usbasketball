@@ -9,10 +9,9 @@ import type {Dictionary} from "@/lib/i18n";
 interface UserMenuProps {
   dict: Dictionary;
   locale: string;
-  mobile?: boolean;
 }
 
-export default function UserMenu({dict, locale, mobile}: UserMenuProps) {
+export default function UserMenu({dict, locale}: UserMenuProps) {
   const {user, isLoading} = useUser();
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -30,16 +29,6 @@ export default function UserMenu({dict, locale, mobile}: UserMenuProps) {
   if (isLoading) return null;
 
   if (!user) {
-    if (mobile) {
-      return (
-        <a
-          href={`/auth/login?returnTo=/${locale}`}
-          className="inline-flex items-center justify-center h-9 px-4 border border-gray-300 text-sm font-bold uppercase tracking-wide text-gray-700 hover:border-gray-900 hover:text-gray-900 transition-colors"
-        >
-          {dict.login.login}
-        </a>
-      );
-    }
     return (
       <div className="flex items-center gap-3">
         {}
@@ -86,9 +75,7 @@ export default function UserMenu({dict, locale, mobile}: UserMenuProps) {
       </button>
 
       {open && (
-        <div
-          className={`absolute right-0 w-56 bg-white shadow-lg border border-gray-100 py-2 z-50 ${mobile ? "bottom-full mb-2" : "mt-2"}`}
-        >
+        <div className="absolute right-0 mt-2 w-56 bg-white shadow-lg border border-gray-100 py-2 z-50">
           {/* User info */}
           <div className="px-4 py-2 border-b border-gray-100">
             {user.name && (

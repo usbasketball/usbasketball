@@ -24,16 +24,25 @@ export function getNavItems(locale: Locale, dict: Dictionary) {
       label: dict.nav.informatie,
       href: `/${locale}/informatie`,
       membersOnly: false,
+      guestOnly: false,
     },
     {
       label: dict.nav.trainingschema,
       href: `/${locale}/trainingschema`,
       membersOnly: true,
+      guestOnly: false,
     },
     {
       label: dict.nav.takenschema,
       href: `/${locale}/takenschema`,
       membersOnly: true,
+      guestOnly: false,
+    },
+    {
+      label: dict.nav.aanmelden,
+      href: `/${locale}/aanmelden`,
+      membersOnly: false,
+      guestOnly: true,
     },
   ];
 }
