@@ -67,7 +67,7 @@ export function getNavItems(locale: Locale, dict: Dictionary) {
     {
       label: dict.nav.dashboard,
       href: `/${locale}/dashboard`,
-      visibility: "role:bestuur",
+      visibility: "role:Bestuur",
       disabled: false,
     },
   ];
