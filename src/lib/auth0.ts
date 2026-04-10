@@ -1,33 +1,41 @@
 import {Auth0Client} from "@auth0/nextjs-auth0/server";
-
-export const auth0 = new Auth0Client();
-
-// To enable role-based nav items, add this Post-Login Action in the Auth0 Dashboard:
-// Dashboard → Actions → Flows → Login → Add Action (custom)
-//
-// exports.onExecutePostLogin = async (event, api) => {
-//   api.idToken.setCustomClaim(
-//     "https://usbasketball.nl/roles",
-//     event.authorization?.roles ?? []
-//   );
-// };
-//
-// Then create roles (e.g. "admin") in Dashboard → User Management → Roles
-// and assign them to users. Nav items with visibility "role:bestuur" will
-// automatically appear for those users.
+import {User} from "@auth0/nextjs-auth0/types";
 
 const ROLES_CLAIM = "https://usbasketball.nl/roles";
 
-export function getUserRoles(
-  user: {[key: string]: unknown} | undefined,
-): string[] {
+export const auth0 = new Auth0Client({
+  async beforeSessionSaved(session) {
+    // The SDK strips all non-standard claims by default (whitelist: sub, name,
+    // email, picture, etc.). We need to preserve the roles custom claim that
+    // the Auth0 Post-Login Action injects into the ID token.
+    if (
+      session.user &&
+      !session.user[ROLES_CLAIM] &&
+      session.tokenSet?.idToken
+    ) {
+      try {
+        const payload = JSON.parse(
+          Buffer.from(
+            session.tokenSet.idToken.split(".")[1],
+            "base64url",
+          ).toString(),
+        );
+        if (payload[ROLES_CLAIM]) {
+          session.user[ROLES_CLAIM] = payload[ROLES_CLAIM];
+        }
+      } catch {
+        // Ignore decode errors — roles will just be empty
+      }
+    }
+    return session;
+  },
+});
+
+export function getUserRoles(user: User | undefined): string[] {
   if (!user) return [];
   return (user[ROLES_CLAIM] as string[]) ?? [];
 }
 
-export function hasRole(
-  user: {[key: string]: unknown} | undefined,
-  role: string,
-): boolean {
+export function hasRole(user: User | undefined, role: string): boolean {
   return getUserRoles(user).includes(role);
 }
