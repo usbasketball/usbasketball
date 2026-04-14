@@ -15,8 +15,10 @@ export interface RegistrationData {
   locale: string;
 }
 
+// use onboarding@resend.dev as FROM for testing
 const FROM = "US Basketball <noreply@usbasketball.nl>";
-const BOARD_EMAILS = ["tc@usbasketball.nl", "secretaris@usbasketball.nl"];
+const SECRETARIS_EMAIL = "secretaris@usbasketball.nl";
+const TC_EMAIL = "tc@usbasketball.nl";
 
 function boardNotificationHtml(data: RegistrationData): string {
   return `
@@ -53,12 +55,13 @@ function autoReplyHtml(data: RegistrationData): string {
 }
 
 export async function sendRegistrationEmails(
-  data: RegistrationData
+  data: RegistrationData,
 ): Promise<void> {
   await Promise.all([
     resend.emails.send({
       from: FROM,
-      to: BOARD_EMAILS,
+      to: [TC_EMAIL],
+      cc: SECRETARIS_EMAIL,
       subject: `Nieuwe aanmelding: ${data.name}`,
       html: boardNotificationHtml(data),
     }),
