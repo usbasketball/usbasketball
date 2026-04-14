@@ -1,0 +1,69 @@
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+
+## Commands
+
+```bash
+npm run dev        # Start dev server with Turbopack
+npm run build      # Production build with Turbopack
+npm run lint       # ESLint + Prettier check
+npm run lint:fix   # ESLint + Prettier auto-fix
+npm run format     # Prettier write (format only, no lint)
+```
+
+There is no test suite.
+
+## Architecture
+
+**U.S. Basketball Amsterdam** — club website built with Next.js 15 App Router, React 19, TypeScript, and Tailwind CSS v4. Deployed on Vercel.
+
+### Routing
+
+All pages live under `src/app/[locale]/` with two locales: `nl` (default) and `en`. Middleware at `src/middleware.ts` handles locale detection/redirect via `Accept-Language` and delegates `/auth/*` routes to Auth0. Every page/layout exports `generateStaticParams()` for SSG across both locales.
+
+### i18n
+
+Lightweight, no third-party library. `src/lib/i18n/dictionaries.ts` holds static NL/EN strings. Locale is passed as a prop from layouts down to server components. The `useLocale()` hook is available for client components.
+
+### Authentication (Auth0)
+
+`src/lib/auth0.ts` instantiates `Auth0Client` with a `beforeSessionSaved` hook that manually extracts a custom roles claim (`https://usbasketball.nl/roles`) from the raw ID token — the SDK strips non-standard claims by default. This claim is set by an Auth0 Post-Login Action.
+
+Role helpers: `getUserRoles(session)` and `hasRole(session, role)`.
+
+Login: `/auth/login?returnTo=/{locale}` | Logout: `/auth/logout`
+
+The locale layout wraps children in `<Auth0Provider user={session?.user}>` so client components can call `useUser()`.
+
+### Nav visibility system
+
+Nav items are defined in `src/lib/constants.ts` with a `visibility` field: `"public"`, `"guest"`, `"authenticated"`, or `"role:<RoleName>"`. `isNavItemVisible()` gates rendering against the Auth0 session/roles.
+
+### Data layer
+
+No database or ORM. Registration form submissions go to a Google Sheet (`src/lib/google-sheets.ts`) via a GCP service account. The API route is `src/app/api/register/route.ts`.
+
+### Email
+
+`src/lib/resend.ts` sends two emails on registration: a board notification and a registrant auto-reply. From-address is always `noreply@usbasketball.nl`.
+
+### Styling
+
+Tailwind CSS v4 using the PostCSS plugin (`@tailwindcss/postcss`) — no `tailwind.config.js`. CSS is in `src/app/globals.css`.
+
+## Required Environment Variables
+
+```
+AUTH0_SECRET
+AUTH0_BASE_URL
+AUTH0_ISSUER_BASE_URL
+AUTH0_CLIENT_ID
+AUTH0_CLIENT_SECRET
+GOOGLE_SHEET_ID
+GOOGLE_SERVICE_ACCOUNT_EMAIL
+GOOGLE_PRIVATE_KEY          # escape \n in the key
+RESEND_API_KEY
+NEXT_PUBLIC_RECAPTCHA_SITE_KEY
+RECAPTCHA_SECRET_KEY
+```
