@@ -5,6 +5,7 @@ import Button from "@/components/ui/Button";
 import {isValidLocale, getDictionary} from "@/lib/i18n";
 import type {Locale} from "@/lib/i18n";
 import {getAlternates} from "@/lib/seo";
+import {getHelpUsContent} from "@/lib/contentful";
 
 export async function generateStaticParams() {
   return [{locale: "nl"}, {locale: "en"}];
@@ -24,7 +25,7 @@ export async function generateMetadata({
   };
 }
 
-const content = {
+const fallbackContent = {
   nl: {
     intro:
       "US Basketball draait op vrijwilligers. Of je nu wil meehelpen achter de schermen, op de vloer, of in een commissie — er is altijd een plek voor jou. Hieronder vind je alle functies en commissies waar je je voor kunt opgeven.",
@@ -178,7 +179,8 @@ export default async function HelpUs({
   const {locale} = await params;
   if (!isValidLocale(locale)) notFound();
   const t = getDictionary(locale).helpUs;
-  const {intro, cta, committees} = content[locale];
+  const {intro, cta, committees} =
+    (await getHelpUsContent(locale)) ?? fallbackContent[locale];
 
   return (
     <>

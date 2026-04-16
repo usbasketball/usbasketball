@@ -9,6 +9,7 @@ import type {Locale} from "@/lib/i18n";
 import {getAlternates} from "@/lib/seo";
 import heroImage from "@/../public/kampioenschap-heren1.webp";
 import InstagramFeed from "@/components/ui/InstagramFeed";
+import {getInstagramPost} from "@/lib/contentful";
 
 export async function generateStaticParams() {
   return [{locale: "nl"}, {locale: "en"}];
@@ -39,6 +40,7 @@ export default async function Home({
   if (!isValidLocale(locale)) notFound();
   const dict = getDictionary(locale);
   const t = dict.home;
+  const instagramPost = await getInstagramPost();
 
   return (
     <>
@@ -105,7 +107,11 @@ export default async function Home({
       {/* Instagram */}
       <section className="bg-gray-50 px-4 sm:px-6 py-16">
         <div className="max-w-xl mx-auto">
-          <InstagramFeed />
+          <InstagramFeed
+            postUrl={instagramPost?.postUrl}
+            imageAlt={instagramPost?.imageAlt}
+            caption={instagramPost?.caption}
+          />
         </div>
       </section>
 

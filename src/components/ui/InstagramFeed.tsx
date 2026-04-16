@@ -4,12 +4,20 @@ import Script from "next/script";
 import Image from "next/image";
 import {useState} from "react";
 
-const POST_URL =
-  "https://www.instagram.com/p/DIZDlQiok7_/?utm_source=ig_embed&utm_campaign=loading"; // H4 champion
+const DEFAULT_POST_URL =
+  "https://www.instagram.com/p/DIZDlQiok7_/?utm_source=ig_embed&utm_campaign=loading";
+const DEFAULT_IMAGE_ALT = "U.S. Basketball Amsterdam H4 kampioen";
+const DEFAULT_CAPTION = "Now officially champs: H4! 🏆🥇🍾";
 
 const PROFILE_URL = "https://www.instagram.com/usbasketbal/";
 
-function InstagramFallback() {
+type Props = {
+  postUrl?: string;
+  imageAlt?: string;
+  caption?: string;
+};
+
+function InstagramFallback({postUrl, imageAlt, caption}: Required<Props>) {
   return (
     <div
       style={{
@@ -55,7 +63,7 @@ function InstagramFallback() {
           <span style={{fontSize: "12px", color: "#8e8e8e", lineHeight: 1.4}}>U.S. Basketball Amsterdam</span>
         </div>
         {/* Instagram logo */}
-        <a href={POST_URL} target="_blank" rel="noopener noreferrer" aria-label="View on Instagram">
+        <a href={postUrl} target="_blank" rel="noopener noreferrer" aria-label="View on Instagram">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#262626" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
             <circle cx="12" cy="12" r="4"/>
@@ -65,10 +73,10 @@ function InstagramFallback() {
       </div>
 
       {/* Image */}
-      <a href={POST_URL} target="_blank" rel="noopener noreferrer" style={{display: "block"}}>
+      <a href={postUrl} target="_blank" rel="noopener noreferrer" style={{display: "block"}}>
         <Image
           src="/instagram-post.webp"
-          alt="U.S. Basketball Amsterdam H4 kampioen"
+          alt={imageAlt}
           width={1079}
           height={742}
           style={{width: "100%", height: "auto", display: "block"}}
@@ -79,14 +87,14 @@ function InstagramFallback() {
       <div style={{padding: "12px 16px 4px"}}>
         <span style={{fontSize: "14px", color: "#262626", lineHeight: "18px"}}>
           <a href={PROFILE_URL} target="_blank" rel="noopener noreferrer" style={{fontWeight: 600, color: "#262626", textDecoration: "none", marginRight: 4}}>usbasketbal</a>
-          Now officially champs: H4! 🏆🥇🍾
+          {caption}
         </span>
       </div>
 
       {/* Footer */}
       <div style={{padding: "8px 16px 14px"}}>
         <a
-          href={POST_URL}
+          href={postUrl}
           target="_blank"
           rel="noopener noreferrer"
           style={{fontSize: "12px", color: "#8e8e8e", textDecoration: "none"}}
@@ -98,7 +106,11 @@ function InstagramFallback() {
   );
 }
 
-export default function InstagramFeed() {
+export default function InstagramFeed({
+  postUrl = DEFAULT_POST_URL,
+  imageAlt = DEFAULT_IMAGE_ALT,
+  caption = DEFAULT_CAPTION,
+}: Props) {
   const [scriptFailed, setScriptFailed] = useState(false);
 
   return (
@@ -111,11 +123,11 @@ export default function InstagramFeed() {
         />
       )}
       {scriptFailed ? (
-        <InstagramFallback />
+        <InstagramFallback postUrl={postUrl} imageAlt={imageAlt} caption={caption} />
       ) : (
         <blockquote
           className="instagram-media"
-          data-instgrm-permalink={POST_URL}
+          data-instgrm-permalink={postUrl}
           data-instgrm-version="14"
           style={{
             background: "#FFF",

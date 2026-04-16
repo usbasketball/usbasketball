@@ -5,6 +5,8 @@ import Button from "@/components/ui/Button";
 import {isValidLocale, getDictionary} from "@/lib/i18n";
 import type {Locale} from "@/lib/i18n";
 import {getAlternates} from "@/lib/seo";
+import {getInformatieSections} from "@/lib/contentful";
+import type {InformatieSection} from "@/lib/contentful";
 
 export async function generateStaticParams() {
   return [{locale: "nl"}, {locale: "en"}];
@@ -24,7 +26,7 @@ export async function generateMetadata({
   };
 }
 
-const content = {
+const fallbackContent = {
   nl: {
     sections: [
       {
@@ -183,7 +185,9 @@ export default async function Informatie({
   const {locale} = await params;
   if (!isValidLocale(locale)) notFound();
   const t = getDictionary(locale).informatie;
-  const {sections} = content[locale];
+  const sections: InformatieSection[] =
+    (await getInformatieSections(locale)) ??
+    (fallbackContent[locale].sections as unknown as InformatieSection[]);
 
   return (
     <>
