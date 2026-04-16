@@ -24,7 +24,13 @@ All pages live under `src/app/[locale]/` with two locales: `nl` (default) and `e
 
 ### i18n
 
-Lightweight, no third-party library. `src/lib/i18n/dictionaries.ts` holds static NL/EN strings. Locale is passed as a prop from layouts down to server components. The `useLocale()` hook is available for client components.
+Lightweight, no third-party library. `src/lib/i18n/dictionaries.ts` holds static NL/EN strings used as fallbacks. Locale is passed as a prop from layouts down to server components. The `useLocale()` hook is available for client components.
+
+### Content (Contentful)
+
+Editable page content is fetched from Contentful at build time via `src/lib/contentful.ts`. All fetchers return `null` if `CONTENTFUL_SPACE_ID` / `CONTENTFUL_ACCESS_TOKEN` are missing, and pages fall back to the hardcoded data in the page file.
+
+**To re-run the migration** (e.g. after a space reset): `npm run migrate:contentful`. Requires `CONTENTFUL_MANAGEMENT_TOKEN` in `.env.local` (management PAT from the space-owner account — not the delivery token).
 
 ### Authentication (Auth0)
 
@@ -62,8 +68,10 @@ AUTH0_CLIENT_ID
 AUTH0_CLIENT_SECRET
 GOOGLE_SHEET_ID
 GOOGLE_SERVICE_ACCOUNT_EMAIL
-GOOGLE_PRIVATE_KEY          # escape \n in the key
+GOOGLE_PRIVATE_KEY                  # escape \n in the key
 RESEND_API_KEY
 NEXT_PUBLIC_RECAPTCHA_SITE_KEY
 RECAPTCHA_SECRET_KEY
+CONTENTFUL_SPACE_ID
+CONTENTFUL_DELIVERY_ACCESS_TOKEN    # used for one-time migration only
 ```
