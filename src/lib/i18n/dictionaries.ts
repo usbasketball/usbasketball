@@ -12,6 +12,7 @@ const dictionaries = {
       helpUs: "Help US",
       contact: "Contact",
       aanmelden: "Aanmelden",
+      reglementen: "Reglementen",
       dashboard: "Bestuur",
     },
     common: {
@@ -42,6 +43,10 @@ const dictionaries = {
       newSeasonText:
         "Nieuw seizoen, nieuwe kansen, zelfde gezelligheid. Schrijf je in voor 2026\u20132027!",
       registerNow: "Join US!",
+      memberWelcomeMessage: "Welkom terug",
+      memberTrainingBtn: "Trainingschema",
+      memberTasksBtn: "Mijn Taken",
+      memberClubInfoBtn: "Meer Bij U.S.",
     },
     informatie: {
       title: "Informatie",
@@ -140,6 +145,10 @@ const dictionaries = {
       vertrouwenspersoon: "Vertrouwenspersoon",
       privacy: "Privacyverklaring",
     },
+    reglementen: {
+      title: "Reglementen",
+      subtitle: "Teamafspraken en gedragscode voor alle leden.",
+    },
   },
   en: {
     nav: {
@@ -152,6 +161,7 @@ const dictionaries = {
       helpUs: "Help US",
       contact: "Contact",
       aanmelden: "Join US",
+      reglementen: "Regulations",
       dashboard: "Board",
     },
     common: {
@@ -182,6 +192,10 @@ const dictionaries = {
       newSeasonText:
         "New season, new chances, same great crew. Sign up for 2026\u20132027!",
       registerNow: "Join US!",
+      memberWelcomeMessage: "Welcome back",
+      memberTrainingBtn: "Training Schedule",
+      memberTasksBtn: "My Tasks",
+      memberClubInfoBtn: "More At U.S.",
     },
     informatie: {
       title: "About",
@@ -278,6 +292,10 @@ const dictionaries = {
     footer: {
       vertrouwenspersoon: "Confidential Counselor",
       privacy: "Privacy Policy",
+    },
+    reglementen: {
+      title: "Regulations",
+      subtitle: "Team agreements and code of conduct for all members.",
     },
   },
 } as const;
