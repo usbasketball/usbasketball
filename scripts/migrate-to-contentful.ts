@@ -311,11 +311,16 @@ function locNl<T>(value: T): Record<string, T> {
 }
 
 async function deleteAllEntries(contentTypeId: string) {
-  const entries = await client.entry.getMany({
-    spaceId: SPACE_ID!,
-    environmentId: ENV_ID,
-    query: {content_type: contentTypeId, limit: 1000},
-  });
+  let entries;
+  try {
+    entries = await client.entry.getMany({
+      spaceId: SPACE_ID!,
+      environmentId: ENV_ID,
+      query: {content_type: contentTypeId, limit: 1000},
+    });
+  } catch {
+    return;
+  }
   for (const entry of entries.items) {
     try {
       await client.entry.unpublish({
@@ -497,6 +502,25 @@ async function main() {
     ],
     "instagramPost",
     "Instagram Post",
+    enLocale,
+  );
+
+  await upsertContentType(
+    [
+      int("year", "Year"),
+      sym("title", "Title", true, true),
+      {
+        id: "document",
+        name: "Document",
+        type: "Link",
+        linkType: "Asset",
+        localized: false,
+        required: true,
+        validations: [],
+      } as unknown as ContentFields<KeyValueMap>,
+    ],
+    "meetingNote",
+    "Meeting Note",
     enLocale,
   );
 

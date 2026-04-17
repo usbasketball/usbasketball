@@ -72,7 +72,7 @@ export default async function Home({
             width={80}
             height={98}
             priority
-            className="h-20 w-20 mb-6 brightness-0 invert"
+            className="h-20 w-auto mb-6 brightness-0 invert"
           />
           <p className="text-white/60 text-xs font-bold uppercase tracking-widest mb-4">
             {t.heroSubtitle}

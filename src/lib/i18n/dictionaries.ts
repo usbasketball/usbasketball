@@ -8,10 +8,11 @@ const dictionaries = {
       nieuws: "Nieuws",
       trainingschema: "Trainingschema",
       takenschema: "Takenschema",
+      vergaderingen: "ALV",
       helpUs: "Help US",
       contact: "Contact",
       aanmelden: "Aanmelden",
-      dashboard: "Dashboard",
+      dashboard: "Bestuur",
     },
     common: {
       menu: "Menu",
@@ -118,6 +119,12 @@ const dictionaries = {
       underage: "Je moet minimaal 18 jaar oud zijn om je aan te melden",
       recaptchaError: "Verificatie mislukt. Probeer het opnieuw.",
     },
+    vergaderingen: {
+      title: "Algemene Ledenvergadering (ALV) Nouten",
+      subtitle: "Officiële notulen en verslagen van de ledenvergaderingen.",
+      downloadBtn: "Download PDF",
+      noDocuments: "Er zijn nog geen vergaderstukken beschikbaar.",
+    },
     placeholder: {
       underConstruction: "Komt eraan! \u{1F3C0}",
     },
@@ -141,10 +148,11 @@ const dictionaries = {
       nieuws: "News",
       trainingschema: "Training Schedule",
       takenschema: "Task Schedule",
+      vergaderingen: "GA",
       helpUs: "Help US",
       contact: "Contact",
       aanmelden: "Join US",
-      dashboard: "Dashboard",
+      dashboard: "Board",
     },
     common: {
       menu: "Menu",
@@ -249,6 +257,12 @@ const dictionaries = {
       invalidEmail: "Please enter a valid email address",
       underage: "You must be at least 18 years old to register",
       recaptchaError: "Verification failed. Please try again.",
+    },
+    vergaderingen: {
+      title: "General Assembly (GA) Meeting Notes",
+      subtitle: "Official minutes and reports from member meetings.",
+      downloadBtn: "Download PDF",
+      noDocuments: "No meeting documents are available yet.",
     },
     placeholder: {
       underConstruction: "Coming soon! \u{1F3C0}",

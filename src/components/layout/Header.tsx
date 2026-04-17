@@ -55,6 +55,7 @@ export default function Header({locale, dict}: HeaderProps) {
                     href={item.href}
                     label={item.label}
                     disabled={item.disabled}
+                    isRoleGated={item.visibility.startsWith("role:")}
                   />
                 ))}
             </nav>

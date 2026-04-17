@@ -76,7 +76,13 @@ export default function MobileNav({
         <nav className="flex flex-col gap-1 p-6 flex-1">
           {navItems.map((item) => (
             <div key={item.href} className="py-3 border-b border-gray-100">
-              <NavLink href={item.href} label={item.label} onClick={onClose} disabled={item.disabled} />
+              <NavLink
+                href={item.href}
+                label={item.label}
+                onClick={onClose}
+                disabled={item.disabled}
+                isRoleGated={item.visibility.startsWith("role:")}
+              />
             </div>
           ))}
         </nav>
