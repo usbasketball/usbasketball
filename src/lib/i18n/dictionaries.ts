@@ -12,6 +12,7 @@ const dictionaries = {
       helpUs: "Help US",
       contact: "Contact",
       aanmelden: "Aanmelden",
+      reglementen: "Reglementen",
       dashboard: "Bestuur",
     },
     common: {
@@ -144,6 +145,10 @@ const dictionaries = {
       vertrouwenspersoon: "Vertrouwenspersoon",
       privacy: "Privacyverklaring",
     },
+    reglementen: {
+      title: "Reglementen",
+      subtitle: "Teamafspraken en gedragscode voor alle leden.",
+    },
   },
   en: {
     nav: {
@@ -156,6 +161,7 @@ const dictionaries = {
       helpUs: "Help US",
       contact: "Contact",
       aanmelden: "Join US",
+      reglementen: "Regulations",
       dashboard: "Board",
     },
     common: {
@@ -286,6 +292,10 @@ const dictionaries = {
     footer: {
       vertrouwenspersoon: "Confidential Counselor",
       privacy: "Privacy Policy",
+    },
+    reglementen: {
+      title: "Regulations",
+      subtitle: "Team agreements and code of conduct for all members.",
     },
   },
 } as const;

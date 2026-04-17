@@ -95,7 +95,7 @@ export default async function Home({
               <Button href={`/${locale}/takenschema`} variant="secondary">
                 {t.memberTasksBtn}
               </Button>
-              <Button href={`/${locale}/vergaderingen`} variant="outline">
+              <Button href={`/${locale}/reglementen`} variant="outline">
                 {t.memberClubInfoBtn}
               </Button>
             </div>

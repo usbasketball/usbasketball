@@ -1,4 +1,5 @@
 import {createClient} from "contentful";
+import type {Document} from "@contentful/rich-text-types";
 import type {Locale} from "@/lib/i18n";
 
 function getClient() {
@@ -42,6 +43,10 @@ export type MeetingNote = {
   year: number;
   title: string;
   documentUrl: string;
+};
+
+export type TeamAgreements = {
+  teamAfspraken: Document;
 };
 
 // ─── Fetchers ──────────────────────────────────────────────────────────────
@@ -135,6 +140,26 @@ export async function getMeetingNotes(): Promise<MeetingNote[] | null> {
       documentUrl: rawUrl.startsWith("//") ? `https:${rawUrl}` : rawUrl,
     };
   });
+}
+
+export async function getTeamAgreements(
+  locale: Locale,
+): Promise<TeamAgreements | null> {
+  const client = getClient();
+  if (!client) return null;
+
+  const res = await client.getEntries({
+    content_type: "teamAgreements",
+    locale: locale === "nl" ? "nl" : "en",
+    limit: 1,
+  });
+
+  if (!res.items.length) return null;
+
+  const f = res.items[0].fields as Record<string, unknown>;
+  return {
+    teamAfspraken: f.teamAfspraken as Document,
+  };
 }
 
 export async function getInstagramPost(): Promise<InstagramPost | null> {
