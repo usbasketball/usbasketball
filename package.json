@@ -9,7 +9,7 @@
     "lint": "eslint . && prettier --check .",
     "lint:fix": "eslint . --fix && prettier --write .",
     "format": "prettier --write .",
-    "migrate:contentful": "dotenv-cli -e .env.local -- tsx scripts/migrate-to-contentful.ts"
+    "migrate:contentful": "npx dotenv-cli -e .env.local -- npx tsx scripts/migrate-to-contentful.ts"
   },
   "dependencies": {
     "@auth0/nextjs-auth0": "^4.16.2",

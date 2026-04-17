@@ -37,6 +37,13 @@ export type InstagramPost = {
   caption: string;
 };
 
+export type MeetingNote = {
+  id: string;
+  year: number;
+  title: string;
+  documentUrl: string;
+};
+
 // ─── Fetchers ──────────────────────────────────────────────────────────────
 
 export async function getInformatieSections(
@@ -103,6 +110,31 @@ export async function getHelpUsContent(
       return {name: f.name as string, description: f.description as string};
     }),
   };
+}
+
+export async function getMeetingNotes(): Promise<MeetingNote[] | null> {
+  const client = getClient();
+  if (!client) return null;
+
+  const res = await client.getEntries({
+    content_type: "meetingNote",
+    include: 1,
+    order: ["-fields.year"],
+  });
+
+  if (!res.items.length) return null;
+
+  return res.items.map((item) => {
+    const f = item.fields as Record<string, unknown>;
+    const asset = f.document as {fields: {file: {url: string}}};
+    const rawUrl = asset.fields.file.url;
+    return {
+      id: item.sys.id,
+      year: f.year as number,
+      title: f.title as string,
+      documentUrl: rawUrl.startsWith("//") ? `https:${rawUrl}` : rawUrl,
+    };
+  });
 }
 
 export async function getInstagramPost(): Promise<InstagramPost | null> {

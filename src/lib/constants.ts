@@ -60,6 +60,11 @@ export function getNavItems(locale: Locale, dict: Dictionary) {
       visibility: "authenticated",
     },
     {
+      label: dict.nav.vergaderingen,
+      href: `/${locale}/vergaderingen`,
+      visibility: "authenticated",
+    },
+    {
       label: dict.nav.aanmelden,
       href: `/${locale}/aanmelden`,
       visibility: "guest",
