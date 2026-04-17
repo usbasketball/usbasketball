@@ -142,6 +142,24 @@ export async function getMeetingNotes(): Promise<MeetingNote[] | null> {
   });
 }
 
+export async function getPrivacyPolicy(
+  locale: Locale,
+): Promise<Document | null> {
+  const client = getClient();
+  if (!client) return null;
+
+  const res = await client.getEntries({
+    content_type: "privacy",
+    locale: locale === "nl" ? "nl" : "en",
+    limit: 1,
+  });
+
+  if (!res.items.length) return null;
+
+  const f = res.items[0].fields as Record<string, unknown>;
+  return f.privacyPolicy as Document;
+}
+
 export async function getTeamAgreements(
   locale: Locale,
 ): Promise<TeamAgreements | null> {
