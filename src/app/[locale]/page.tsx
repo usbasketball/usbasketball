@@ -10,6 +10,7 @@ import {getAlternates} from "@/lib/seo";
 import heroImage from "@/../public/kampioenschap-heren1-opt.webp";
 import InstagramFeed from "@/components/ui/InstagramFeed";
 import {getInstagramPost} from "@/lib/contentful";
+import {auth0} from "@/lib/auth0";
 
 export async function generateStaticParams() {
   return [{locale: "nl"}, {locale: "en"}];
@@ -40,7 +41,11 @@ export default async function Home({
   if (!isValidLocale(locale)) notFound();
   const dict = getDictionary(locale);
   const t = dict.home;
-  const instagramPost = await getInstagramPost();
+  const [instagramPost, session] = await Promise.all([
+    getInstagramPost(),
+    auth0.getSession(),
+  ]);
+  const user = session?.user ?? null;
 
   return (
     <>
@@ -80,15 +85,30 @@ export default async function Home({
           <h1 className="text-4xl sm:text-6xl font-black tracking-tight text-white uppercase leading-none mb-4">
             U.S. Basketball
           </h1>
-          <p className="text-white/60 text-lg mb-8 italic">{SITE_TAGLINE}</p>
-          <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <Button href={`/${locale}/aanmelden`} variant="secondary">
-              {t.registerBtn}
-            </Button>
-            <Button href={`/${locale}/informatie`} variant="outline">
-              {t.aboutBtn}
-            </Button>
-          </div>
+          <p className="text-white/60 text-lg mb-8 italic">
+            {user
+              ? `${t.memberWelcomeMessage}, ${user.given_name}!`
+              : SITE_TAGLINE}
+          </p>
+          {user ? (
+            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+              <Button href={`/${locale}/takenschema`} variant="secondary">
+                {t.memberTasksBtn}
+              </Button>
+              <Button href={`/${locale}/vergaderingen`} variant="outline">
+                {t.memberClubInfoBtn}
+              </Button>
+            </div>
+          ) : (
+            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+              <Button href={`/${locale}/aanmelden`} variant="secondary">
+                {t.registerBtn}
+              </Button>
+              <Button href={`/${locale}/informatie`} variant="outline">
+                {t.aboutBtn}
+              </Button>
+            </div>
+          )}
         </div>
       </HeroParallax>
 
@@ -116,24 +136,26 @@ export default async function Home({
         </div>
       </section>
 
-      {/* CTA banner */}
-      <section className="bg-gradient-to-r from-gray-900 to-gray-800 px-4 sm:px-6 py-12">
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left">
-          <div>
-            <h2 className="text-white font-black text-2xl uppercase">
-              {t.newSeason}
-            </h2>
-            <p className="text-white/70 text-sm mt-1">{t.newSeasonText}</p>
+      {/* CTA banner — guests only */}
+      {!user && (
+        <section className="bg-gradient-to-r from-gray-900 to-gray-800 px-4 sm:px-6 py-12">
+          <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left">
+            <div>
+              <h2 className="text-white font-black text-2xl uppercase">
+                {t.newSeason}
+              </h2>
+              <p className="text-white/70 text-sm mt-1">{t.newSeasonText}</p>
+            </div>
+            <Button
+              href={`/${locale}/aanmelden`}
+              variant="secondary"
+              className="shrink-0"
+            >
+              {t.registerNow}
+            </Button>
           </div>
-          <Button
-            href={`/${locale}/aanmelden`}
-            variant="secondary"
-            className="shrink-0"
-          >
-            {t.registerNow}
-          </Button>
-        </div>
-      </section>
+        </section>
+      )}
     </>
   );
 }

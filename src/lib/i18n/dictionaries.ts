@@ -42,6 +42,10 @@ const dictionaries = {
       newSeasonText:
         "Nieuw seizoen, nieuwe kansen, zelfde gezelligheid. Schrijf je in voor 2026\u20132027!",
       registerNow: "Join US!",
+      memberWelcomeMessage: "Welkom terug",
+      memberTrainingBtn: "Trainingschema",
+      memberTasksBtn: "Mijn Taken",
+      memberClubInfoBtn: "Meer Bij U.S.",
     },
     informatie: {
       title: "Informatie",
@@ -182,6 +186,10 @@ const dictionaries = {
       newSeasonText:
         "New season, new chances, same great crew. Sign up for 2026\u20132027!",
       registerNow: "Join US!",
+      memberWelcomeMessage: "Welcome back",
+      memberTrainingBtn: "Training Schedule",
+      memberTasksBtn: "My Tasks",
+      memberClubInfoBtn: "More At U.S.",
     },
     informatie: {
       title: "About",
