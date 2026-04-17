@@ -7,7 +7,7 @@ import {SITE_TAGLINE} from "@/lib/constants";
 import {isValidLocale, getDictionary} from "@/lib/i18n";
 import type {Locale} from "@/lib/i18n";
 import {getAlternates} from "@/lib/seo";
-import heroImage from "@/../public/kampioenschap-heren1.webp";
+import heroImage from "@/../public/kampioenschap-heren1-opt.webp";
 import InstagramFeed from "@/components/ui/InstagramFeed";
 import {getInstagramPost} from "@/lib/contentful";
 
@@ -67,10 +67,11 @@ export default async function Home({
       >
         <div className="px-4 sm:px-6 py-20 sm:py-28 text-center max-w-2xl flex flex-col items-center">
           <Image
-            src="/us_logo_png.avif"
+            src="/us_logo_text.webp"
             alt="U.S. Basketball Amsterdam"
             width={80}
-            height={80}
+            height={98}
+            priority
             className="h-20 w-20 mb-6 brightness-0 invert"
           />
           <p className="text-white/60 text-xs font-bold uppercase tracking-widest mb-4">
