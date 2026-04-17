@@ -10,9 +10,23 @@ npm run build      # Production build with Turbopack
 npm run lint       # ESLint + Prettier check
 npm run lint:fix   # ESLint + Prettier auto-fix
 npm run format     # Prettier write (format only, no lint)
+npm run test:e2e          # Playwright E2E tests (headless, all devices)
+npm run test:e2e:ui       # Playwright interactive UI mode
+npm run test:e2e:headed   # Playwright headed mode (for debugging)
 ```
 
-There is no test suite.
+### Testing
+
+Playwright E2E tests live in `tests/e2e/`. Three test files:
+- `public-pages.spec.ts` — all 5 public pages × 2 locales render without error
+- `auth-pages.spec.ts` — 4 auth-gated pages redirect to login when unauthenticated
+- `navigation.spec.ts` — mobile hamburger open/close, desktop nav visibility
+
+Tests run against 3 device projects: `desktop` (1280px), `tablet` (768px), `mobile` (375px).
+
+Locally, `npm run test:e2e` starts `next dev` automatically via the `webServer` config. In CI, the workflow builds and starts `next start` separately before running tests.
+
+CI runs on every push/PR to `main` via `.github/workflows/e2e.yml`. Requires three GitHub Actions secrets: `CI_AUTH0_SECRET`, `CI_AUTH0_CLIENT_SECRET`, `CI_GOOGLE_PRIVATE_KEY` (any placeholder values — no real auth is tested).
 
 ## Architecture
 

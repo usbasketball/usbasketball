@@ -1,0 +1,63 @@
+name: E2E Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  e2e:
+    name: Playwright E2E
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    env:
+      AUTH0_SECRET: ${{ secrets.CI_AUTH0_SECRET }}
+      AUTH0_BASE_URL: http://localhost:3000
+      AUTH0_ISSUER_BASE_URL: https://placeholder.us.auth0.com
+      AUTH0_CLIENT_ID: playwright-ci-client
+      AUTH0_CLIENT_SECRET: ${{ secrets.CI_AUTH0_CLIENT_SECRET }}
+      GOOGLE_SHEET_ID: placeholder-sheet-id
+      GOOGLE_SERVICE_ACCOUNT_EMAIL: ci@placeholder.iam.gserviceaccount.com
+      GOOGLE_PRIVATE_KEY: ${{ secrets.CI_GOOGLE_PRIVATE_KEY }}
+      RESEND_API_KEY: re_placeholder_ci
+      NEXT_PUBLIC_RECAPTCHA_SITE_KEY: 6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI
+      RECAPTCHA_SECRET_KEY: 6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe
+      PLAYWRIGHT_BASE_URL: http://localhost:3000
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps chromium webkit
+
+      - name: Build Next.js app
+        run: npm run build
+
+      - name: Start Next.js server
+        run: npm run start &
+
+      - name: Wait for server
+        run: npx wait-on http://localhost:3000 --timeout 30000
+
+      - name: Run Playwright tests
+        run: npm run test:e2e
+
+      - name: Upload Playwright report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 14
