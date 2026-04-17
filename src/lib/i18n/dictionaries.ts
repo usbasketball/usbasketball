@@ -12,7 +12,7 @@ const dictionaries = {
       helpUs: "Help US",
       contact: "Contact",
       aanmelden: "Aanmelden",
-      dashboard: "Dashboard",
+      dashboard: "Bestuur",
     },
     common: {
       menu: "Menu",
@@ -152,7 +152,7 @@ const dictionaries = {
       helpUs: "Help US",
       contact: "Contact",
       aanmelden: "Join US",
-      dashboard: "Dashboard",
+      dashboard: "Board",
     },
     common: {
       menu: "Menu",
