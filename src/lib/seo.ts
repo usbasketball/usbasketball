@@ -12,6 +12,7 @@ export function getAlternates(
     languages: {
       nl: `${BASE_URL}/nl${path}`,
       en: `${BASE_URL}/en${path}`,
+      "x-default": `${BASE_URL}/nl${path}`,
     },
   };
 }

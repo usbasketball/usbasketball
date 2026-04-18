@@ -21,6 +21,7 @@ export async function generateMetadata({
     title: t.title,
     description: t.subtitle,
     alternates: getAlternates(locale, "/reglementen"),
+    robots: {index: false, follow: false},
   };
 }
 

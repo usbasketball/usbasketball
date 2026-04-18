@@ -7,7 +7,10 @@ test.describe("Mobile navigation", () => {
     // Skip in projects that use a wide viewport (desktop/tablet projects run all
     // describes, but mobile nav only makes sense below the lg breakpoint 1024px)
     const vp = page.viewportSize();
-    test.skip(!!vp && vp.width >= 1024, "mobile nav not rendered at this viewport");
+    test.skip(
+      !!vp && vp.width >= 1024,
+      "mobile nav not rendered at this viewport",
+    );
     await page.goto("/nl");
   });
 
@@ -52,7 +55,9 @@ test.describe("Desktop navigation", () => {
   });
 
   test("desktop nav is visible", async ({page}) => {
-    await expect(page.locator("header .hidden.lg\\:flex").first()).toBeVisible();
+    await expect(
+      page.locator("header .hidden.lg\\:flex").first(),
+    ).toBeVisible();
   });
 
   test("hamburger button is not visible", async ({page}) => {

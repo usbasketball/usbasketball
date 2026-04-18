@@ -18,6 +18,7 @@ npm run test:e2e:headed   # Playwright headed mode (for debugging)
 ### Testing
 
 Playwright E2E tests live in `tests/e2e/`. Three test files:
+
 - `public-pages.spec.ts` — all 5 public pages × 2 locales render without error
 - `auth-pages.spec.ts` — 4 auth-gated pages redirect to login when unauthenticated
 - `navigation.spec.ts` — mobile hamburger open/close, desktop nav visibility

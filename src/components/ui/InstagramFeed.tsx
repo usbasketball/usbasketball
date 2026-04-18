@@ -29,18 +29,50 @@ function InstagramFallback({postUrl, imageAlt, caption}: Required<Props>) {
         maxWidth: "540px",
         minWidth: "326px",
         width: "calc(100% - 2px)",
-        fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
+        fontFamily:
+          "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
       }}
     >
       {/* Header */}
-      <div style={{display: "flex", alignItems: "center", padding: "14px 16px", gap: "10px"}}>
-        <a href={PROFILE_URL} target="_blank" rel="noopener noreferrer" style={{flexShrink: 0}}>
-          <div style={{
-            width: 32, height: 32, borderRadius: "50%",
-            background: "linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888)",
-            padding: 2, display: "flex", alignItems: "center", justifyContent: "center",
-          }}>
-            <div style={{width: "100%", height: "100%", borderRadius: "50%", background: "#fff", display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden"}}>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          padding: "14px 16px",
+          gap: "10px",
+        }}
+      >
+        <a
+          href={PROFILE_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{flexShrink: 0}}
+        >
+          <div
+            style={{
+              width: 32,
+              height: 32,
+              borderRadius: "50%",
+              background:
+                "linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888)",
+              padding: 2,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <div
+              style={{
+                width: "100%",
+                height: "100%",
+                borderRadius: "50%",
+                background: "#fff",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                overflow: "hidden",
+              }}
+            >
               <Image
                 src="/us_logo_png.avif"
                 alt="usbasketbal"
@@ -56,24 +88,53 @@ function InstagramFallback({postUrl, imageAlt, caption}: Required<Props>) {
             href={PROFILE_URL}
             target="_blank"
             rel="noopener noreferrer"
-            style={{display: "block", fontWeight: 600, fontSize: "14px", color: "#262626", textDecoration: "none", lineHeight: 1.4}}
+            style={{
+              display: "block",
+              fontWeight: 600,
+              fontSize: "14px",
+              color: "#262626",
+              textDecoration: "none",
+              lineHeight: 1.4,
+            }}
           >
             usbasketbal
           </a>
-          <span style={{fontSize: "12px", color: "#8e8e8e", lineHeight: 1.4}}>U.S. Basketball Amsterdam</span>
+          <span style={{fontSize: "12px", color: "#8e8e8e", lineHeight: 1.4}}>
+            U.S. Basketball Amsterdam
+          </span>
         </div>
         {/* Instagram logo */}
-        <a href={postUrl} target="_blank" rel="noopener noreferrer" aria-label="View on Instagram">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#262626" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
-            <circle cx="12" cy="12" r="4"/>
-            <circle cx="17.5" cy="6.5" r="1" fill="#262626" stroke="none"/>
+        <a
+          href={postUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="View on Instagram"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#262626"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+            <circle cx="12" cy="12" r="4" />
+            <circle cx="17.5" cy="6.5" r="1" fill="#262626" stroke="none" />
           </svg>
         </a>
       </div>
 
       {/* Image */}
-      <a href={postUrl} target="_blank" rel="noopener noreferrer" style={{display: "block"}}>
+      <a
+        href={postUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        style={{display: "block"}}
+      >
         <Image
           src="/instagram-post.webp"
           alt={imageAlt}
@@ -86,7 +147,19 @@ function InstagramFallback({postUrl, imageAlt, caption}: Required<Props>) {
       {/* Caption */}
       <div style={{padding: "12px 16px 4px"}}>
         <span style={{fontSize: "14px", color: "#262626", lineHeight: "18px"}}>
-          <a href={PROFILE_URL} target="_blank" rel="noopener noreferrer" style={{fontWeight: 600, color: "#262626", textDecoration: "none", marginRight: 4}}>usbasketbal</a>
+          <a
+            href={PROFILE_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              fontWeight: 600,
+              color: "#262626",
+              textDecoration: "none",
+              marginRight: 4,
+            }}
+          >
+            usbasketbal
+          </a>
           {caption}
         </span>
       </div>
@@ -123,7 +196,11 @@ export default function InstagramFeed({
         />
       )}
       {scriptFailed ? (
-        <InstagramFallback postUrl={postUrl} imageAlt={imageAlt} caption={caption} />
+        <InstagramFallback
+          postUrl={postUrl}
+          imageAlt={imageAlt}
+          caption={caption}
+        />
       ) : (
         <blockquote
           className="instagram-media"
@@ -133,7 +210,8 @@ export default function InstagramFeed({
             background: "#FFF",
             border: 0,
             borderRadius: "3px",
-            boxShadow: "0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15)",
+            boxShadow:
+              "0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15)",
             margin: "0 auto",
             maxWidth: "540px",
             minWidth: "326px",
