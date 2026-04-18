@@ -7,7 +7,10 @@ interface HeroParallaxProps {
   children: React.ReactNode;
 }
 
-export default function HeroParallax({background, children}: HeroParallaxProps) {
+export default function HeroParallax({
+  background,
+  children,
+}: HeroParallaxProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const bgRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
@@ -52,7 +55,10 @@ export default function HeroParallax({background, children}: HeroParallaxProps) 
       <div ref={bgRef} className="absolute inset-0 will-change-transform">
         {background}
       </div>
-      <div ref={contentRef} className="relative z-10 will-change-[transform,opacity]">
+      <div
+        ref={contentRef}
+        className="relative z-10 will-change-[transform,opacity]"
+      >
         {children}
       </div>
     </section>

@@ -38,22 +38,13 @@ export async function generateMetadata({
       siteName: "U.S. Basketball Amsterdam",
       locale: isNl ? "nl_NL" : "en_US",
       alternateLocale: isNl ? "en_US" : "nl_NL",
-      images: [
-        {
-          url: "/icon.png",
-          width: 192,
-          height: 192,
-          alt: "U.S. Basketball Amsterdam logo",
-        },
-      ],
     },
     twitter: {
-      card: "summary",
+      card: "summary_large_image",
       title: "U.S. Basketball Amsterdam",
       description: isNl
         ? "U.S. Basketball Amsterdam — basketbalclub met dames- en herenteams voor spelers 18+. Thuis in de Amstelcampushal."
         : "U.S. Basketball Amsterdam — basketball club with women's and men's teams for players 18+. Based at the Amstelcampushal.",
-      images: ["/icon.png"],
     },
   };
 }

@@ -3,7 +3,15 @@ import {sendRegistrationEmails, type RegistrationData} from "@/lib/resend";
 import {appendRegistration} from "@/lib/google-sheets";
 
 const VALID_GENDERS = ["Man", "Vrouw", "Male", "Female"];
-const VALID_POSITIONS = ["Guard", "Forward", "Center", "N.v.t.", "N/A", "Anders", "Other"];
+const VALID_POSITIONS = [
+  "Guard",
+  "Forward",
+  "Center",
+  "N.v.t.",
+  "N/A",
+  "Anders",
+  "Other",
+];
 const VALID_INTERESTS = [
   "Trainen én competitie spelen",
   "Alleen trainen",
@@ -14,17 +22,33 @@ const VALID_INTERESTS = [
 ];
 
 function validate(body: Record<string, unknown>): string | null {
-  const required = ["name", "birthDate", "email", "gender", "lastLevel", "lastSeason", "position", "interest", "remarks"];
+  const required = [
+    "name",
+    "birthDate",
+    "email",
+    "gender",
+    "lastLevel",
+    "lastSeason",
+    "position",
+    "interest",
+    "remarks",
+  ];
   for (const field of required) {
-    if (!body[field] || typeof body[field] !== "string" || !(body[field] as string).trim()) {
+    if (
+      !body[field] ||
+      typeof body[field] !== "string" ||
+      !(body[field] as string).trim()
+    ) {
       return `Missing field: ${field}`;
     }
   }
   const email = body.email as string;
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return "Invalid email";
   if (!VALID_GENDERS.includes(body.gender as string)) return "Invalid gender";
-  if (!VALID_POSITIONS.includes(body.position as string)) return "Invalid position";
-  if (!VALID_INTERESTS.includes(body.interest as string)) return "Invalid interest";
+  if (!VALID_POSITIONS.includes(body.position as string))
+    return "Invalid position";
+  if (!VALID_INTERESTS.includes(body.interest as string))
+    return "Invalid interest";
   return null;
 }
 
@@ -35,7 +59,7 @@ async function verifyRecaptcha(token: unknown): Promise<boolean> {
     headers: {"Content-Type": "application/x-www-form-urlencoded"},
     body: `secret=${process.env.RECAPTCHA_SECRET_KEY}&response=${token}`,
   });
-  const data = await res.json() as {success: boolean; score?: number};
+  const data = (await res.json()) as {success: boolean; score?: number};
   return data.success && (data.score ?? 0) >= 0.5;
 }
 
@@ -49,7 +73,10 @@ export async function POST(req: NextRequest) {
 
   const captchaOk = await verifyRecaptcha(body.recaptchaToken);
   if (!captchaOk) {
-    return NextResponse.json({error: "reCAPTCHA verification failed"}, {status: 400});
+    return NextResponse.json(
+      {error: "reCAPTCHA verification failed"},
+      {status: 400},
+    );
   }
 
   const validationError = validate(body);
@@ -71,10 +98,7 @@ export async function POST(req: NextRequest) {
   };
 
   try {
-    await Promise.all([
-      appendRegistration(data),
-      sendRegistrationEmails(data),
-    ]);
+    await Promise.all([appendRegistration(data), sendRegistrationEmails(data)]);
   } catch (err) {
     console.error("Registration error:", err);
     return NextResponse.json({error: "Internal server error"}, {status: 500});

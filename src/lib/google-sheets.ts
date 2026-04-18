@@ -14,7 +14,9 @@ function getAuth() {
   });
 }
 
-export async function appendRegistration(data: RegistrationData): Promise<void> {
+export async function appendRegistration(
+  data: RegistrationData,
+): Promise<void> {
   const auth = getAuth();
   const sheets = google.sheets({version: "v4", auth});
 

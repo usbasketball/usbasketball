@@ -79,7 +79,13 @@ export default function InterestForm({t, locale}: Props) {
     setStatus("loading");
     try {
       const recaptchaToken: string = await new Promise((resolve, reject) => {
-        const gr = (window as unknown as {grecaptcha?: {execute: (key: string, opts: {action: string}) => Promise<string>}}).grecaptcha;
+        const gr = (
+          window as unknown as {
+            grecaptcha?: {
+              execute: (key: string, opts: {action: string}) => Promise<string>;
+            };
+          }
+        ).grecaptcha;
         if (!gr) return reject(new Error("reCAPTCHA not loaded"));
         gr.execute(SITE_KEY, {action: "register"}).then(resolve).catch(reject);
       });
@@ -122,162 +128,164 @@ export default function InterestForm({t, locale}: Props) {
 
   return (
     <>
-    <Script
-      src={`https://www.google.com/recaptcha/api.js?render=${SITE_KEY}`}
-      strategy="lazyOnload"
-    />
-    <form
-      onSubmit={handleSubmit}
-      noValidate
-      className="bg-white border border-gray-100 shadow-sm p-8 flex flex-col gap-5"
-    >
-      {/* Name */}
-      <div>
-        <label className={labelClass}>{t.name}</label>
-        <input
-          type="text"
-          className={inputClass}
-          value={data.name}
-          onChange={(e) => set("name", e.target.value)}
-          autoComplete="name"
-        />
-        {errors.name && <p className={errorClass}>{errors.name}</p>}
-      </div>
-
-      {/* Date of birth */}
-      <div>
-        <label className={labelClass}>{t.birthDate}</label>
-        <input
-          type="date"
-          className={inputClass}
-          value={data.birthDate}
-          onChange={(e) => set("birthDate", e.target.value)}
-        />
-        {errors.birthDate && <p className={errorClass}>{errors.birthDate}</p>}
-      </div>
-
-      {/* Email */}
-      <div>
-        <label className={labelClass}>{t.emailField}</label>
-        <input
-          type="email"
-          className={inputClass}
-          value={data.email}
-          onChange={(e) => set("email", e.target.value)}
-          autoComplete="email"
-        />
-        {errors.email && <p className={errorClass}>{errors.email}</p>}
-      </div>
-
-      {/* Gender */}
-      <div>
-        <label className={labelClass}>{t.gender}</label>
-        <div className="flex gap-4 mt-2">
-          {[
-            {value: t.genderMale, label: t.genderMale},
-            {value: t.genderFemale, label: t.genderFemale},
-          ].map(({value, label}) => (
-            <label
-              key={value}
-              className="flex items-center gap-2 cursor-pointer"
-            >
-              <input
-                type="radio"
-                name="gender"
-                value={value}
-                checked={data.gender === value}
-                onChange={(e) => set("gender", e.target.value)}
-                className="accent-gray-900"
-              />
-              <span className="text-sm text-gray-700">{label}</span>
-            </label>
-          ))}
+      <Script
+        src={`https://www.google.com/recaptcha/api.js?render=${SITE_KEY}`}
+        strategy="lazyOnload"
+      />
+      <form
+        onSubmit={handleSubmit}
+        noValidate
+        className="bg-white border border-gray-100 shadow-sm p-8 flex flex-col gap-5"
+      >
+        {/* Name */}
+        <div>
+          <label className={labelClass}>{t.name}</label>
+          <input
+            type="text"
+            className={inputClass}
+            value={data.name}
+            onChange={(e) => set("name", e.target.value)}
+            autoComplete="name"
+          />
+          {errors.name && <p className={errorClass}>{errors.name}</p>}
         </div>
-        {errors.gender && <p className={errorClass}>{errors.gender}</p>}
-      </div>
 
-      {/* Last level played */}
-      <div>
-        <label className={labelClass}>{t.lastLevel}</label>
-        <input
-          type="text"
-          className={inputClass}
-          placeholder={t.lastLevelPlaceholder}
-          value={data.lastLevel}
-          onChange={(e) => set("lastLevel", e.target.value)}
-        />
-        {errors.lastLevel && <p className={errorClass}>{errors.lastLevel}</p>}
-      </div>
+        {/* Date of birth */}
+        <div>
+          <label className={labelClass}>{t.birthDate}</label>
+          <input
+            type="date"
+            className={inputClass}
+            value={data.birthDate}
+            onChange={(e) => set("birthDate", e.target.value)}
+          />
+          {errors.birthDate && <p className={errorClass}>{errors.birthDate}</p>}
+        </div>
 
-      {/* Last season played */}
-      <div>
-        <label className={labelClass}>{t.lastSeason}</label>
-        <input
-          type="text"
-          className={inputClass}
-          placeholder={t.lastSeasonPlaceholder}
-          value={data.lastSeason}
-          onChange={(e) => set("lastSeason", e.target.value)}
-        />
-        {errors.lastSeason && <p className={errorClass}>{errors.lastSeason}</p>}
-      </div>
+        {/* Email */}
+        <div>
+          <label className={labelClass}>{t.emailField}</label>
+          <input
+            type="email"
+            className={inputClass}
+            value={data.email}
+            onChange={(e) => set("email", e.target.value)}
+            autoComplete="email"
+          />
+          {errors.email && <p className={errorClass}>{errors.email}</p>}
+        </div>
 
-      {/* Position */}
-      <div>
-        <label className={labelClass}>{t.position}</label>
-        <select
-          className={inputClass}
-          value={data.position}
-          onChange={(e) => set("position", e.target.value)}
-        >
-          <option value="" disabled />
-          <option value={t.positionGuard}>{t.positionGuard}</option>
-          <option value={t.positionForward}>{t.positionForward}</option>
-          <option value={t.positionCenter}>{t.positionCenter}</option>
-          <option value={t.positionNvt}>{t.positionNvt}</option>
-          <option value={t.positionOther}>{t.positionOther}</option>
-        </select>
-        {errors.position && <p className={errorClass}>{errors.position}</p>}
-      </div>
+        {/* Gender */}
+        <div>
+          <label className={labelClass}>{t.gender}</label>
+          <div className="flex gap-4 mt-2">
+            {[
+              {value: t.genderMale, label: t.genderMale},
+              {value: t.genderFemale, label: t.genderFemale},
+            ].map(({value, label}) => (
+              <label
+                key={value}
+                className="flex items-center gap-2 cursor-pointer"
+              >
+                <input
+                  type="radio"
+                  name="gender"
+                  value={value}
+                  checked={data.gender === value}
+                  onChange={(e) => set("gender", e.target.value)}
+                  className="accent-gray-900"
+                />
+                <span className="text-sm text-gray-700">{label}</span>
+              </label>
+            ))}
+          </div>
+          {errors.gender && <p className={errorClass}>{errors.gender}</p>}
+        </div>
 
-      {/* Interest */}
-      <div>
-        <label className={labelClass}>{t.interest}</label>
-        <select
-          className={inputClass}
-          value={data.interest}
-          onChange={(e) => set("interest", e.target.value)}
-        >
-          <option value="" disabled />
-          <option value={t.interestBoth}>{t.interestBoth}</option>
-          <option value={t.interestTrainingOnly}>
-            {t.interestTrainingOnly}
-          </option>
-          <option value={t.interestNotSure}>{t.interestNotSure}</option>
-        </select>
-        {errors.interest && <p className={errorClass}>{errors.interest}</p>}
-      </div>
+        {/* Last level played */}
+        <div>
+          <label className={labelClass}>{t.lastLevel}</label>
+          <input
+            type="text"
+            className={inputClass}
+            placeholder={t.lastLevelPlaceholder}
+            value={data.lastLevel}
+            onChange={(e) => set("lastLevel", e.target.value)}
+          />
+          {errors.lastLevel && <p className={errorClass}>{errors.lastLevel}</p>}
+        </div>
 
-      {/* Remarks */}
-      <div>
-        <label className={labelClass}>{t.remarks}</label>
-        <textarea
-          className="w-full px-3 py-2 bg-white border border-gray-200 text-gray-900 text-sm focus:outline-none focus:border-gray-900 transition-colors resize-none"
-          rows={4}
-          placeholder={t.remarksPlaceholder}
-          value={data.remarks}
-          onChange={(e) => set("remarks", e.target.value)}
-        />
-      </div>
+        {/* Last season played */}
+        <div>
+          <label className={labelClass}>{t.lastSeason}</label>
+          <input
+            type="text"
+            className={inputClass}
+            placeholder={t.lastSeasonPlaceholder}
+            value={data.lastSeason}
+            onChange={(e) => set("lastSeason", e.target.value)}
+          />
+          {errors.lastSeason && (
+            <p className={errorClass}>{errors.lastSeason}</p>
+          )}
+        </div>
 
-      {status === "error" && (
-        <p className="text-red-500 text-sm">{t.errorText}</p>
-      )}
+        {/* Position */}
+        <div>
+          <label className={labelClass}>{t.position}</label>
+          <select
+            className={inputClass}
+            value={data.position}
+            onChange={(e) => set("position", e.target.value)}
+          >
+            <option value="" disabled />
+            <option value={t.positionGuard}>{t.positionGuard}</option>
+            <option value={t.positionForward}>{t.positionForward}</option>
+            <option value={t.positionCenter}>{t.positionCenter}</option>
+            <option value={t.positionNvt}>{t.positionNvt}</option>
+            <option value={t.positionOther}>{t.positionOther}</option>
+          </select>
+          {errors.position && <p className={errorClass}>{errors.position}</p>}
+        </div>
 
-      <Button type="submit" disabled={status === "loading"} className="mt-2">
-        {status === "loading" ? t.submitting : t.submit}
-      </Button>
-    </form>
+        {/* Interest */}
+        <div>
+          <label className={labelClass}>{t.interest}</label>
+          <select
+            className={inputClass}
+            value={data.interest}
+            onChange={(e) => set("interest", e.target.value)}
+          >
+            <option value="" disabled />
+            <option value={t.interestBoth}>{t.interestBoth}</option>
+            <option value={t.interestTrainingOnly}>
+              {t.interestTrainingOnly}
+            </option>
+            <option value={t.interestNotSure}>{t.interestNotSure}</option>
+          </select>
+          {errors.interest && <p className={errorClass}>{errors.interest}</p>}
+        </div>
+
+        {/* Remarks */}
+        <div>
+          <label className={labelClass}>{t.remarks}</label>
+          <textarea
+            className="w-full px-3 py-2 bg-white border border-gray-200 text-gray-900 text-sm focus:outline-none focus:border-gray-900 transition-colors resize-none"
+            rows={4}
+            placeholder={t.remarksPlaceholder}
+            value={data.remarks}
+            onChange={(e) => set("remarks", e.target.value)}
+          />
+        </div>
+
+        {status === "error" && (
+          <p className="text-red-500 text-sm">{t.errorText}</p>
+        )}
+
+        <Button type="submit" disabled={status === "loading"} className="mt-2">
+          {status === "loading" ? t.submitting : t.submit}
+        </Button>
+      </form>
     </>
   );
 }
