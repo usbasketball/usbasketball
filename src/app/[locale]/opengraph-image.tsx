@@ -1,3 +1,5 @@
+import {readFile} from "fs/promises";
+import {join} from "path";
 import {ImageResponse} from "next/og";
 
 export const runtime = "nodejs";
@@ -6,6 +8,11 @@ export const size = {width: 1200, height: 630};
 export const contentType = "image/jpeg";
 
 export default async function Image() {
+  const heroBytes = await readFile(
+    join(process.cwd(), "public", "kampioenschap-heren1-opt.webp"),
+  );
+  const heroSrc = `data:image/webp;base64,${heroBytes.toString("base64")}`;
+
   return new ImageResponse(
     <div
       style={{
@@ -17,7 +24,7 @@ export default async function Image() {
       }}
     >
       <img
-        src={`${process.env.NEXT_PUBLIC_BASE_URL ?? "https://www.usbasketball.nl"}/kampioenschap-heren1-opt.webp`}
+        src={heroSrc}
         alt=""
         style={{
           position: "absolute",
