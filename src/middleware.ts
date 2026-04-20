@@ -11,10 +11,11 @@ export async function middleware(request: NextRequest) {
     return await auth0.middleware(request);
   }
 
-  // Skip internal Next.js paths and static files
+  // Skip internal Next.js paths, static files, and Sentry tunnel
   if (
     pathname.startsWith("/_next") ||
     pathname.startsWith("/api") ||
+    pathname.startsWith("/monitoring") ||
     pathname.includes(".")
   ) {
     return NextResponse.next();
