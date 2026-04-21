@@ -17,11 +17,12 @@
   "dependencies": {
     "@auth0/nextjs-auth0": "^4.16.2",
     "@contentful/rich-text-react-renderer": "^16.2.1",
+    "@sentry/nextjs": "^10.49.0",
     "@vercel/analytics": "^2.0.1",
     "@vercel/speed-insights": "^2.0.0",
     "contentful": "^11.12.1",
     "googleapis": "^171.4.0",
-    "next": "15.5.14",
+    "next": "^15.5.15",
     "react": "19.1.4",
     "react-dom": "19.1.4",
     "resend": "^6.10.0"

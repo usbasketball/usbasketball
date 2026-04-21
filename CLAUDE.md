@@ -89,4 +89,7 @@ NEXT_PUBLIC_RECAPTCHA_SITE_KEY
 RECAPTCHA_SECRET_KEY
 CONTENTFUL_SPACE_ID
 CONTENTFUL_DELIVERY_ACCESS_TOKEN    # used for one-time migration only
+SENTRY_DSN
+NEXT_PUBLIC_SENTRY_DSN              # same value as SENTRY_DSN, exposed to client bundle
+SENTRY_AUTH_TOKEN                   # for source map upload during build; needs project:releases + org:read scopes
 ```
