@@ -1,0 +1,18 @@
+services:
+  web:
+    build:
+      context: .
+      target: deps
+    command: npm run dev
+    ports:
+      - "3000:3000"
+    environment:
+      DATABASE_URL: ${DATABASE_URL:?Set DATABASE_URL in your shell or .env}
+      AUTH_SECRET: ${AUTH_SECRET:-dev-only-secret-change-me}
+      AUTH_URL: ${AUTH_URL:-http://localhost:3000}
+      NEXT_PUBLIC_SITE_URL: ${NEXT_PUBLIC_SITE_URL:-http://localhost:3000}
+      NEXT_PUBLIC_SITE_NAME: ${NEXT_PUBLIC_SITE_NAME:-US Basketball NL}
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/.next
