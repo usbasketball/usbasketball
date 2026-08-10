@@ -1,14 +1,20 @@
 export const siteConfig = {
-  name: process.env.NEXT_PUBLIC_SITE_NAME ?? "US Basketball NL",
+  name: process.env.NEXT_PUBLIC_SITE_NAME ?? "US Basketbal",
   url: (process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000").replace(
     /\/+$/,
     ""
   ),
-  email: process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "info@usbasketballnl.example",
-  address: "Sportpark Olympos, 3584 JL Utrecht",
-  city: "Utrecht",
+  email: process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "bestuur@usbasketball.nl",
+  secretariatEmail: process.env.NEXT_PUBLIC_SECRETARIAT_EMAIL ?? "secretaris@usbasketball.nl",
+  technicalCommitteeEmail: process.env.NEXT_PUBLIC_TC_EMAIL ?? "tc@usbasketball.nl",
+  address: "Tweede Boerhaavestraat 10, 1091BD Amsterdam",
+  city: "Amsterdam",
   country: "NL",
-  foundedYear: 1985,
+  foundedYear: 1951,
+  social: {
+    instagram: "https://www.instagram.com/usbasketbal/",
+    facebook: "https://www.facebook.com/usbasketbal",
+  },
 } as const;
 
 type JsonLdObject = Record<string, unknown>;

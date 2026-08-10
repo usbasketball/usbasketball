@@ -1,14 +1,10 @@
 {
   "Metadata": {
-    "title": "US Basketball NL",
-    "description": "US Basketball NL is an amateur basketball club for everyone: from young talent to adult recreational players. Join us and play basketball in a fun, team-oriented club.",
+    "title": "US Basketball",
+    "description": "US Basketball is an amateur basketball club for adults (18+): from beginners to experienced players. Join us and play basketball in a fun, team-oriented club.",
     "about": {
       "title": "About us",
-      "description": "The history of US Basketball NL: our foundation, club facts and the teams that make up our club."
-    },
-    "teams": {
-      "title": "Teams",
-      "description": "Meet the teams of US Basketball NL, from the youngest rookies to the senior teams."
+      "description": "Read all about US Basketball NL: our club, trainings, home games and recreational players."
     },
     "membership": {
       "title": "Membership",
@@ -19,8 +15,8 @@
       "description": "The privacy policy of US Basketball NL: what data we collect and how we use it."
     },
     "signup": {
-      "title": "Sign up",
-      "description": "Register as a member of US Basketball NL in a few minutes."
+      "title": "Interest form",
+      "description": "Leave your interest to come play basketball at US Basketball. We'll match you to a team that fits your experience."
     },
     "login": {
       "title": "Log in",
@@ -34,169 +30,112 @@
   "Nav": {
     "home": "Home",
     "about": "About",
-    "teams": "Teams",
     "membership": "Membership",
     "privacy": "Privacy",
     "signup": "Join",
     "account": "My account",
-    "logout": "Log out"
+    "logout": "Log out",
+    "login": "Log in",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
   },
   "Home": {
-    "badge": "Basketball for everyone",
-    "title": "Play basketball in a club that feels like home",
-    "subtitle": "US Basketball NL is an amateur basketball club in Utrecht for all ages and levels. Fun, teamwork and improvement come first.",
-    "cta": "Become a member",
-    "ctaSecondary": "Meet the teams",
-    "highlights": {
-      "title": "Why join us?",
-      "items": {
-        "community": {
-          "title": "A warm community",
-          "description": "Teams for every age group, from kids to seniors, and a social club life around it."
-        },
-        "training": {
-          "title": "Real training, real progress",
-          "description": "Weekly trainings with qualified coaches that help you get better every season."
-        },
-        "fun": {
-          "title": "Fun comes first",
-          "description": "Competition is important, but enjoying the game with your team matters most."
-        }
-      }
+    "hero": {
+      "title": "US BASKETBALL",
+      "tagline": "IF YOU CAN'T BEAT US, JOIN US!"
     },
-    "news": {
-      "title": "Latest news",
-      "items": {
-        "one": {
-          "date": "August 2026",
-          "title": "New season has started",
-          "description": "Trainings for the 2026-2027 season have started. New players are welcome all year round."
-        },
-        "two": {
-          "date": "June 2026",
-          "title": "Great season for the seniors",
-          "description": "Our senior teams finished a strong season with an exciting promotion campaign."
-        }
-      }
+    "welcome": {
+      "title": "Welcome to US",
+      "p": "The Amstelcampushal is the second home for US members. Here we shoot hoops both on the court and in the canteen. With our six women's and six men's teams you'll always find a fun group at your level (18+).",
+      "cta": "Read more"
     },
-    "signupCta": {
-      "title": "Ready to hit the court?",
-      "description": "Signing up only takes a few minutes. Come train with us once and see if it's a match.",
-      "cta": "Register now"
+    "sponsors": {
+      "title": "Proudly supported by:"
+    },
+    "join": {
+      "title": "Join US",
+      "p": "US Basketball has 12 fantastic women's and men's teams that take the court every week! Do you love basketball and the social scene? Then you've come to the right place at U.S. Basketbal! At U.S. you can train along for free twice to find the team that suits you best.",
+      "cta": "Join us"
     }
   },
   "About": {
     "title": "About our club",
-    "intro": "US Basketball NL was founded in 1985 and has grown into a lively amateur basketball club in Utrecht. What started with a single team is today a club with teams for children, youth, adults and seniors.",
-    "sections": {
-      "history": {
-        "title": "History",
-        "p1": "The club was founded in 1985 by a group of basketball enthusiasts who wanted to make the sport accessible to everyone in Utrecht. The first season counted just one team and a handful of loyal players.",
-        "p2": "Over the years the club grew steadily. New teams were added, the first youth department was created in the early nineties, and today the club fields teams from under-10 to seniors, both for men and women."
+    "intro": "Since 1951 U.S. Basketball has been one of the basketball clubs in Amsterdam. Our motto is \"if you can't beat us, join US\". Consider yourself warned: U.S. will feel like an extra family! After trainings and matches you'll find many members in the clubhouse for the third half, or in the stands cheering on the other teams. A wonderful mix of competition and cosiness where everyone feels at home.",
+    "options": {
+      "cta": "See membership fees",
+      "competition": {
+        "title": "Competition teams",
+        "intro": "All competition teams train 75 minutes on Wednesday evening; some teams also train on Friday evening. Home games are played on Sundays at the Amstelcampushal.",
+        "playingTitle": "Playing member",
+        "playingP": "Play matches for a competition team in the NBB competition, every week during the season.",
+        "trainingTitle": "Training member",
+        "trainingP": "Train with a competition team without playing matches. As a training member you can play a maximum of 3 games per season.",
+        "resultsP": "Want to know where the U.S. teams stand in the competition or which league they play in? All results, standings and match schedules can be found on <link>basketball.nl</link>."
       },
-      "facts": {
-        "title": "Club facts",
-        "founded": "Founded",
-        "foundedValue": "1985",
-        "city": "City",
-        "cityValue": "Utrecht, Netherlands",
-        "teams": "Teams",
-        "teamsValue": "8 teams, from under-10 to seniors",
-        "players": "Members",
-        "playersValue": "Over 150 active members",
-        "values": "Values",
-        "valuesValue": "Fun, teamwork, respect and development"
+      "recreation": {
+        "title": "Recreational teams",
+        "p": "Prefer to play basketball without matches? Join our enthusiastic recreational team, which trains on Tuesday and Thursday evenings in the Apollohal."
       }
-    }
-  },
-  "Teams": {
-    "title": "Our teams",
-    "intro": "From the youngest rookies to our senior teams: at US Basketball NL there is a team for everyone. Each team trains weekly with qualified coaches.",
-    "teamCta": "Join this team",
-    "practice": "Practice",
-    "age": "Age",
-    "items": {
-      "u10": {
-        "name": "Under-10 (boys & girls)",
-        "age": "6 - 9 years",
-        "description": "Learning the basics of basketball through fun games and exercises. The emphasis is on having fun and developing motor skills.",
-        "practice": "Saturday 10:00 - 11:30"
-      },
-      "u12": {
-        "name": "Under-12",
-        "age": "10 - 11 years",
-        "description": "The first real basketball skills: dribbling, passing and the first matches in the competition.",
-        "practice": "Tuesday 18:00 - 19:30"
-      },
-      "u16": {
-        "name": "Under-16",
-        "age": "12 - 15 years",
-        "description": "Youth players who train several times a week and play competition matches in the region.",
-        "practice": "Monday 19:00 - 20:30, Thursday 18:30 - 20:00"
-      },
-      "seniors": {
-        "name": "Seniors",
-        "age": "18+",
-        "description": "Recreational senior teams that play in the regional competition. For players who are serious about the game, but still do it for fun.",
-        "practice": "Tuesday 20:00 - 21:30, Friday 20:00 - 21:30"
-      }
-    }
+    },
+    "note": "Note: US only has senior teams (18+). We do NOT offer youth basketball."
   },
   "Membership": {
     "title": "Membership",
-    "intro": "Become a member of US Basketball NL. Below you will find the fees and the rules for registration and deregistration.",
+    "intro": "Below you'll find all the information about joining, membership fees, kits and deregistering at US Basketball.",
+    "join": {
+      "title": "Join US",
+      "p1": "Love basketball and good vibes? Then you're in the right place at U.S. Basketbal! You can train along twice for free to find the team that suits you best. Fill in the interest form and we'll invite you to a trial training.",
+      "p2": "Played at another club in the last 5 years? Make sure you're deregistered there and free of any debts. The statement of no debt is arranged online via basketball.nl.",
+      "cta": "Fill in the interest form"
+    },
     "fees": {
       "title": "Membership fees",
-      "note": "Fees are paid per season (September - June). Prices are indicative and can be adjusted by the board.",
-      "items": {
-        "youth": {
-          "label": "Youth (under 18)",
-          "amount": "€ 120",
-          "per": "per season"
+      "intro": "These are the membership fees at US",
+      "per": "per season",
+      "matchTitle": "Competition member",
+      "matchIntro": "Play matches for US. Your contribution depends on how many times your team trains per week.",
+      "matchRows": {
+        "two": {
+          "label": "Trains 2x per week",
+          "amount": "€330,-"
         },
-        "adult": {
-          "label": "Adults (18 and older)",
-          "amount": "€ 180",
-          "per": "per season"
+        "onehalf": {
+          "label": "Trains 1.5x per week",
+          "amount": "€300,-"
         },
-        "family": {
-          "label": "Family discount",
-          "amount": "-15%",
-          "per": "for the second and next family member"
+        "one": {
+          "label": "Trains 1x per week",
+          "amount": "€270,-"
         }
+      },
+      "recTitle": "Recreational member",
+      "recIntro": "Training only, without playing matches.",
+      "recAmount": "€170,-",
+      "studentNote": "Students get 10% discount on their membership fee at US.",
+      "timing": {
+        "full": "Joining between 1 August and 31 December: full season membership fee.",
+        "reduced": "Joining between 1 January and 31 March: reduced season membership fee."
       }
     },
-    "register": {
-      "title": "Registration",
-      "p1": "Registration runs through the online sign-up form on this website. After submitting the form your membership starts immediately; you can pay the season fee within 14 days.",
-      "p2": "You can come and train twice for free to decide if the club is a good fit before you commit."
+    "merch": {
+      "title": "Kits and merchandise",
+      "p": "Looking for a new kit? Or would you like some of that awesome US merchandise!? Take a look at <shopLink>Basketball Totaal</shopLink>."
     },
-    "deregister": {
-      "title": "Deregistration",
-      "p1": "Deregistration is possible at the end of the season with a notice period of one month, via an email to the board.",
-      "p2": "Players who deregister mid-season remain liable for the season fee for the current season.",
-      "p3": "After deregistration your account stays accessible for one year so you can simply rejoin."
-    },
-    "faq": {
-      "title": "Frequently asked questions",
-      "items": {
-        "q1": {
-          "q": "Can I come and train once to try it out?",
-          "a": "Yes. You can join a training twice for free before you decide to become a member. Sign up via the form and let us know you'd like to try out."
-        },
-        "q2": {
-          "q": "Do I need basketball experience?",
-          "a": "No. We have teams and trainings for all levels, from beginners to experienced players. Tell us your level and we'll find a team that fits."
-        },
-        "q3": {
-          "q": "What does the membership fee include?",
-          "a": "The season fee covers your trainings, competition matches, refereeing and the use of the clubhouse. Basketball outfit and shoes are not included."
-        },
-        "q4": {
-          "q": "How do I deregister?",
-          "a": "You can deregister at the end of the season with a notice period of one month by sending an email to the board."
-        }
-      }
+    "leave": {
+      "title": "Leave US",
+      "p1": "Want to leave U.S.? Send an email to <email>secretaris@usbasketball.nl</email> with your cancellation. This is the only way to officially cancel! If you don't deregister, you will keep paying your membership fee (even if you've told your coach and team).",
+      "p2": "Cancellation of your membership for the new season must be done before 1 May. There is no refund of membership fees in case of mid-season cancellation after the start of the season (1 September). If you cancel after 1 May, a one-off fee of €50 applies, see below.",
+      "matchTitle": "Competition member",
+      "matchRows": {
+        "r1": "Period 1 September - 30 April: full year membership fee for the current season is due",
+        "r2": "Period 1 May - 31 August: €50,- penalty"
+      },
+      "recTitle": "Recreational (training member)",
+      "recRows": {
+        "r1": "Period 1 September - 31 December: membership fee for half a season is due",
+        "r2": "Period 1 January - 31 August: full membership fee for the current season is due"
+      },
+      "disclaimer": "Disclaimer regarding deregistering at US: When you deregister, you give up all your rights to play in a team. The board assumes there is a spot in a team and will forward new registrations to this team. When you register again, you therefore have no priority over new members."
     },
     "cta": {
       "title": "Become a member",
@@ -210,7 +149,7 @@
     "sections": {
       "who": {
         "title": "Who are we?",
-        "p": "US Basketball NL is the data controller for the personal data processed on this website and in our administration. You can reach us via info@usbasketballnl.example."
+        "p": "US Basketball NL is the data controller for the personal data processed on this website and in our administration. You can reach us via bestuur@usbasketball.nl."
       },
       "data": {
         "title": "What data do we collect?",
@@ -235,27 +174,46 @@
     }
   },
   "Signup": {
-    "title": "Register as a member",
-    "intro": "Fill in the form below to become a member of US Basketball NL. After signing up you can log in immediately with your email and password.",
-    "firstName": "First name",
-    "lastName": "Last name",
+    "title": "Interest form",
+    "intro": "Interested in playing basketball at US? Fill in the form below! Please note that US only has senior (18+) teams.",
+    "capacityNote": "Thanks for your interest in joining US! Our committee is made up entirely of volunteers and members, so capacity is limited. Feel free to fill in the form; once spots open up we'll get in touch.",
+    "name": "Full name",
+    "namePlaceholder": "First and last name",
+    "lastLevel": "Last played level",
+    "lastLevelPlaceholder": "E.g. 2nd division, national 1st division, recreational or never played",
+    "position": "Position",
+    "positionGuard": "Guard",
+    "positionForward": "Forward",
+    "positionCenter": "Center",
+    "positionNotApplicable": "N/A",
+    "positionOther": "Other",
+    "positionNote": "Choose 'Other' and explain it in 'More info about your background/level'.",
+    "birthDate": "Birth date",
+    "lastSeason": "Last played season",
+    "lastSeasonPlaceholder": "E.g. 2024-2025 or 'long ago'",
+    "interest": "Interest in",
+    "interestCompete": "Training and playing matches",
+    "interestTrainingOnly": "Training only",
+    "interestUndecided": "Not sure yet",
     "email": "Email address",
-    "phone": "Phone number (optional)",
-    "team": "Team of preference (optional)",
-    "password": "Password",
-    "passwordHelp": "At least 8 characters.",
-    "submit": "Create my account",
-    "loginLink": "Already a member? Log in",
+    "gender": "I identify as",
+    "genderMan": "Man",
+    "genderVrouw": "Woman",
+    "background": "More info about your background/level",
+    "backgroundPlaceholder": "Tell us a bit about your experience, level and/or any comments...",
+    "submit": "Send",
+    "privacyNote": "The information submitted via this form can be viewed by the board and technical committee of US Basketball and will only be used to help find a suitable team.",
     "errors": {
       "missing_fields": "Please fill in all required fields.",
       "invalid_email": "Please enter a valid email address.",
-      "password_too_short": "Your password must be at least 8 characters long.",
-      "email_exists": "An account with this email address already exists. Please log in instead.",
+      "invalid_birth_date": "Please enter a valid birth date.",
+      "underage": "You must be at least 18 years old to play at US.",
+      "captcha_failed": "We couldn't confirm you're not a robot. Please try again.",
       "generic": "Something went wrong. Please try again."
     },
     "success": {
-      "title": "Almost there!",
-      "text": "Your account has been created. You can log in with your email address and password."
+      "title": "Thanks for your interest!",
+      "text": "We hope to let you know within two weeks whether there are spots available in a team that matches your wishes and experience. Please note that this can sometimes take longer, since we are run entirely by volunteers. A copy of your submission has been sent to your email address."
     }
   },
   "Login": {
@@ -264,7 +222,7 @@
     "email": "Email address",
     "password": "Password",
     "submit": "Log in",
-    "signupLink": "No account yet? Register here",
+    "signupLink": "Not a member yet? Leave your interest here",
     "errors": {
       "invalid_credentials": "Invalid email address or password.",
       "generic": "Something went wrong. Please try again."
@@ -299,7 +257,7 @@
     "logout": "Log out"
   },
   "Footer": {
-    "tagline": "Amateur basketball club in Utrecht since 1985. Fun, teamwork and improvement.",
+    "tagline": "The most gezellig basketball club in Amsterdam since 1951. If you can't beat us, join US!",
     "navigation": "Navigation",
     "contact": "Contact",
     "legal": "Legal",
@@ -309,8 +267,8 @@
     "signup": "Join the club"
   },
   "NotFound": {
-    "title": "Page not found",
-    "description": "The page you are looking for does not exist.",
+    "title": "Nothing but air!",
+    "description": "The page you are looking for dribbled out of bounds. Let's get you back on the court.",
     "home": "Back to the homepage"
   },
   "LocaleSwitcher": {

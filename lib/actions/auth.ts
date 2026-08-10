@@ -12,53 +12,8 @@ export type ActionState = {
   success?: boolean;
 };
 
-const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
 function isStrongPassword(password: string) {
   return password.length >= 8;
-}
-
-export async function signup(
-  prevState: ActionState,
-  formData: FormData
-): Promise<ActionState> {
-  const firstName = String(formData.get("firstName") ?? "").trim();
-  const lastName = String(formData.get("lastName") ?? "").trim();
-  const email = String(formData.get("email") ?? "").trim().toLowerCase();
-  const phone = String(formData.get("phone") ?? "").trim() || null;
-  const team = String(formData.get("team") ?? "").trim() || null;
-  const password = String(formData.get("password") ?? "");
-
-  if (!firstName || !lastName || !email || !password) {
-    return { error: "missing_fields" };
-  }
-  if (!EMAIL_REGEX.test(email)) {
-    return { error: "invalid_email" };
-  }
-  if (!isStrongPassword(password)) {
-    return { error: "password_too_short" };
-  }
-
-  const existing = await prisma.user.findUnique({ where: { email } });
-  if (existing) {
-    return { error: "email_exists" };
-  }
-
-  const passwordHash = await bcrypt.hash(password, 12);
-
-  await prisma.user.create({
-    data: {
-      firstName,
-      lastName,
-      email,
-      phone,
-      team,
-      passwordHash,
-      status: "ACTIVE",
-    },
-  });
-
-  return redirect({ href: "/login", locale: await getLocale() });
 }
 
 export async function login(

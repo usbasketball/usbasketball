@@ -1,10 +1,16 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
+import { JsonLd } from "@/components/json-ld";
+import { Link } from "@/i18n/navigation";
 import { localizedAlternates } from "@/lib/seo";
+import { organizationJsonLd } from "@/lib/site";
 
 type Props = {
   params: Promise<{ locale: string }>;
 };
+
+const PLATFORM_URL =
+  "https://basketball.nl/basketball/competities/vereniging-zoeken/#/clubs/2f1e5e8e-e2c5-4d8b-9d21-1584bc6c8d5a/details";
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
@@ -23,70 +29,70 @@ export default async function AboutPage({ params }: Props) {
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6">
-      <h1 className="text-3xl font-bold tracking-tight text-zinc-900 sm:text-4xl dark:text-zinc-50">
+      <JsonLd data={organizationJsonLd()} />
+      <h1 className="font-display text-4xl uppercase tracking-wide text-ink sm:text-5xl">
         {t("title")}
       </h1>
-      <p className="mt-6 text-lg text-zinc-600 dark:text-zinc-400">
+      <p className="mt-4 text-lg leading-relaxed text-ink-muted">
         {t("intro")}
       </p>
 
       <section className="mt-12">
-        <h2 className="text-2xl font-bold text-zinc-900 dark:text-zinc-50">
-          {t("sections.history.title")}
+        <h2 className="font-display text-2xl uppercase tracking-wide text-ink">
+          {t("options.competition.title")}
         </h2>
-        <div className="mt-4 space-y-4 text-zinc-600 dark:text-zinc-400">
-          <p>{t("sections.history.p1")}</p>
-          <p>{t("sections.history.p2")}</p>
-        </div>
+        <p className="mt-3 leading-relaxed text-ink-muted">
+          {t("options.competition.intro")}
+        </p>
+        <p className="mt-4">
+          <span className="font-semibold text-ink">
+            {t("options.competition.playingTitle")}.
+          </span>{" "}
+          <span className="text-ink-muted">
+            {t("options.competition.playingP")}
+          </span>
+        </p>
+        <p className="mt-3">
+          <span className="font-semibold text-ink">
+            {t("options.competition.trainingTitle")}.
+          </span>{" "}
+          <span className="text-ink-muted">
+            {t("options.competition.trainingP")}
+          </span>
+        </p>
+        <p className="mt-5 leading-relaxed text-ink-muted">
+          {t.rich("options.competition.resultsP", {
+            link: (chunks) => (
+              <a
+                href={PLATFORM_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-semibold text-accent hover:underline"
+              >
+                {chunks}
+              </a>
+            ),
+          })}
+        </p>
+
+        <h2 className="mt-10 font-display text-xl uppercase tracking-wide text-ink">
+          {t("options.recreation.title")}
+        </h2>
+        <p className="mt-2 leading-relaxed text-ink-muted">
+          {t("options.recreation.p")}
+        </p>
+
+        <Link
+          href="/membership"
+          className="mt-8 inline-flex items-center justify-center bg-accent px-6 py-3 text-sm font-semibold uppercase tracking-widest text-white transition-colors hover:bg-brand-darker"
+        >
+          {t("options.cta")}
+        </Link>
       </section>
 
-      <section className="mt-12">
-        <h2 className="text-2xl font-bold text-zinc-900 dark:text-zinc-50">
-          {t("sections.facts.title")}
-        </h2>
-        <dl className="mt-6 divide-y divide-zinc-200 rounded-lg border border-zinc-200 dark:divide-zinc-800 dark:border-zinc-800">
-          <div className="grid grid-cols-2 gap-4 px-6 py-4">
-            <dt className="font-medium text-zinc-900 dark:text-zinc-50">
-              {t("sections.facts.founded")}
-            </dt>
-            <dd className="text-zinc-600 dark:text-zinc-400">
-              {t("sections.facts.foundedValue")}
-            </dd>
-          </div>
-          <div className="grid grid-cols-2 gap-4 px-6 py-4">
-            <dt className="font-medium text-zinc-900 dark:text-zinc-50">
-              {t("sections.facts.city")}
-            </dt>
-            <dd className="text-zinc-600 dark:text-zinc-400">
-              {t("sections.facts.cityValue")}
-            </dd>
-          </div>
-          <div className="grid grid-cols-2 gap-4 px-6 py-4">
-            <dt className="font-medium text-zinc-900 dark:text-zinc-50">
-              {t("sections.facts.teams")}
-            </dt>
-            <dd className="text-zinc-600 dark:text-zinc-400">
-              {t("sections.facts.teamsValue")}
-            </dd>
-          </div>
-          <div className="grid grid-cols-2 gap-4 px-6 py-4">
-            <dt className="font-medium text-zinc-900 dark:text-zinc-50">
-              {t("sections.facts.players")}
-            </dt>
-            <dd className="text-zinc-600 dark:text-zinc-400">
-              {t("sections.facts.playersValue")}
-            </dd>
-          </div>
-          <div className="grid grid-cols-2 gap-4 px-6 py-4">
-            <dt className="font-medium text-zinc-900 dark:text-zinc-50">
-              {t("sections.facts.values")}
-            </dt>
-            <dd className="text-zinc-600 dark:text-zinc-400">
-              {t("sections.facts.valuesValue")}
-            </dd>
-          </div>
-        </dl>
-      </section>
+      <p className="mt-12 border-t border-line pt-6 text-sm italic text-ink-muted">
+        {t("note")}
+      </p>
     </div>
   );
 }

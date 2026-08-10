@@ -40,51 +40,49 @@ export default async function MePage({ params }: Props) {
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6">
-      <h1 className="text-3xl font-bold tracking-tight text-zinc-900 sm:text-4xl dark:text-zinc-50">
+      <h1 className="font-display text-4xl uppercase tracking-wide text-ink sm:text-5xl">
         {t("title")}
       </h1>
-      <p className="mt-4 text-lg text-zinc-600 dark:text-zinc-400">
+      <p className="mt-4 text-lg text-ink-muted">
         {t("welcome", { name: `${user.firstName} ${user.lastName}` })}
       </p>
 
       <section className="mt-10">
-        <h2 className="text-xl font-bold text-zinc-900 dark:text-zinc-50">
-          {t("profile.title")}
-        </h2>
-        <dl className="mt-4 divide-y divide-zinc-200 rounded-lg border border-zinc-200 dark:divide-zinc-800 dark:border-zinc-800">
+        <h2 className="text-xl font-bold text-ink">{t("profile.title")}</h2>
+        <dl className="mt-4 divide-y divide-line border border-line">
           <div className="grid grid-cols-2 gap-4 px-6 py-4">
-            <dt className="font-medium text-zinc-900 dark:text-zinc-50">
+            <dt className="font-medium text-ink">
               {t("profile.firstName")}
             </dt>
-            <dd className="text-zinc-600 dark:text-zinc-400">
+            <dd className="text-ink-muted">
               {user.firstName}
             </dd>
           </div>
           <div className="grid grid-cols-2 gap-4 px-6 py-4">
-            <dt className="font-medium text-zinc-900 dark:text-zinc-50">
+            <dt className="font-medium text-ink">
               {t("profile.lastName")}
             </dt>
-            <dd className="text-zinc-600 dark:text-zinc-400">{user.lastName}</dd>
+            <dd className="text-ink-muted">{user.lastName}</dd>
           </div>
           <div className="grid grid-cols-2 gap-4 px-6 py-4">
-            <dt className="font-medium text-zinc-900 dark:text-zinc-50">
+            <dt className="font-medium text-ink">
               {t("profile.email")}
             </dt>
-            <dd className="text-zinc-600 dark:text-zinc-400">{user.email}</dd>
+            <dd className="text-ink-muted">{user.email}</dd>
           </div>
           <div className="grid grid-cols-2 gap-4 px-6 py-4">
-            <dt className="font-medium text-zinc-900 dark:text-zinc-50">
+            <dt className="font-medium text-ink">
               {t("profile.team")}
             </dt>
-            <dd className="text-zinc-600 dark:text-zinc-400">
+            <dd className="text-ink-muted">
               {user.team ?? "-"}
             </dd>
           </div>
           <div className="grid grid-cols-2 gap-4 px-6 py-4">
-            <dt className="font-medium text-zinc-900 dark:text-zinc-50">
+            <dt className="font-medium text-ink">
               {t("profile.since")}
             </dt>
-            <dd className="text-zinc-600 dark:text-zinc-400">
+            <dd className="text-ink-muted">
               {format.dateTime(user.joinedAt, {
                 year: "numeric",
                 month: "long",
@@ -96,9 +94,7 @@ export default async function MePage({ params }: Props) {
       </section>
 
       <section className="mt-10">
-        <h2 className="text-xl font-bold text-zinc-900 dark:text-zinc-50">
-          {t("password.title")}
-        </h2>
+        <h2 className="text-xl font-bold text-ink">{t("password.title")}</h2>
         <PasswordForm />
       </section>
 
@@ -106,7 +102,7 @@ export default async function MePage({ params }: Props) {
         <form action={logout}>
           <button
             type="submit"
-            className="rounded-md border border-zinc-300 px-4 py-2 text-sm font-semibold text-zinc-900 transition-colors hover:bg-zinc-100 dark:border-zinc-700 dark:text-zinc-100 dark:hover:bg-zinc-900"
+            className="border border-line px-4 py-2 text-sm font-semibold uppercase tracking-wide text-ink transition-colors hover:bg-paper"
           >
             {t("logout")}
           </button>

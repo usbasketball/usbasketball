@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { localizedAlternates } from "@/lib/seo";
+import { Parallax } from "@/components/parallax";
+import { Reveal } from "@/components/scroll-reveal";
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -18,113 +21,131 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
+function highlightLastWord(title: string) {
+  const parts = title.split(" ");
+  const last = parts.pop();
+  return (
+    <>
+      {parts.join(" ")} <span className="text-accent">{last}</span>
+    </>
+  );
+}
+
 export default async function HomePage({ params }: Props) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "Home" });
 
-  const highlights = Object.values(
-    t.raw("highlights.items") as Record<
-      string,
-      { title: string; description: string }
-    >
-  );
-  const news = Object.values(
-    t.raw("news.items") as Record<
-      string,
-      { date: string; title: string; description: string }
-    >
-  );
-
   return (
     <div>
-      <section className="bg-gradient-to-b from-orange-50 to-white dark:from-zinc-900 dark:to-zinc-950">
-        <div className="mx-auto max-w-5xl px-4 py-24 text-center sm:px-6">
-          <p className="inline-block rounded-full bg-orange-100 px-3 py-1 text-sm font-medium text-orange-800 dark:bg-orange-950 dark:text-orange-200">
-            {t("badge")}
-          </p>
-          <h1 className="mx-auto mt-6 max-w-3xl text-4xl font-bold tracking-tight text-zinc-900 sm:text-5xl dark:text-zinc-50">
-            {t("title")}
+      <section className="relative flex min-h-[80svh] items-center justify-center overflow-hidden bg-accent">
+        <Parallax className="absolute inset-0" intensity={0.12}>
+          <Image
+            src="/images/hero.jpg"
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            className="scale-125 object-cover opacity-[0.72]"
+          />
+        </Parallax>
+        <Reveal className="relative z-10 mx-auto max-w-4xl px-4 py-24 text-center text-white sm:px-6">
+          <h1 className="font-display text-6xl uppercase leading-none tracking-wide sm:text-7xl lg:text-8xl">
+            {t("hero.title")}
           </h1>
-          <p className="mx-auto mt-6 max-w-2xl text-lg text-zinc-600 dark:text-zinc-400">
-            {t("subtitle")}
+          <p className="mt-5 text-sm font-semibold uppercase tracking-[0.3em] text-white/80 sm:text-base">
+            {t("hero.tagline")}
           </p>
-          <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <Link
-              href="/signup"
-              className="inline-flex items-center justify-center rounded-md bg-orange-600 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-orange-700"
-            >
-              {t("cta")}
-            </Link>
-            <Link
-              href="/teams"
-              className="inline-flex items-center justify-center rounded-md border border-zinc-300 px-6 py-3 text-sm font-semibold text-zinc-900 transition-colors hover:bg-zinc-100 dark:border-zinc-700 dark:text-zinc-100 dark:hover:bg-zinc-900"
-            >
-              {t("ctaSecondary")}
-            </Link>
-          </div>
+        </Reveal>
+        <div className="absolute bottom-6 left-1/2 z-10 -translate-x-1/2 text-white/70">
+          <svg
+            className="h-8 w-8 animate-bounce"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M6 9l6 6 6-6" />
+          </svg>
         </div>
       </section>
 
-      <section className="mx-auto max-w-5xl px-4 py-16 sm:px-6">
-        <h2 className="text-2xl font-bold text-zinc-900 dark:text-zinc-50">
-          {t("highlights.title")}
-        </h2>
-        <div className="mt-8 grid gap-6 md:grid-cols-3">
-          {highlights.map((item) => (
-            <div
-              key={item.title}
-              className="rounded-lg border border-zinc-200 bg-white p-6 dark:border-zinc-800 dark:bg-zinc-900"
-            >
-              <h3 className="font-semibold text-zinc-900 dark:text-zinc-50">
-                {item.title}
-              </h3>
-              <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
-                {item.description}
-              </p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section className="border-y border-zinc-200 bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-900">
-        <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6">
-          <h2 className="text-2xl font-bold text-zinc-900 dark:text-zinc-50">
-            {t("news.title")}
+      <section className="mx-auto max-w-3xl px-4 py-20 text-center sm:px-6 sm:py-28">
+        <Reveal>
+          <h2 className="font-display text-4xl uppercase tracking-wide text-ink sm:text-5xl">
+            {highlightLastWord(t("welcome.title"))}
           </h2>
-          <div className="mt-8 grid gap-6 md:grid-cols-2">
-            {news.map((item) => (
-              <article
-                key={item.title}
-                className="rounded-lg border border-zinc-200 bg-white p-6 dark:border-zinc-800 dark:bg-zinc-950"
+          <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-ink-muted">
+            {t("welcome.p")}
+          </p>
+          <Link
+            href="/about"
+            className="mt-10 inline-flex items-center justify-center bg-accent px-10 py-4 text-sm font-semibold uppercase tracking-widest text-white transition-colors hover:bg-brand-darker"
+          >
+            {t("welcome.cta")}
+          </Link>
+        </Reveal>
+      </section>
+
+      <section className="border-y border-line bg-paper">
+        <div className="mx-auto max-w-6xl px-4 py-14 text-center sm:px-6">
+          <Reveal>
+            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-ink-muted">
+              {t("sponsors.title")}
+            </p>
+            <div className="mt-6 flex items-center justify-center">
+              <a
+                href="https://www.vitals.nl/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="transition-opacity hover:opacity-80"
+                aria-label="Vitals"
               >
-                <p className="text-xs font-medium uppercase tracking-wide text-orange-600">
-                  {item.date}
-                </p>
-                <h3 className="mt-2 font-semibold text-zinc-900 dark:text-zinc-50">
-                  {item.title}
-                </h3>
-                <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
-                  {item.description}
-                </p>
-              </article>
-            ))}
-          </div>
+                <Image
+                  src="/images/vitals.svg"
+                  alt="Vitals"
+                  width={298}
+                  height={84}
+                  className="h-14 w-auto"
+                />
+              </a>
+            </div>
+          </Reveal>
         </div>
       </section>
 
-      <section className="mx-auto max-w-5xl px-4 py-16 text-center sm:px-6">
-        <h2 className="text-2xl font-bold text-zinc-900 dark:text-zinc-50">
-          {t("signupCta.title")}
-        </h2>
-        <p className="mx-auto mt-4 max-w-xl text-zinc-600 dark:text-zinc-400">
-          {t("signupCta.description")}
-        </p>
-        <Link
-          href="/signup"
-          className="mt-8 inline-flex items-center justify-center rounded-md bg-orange-600 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-orange-700"
-        >
-          {t("signupCta.cta")}
-        </Link>
+      <section className="mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-28">
+        <div className="grid items-center gap-10 md:grid-cols-2 md:gap-16">
+          <Reveal>
+            <div>
+              <h2 className="font-display text-4xl uppercase tracking-wide text-ink sm:text-5xl">
+                {highlightLastWord(t("join.title"))}
+              </h2>
+              <p className="mt-6 leading-relaxed text-ink-muted">
+                {t("join.p")}
+              </p>
+              <Link
+                href="/signup"
+                className="mt-10 inline-flex items-center justify-center bg-accent px-10 py-4 text-sm font-semibold uppercase tracking-widest text-white transition-colors hover:bg-brand-darker"
+              >
+                {t("join.cta")}
+              </Link>
+            </div>
+          </Reveal>
+          <Reveal delay={120}>
+            <div className="relative aspect-[4/5] overflow-hidden bg-paper">
+              <Image
+                src="/images/team-d1.jpg"
+                alt="US Basketball team"
+                fill
+                sizes="(min-width: 768px) 50vw, 100vw"
+                className="object-cover"
+              />
+            </div>
+          </Reveal>
+        </div>
       </section>
     </div>
   );

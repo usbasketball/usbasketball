@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
-import { Link } from "@/i18n/navigation";
 import { localizedAlternates } from "@/lib/seo";
-import { SignupForm } from "@/components/signup-form";
+import { InterestForm } from "@/components/interest-form";
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -25,20 +24,18 @@ export default async function SignupPage({ params }: Props) {
 
   return (
     <div className="mx-auto max-w-lg px-4 py-16 sm:px-6">
-      <h1 className="text-3xl font-bold tracking-tight text-zinc-900 sm:text-4xl dark:text-zinc-50">
+      <h1 className="font-display text-4xl uppercase tracking-wide text-ink sm:text-5xl">
         {t("title")}
       </h1>
-      <p className="mt-4 text-zinc-600 dark:text-zinc-400">{t("intro")}</p>
+      <p className="mt-4 leading-relaxed text-ink-muted">{t("intro")}</p>
 
-      <div className="mt-8 rounded-lg border border-zinc-200 bg-white p-6 dark:border-zinc-800 dark:bg-zinc-900">
-        <SignupForm />
+      <div className="mt-6 border-l-4 border-accent bg-paper/60 p-4 text-sm leading-relaxed text-ink">
+        {t("capacityNote")}
       </div>
 
-      <p className="mt-6 text-center text-sm text-zinc-600 dark:text-zinc-400">
-        <Link href="/login" className="font-medium text-orange-600 hover:underline">
-          {t("loginLink")}
-        </Link>
-      </p>
+      <div className="mt-8 border border-line bg-white p-6">
+        <InterestForm />
+      </div>
     </div>
   );
 }

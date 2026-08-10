@@ -27,3 +27,21 @@ model User {
 
   @@map("users")
 }
+
+model InterestSubmission {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  birthDate DateTime
+  position  String
+  interest  String
+  gender    String
+  lastLevel String?
+  lastSeason String?
+  background String?
+  locale    String   @default("nl")
+  createdAt DateTime @default(now())
+
+  @@index([email])
+  @@map("interest_submissions")
+}

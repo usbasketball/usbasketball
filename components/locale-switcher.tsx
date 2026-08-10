@@ -10,7 +10,13 @@ const LABELS: Record<string, string> = {
   nl: "Nederlands",
 };
 
-export function LocaleSwitcher() {
+type LocaleSwitcherProps = {
+  variant?: "light" | "dark";
+};
+
+export function LocaleSwitcher({
+  variant = "light",
+}: LocaleSwitcherProps) {
   const locale = useLocale();
   const router = useRouter();
   const pathname = usePathname();
@@ -23,13 +29,19 @@ export function LocaleSwitcher() {
     });
   }
 
+  const isDark = variant === "dark";
+
   return (
     <select
       aria-label="Language"
       defaultValue={locale}
       onChange={onSelectChange}
       disabled={isPending}
-      className="rounded-md border border-zinc-300 bg-white px-2 py-1 text-sm text-zinc-900 focus:outline-none focus:ring-2 focus:ring-orange-600 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-100"
+      className={
+        isDark
+          ? "rounded-none border border-white/20 bg-black/40 px-2 py-1.5 text-sm text-white focus:outline-none focus:ring-2 focus:ring-white"
+          : "rounded-none border border-line bg-white px-2 py-1.5 text-sm text-ink focus:outline-none focus:ring-2 focus:ring-accent"
+      }
     >
       {routing.locales.map((loc) => (
         <option key={loc} value={loc}>

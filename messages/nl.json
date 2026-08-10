@@ -1,14 +1,10 @@
 {
   "Metadata": {
-    "title": "US Basketball NL",
-    "description": "US Basketball NL is een amateur basketbalvereniging voor iedereen: van jong talent tot volwassen recreanten. Word lid en speel basketbal in een leuke, teamgerichte club.",
+    "title": "US Basketbal",
+    "description": "US Basketbal is een amateur basketbalvereniging voor volwassenen (18+): van beginner tot ervaren speler. Word lid en speel basketbal in een leuke, teamgerichte club.",
     "about": {
       "title": "Over ons",
-      "description": "De geschiedenis van US Basketball NL: onze oprichting, clubfeiten en de teams die samen onze vereniging vormen."
-    },
-    "teams": {
-      "title": "Teams",
-      "description": "Maak kennis met de teams van US Basketball NL, van de jongste talenten tot de seniorenteams."
+      "description": "Lees alles over US Basketball NL: onze club, trainingen, thuiswedstrijden en recreanten."
     },
     "membership": {
       "title": "Lidmaatschap",
@@ -19,8 +15,8 @@
       "description": "Het privacybeleid van US Basketball NL: welke gegevens we verzamelen en hoe we die gebruiken."
     },
     "signup": {
-      "title": "Inschrijven",
-      "description": "Word in een paar minuten lid van US Basketball NL."
+      "title": "Interesseformulier",
+      "description": "Laat hier je interesse achter om bij U.S. Basketbal te komen basketballen. We matchen je graag aan een team dat past bij jouw ervaring."
     },
     "login": {
       "title": "Inloggen",
@@ -34,169 +30,112 @@
   "Nav": {
     "home": "Home",
     "about": "Over ons",
-    "teams": "Teams",
     "membership": "Lidmaatschap",
     "privacy": "Privacy",
     "signup": "Word lid",
     "account": "Mijn account",
-    "logout": "Uitloggen"
+    "logout": "Uitloggen",
+    "login": "Inloggen",
+    "openMenu": "Menu openen",
+    "closeMenu": "Menu sluiten"
   },
   "Home": {
-    "badge": "Basketbal voor iedereen",
-    "title": "Speel basketbal in een club die voelt als thuis",
-    "subtitle": "US Basketball NL is een amateur basketbalvereniging in Utrecht voor alle leeftijden en niveaus. Plezier, teamwork en vooruitgang staan voorop.",
-    "cta": "Word lid",
-    "ctaSecondary": "Bekijk de teams",
-    "highlights": {
-      "title": "Waarom word je lid?",
-      "items": {
-        "community": {
-          "title": "Een warme gemeenschap",
-          "description": "Teams voor elke leeftijd, van kinderen tot senioren, en een gezellig verenigingsleven eromheen."
-        },
-        "training": {
-          "title": "Echte training, echte vooruitgang",
-          "description": "Wekelijkse trainingen met gediplomeerde coaches die je elk seizoen beter maken."
-        },
-        "fun": {
-          "title": "Plezier staat voorop",
-          "description": "Winnen is belangrijk, maar samen genieten van het spel is het allerbelangrijkst."
-        }
-      }
+    "hero": {
+      "title": "US BASKETBALL",
+      "tagline": "IF YOU CAN'T BEAT US, JOIN US!"
     },
-    "news": {
-      "title": "Laatste nieuws",
-      "items": {
-        "one": {
-          "date": "Augustus 2026",
-          "title": "Het nieuwe seizoen is begonnen",
-          "description": "De trainingen voor seizoen 2026-2027 zijn gestart. Nieuwe spelers zijn het hele jaar welkom."
-        },
-        "two": {
-          "date": "Juni 2026",
-          "title": "Sterk seizoen voor de senioren",
-          "description": "Onze seniorenteams sloten een mooi seizoen af met een spannende promotiecampagne."
-        }
-      }
+    "welcome": {
+      "title": "Welkom bij US",
+      "p": "De Amstelcampushal is het tweede thuis voor US-ers. Hier gooien we zowel op het veld als in de kantine wel eens een balletje op. Met onze zes damUS- en zes heren-teams vind je altijd wel een leuke groep op jouw niveau (18+).",
+      "cta": "Lees meer"
     },
-    "signupCta": {
-      "title": "Klaar om het veld op te gaan?",
-      "description": "Inschrijven duurt maar een paar minuten. Kom een keer meetrainen en ontdek of het een match is.",
-      "cta": "Meld je nu aan"
+    "sponsors": {
+      "title": "Proudly supported by:"
+    },
+    "join": {
+      "title": "Word lid van US",
+      "p": "US Basketball heeft 12 teams van fantastische dames en heren basketballers die wekelijks het veld betreden! Houd je van basketbal én gezelligheid? Dan zit je goed bij U.S. Basketbal! Bij U.S. kun je kosteloos twee keer meetrainen om te kijken in welk team je het beste past.",
+      "cta": "Join us"
     }
   },
   "About": {
     "title": "Over onze club",
-    "intro": "US Basketball NL is opgericht in 1985 en uitgegroeid tot een levendige amateur basketbalvereniging in Utrecht. Wat begon met één team is vandaag een club met teams voor kinderen, jongeren, volwassenen en senioren.",
-    "sections": {
-      "history": {
-        "title": "Geschiedenis",
-        "p1": "De vereniging is in 1985 opgericht door een groep basketbalfanaten die de sport toegankelijk wilden maken voor iedereen in Utrecht. Het eerste seizoen telde maar één team en een handvol trouwe spelers.",
-        "p2": "Door de jaren heen groeide de club gestaag. Er kwamen teams bij, in de vroege jaren negentig werd de jeugdafdeling opgericht, en tegenwoordig heeft de club teams van onder-10 tot senioren, voor mannen en vrouwen."
+    "intro": "Sinds 1951 is U.S. Basketball een van de basketbalclubs in Amsterdam. Ons motto is \"if you can't beat us, join US\". Wees gewaarschuwd: U.S. zal voelen als een extra familie! Na trainingen en wedstrijden vind je veel leden in de kantine voor de derde helft, of op de tribune om de andere teams aan te moedigen. Een heerlijke mix tussen competitie en gezelligheid waar iedereen zich op zijn gemak voelt.",
+    "options": {
+      "cta": "Bekijk de contributie",
+      "competition": {
+        "title": "Competitieteams",
+        "intro": "Alle competitiespelende teams trainen op woensdagavond 75 minuten; sommige teams trainen ook op vrijdagavond. Thuiswedstrijden spelen we op zondag in de Amstelcampushal.",
+        "playingTitle": "Wedstrijdspeler",
+        "playingP": "Speel voor een competitieteam wedstrijden in de NBB-competitie, elke week tijdens het seizoen.",
+        "trainingTitle": "Trainend lid",
+        "trainingP": "Train mee met een competitieteam zonder wedstrijden te spelen. Als trainend lid mag je maximaal 3 wedstrijden per seizoen spelen.",
+        "resultsP": "Wil je weten op welke plek in de competitie de U.S. teams staan of in welke competitie ze spelen? Alle uitslagen, standen en wedstrijdschema's vind je op <link>basketball.nl</link>."
       },
-      "facts": {
-        "title": "Clubfeiten",
-        "founded": "Opgericht",
-        "foundedValue": "1985",
-        "city": "Stad",
-        "cityValue": "Utrecht, Nederland",
-        "teams": "Teams",
-        "teamsValue": "8 teams, van onder-10 tot senioren",
-        "players": "Leden",
-        "playersValue": "Meer dan 150 actieve leden",
-        "values": "Kernwaarden",
-        "valuesValue": "Plezier, teamwork, respect en ontwikkeling"
+      "recreation": {
+        "title": "Recreantenteams",
+        "p": "Liever basketballen zonder wedstrijden? Sluit je aan bij ons enthousiaste recreantenteam, dat op dinsdag- en donderdagavond traint in de Apollohal."
       }
-    }
-  },
-  "Teams": {
-    "title": "Onze teams",
-    "intro": "Van de jongste talenten tot onze seniorenteams: bij US Basketball NL is er een team voor iedereen. Elk team traint wekelijks met gediplomeerde coaches.",
-    "teamCta": "Sluit je bij dit team aan",
-    "practice": "Training",
-    "age": "Leeftijd",
-    "items": {
-      "u10": {
-        "name": "Onder-10 (jongens & meisjes)",
-        "age": "6 - 9 jaar",
-        "description": "De basis van basketbal leren door spelletjes en oefeningen. De nadruk ligt op plezier en het ontwikkelen van motoriek.",
-        "practice": "Zaterdag 10:00 - 11:30"
-      },
-      "u12": {
-        "name": "Onder-12",
-        "age": "10 - 11 jaar",
-        "description": "De eerste echte basketbalvaardigheden: dribbelen, passen en de eerste wedstrijden in de competitie.",
-        "practice": "Dinsdag 18:00 - 19:30"
-      },
-      "u16": {
-        "name": "Onder-16",
-        "age": "12 - 15 jaar",
-        "description": "Jeugdspelers die meerdere keren per week trainen en competitiewedstrijden spelen in de regio.",
-        "practice": "Maandag 19:00 - 20:30, donderdag 18:30 - 20:00"
-      },
-      "seniors": {
-        "name": "Senioren",
-        "age": "18+",
-        "description": "Recreatieve seniorenteams die spelen in de regionale competitie. Voor spelers die serieus zijn over het spel, maar het vooral voor de fun doen.",
-        "practice": "Dinsdag 20:00 - 21:30, vrijdag 20:00 - 21:30"
-      }
-    }
+    },
+    "note": "Let op: US heeft enkel senioren teams (18+), wij bieden GEEN basketball aan voor de jeugd."
   },
   "Membership": {
     "title": "Lidmaatschap",
-    "intro": "Word lid van US Basketball NL. Hieronder vind je de contributie en de regels voor aanmelding en uitschrijving.",
+    "intro": "Hieronder vind je alle informatie over aanmelden, contributie, tenues en uitschrijven bij US Basketball.",
+    "join": {
+      "title": "Join US",
+      "p1": "Houd je van basketbal én gezelligheid? Dan zit je goed bij U.S. Basketbal! Je kunt kosteloos twee keer meetrainen om te kijken in welk team je het beste past. Vul het interesseformulier in en we nodigen je uit voor een proeftraining.",
+      "p2": "Gespeeld bij een andere vereniging in de afgelopen 5 jaar? Zorg dat je daar bent uitgeschreven en schuldvrij bent. De schuldvrijverklaring regel je online via basketball.nl.",
+      "cta": "Vul het interesseformulier in"
+    },
     "fees": {
       "title": "Contributie",
-      "note": "De contributie wordt betaald per seizoen (september - juni). De prijzen zijn indicatief en kunnen door het bestuur worden aangepast.",
-      "items": {
-        "youth": {
-          "label": "Jeugd (t/m 18 jaar)",
-          "amount": "€ 120",
-          "per": "per seizoen"
+      "intro": "We hanteren de volgende contributiebedragen bij US",
+      "per": "per seizoen",
+      "matchTitle": "Wedstrijdlid",
+      "matchIntro": "Speel wedstrijden voor US. Je contributie hangt af van het aantal keer dat jouw team per week traint.",
+      "matchRows": {
+        "two": {
+          "label": "2x per week trainen",
+          "amount": "€330,-"
         },
-        "adult": {
-          "label": "Volwassenen (18 jaar en ouder)",
-          "amount": "€ 180",
-          "per": "per seizoen"
+        "onehalf": {
+          "label": "1,5x per week trainen",
+          "amount": "€300,-"
         },
-        "family": {
-          "label": "Korting voor gezinnen",
-          "amount": "-15%",
-          "per": "voor het tweede en volgende gezinslid"
+        "one": {
+          "label": "1x per week trainen",
+          "amount": "€270,-"
         }
+      },
+      "recTitle": "Recreant (trainend lid)",
+      "recIntro": "Alleen trainen, geen wedstrijden spelen.",
+      "recAmount": "€170,-",
+      "studentNote": "Studenten krijgen 10% korting op hun contributie bij US.",
+      "timing": {
+        "full": "Aanmelden tussen 1 augustus en 31 december: volledig seizoen contributie.",
+        "reduced": "Aanmelden tussen 1 januari en 31 maart: gereduceerd tarief seizoen contributie."
       }
     },
-    "register": {
-      "title": "Aanmelden",
-      "p1": "Aanmelding loopt via het online inschrijfformulier op deze website. Na het versturen van het formulier gaat je lidmaatschap direct in; je kunt de contributie binnen 14 dagen betalen.",
-      "p2": "Je mag twee keer gratis meetrainen om te bepalen of de club bij je past, voordat je je vastlegt."
+    "merch": {
+      "title": "Tenues en merchandise",
+      "p": "Op zoek naar een nieuw tenue? Of wil je toch iets van die awesome US merchandise!? Neem dan een kijkje op <shopLink>Basketball Totaal</shopLink>."
     },
-    "deregister": {
-      "title": "Uitschrijven",
-      "p1": "Uitschrijven kan aan het einde van het seizoen met een opzegtermijn van één maand, per e-mail aan het bestuur.",
-      "p2": "Spelers die halverwege het seizoen uitschrijven, blijven de contributie voor het lopende seizoen verschuldigd.",
-      "p3": "Na uitschrijving blijft je account één jaar toegankelijk, zodat je makkelijk terug kunt komen."
-    },
-    "faq": {
-      "title": "Veelgestelde vragen",
-      "items": {
-        "q1": {
-          "q": "Mag ik eerst een keer meetrainen?",
-          "a": "Ja. Je kunt twee keer gratis meetrainen voordat je lid wordt. Meld je aan via het formulier en laat weten dat je wilt meetrainen."
-        },
-        "q2": {
-          "q": "Heb ik basketbalervaring nodig?",
-          "a": "Nee. We hebben teams en trainingen voor alle niveaus, van beginners tot ervaren spelers. Vertel ons je niveau en we zoeken een team dat past."
-        },
-        "q3": {
-          "q": "Wat zit er in de contributie?",
-          "a": "De contributie dekt je trainingen, competitiewedstrijden, scheidsrechters en het gebruik van de kantine. Basketbalkleding en -schoenen zijn niet inbegrepen."
-        },
-        "q4": {
-          "q": "Hoe zeg ik mijn lidmaatschap op?",
-          "a": "Je kunt aan het einde van het seizoen opzeggen met een opzegtermijn van één maand, per e-mail aan het bestuur."
-        }
-      }
+    "leave": {
+      "title": "Leave US",
+      "p1": "Wil je U.S. verlaten, stuur dan een mail naar <email>secretaris@usbasketball.nl</email> met je opzegging. Dit is de enige manier om officieel op te zeggen! Meld je je niet af, dan blijf je contributie betalen (ook al heb je het tegen je coach en team gezegd).",
+      "p2": "Opzegging van lidmaatschap voor het nieuwe seizoen dient te geschieden vóór 1 mei. Er wordt geen contributie terugbetaald bij tussentijdse opzegging na de start van het seizoen (1 september). Kosten indien opzegging na 1 mei bedragen eenmalig €50, zie hieronder.",
+      "matchTitle": "Wedstrijdlid",
+      "matchRows": {
+        "r1": "Periode 1 september - 30 april: jaarcontributie voor het lopende seizoen verschuldigd",
+        "r2": "Periode 1 mei - 31 augustus: €50,- boete"
+      },
+      "recTitle": "Recreant (trainend lid)",
+      "recRows": {
+        "r1": "Periode 1 september - 31 december: contributie voor het halve seizoen verschuldigd",
+        "r2": "Periode 1 januari - 31 augustus: gehele contributie voor het aflopende seizoen verschuldigd"
+      },
+      "disclaimer": "Disclaimer m.b.t. uitschrijven bij US: Wanneer je je uitschrijft, geef je al je rechten om in een team te spelen op. Het bestuur gaat er dan van uit dat er plek is in een team en zal de nieuwe aanmeldingen naar dit team doorsturen. Je hebt op het moment dat je je weer inschrijft dan dus geen voorrang op nieuwe leden."
     },
     "cta": {
       "title": "Word lid",
@@ -210,7 +149,7 @@
     "sections": {
       "who": {
         "title": "Wie zijn wij?",
-        "p": "US Basketball NL is de verwerkingsverantwoordelijke voor de persoonsgegevens die op deze website en in onze administratie worden verwerkt. Je kunt ons bereiken via info@usbasketballnl.example."
+        "p": "US Basketball NL is de verwerkingsverantwoordelijke voor de persoonsgegevens die op deze website en in onze administratie worden verwerkt. Je kunt ons bereiken via bestuur@usbasketball.nl."
       },
       "data": {
         "title": "Welke gegevens verzamelen wij?",
@@ -235,27 +174,46 @@
     }
   },
   "Signup": {
-    "title": "Schrijf je in als lid",
-    "intro": "Vul onderstaand formulier in om lid te worden van US Basketball NL. Na inschrijving kun je direct inloggen met je e-mailadres en wachtwoord.",
-    "firstName": "Voornaam",
-    "lastName": "Achternaam",
+    "title": "Interesseformulier",
+    "intro": "Heb jij interesse om bij US te komen basketballen? Vul dan het onderstaande formulier in! Houd er rekening mee dat wij bij US alleen senioren (18+) teams hebben.",
+    "capacityNote": "Bedankt voor je interesse om bij US aan te sluiten! Onze commissie bestaat volledig uit vrijwilligers en leden, waardoor we beperkte capaciteit hebben. Vul het formulier gerust in; zodra er plekken vrijkomen nemen we contact met je op.",
+    "name": "Volledige naam",
+    "namePlaceholder": "Voor- en achternaam",
+    "lastLevel": "Laatst gespeelde niveau",
+    "lastLevelPlaceholder": "Bijv. 2e klasse, landelijke 1e klasse, recreatief of nooit gespeeld",
+    "position": "Positie",
+    "positionGuard": "Guard",
+    "positionForward": "Forward",
+    "positionCenter": "Center",
+    "positionNotApplicable": "N.V.T.",
+    "positionOther": "Anders",
+    "positionNote": "Kies 'Anders' en licht dit toe bij 'Meer informatie over je achtergrond/niveau'.",
+    "birthDate": "Geboortedatum",
+    "lastSeason": "Laatst gespeelde seizoen",
+    "lastSeasonPlaceholder": "Bijv. 2024-2025 of 'lang geleden'",
+    "interest": "Interesse in",
+    "interestCompete": "Trainen en wedstrijden spelen",
+    "interestTrainingOnly": "Alleen trainen",
+    "interestUndecided": "Weet ik nog niet zeker",
     "email": "E-mailadres",
-    "phone": "Telefoonnummer (optioneel)",
-    "team": "Voorkeursteam (optioneel)",
-    "password": "Wachtwoord",
-    "passwordHelp": "Minimaal 8 tekens.",
-    "submit": "Maak mijn account aan",
-    "loginLink": "Al lid? Log in",
+    "gender": "Ik identificeer me als",
+    "genderMan": "Man",
+    "genderVrouw": "Vrouw",
+    "background": "Meer informatie over je achtergrond/niveau",
+    "backgroundPlaceholder": "Vertel iets over je ervaring, niveau en/of eventuele opmerkingen...",
+    "submit": "Verzenden",
+    "privacyNote": "De informatie die via dit formulier wordt opgestuurd, kan worden ingezien door het bestuur en de technische commissie van U.S. Basketball en wordt alleen gebruikt om een geschikt team voor je te zoeken.",
     "errors": {
       "missing_fields": "Vul alle verplichte velden in.",
       "invalid_email": "Voer een geldig e-mailadres in.",
-      "password_too_short": "Je wachtwoord moet minimaal 8 tekens lang zijn.",
-      "email_exists": "Er bestaat al een account met dit e-mailadres. Log in in plaats daarvan.",
+      "invalid_birth_date": "Voer een geldige geboortedatum in.",
+      "underage": "Je moet minimaal 18 jaar zijn om bij US te spelen.",
+      "captcha_failed": "We konden niet bevestigen dat je geen robot bent. Probeer het opnieuw.",
       "generic": "Er is iets misgegaan. Probeer het opnieuw."
     },
     "success": {
-      "title": "Bijna klaar!",
-      "text": "Je account is aangemaakt. Je kunt inloggen met je e-mailadres en wachtwoord."
+      "title": "Bedankt voor je interesse!",
+      "text": "Wij hopen je binnen twee weken te kunnen laten weten of er plekken beschikbaar zijn in een team dat aansluit bij jouw wensen en ervaring. Houd er rekening mee dat dit soms wat langer kan duren, omdat ons werk volledig door vrijwilligers wordt gedaan. Een kopie van je aanmelding is naar je e-mailadres gestuurd."
     }
   },
   "Login": {
@@ -264,7 +222,7 @@
     "email": "E-mailadres",
     "password": "Wachtwoord",
     "submit": "Inloggen",
-    "signupLink": "Nog geen account? Schrijf je hier in",
+    "signupLink": "Nog geen lid? Laat hier je interesse achter",
     "errors": {
       "invalid_credentials": "Ongeldig e-mailadres of wachtwoord.",
       "generic": "Er is iets misgegaan. Probeer het opnieuw."
@@ -299,7 +257,7 @@
     "logout": "Uitloggen"
   },
   "Footer": {
-    "tagline": "Amateur basketbalvereniging in Utrecht sinds 1985. Plezier, teamwork en vooruitgang.",
+    "tagline": "De gezelligste basketbalclub van Amsterdam sinds 1951. If you can't beat us, join US!",
     "navigation": "Navigatie",
     "contact": "Contact",
     "legal": "Juridisch",
@@ -309,8 +267,8 @@
     "signup": "Word lid van de club"
   },
   "NotFound": {
-    "title": "Pagina niet gevonden",
-    "description": "De pagina die je zoekt bestaat niet.",
+    "title": "Niets dan lucht!",
+    "description": "De pagina die je zoekt is uitgespeeld. Laten we je terug het veld op halen.",
     "home": "Terug naar de homepage"
   },
   "LocaleSwitcher": {
