@@ -10,6 +10,10 @@
       "title": "Lidmaatschap",
       "description": "Contributie, aanmeldings- en uitschrijvingsregels van US Basketball NL."
     },
+    "schedule": {
+      "title": "Trainingsschema",
+      "description": "Wanneer en waar de teams van US Basketball trainen — woensdag- en vrijdagtrainingen in de Amstelcampushal."
+    },
     "privacy": {
       "title": "Privacybeleid",
       "description": "Het privacybeleid van US Basketball NL: welke gegevens we verzamelen en hoe we die gebruiken."
@@ -31,6 +35,7 @@
     "home": "Home",
     "about": "Over ons",
     "membership": "Lidmaatschap",
+    "schedule": "Trainingen",
     "privacy": "Privacy",
     "signup": "Word lid",
     "account": "Mijn account",
@@ -255,6 +260,20 @@
       }
     },
     "logout": "Uitloggen"
+  },
+  "Training": {
+    "title": "Trainingsschema",
+    "intro": "Ontdek wanneer en waar onze teams trainen.",
+    "empty": "Het trainingsschema is binnenkort beschikbaar. Kom later nog eens terug.",
+    "wednesday": {
+      "title": "Woensdagtrainingen",
+      "firstHalf": "Eerste seizoenshelft",
+      "secondHalf": "Tweede seizoenshelft"
+    },
+    "friday": {
+      "title": "Vrijdagtrainingen",
+      "lastUpdated": "Laatst bijgewerkt"
+    }
   },
   "Footer": {
     "tagline": "De gezelligste basketbalclub van Amsterdam sinds 1951. If you can't beat us, join US!",

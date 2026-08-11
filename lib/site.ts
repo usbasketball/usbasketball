@@ -51,3 +51,28 @@ export function websiteJsonLd(): JsonLdObject {
     publisher: { "@id": `${siteConfig.url}/#organization` },
   };
 }
+
+export function scheduleJsonLd(): JsonLdObject {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Event",
+    name: "US Basketball Wednesday trainings",
+    eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+    eventStatus: "https://schema.org/EventScheduled",
+    organizer: { "@id": `${siteConfig.url}/#organization` },
+    location: {
+      "@type": "Place",
+      name: "Amstelcampushal",
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: siteConfig.city,
+        addressCountry: siteConfig.country,
+      },
+    },
+    schedule: {
+      "@type": "Schedule",
+      byDay: "http://schema.org/Wednesday",
+      repeatFrequency: "P1W",
+    },
+  };
+}

@@ -26,15 +26,16 @@
 | Email | Resend (optional: welcome/notification emails) |
 | Analytics | GA4 (via `@next/third-parties`) + `@vercel/analytics` (Core Web Vitals) |
 | Consent | Lightweight GDPR cookie banner before GA4 loads |
-| Deploy | Dockerfile (Next.js `standalone` output) → Vercel |
+| Deploy | Vercel (native Git integration) |
 
-**Why Postgres/Prisma over SQLite:** signups become member accounts you'll grow over time; Postgres scales, and Prisma makes migrating to a self-managed DB later easy (fits the Docker-on-Vercel route).
+**Why Postgres/Prisma over SQLite:** signups become member accounts you'll grow over time; Postgres scales, and Prisma keeps the option of a self-managed DB later easy.
 
 ## 3. Content Architecture
 
 ```
 /                    → home
 /about               → history, club facts
+/schedule            → training schedule (Contentful: Wednesday + Friday tables)
 /teams               → team introductions
 /membership          → fees + registration/deregistration rules
 /privacy             → privacy policy (text-heavy)
@@ -86,13 +87,13 @@ app/
     (private)/me/
   sitemap.ts, robots.ts, llms.txt
 components/  lib/  prisma/  i18n/  public/
-Dockerfile  docker-compose.yml (dev)  next.config.ts
+next.config.ts
 ```
 
 ## 8. Milestones
 
-1. **Setup** — Next.js + TS + Tailwind + i18n scaffold, Dockerfile, Prisma + Neon wired up
+1. **Setup** — Next.js + TS + Tailwind + i18n scaffold, Prisma + Neon wired up
 2. **Public pages** — content + design, SEO basics, structured data, llms.txt
 3. **Signup + Auth** — form → DB, Auth.js login/logout, `/me` account page with password change
 4. **Tracking** — GA4, Vercel Analytics, consent banner, GEO referral monitoring
-5. **Launch** — deploy Docker to Vercel, connect Search Console, verify GEO signals
+5. **Launch** — deploy to Vercel, connect Search Console, verify GEO signals

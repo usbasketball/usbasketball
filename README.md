@@ -1,6 +1,6 @@
 # US Basketball NL
 
-Website for the US Basketball NL basketball club: public pages (home, about, teams, membership, privacy), a member signup form, and a private account page with password change. Fully localized in English and Dutch.
+Website for the US Basketball NL basketball club: public pages (home, about, training schedule, membership, privacy), a member signup form, and a private account page with password change. Fully localized in English and Dutch.
 
 ## Tech Stack
 
@@ -11,7 +11,8 @@ Website for the US Basketball NL basketball club: public pages (home, about, tea
 | i18n | next-intl (locale routing, EN + NL) |
 | Auth | Auth.js v5 (NextAuth) — email + password |
 | DB | PostgreSQL + Prisma ORM (client generated into `lib/generated`) |
-| Deploy | Docker (`standalone` output) |
+| CMS | Contentful (training schedule content) |
+| Deploy | Vercel (native Git integration) |
 
 ## Getting Started
 
@@ -55,7 +56,7 @@ Open [http://localhost:3000](http://localhost:3000). The app is available under 
 | Command | Description |
 |---|---|
 | `npm run dev` | Start the development server |
-| `npm run build` | Production build (`standalone` output) |
+| `npm run build` | Production build |
 | `npm run start` | Start the production server |
 | `npm run lint` | Run ESLint |
 | `npm run typecheck` | Type-check the project (`tsc --noEmit`) |
@@ -69,29 +70,32 @@ Open [http://localhost:3000](http://localhost:3000). The app is available under 
 ```
 app/
   [locale]/
-    (public)/          home, about, teams, membership, privacy, signup, login
+    (public)/          home, about, schedule, membership, privacy, signup, login
     (private)/me/      account page (requires login)
     layout.tsx         locale-aware root layout (Geist font, header, footer, JSON-LD)
     not-found.tsx
   api/auth/[...nextauth]/route.ts
+  api/revalidate/route.ts   Contentful webhook → revalidate the schedule
   sitemap.ts, robots.ts, llms.txt
-components/            header, footer, locale switcher, forms (signup/login/password), JSON-LD
+components/            header, footer, locale switcher, forms (signup/login/password), JSON-LD, schedule content
 i18n/                  routing + request (locale detection)
-lib/                   prisma client, server actions, site config, SEO helpers
+lib/                   prisma client, contentful client + schedule fetch, server actions, site config, SEO helpers
 messages/              en.json, nl.json
 prisma/                schema.prisma
 types/                 Auth.js module augmentation (Session type)
 auth.ts, auth.config.ts
 proxy.ts               next-intl middleware
-next.config.ts         standalone output + next-intl plugin
-Dockerfile             multi-stage production image
-docker-compose.yml     local dev with Postgres-backed services
+next.config.ts         next-intl plugin (+ standalone output when not on Vercel)
 ```
 
-## Docker
+## Deployment
 
-Run the app locally with `docker-compose up` (development, hot reload). For production, build the `Dockerfile` — it produces a standalone Next.js image; pass the required build args (`DATABASE_URL`, `AUTH_SECRET`, `NEXT_PUBLIC_SITE_URL`, `NEXT_PUBLIC_SITE_NAME`) with `--build-arg`.
+The app is deployed to Vercel with native Git integration. No Docker setup is required.
+
+## Contentful (training schedule)
+
+The `/schedule` page shows the Wednesday and Friday training schedules, sourced from Contentful so the club can update them without code changes. UI labels are translated via `messages/`; Contentful only stores schedule data (single-language).
 
 ## Environment Variables
 
-See `.env.example` for the full list: `DATABASE_URL`, `AUTH_SECRET`, `AUTH_URL`, `NEXT_PUBLIC_SITE_URL`, `NEXT_PUBLIC_SITE_NAME`, `NEXT_PUBLIC_CONTACT_EMAIL`.
+See `.env.example` for the full list: `DATABASE_URL`, `AUTH_SECRET`, `AUTH_URL`, `NEXT_PUBLIC_SITE_URL`, `NEXT_PUBLIC_SITE_NAME`, `NEXT_PUBLIC_CONTACT_EMAIL`, `CONTENTFUL_*`.

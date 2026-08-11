@@ -10,6 +10,10 @@
       "title": "Membership",
       "description": "Membership fees, registration and deregistration rules of US Basketball NL."
     },
+    "schedule": {
+      "title": "Training schedule",
+      "description": "When and where the US Basketball teams train — Wednesday and Friday trainings at the Amstelcampushal."
+    },
     "privacy": {
       "title": "Privacy policy",
       "description": "The privacy policy of US Basketball NL: what data we collect and how we use it."
@@ -31,6 +35,7 @@
     "home": "Home",
     "about": "About",
     "membership": "Membership",
+    "schedule": "Training",
     "privacy": "Privacy",
     "signup": "Join",
     "account": "My account",
@@ -255,6 +260,20 @@
       }
     },
     "logout": "Log out"
+  },
+  "Training": {
+    "title": "Training schedule",
+    "intro": "Find out when and where our teams train.",
+    "empty": "The training schedule is coming soon. Please check back later.",
+    "wednesday": {
+      "title": "Wednesday trainings",
+      "firstHalf": "First half of the season",
+      "secondHalf": "Second half of the season"
+    },
+    "friday": {
+      "title": "Friday trainings",
+      "lastUpdated": "Last updated"
+    }
   },
   "Footer": {
     "tagline": "The most gezellig basketball club in Amsterdam since 1951. If you can't beat us, join US!",

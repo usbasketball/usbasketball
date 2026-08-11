@@ -7,6 +7,7 @@ export async function Header() {
 
   const items = [
     { href: "/about" as const, label: t("about") },
+    { href: "/schedule" as const, label: t("schedule") },
     { href: "/membership" as const, label: t("membership") },
   ];
 

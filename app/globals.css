@@ -23,3 +23,7 @@ body {
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
 }
+
+.schedule-table p {
+  margin: 0;
+}
