@@ -1,7 +1,7 @@
 "use client";
 
 import { useActionState, useRef, useState } from "react";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import { submitInterest, type ActionState } from "@/lib/actions/interest";
 import {
   TurnstileWidget,
@@ -109,6 +109,7 @@ function RadioGroup({
 
 export function InterestForm() {
   const t = useTranslations("Signup");
+  const locale = useLocale();
   const [errors, setErrors] = useState<FieldErrors>({});
   const [token, setToken] = useState("");
   const [captchaError, setCaptchaError] = useState<string | null>(null);
@@ -162,6 +163,7 @@ export function InterestForm() {
       onSubmit={handleSubmit}
       className="space-y-5"
     >
+      <input type="hidden" name="locale" value={locale} />
       <div>
         <label htmlFor="name" className={labelClass}>
           {t("name")} *
