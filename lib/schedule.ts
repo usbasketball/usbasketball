@@ -28,7 +28,7 @@ async function fetchTrainingSchedule(): Promise<TrainingSchedule | null> {
 
   try {
     const result = await contentfulClient.getEntries({
-      content_type: "wednesdaySlot",
+      content_type: "trainingSchedules",
       limit: 1,
     });
     const entry = result.items[0];
