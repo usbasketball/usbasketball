@@ -1,7 +1,6 @@
 "use server";
 
 import { headers } from "next/headers";
-import { getLocale } from "next-intl/server";
 
 import {
   sendInterestConfirmation,
@@ -25,6 +24,7 @@ const VALID_POSITIONS = new Set([
 ]);
 const VALID_INTERESTS = new Set(["compete", "training_only", "undecided"]);
 const VALID_GENDERS = new Set(["man", "vrouw"]);
+const VALID_LOCALES = new Set(["en", "nl"]);
 
 const TURNSTILE_ACTION = "interest_form";
 
@@ -94,7 +94,10 @@ export async function submitInterest(
   prevState: ActionState,
   formData: FormData
 ): Promise<ActionState> {
-  const locale = (await getLocale()) === "en" ? "en" : "nl";
+  const locale = String(formData.get("locale") ?? "nl").toLowerCase();
+  if (!VALID_LOCALES.has(locale)) {
+    return { error: "missing_fields" };
+  }
 
   const name = String(formData.get("name") ?? "").trim();
   const email = String(formData.get("email") ?? "").trim().toLowerCase();
