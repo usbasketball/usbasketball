@@ -1,4 +1,5 @@
 import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
 import { Bebas_Neue, Inter } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
@@ -72,6 +73,7 @@ export default async function LocaleLayout({
         <JsonLd data={organizationJsonLd()} />
         <JsonLd data={websiteJsonLd()} />
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
