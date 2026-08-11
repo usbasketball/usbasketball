@@ -46,6 +46,7 @@ export function LeftNav() {
   const items = [
     { href: "/about", label: t("about") },
     { href: "/membership", label: t("membership") },
+    { href: "/schedule", label: t("schedule") },
   ];
 
   return (

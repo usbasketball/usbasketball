@@ -15,11 +15,13 @@
     "db:studio": "prisma studio"
   },
   "dependencies": {
+    "@contentful/rich-text-react-renderer": "^16.2.2",
     "@prisma/adapter-pg": "^7.9.1",
     "@prisma/client": "^7.9.1",
     "@vercel/analytics": "^2.0.1",
     "@vercel/speed-insights": "^2.0.0",
     "bcryptjs": "^3.0.3",
+    "contentful": "^11.12.9",
     "dotenv": "^17.4.2",
     "next": "16.3.0",
     "next-auth": "^5.0.0-beta.32",

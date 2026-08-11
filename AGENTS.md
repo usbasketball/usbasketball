@@ -10,7 +10,7 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 # Project: US Basketball NL
 
-Next.js 16 (App Router) + TypeScript + Tailwind v4, next-intl (EN/NL), Auth.js v5, Prisma 7 + PostgreSQL.
+Next.js 16 (App Router) + TypeScript + Tailwind v4, next-intl (EN/NL), Auth.js v5, Prisma 7 + PostgreSQL, Contentful (CMS).
 
 ## Verification
 
@@ -29,4 +29,5 @@ npm run typecheck
 - **Redirects & type narrowing:** Always use `return redirect({ href: "...", locale })` (not a bare `redirect(...)` call) — bare calls do not narrow types in this project's build.
 - **Prisma:** The client is generated into `lib/generated/prisma` (not `node_modules`). After editing `prisma/schema.prisma` run `npm run db:generate`. Use the singleton in `@/lib/prisma` (PrismaPg adapter); never instantiate your own client.
 - **Server actions** live in `lib/actions/` and return `{ error?: string } | { success: true }` state for use with `useActionState`.
-- Database runs on PostgreSQL (Neon); dev config in `docker-compose.yml`, production image in `Dockerfile`.
+- **Contentful:** The training schedule (`/schedule`) is fetched in `lib/schedule.ts` via the guarded client in `lib/contentful.ts`, wrapped in `unstable_cache` tagged `training-schedule`. The webhook route `app/api/revalidate/route.ts` revalidates it on publish. Contentful keys must stay unset-safe so builds never crash without them.
+- The app is deployed to Vercel (native Git integration); no Docker artifacts are kept in the repo.
