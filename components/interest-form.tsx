@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState, useRef, useState } from "react";
+import { useActionState, useRef, useState, startTransition } from "react";
 import { useTranslations, useLocale } from "next-intl";
 import { submitInterest, type ActionState } from "@/lib/actions/interest";
 import {
@@ -152,7 +152,9 @@ export function InterestForm() {
     }
     setCaptchaError(null);
     formData.set("cf-turnstile-response", token);
-    formAction(formData);
+    startTransition(() => {
+      formAction(formData);
+    });
     turnstileRef.current?.reset();
   }
 
