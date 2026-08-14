@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
-import { localizedAlternates } from "@/lib/seo";
+import { pageMetadata } from "@/lib/seo";
 import { Parallax } from "@/components/parallax";
 import { Reveal } from "@/components/scroll-reveal";
 
@@ -14,11 +14,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "Metadata" });
 
-  return {
+  return pageMetadata({
+    locale,
+    pathname: "/",
     title: t("title"),
     description: t("description"),
-    alternates: localizedAlternates("/"),
-  };
+  });
 }
 
 function highlightLastWord(title: string) {

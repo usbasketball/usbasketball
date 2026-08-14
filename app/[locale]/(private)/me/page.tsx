@@ -3,7 +3,7 @@ import { getFormatter, getTranslations } from "next-intl/server";
 import { auth } from "@/auth";
 import { logout } from "@/lib/actions/auth";
 import { redirect } from "@/i18n/navigation";
-import { localizedAlternates } from "@/lib/seo";
+import { pageMetadata } from "@/lib/seo";
 import { prisma } from "@/lib/prisma";
 import { PasswordForm } from "@/components/password-form";
 
@@ -15,12 +15,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "Metadata.me" });
 
-  return {
+  return pageMetadata({
+    locale,
+    pathname: "/me",
     title: t("title"),
     description: t("description"),
-    alternates: localizedAlternates("/me"),
     robots: { index: false, follow: false },
-  };
+  });
 }
 
 export default async function MePage({ params }: Props) {

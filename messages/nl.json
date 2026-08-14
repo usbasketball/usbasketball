@@ -4,19 +4,23 @@
     "description": "US Basketbal is een amateur basketbalvereniging voor volwassenen (18+): van beginner tot ervaren speler. Word lid en speel basketbal in een leuke, teamgerichte club.",
     "about": {
       "title": "Over ons",
-      "description": "Lees alles over US Basketball NL: onze club, trainingen, thuiswedstrijden en recreanten."
+      "description": "Lees alles over US Basketbal: onze club, trainingen, thuiswedstrijden en recreanten."
     },
     "membership": {
       "title": "Lidmaatschap",
-      "description": "Contributie, aanmeldings- en uitschrijvingsregels van US Basketball NL."
+      "description": "Contributie, aanmeldings- en uitschrijvingsregels van US Basketbal."
     },
     "schedule": {
       "title": "Trainingsschema",
-      "description": "Wanneer en waar de teams van US Basketball trainen — woensdag- en vrijdagtrainingen in de Amstelcampushal."
+      "description": "Wanneer en waar de teams van US Basketbal trainen — woensdag- en vrijdagtrainingen in de Amstelcampushal."
     },
     "privacy": {
       "title": "Privacybeleid",
-      "description": "Het privacybeleid van US Basketball NL: welke gegevens we verzamelen en hoe we die gebruiken."
+      "description": "Het privacybeleid van US Basketbal: welke gegevens we verzamelen en hoe we die gebruiken."
+    },
+    "faq": {
+      "title": "Veelgestelde vragen",
+      "description": "Veelgestelde vragen over US Basketbal: lid worden, contributie, trainingstijden en meer."
     },
     "signup": {
       "title": "Interesseformulier",
@@ -24,11 +28,11 @@
     },
     "login": {
       "title": "Inloggen",
-      "description": "Log in op je US Basketball NL-ledenaccount."
+      "description": "Log in op je US Basketbal-ledenaccount."
     },
     "me": {
       "title": "Mijn account",
-      "description": "Jouw persoonlijke ledenaccount bij US Basketball NL."
+      "description": "Jouw persoonlijke ledenaccount bij US Basketbal."
     }
   },
   "Nav": {
@@ -36,6 +40,7 @@
     "about": "Over ons",
     "membership": "Lidmaatschap",
     "schedule": "Trainingsschema",
+    "faq": "Veelgestelde vragen",
     "privacy": "Privacy",
     "signup": "Word lid",
     "account": "Mijn account",
@@ -273,6 +278,46 @@
     "friday": {
       "title": "Vrijdagtrainingen",
       "lastUpdated": "Laatst bijgewerkt"
+    }
+  },
+  "FAQ": {
+    "title": "Veelgestelde vragen",
+    "intro": "Snelle antwoorden over lid worden bij US Basketbal, contributie, trainingstijden en meer.",
+    "cta": "Nog steeds geïnteresseerd? Vul het interesseformulier in en we nodigen je uit voor een proeftraining.",
+    "ctaButton": "Word lid",
+    "items": {
+      "age": {
+        "question": "Wie kan lid worden van US Basketbal?",
+        "answer": "US Basketbal is voor volwassenen van 18 jaar en ouder. We hebben geen jeugdteams — al onze leden spelen in seniorenteams."
+      },
+      "join": {
+        "question": "Hoe word ik lid?",
+        "answer": "Vul het interesseformulier op onze website in. Onze commissie bekijkt je aanmelding en nodigt je uit voor een proeftraining. Daarna matchen we je aan een team dat past bij jouw niveau en voorkeuren."
+      },
+      "trial": {
+        "question": "Kan ik eerst proeftrainen?",
+        "answer": "Ja. Je kunt kosteloos twee keer meetrainen om te kijken welk team het beste bij je past, voordat je besluit lid te worden."
+      },
+      "fees": {
+        "question": "Wat kost het lidmaatschap?",
+        "answer": "Competitieleden betalen €330 (2× per week trainen), €300 (1,5× per week) of €270 (1× per week) per seizoen. Recreanten die alleen trainen en geen wedstrijden spelen betalen €170 per seizoen."
+      },
+      "student": {
+        "question": "Is er studentenkorting?",
+        "answer": "Ja. Studenten krijgen 10% korting op hun contributie."
+      },
+      "training": {
+        "question": "Wanneer en waar trainen de teams?",
+        "answer": "Competitieteams trainen op woensdagavond (75 minuten) in de Amstelcampushal; sommige teams trainen ook op vrijdag. Thuiswedstrijden worden op zondag gespeeld in de Amstelcampushal. Ons recreatieteam traint op dinsdag- en donderdagavond in de Apollohal."
+      },
+      "competition": {
+        "question": "Wat is het verschil tussen wedstrijdspeler en trainend lid?",
+        "answer": "Een wedstrijdspeler speelt elke week wedstrijden in de NBB-competitie tijdens het seizoen. Een trainend lid traint mee met een competitieteam maar speelt geen wedstrijden — maximaal 3 wedstrijden per seizoen zijn toegestaan."
+      },
+      "cancel": {
+        "question": "Hoe zeg ik mijn lidmaatschap op?",
+        "answer": "Stuur een e-mail naar secretaris@usbasketball.nl — dit is de enige officiële manier om op te zeggen. Opzegging voor het nieuwe seizoen moet vóór 1 mei. Opzeggen na 1 mei kost een eenmalige fee van €50. Contributie wordt niet terugbetaald bij opzegging halverwege het seizoen na de start op 1 september."
+      }
     }
   },
   "Footer": {

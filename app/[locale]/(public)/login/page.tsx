@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
-import { localizedAlternates } from "@/lib/seo";
+import { pageMetadata } from "@/lib/seo";
 import { LoginForm } from "@/components/login-form";
 
 type Props = {
@@ -12,12 +12,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "Metadata.login" });
 
-  return {
+  return pageMetadata({
+    locale,
+    pathname: "/login",
     title: t("title"),
     description: t("description"),
-    alternates: localizedAlternates("/login"),
     robots: { index: false, follow: false },
-  };
+  });
 }
 
 export default async function LoginPage({ params }: Props) {

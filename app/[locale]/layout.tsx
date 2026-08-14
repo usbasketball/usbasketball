@@ -27,7 +27,6 @@ export function generateStaticParams() {
 }
 
 export async function generateMetadata(): Promise<Metadata> {
-  const locale = await getLocale();
   const t = await getTranslations("Metadata");
 
   return {
@@ -37,14 +36,6 @@ export async function generateMetadata(): Promise<Metadata> {
       template: `%s | ${t("title")}`,
     },
     description: t("description"),
-    openGraph: {
-      type: "website",
-      siteName: siteConfig.name,
-      title: t("title"),
-      description: t("description"),
-      locale: locale === "nl" ? "nl_NL" : "en_US",
-      alternateLocale: locale === "nl" ? ["en_US"] : ["nl_NL"],
-    },
     robots: { index: true, follow: true },
   };
 }
@@ -70,8 +61,8 @@ export default async function LocaleLayout({
             <Footer />
           </div>
         </NextIntlClientProvider>
-        <JsonLd data={organizationJsonLd()} />
-        <JsonLd data={websiteJsonLd()} />
+        <JsonLd data={organizationJsonLd(locale)} />
+        <JsonLd data={websiteJsonLd(locale)} />
         <Analytics />
         <SpeedInsights />
       </body>

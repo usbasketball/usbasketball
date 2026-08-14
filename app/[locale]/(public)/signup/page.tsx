@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
-import { localizedAlternates } from "@/lib/seo";
+import { pageMetadata } from "@/lib/seo";
 import { InterestForm } from "@/components/interest-form";
 
 type Props = {
@@ -11,11 +11,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "Metadata.signup" });
 
-  return {
+  return pageMetadata({
+    locale,
+    pathname: "/signup",
     title: t("title"),
     description: t("description"),
-    alternates: localizedAlternates("/signup"),
-  };
+  });
 }
 
 export default async function SignupPage({ params }: Props) {
