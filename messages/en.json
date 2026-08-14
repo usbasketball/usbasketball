@@ -4,11 +4,11 @@
     "description": "US Basketball is an amateur basketball club for adults (18+): from beginners to experienced players. Join us and play basketball in a fun, team-oriented club.",
     "about": {
       "title": "About us",
-      "description": "Read all about US Basketball NL: our club, trainings, home games and recreational players."
+      "description": "Read all about US Basketball: our club, trainings, home games and recreational players."
     },
     "membership": {
       "title": "Membership",
-      "description": "Membership fees, registration and deregistration rules of US Basketball NL."
+      "description": "Membership fees, registration and deregistration rules of US Basketball."
     },
     "schedule": {
       "title": "Training schedule",
@@ -16,7 +16,11 @@
     },
     "privacy": {
       "title": "Privacy policy",
-      "description": "The privacy policy of US Basketball NL: what data we collect and how we use it."
+      "description": "The privacy policy of US Basketball: what data we collect and how we use it."
+    },
+    "faq": {
+      "title": "FAQ",
+      "description": "Frequently asked questions about US Basketball: joining, membership fees, training times and more."
     },
     "signup": {
       "title": "Interest form",
@@ -24,11 +28,11 @@
     },
     "login": {
       "title": "Log in",
-      "description": "Log in to your US Basketball NL member account."
+      "description": "Log in to your US Basketball member account."
     },
     "me": {
       "title": "My account",
-      "description": "Your personal member account at US Basketball NL."
+      "description": "Your personal member account at US Basketball."
     }
   },
   "Nav": {
@@ -36,6 +40,7 @@
     "about": "About",
     "membership": "Membership",
     "schedule": "Training schedule",
+    "faq": "FAQ",
     "privacy": "Privacy",
     "signup": "Join",
     "account": "My account",
@@ -273,6 +278,46 @@
     "friday": {
       "title": "Friday trainings",
       "lastUpdated": "Last updated"
+    }
+  },
+  "FAQ": {
+    "title": "Frequently asked questions",
+    "intro": "Quick answers about joining US Basketball, membership fees, training times and more.",
+    "cta": "Still interested? Fill in the interest form and we'll invite you to a trial training.",
+    "ctaButton": "Sign up",
+    "items": {
+      "age": {
+        "question": "Who can join US Basketball?",
+        "answer": "US Basketball is for adults aged 18 and over. We have no youth teams — all our members play in senior teams."
+      },
+      "join": {
+        "question": "How do I become a member?",
+        "answer": "Fill in the interest form on our website. Our committee will review your submission and invite you to a trial training. After that we match you to a team that fits your level and preferences."
+      },
+      "trial": {
+        "question": "Can I try before I join?",
+        "answer": "Yes. You can train along for free twice to see which team suits you best before deciding to become a member."
+      },
+      "fees": {
+        "question": "What are the membership fees?",
+        "answer": "Competition members pay €330 (trains 2× per week), €300 (1.5× per week) or €270 (1× per week) per season. Recreational members who train without playing matches pay €170 per season."
+      },
+      "student": {
+        "question": "Is there a student discount?",
+        "answer": "Yes. Students receive a 10% discount on their membership fee."
+      },
+      "training": {
+        "question": "When and where do teams train?",
+        "answer": "Competition teams train on Wednesday evenings (75 minutes) at the Amstelcampushal; some teams also train on Friday. Home games are played on Sundays at the Amstelcampushal. Our recreational team trains on Tuesday and Thursday evenings at the Apollohal."
+      },
+      "competition": {
+        "question": "What is the difference between a playing member and a training member?",
+        "answer": "A playing member competes in NBB league matches every week during the season. A training member trains with a competition team but does not play matches — they may play a maximum of 3 games per season."
+      },
+      "cancel": {
+        "question": "How do I cancel my membership?",
+        "answer": "Send an email to secretaris@usbasketball.nl — this is the only official way to cancel. Cancellation for the new season must be done before 1 May. Cancelling after 1 May costs a one-off fee of €50. No membership fees are refunded for mid-season cancellation after the season starts on 1 September."
+      }
     }
   },
   "Footer": {

@@ -2,10 +2,11 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { LocaleSwitcher } from "@/components/locale-switcher";
 import { ActiveLink } from "@/components/active-link";
+import { getSiteName } from "@/lib/site";
 
 function MenuIcon() {
   return (
@@ -41,12 +42,15 @@ function CloseIcon() {
 
 export function LeftNav() {
   const t = useTranslations("Nav");
+  const locale = useLocale();
+  const siteName = getSiteName(locale);
   const [open, setOpen] = useState(false);
 
   const items = [
     { href: "/about", label: t("about") },
     { href: "/membership", label: t("membership") },
     { href: "/schedule", label: t("schedule") },
+    { href: "/faq", label: t("faq") },
   ];
 
   return (
@@ -83,7 +87,7 @@ export function LeftNav() {
             >
               <Image
                 src="/Logo_US_DEF_mettekst.svg"
-                alt="US Basketball"
+                alt={siteName}
                 width={34}
                 height={42}
                 className="h-10 w-auto invert"
@@ -133,7 +137,7 @@ export function LeftNav() {
             <Link href="/" className="flex items-center" aria-label={t("home")}>
               <Image
                 src="/Logo_US_DEF_mettekst.svg"
-                alt="US Basketball"
+                alt={siteName}
                 width={34}
                 height={42}
                 className="h-10 w-auto invert"

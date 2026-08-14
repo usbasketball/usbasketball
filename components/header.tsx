@@ -9,6 +9,7 @@ export async function Header() {
     { href: "/about" as const, label: t("about") },
     { href: "/membership" as const, label: t("membership") },
     { href: "/schedule" as const, label: t("schedule") },
+    { href: "/faq" as const, label: t("faq") },
   ];
 
   return (

@@ -35,6 +35,8 @@ export function GET() {
     `- Home: ${siteConfig.url}/en and ${siteConfig.url}/nl`,
     `- About: ${siteConfig.url}/en/about and ${siteConfig.url}/nl/about`,
     `- Membership: ${siteConfig.url}/en/membership and ${siteConfig.url}/nl/membership`,
+    `- Training schedule: ${siteConfig.url}/en/schedule and ${siteConfig.url}/nl/schedule`,
+    `- FAQ: ${siteConfig.url}/en/faq and ${siteConfig.url}/nl/faq`,
     `- Sign up (interest form): ${siteConfig.url}/en/signup and ${siteConfig.url}/nl/signup`,
     `- Privacy policy: ${siteConfig.url}/en/privacy and ${siteConfig.url}/nl/privacy`,
   ].join("\n");

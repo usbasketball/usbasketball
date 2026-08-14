@@ -2,14 +2,18 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+import { useLocale } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { MobileNav } from "@/components/mobile-nav";
+import { getSiteName } from "@/lib/site";
 
 type MobileHeaderProps = {
   items: Array<{ href: string; label: string }>;
 };
 
 export function MobileHeader({ items }: MobileHeaderProps) {
+  const locale = useLocale();
+  const siteName = getSiteName(locale);
   const [hidden, setHidden] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const lastY = useRef(0);
@@ -51,7 +55,7 @@ export function MobileHeader({ items }: MobileHeaderProps) {
         <Link href="/" className="flex items-center">
           <Image
             src="/Logo_US_DEF_mettekst.svg"
-            alt="US Basketball"
+            alt={siteName}
             width={54}
             height={66}
             className="h-14 w-auto invert"

@@ -1,7 +1,7 @@
 import Image from "next/image";
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
-import { siteConfig } from "@/lib/site";
+import { getSiteName, siteConfig } from "@/lib/site";
 
 function InstagramIcon() {
   return (
@@ -38,12 +38,15 @@ function FacebookIcon() {
 export async function Footer() {
   const t = await getTranslations("Footer");
   const nav = await getTranslations("Nav");
+  const locale = await getLocale();
+  const siteName = getSiteName(locale);
   const year = new Date().getFullYear();
 
   const navLinks = [
     { href: "/about" as const, label: nav("about") },
     { href: "/membership" as const, label: nav("membership") },
     { href: "/schedule" as const, label: nav("schedule") },
+    { href: "/faq" as const, label: nav("faq") },
     { href: "/signup" as const, label: nav("signup") },
     { href: "/login" as const, label: nav("account") },
   ];
@@ -55,7 +58,7 @@ export async function Footer() {
           <div className="flex items-center">
             <Image
               src="/Logo_US_DEF_mettekst.svg"
-              alt="US Basketball"
+              alt={siteName}
               width={65}
               height={80}
               className="h-16 w-auto invert"

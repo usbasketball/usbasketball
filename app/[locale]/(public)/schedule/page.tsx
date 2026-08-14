@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { getFormatter, getTranslations } from "next-intl/server";
 import { JsonLd } from "@/components/json-ld";
 import { ScheduleContent } from "@/components/schedule/schedule-content";
-import { localizedAlternates } from "@/lib/seo";
+import { pageMetadata } from "@/lib/seo";
 import { getTrainingSchedule } from "@/lib/schedule";
 import { scheduleJsonLd } from "@/lib/site";
 
@@ -14,11 +14,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "Metadata.schedule" });
 
-  return {
+  return pageMetadata({
+    locale,
+    pathname: "/schedule",
     title: t("title"),
     description: t("description"),
-    alternates: localizedAlternates("/schedule"),
-  };
+  });
 }
 
 export default async function SchedulePage({ params }: Props) {
@@ -40,7 +41,7 @@ export default async function SchedulePage({ params }: Props) {
 
   return (
     <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6">
-      <JsonLd data={scheduleJsonLd()} />
+      <JsonLd data={scheduleJsonLd(locale)} />
       <h1 className="font-display text-4xl uppercase tracking-wide text-ink sm:text-5xl">
         {t("title")}
       </h1>
