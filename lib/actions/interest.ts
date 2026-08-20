@@ -52,7 +52,12 @@ async function verifyTurnstile(token: string): Promise<boolean> {
     return false;
   }
 
-  let result: { success?: boolean; action?: string; hostname?: string };
+  let result: {
+    success?: boolean;
+    action?: string;
+    hostname?: string;
+    "error-codes"?: string[];
+  };
   try {
     const body = new URLSearchParams({ secret, response: token });
     const ip = await getClientIp();
@@ -73,11 +78,21 @@ async function verifyTurnstile(token: string): Promise<boolean> {
     return false;
   }
 
-  return (
+  const valid =
     result.success === true &&
     result.action === TURNSTILE_ACTION &&
-    expectedHostnames.has(result.hostname ?? "")
-  );
+    expectedHostnames.has(result.hostname ?? "");
+
+  if (!valid) {
+    console.warn("Turnstile verification failed", {
+      success: result.success,
+      action: result.action,
+      hostname: result.hostname,
+      errorCodes: result["error-codes"],
+    });
+  }
+
+  return valid;
 }
 
 function isAtLeast18(birthDate: Date): boolean {

@@ -10,6 +10,7 @@ type TurnstileProps = {
   siteKey: string;
   onToken: (token: string) => void;
   onExpire: () => void;
+  onError?: () => void;
 };
 
 declare global {
@@ -28,13 +29,15 @@ declare global {
 const SCRIPT_ID = "cf-turnstile-script";
 
 export const TurnstileWidget = forwardRef<TurnstileHandle, TurnstileProps>(
-  function TurnstileWidget({ siteKey, onToken, onExpire }, ref) {
+  function TurnstileWidget({ siteKey, onToken, onExpire, onError }, ref) {
     const containerRef = useRef<HTMLDivElement>(null);
     const widgetIdRef = useRef<string | null>(null);
     const onTokenRef = useRef(onToken);
     const onExpireRef = useRef(onExpire);
+    const onErrorRef = useRef(onError);
     onTokenRef.current = onToken;
     onExpireRef.current = onExpire;
+    onErrorRef.current = onError;
 
     useEffect(() => {
       if (!siteKey) return;
@@ -49,9 +52,11 @@ export const TurnstileWidget = forwardRef<TurnstileHandle, TurnstileProps>(
           sitekey: siteKey,
           theme: "light",
           action: "interest_form",
+          appearance: "interaction-only",
+          "refresh-expired": "auto",
           callback: (token: string) => onTokenRef.current(token),
           "expired-callback": () => onExpireRef.current(),
-          "error-callback": () => onExpireRef.current(),
+          "error-callback": () => onErrorRef.current?.(),
         });
       };
 
@@ -73,6 +78,10 @@ export const TurnstileWidget = forwardRef<TurnstileHandle, TurnstileProps>(
         if (script.dataset.loaded === "true") {
           renderWidget();
         } else {
+          const handleScriptError = () => {
+            if (!disposed) onErrorRef.current?.();
+          };
+          script.addEventListener("error", handleScriptError, { once: true });
           script.addEventListener(
             "load",
             () => {

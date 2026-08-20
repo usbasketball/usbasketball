@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState, useRef, useState, startTransition } from "react";
+import { useActionState, useEffect, useRef, useState, startTransition } from "react";
 import { useTranslations, useLocale } from "next-intl";
 import { submitInterest, type ActionState } from "@/lib/actions/interest";
 import {
@@ -112,7 +112,9 @@ export function InterestForm() {
   const locale = useLocale();
   const [errors, setErrors] = useState<FieldErrors>({});
   const [token, setToken] = useState("");
+  const [tokenExpired, setTokenExpired] = useState(false);
   const [captchaError, setCaptchaError] = useState<string | null>(null);
+  const [scriptError, setScriptError] = useState(false);
   const turnstileRef = useRef<TurnstileHandle>(null);
   const [state, formAction, isPending] = useActionState(
     submitInterest,
@@ -120,6 +122,12 @@ export function InterestForm() {
   );
 
   const hasErrors = Boolean(errors.email || errors.birthDate);
+
+  useEffect(() => {
+    if (state?.error) {
+      turnstileRef.current?.reset();
+    }
+  }, [state]);
 
   if (state?.success) {
     return (
@@ -137,6 +145,10 @@ export function InterestForm() {
   }
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    if (isPending) {
+      event.preventDefault();
+      return;
+    }
     const formData = new FormData(event.currentTarget);
     const nextErrors = validateForm(formData);
     if (nextErrors.email || nextErrors.birthDate) {
@@ -147,15 +159,19 @@ export function InterestForm() {
     event.preventDefault();
     setErrors({});
     if (TURNSTILE_SITE_KEY && !token) {
-      setCaptchaError(t("errors.captcha_failed"));
+      if (!tokenExpired && !scriptError) {
+        setCaptchaError(t("errors.captcha_failed"));
+      }
       return;
     }
     setCaptchaError(null);
     formData.set("cf-turnstile-response", token);
+    setToken("");
+    setTokenExpired(false);
+    setScriptError(false);
     startTransition(() => {
       formAction(formData);
     });
-    turnstileRef.current?.reset();
   }
 
   return (
@@ -294,13 +310,25 @@ export function InterestForm() {
             onToken={(newToken) => {
               setToken(newToken);
               setCaptchaError(null);
+              setTokenExpired(false);
+              setScriptError(false);
             }}
-            onExpire={() => setToken("")}
+            onExpire={() => {
+              setToken("");
+              setTokenExpired(true);
+            }}
+            onError={() => setScriptError(true)}
           />
         </div>
       ) : null}
       {captchaError ? (
         <p className="text-sm text-red-700">{captchaError}</p>
+      ) : null}
+      {tokenExpired ? (
+        <p className="text-sm text-amber-700">{t("errors.captcha_expired")}</p>
+      ) : null}
+      {scriptError ? (
+        <p className="text-sm text-red-700">{t("errors.captcha_load_failed")}</p>
       ) : null}
 
       <button

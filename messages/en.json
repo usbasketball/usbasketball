@@ -219,6 +219,8 @@
       "invalid_birth_date": "Please enter a valid birth date.",
       "underage": "You must be at least 18 years old to play at US.",
       "captcha_failed": "We couldn't confirm you're not a robot. Please try again.",
+      "captcha_expired": "The verification expired. Please complete the check again.",
+      "captcha_load_failed": "The verification could not be loaded. Please disable your ad blocker or try a different browser.",
       "generic": "Something went wrong. Please try again."
     },
     "success": {

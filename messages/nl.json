@@ -219,6 +219,8 @@
       "invalid_birth_date": "Voer een geldige geboortedatum in.",
       "underage": "Je moet minimaal 18 jaar zijn om bij US te spelen.",
       "captcha_failed": "We konden niet bevestigen dat je geen robot bent. Probeer het opnieuw.",
+      "captcha_expired": "De verificatie is verlopen. Doorloop de controle opnieuw.",
+      "captcha_load_failed": "De verificatie kon niet worden geladen. Schakel je adblocker uit of probeer een andere browser.",
       "generic": "Er is iets misgegaan. Probeer het opnieuw."
     },
     "success": {
