@@ -27,7 +27,7 @@ Resolve the target environment in this order:
 
 ## Step 2 — Determine the duration
 
-Parse the desired validity in hours from the request. Default to 48 hours when unspecified. Reject non-positive values.
+Parse the desired validity in hours from the request. Default to 72 hours when unspecified. Reject non-positive values.
 
 ## Step 3 — Generate the link
 

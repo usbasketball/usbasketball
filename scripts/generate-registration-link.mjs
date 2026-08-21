@@ -28,7 +28,7 @@ if (!secret) {
 }
 
 const hoursInput = Number.parseFloat(process.argv[2]);
-const hoursValid = Number.isFinite(hoursInput) && hoursInput > 0 ? hoursInput : 48;
+const hoursValid = Number.isFinite(hoursInput) && hoursInput > 0 ? hoursInput : 72;
 
 const siteUrl = (
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.usbasketball.nl"
