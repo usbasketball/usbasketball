@@ -42,8 +42,8 @@ export default async function RegisterPage({ params, searchParams }: Props) {
   const formId =
     (locale === "en"
       ? process.env.FOYS_REGISTRATION_FORM_EN_ID
-      : process.env.FOYS_REGISTRATION_FORM_ID) ||
-    process.env.FOYS_REGISTRATION_FORM_ID;
+      : process.env.FOYS_REGISTRATION_FORM_NL_ID) ||
+    process.env.FOYS_REGISTRATION_FORM_NL_ID;
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6">
