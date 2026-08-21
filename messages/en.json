@@ -30,6 +30,10 @@
       "title": "Log in",
       "description": "Log in to your US Basketball member account."
     },
+    "register": {
+      "title": "Member registration",
+      "description": "Registration form for new members of US Basketball."
+    },
     "me": {
       "title": "My account",
       "description": "Your personal member account at US Basketball."
@@ -225,6 +229,12 @@
       "title": "Thanks for your interest!",
       "text": "We hope to let you know within two weeks whether there are spots available in a team that matches your wishes and experience. Please note that this can sometimes take longer, since we are run entirely by volunteers. A copy of your submission has been sent to your email address."
     }
+  },
+  "Register": {
+    "title": "Member registration",
+    "intro": "You've reached the private registration page of US Basketball. Fill in the form below to complete your registration.",
+    "formUnavailable": "The registration form is currently unavailable. Please contact the board at bestuur@usbasketball.nl.",
+    "formError": "The registration form could not be loaded. Please refresh the page or try again later."
   },
   "Login": {
     "title": "Log in",
