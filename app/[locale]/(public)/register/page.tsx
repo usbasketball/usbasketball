@@ -23,7 +23,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   });
 }
 
-export default async function RegisterPage({ searchParams }: Props) {
+export default async function RegisterPage({ params, searchParams }: Props) {
+  const { locale } = await params;
   const sp = await searchParams;
 
   // Defense in depth: the proxy already gates this route, but never rely on
@@ -36,7 +37,13 @@ export default async function RegisterPage({ searchParams }: Props) {
   if (!accessValid) notFound();
 
   const t = await getTranslations("Register");
-  const formId = process.env.FOYS_REGISTRATION_FORM_ID;
+  // Per-locale Foys form (identical fields, NL/EN wording). Falls back to the
+  // NL form when the EN-specific id is not configured.
+  const formId =
+    (locale === "en"
+      ? process.env.FOYS_REGISTRATION_FORM_EN_ID
+      : process.env.FOYS_REGISTRATION_FORM_ID) ||
+    process.env.FOYS_REGISTRATION_FORM_ID;
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6">
