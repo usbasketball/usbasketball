@@ -39,7 +39,7 @@ export default async function RegisterPage({ searchParams }: Props) {
   const formId = process.env.FOYS_REGISTRATION_FORM_ID;
 
   return (
-    <div className="mx-auto max-w-lg px-4 py-16 sm:px-6">
+    <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6">
       <h1 className="font-display text-4xl uppercase tracking-wide text-ink sm:text-5xl">
         {t("title")}
       </h1>
