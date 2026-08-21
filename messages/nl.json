@@ -30,6 +30,10 @@
       "title": "Inloggen",
       "description": "Log in op je US Basketbal-ledenaccount."
     },
+    "register": {
+      "title": "Ledenregistratie",
+      "description": "Registratieformulier voor nieuwe leden van US Basketbal."
+    },
     "me": {
       "title": "Mijn account",
       "description": "Jouw persoonlijke ledenaccount bij US Basketbal."
@@ -225,6 +229,12 @@
       "title": "Bedankt voor je interesse!",
       "text": "Wij hopen je binnen twee weken te kunnen laten weten of er plekken beschikbaar zijn in een team dat aansluit bij jouw wensen en ervaring. Houd er rekening mee dat dit soms wat langer kan duren, omdat ons werk volledig door vrijwilligers wordt gedaan. Een kopie van je aanmelding is naar je e-mailadres gestuurd."
     }
+  },
+  "Register": {
+    "title": "Ledenregistratie",
+    "intro": "Je bent op de privé-registratiepagina van US Basketball gekomen. Vul hieronder het formulier in om je registratie af te ronden.",
+    "formUnavailable": "Het registratieformulier is momenteel niet beschikbaar. Neem contact op met het bestuur via bestuur@usbasketball.nl.",
+    "formError": "Het registratieformulier kon niet worden geladen. Ververs de pagina of probeer het later opnieuw."
   },
   "Login": {
     "title": "Inloggen",
