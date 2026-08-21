@@ -45,7 +45,11 @@ function loadScript(id: string, src: string): Promise<void> {
     );
     script.addEventListener(
       "error",
-      () => reject(new Error(`Failed to load ${src}`)),
+      () => {
+        // Drop the dead element so a later mount can retry the load.
+        script?.remove();
+        reject(new Error(`Failed to load ${src}`));
+      },
       { once: true }
     );
   });
@@ -195,12 +199,12 @@ export function FoysRegistrationForm({ configuration }: { configuration: string 
 
   return (
     <>
-      <link rel="stylesheet" href={`${FOYS_BASE}/chuck-vendors.css`} />
+      <link rel="stylesheet" href={`${FOYS_BASE}/chunk-vendors.css`} />
       <link rel="stylesheet" href={`${FOYS_BASE}/app.css`} />
       <link rel="stylesheet" href={`${FOYS_BASE}/foys-bootstrap.min.css`} />
       <link
         rel="stylesheet"
-        href="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.min.css"
+        href="https://unpkg.com/bootstrap-vue@2.23.1/dist/bootstrap-vue.min.css"
       />
 
       <style dangerouslySetInnerHTML={{ __html: FOYS_FORM_STYLES }} />
