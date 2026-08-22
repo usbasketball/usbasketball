@@ -1,5 +1,6 @@
 "use server";
 
+import * as Sentry from "@sentry/nextjs";
 import { headers } from "next/headers";
 
 import {
@@ -38,6 +39,11 @@ async function verifyTurnstile(token: string): Promise<boolean> {
   const secret = process.env.TURNSTILE_SECRET;
   if (!secret) return true;
   if (!token || token.length > 2048) {
+    Sentry.captureMessage("Turnstile validation failed: missing or malformed token", {
+      level: "warning",
+      tags: { feature: "interest_form_turnstile" },
+      extra: { tokenLength: token.length, tokenPresent: Boolean(token) },
+    });
     return false;
   }
 
@@ -48,7 +54,11 @@ async function verifyTurnstile(token: string): Promise<boolean> {
       .filter(Boolean)
   );
   if (expectedHostnames.size === 0) {
-    console.warn("TURNSTILE_HOSTNAMES is not configured");
+    Sentry.captureMessage("Turnstile validation failed: hostnames not configured", {
+      level: "warning",
+      tags: { feature: "interest_form_turnstile" },
+      extra: { configuredHostnames: process.env.TURNSTILE_HOSTNAMES ?? "" },
+    });
     return false;
   }
 
@@ -66,18 +76,44 @@ async function verifyTurnstile(token: string): Promise<boolean> {
         body,
       }
     );
-    if (!res.ok) return false;
+    if (!res.ok) {
+      Sentry.captureMessage("Turnstile siteverify failed: request failed", {
+        level: "warning",
+        tags: { feature: "interest_form_turnstile" },
+      });
+      return false;
+    }
     result = (await res.json()) as typeof result;
   } catch (error) {
-    console.error("Turnstile siteverify failed", error);
+    Sentry.captureException(error, {
+      tags: { feature: "interest_form_turnstile" },
+      extra: {
+        tokenLength: token.length,
+        configuredHostnames: process.env.TURNSTILE_HOSTNAMES ?? "",
+      },
+    });
     return false;
   }
 
-  return (
+  const isValid =
     result.success === true &&
     result.action === TURNSTILE_ACTION &&
-    expectedHostnames.has(result.hostname ?? "")
-  );
+    expectedHostnames.has(result.hostname ?? "");
+
+  if (!isValid) {
+    Sentry.captureMessage("Turnstile validation failure: Cloudflare response did not match expected values", {
+      level: "warning",
+      tags: { feature: "interest_form_turnstile" },
+      extra: {
+        success: result.success,
+        action: result.action,
+        hostname: result.hostname,
+        expectedHostnames: [...expectedHostnames],
+      },
+    });
+  }
+
+  return isValid;
 }
 
 function isAtLeast18(birthDate: Date): boolean {
@@ -162,7 +198,10 @@ export async function submitInterest(
       },
     });
   } catch (error) {
-    console.error("Failed to save interest submission", error);
+    Sentry.captureException(error, {
+      tags: { feature: "interest_form" },
+      extra: { error: String(error) },
+    });
     return { error: "generic" };
   }
 
@@ -186,7 +225,11 @@ export async function submitInterest(
 
   for (const [index, result] of results.entries()) {
     if (result.status === "rejected") {
-      console.error(`Interest form email ${index} failed`, result.reason);
+      Sentry.captureMessage(`Interest form email ${index} failed`, {
+        level: "error",
+        tags: { feature: "interest_form" },
+        extra: { reason: String(result.reason) },
+      });
     }
   }
 
