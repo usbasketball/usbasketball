@@ -1,5 +1,6 @@
 "use server";
 
+import * as Sentry from "@sentry/nextjs";
 import { headers } from "next/headers";
 
 import {
@@ -38,6 +39,11 @@ async function verifyTurnstile(token: string): Promise<boolean> {
   const secret = process.env.TURNSTILE_SECRET;
   if (!secret) return true;
   if (!token || token.length > 2048) {
+    Sentry.captureMessage("Turnstile validation failed: missing or malformed token", {
+      level: "warning",
+      tags: { feature: "interest_form_turnstile" },
+      extra: { tokenLength: token.length, tokenPresent: Boolean(token) },
+    });
     return false;
   }
 
@@ -48,7 +54,11 @@ async function verifyTurnstile(token: string): Promise<boolean> {
       .filter(Boolean)
   );
   if (expectedHostnames.size === 0) {
-    console.warn("TURNSTILE_HOSTNAMES is not configured");
+    Sentry.captureMessage("Turnstile validation failed: hostnames not configured", {
+      level: "warning",
+      tags: { feature: "interest_form_turnstile" },
+      extra: { configuredHostnames: process.env.TURNSTILE_HOSTNAMES ?? "" },
+    });
     return false;
   }
 
@@ -66,18 +76,45 @@ async function verifyTurnstile(token: string): Promise<boolean> {
         body,
       }
     );
-    if (!res.ok) return false;
+    if (!res.ok) {
+      Sentry.captureMessage("Turnstile siteverify responded with a non-OK status", {
+        level: "warning",
+        tags: { feature: "interest_form_turnstile" },
+        extra: { status: res.status, statusText: res.statusText },
+      });
+      return false;
+    }
     result = (await res.json()) as typeof result;
   } catch (error) {
-    console.error("Turnstile siteverify failed", error);
+    Sentry.captureException(error, {
+      tags: { feature: "interest_form_turnstile" },
+      extra: {
+        tokenLength: token.length,
+        configuredHostnames: process.env.TURNSTILE_HOSTNAMES ?? "",
+      },
+    });
     return false;
   }
 
-  return (
+  const isValid =
     result.success === true &&
     result.action === TURNSTILE_ACTION &&
-    expectedHostnames.has(result.hostname ?? "")
-  );
+    expectedHostnames.has(result.hostname ?? "");
+
+  if (!isValid) {
+    Sentry.captureMessage("Turnstile validation failure: Cloudflare response did not match expected values", {
+      level: "warning",
+      tags: { feature: "interest_form_turnstile" },
+      extra: {
+        success: result.success,
+        action: result.action,
+        hostname: result.hostname,
+        expectedHostnames: [...expectedHostnames],
+      },
+    });
+  }
+
+  return isValid;
 }
 
 function isAtLeast18(birthDate: Date): boolean {

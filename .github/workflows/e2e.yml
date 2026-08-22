@@ -1,0 +1,70 @@
+name: e2e
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  interest-form:
+    name: Interest form e2e
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: usbasketballnl
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd="pg_isready -U postgres -d usbasketballnl"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+
+    env:
+      NODE_ENV: test
+      PLAYWRIGHT_TEST: "1"
+      DATABASE_URL: postgresql://postgres:postgres@127.0.0.1:5432/usbasketballnl?schema=public
+      AUTH_SECRET: test-secret
+      AUTH_URL: http://127.0.0.1:3001
+      NEXT_PUBLIC_SITE_URL: http://127.0.0.1:3001
+      NEXT_PUBLIC_SITE_NAME: US Basketbal
+      NEXT_PUBLIC_CONTACT_EMAIL: bestuur@usbasketball.nl
+      NEXT_PUBLIC_SECRETARIAT_EMAIL: secretaris@usbasketball.nl
+      NEXT_PUBLIC_TC_EMAIL: tc@usbasketball.nl
+      RESEND_API_KEY: test-key
+      EMAIL_FROM: US Basketball <onboarding@resend.dev>
+      NEXT_PUBLIC_TURNSTILE_SITE_KEY: ""
+      TURNSTILE_SECRET: ""
+      TURNSTILE_HOSTNAMES: "127.0.0.1,localhost"
+      PORT: 3001
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Generate Prisma client
+        run: npx prisma generate
+
+      - name: Apply Prisma migrations
+        run: npx prisma migrate deploy
+
+      - name: Install Playwright browser
+        run: npx playwright install --with-deps chromium
+
+      - name: Run Playwright interest-form test
+        run: npm run test:e2e -- --reporter=line

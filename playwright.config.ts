@@ -36,7 +36,7 @@ export default defineConfig({
       PLAYWRIGHT_TEST: "1",
       NEXT_PUBLIC_TURNSTILE_SITE_KEY: "",
       TURNSTILE_SECRET: "",
-      TURNSTILE_HOSTNAMES: "",
+      TURNSTILE_HOSTNAMES: "127.0.0.1,localhost",
     },
   },
 });
