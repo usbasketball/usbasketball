@@ -149,6 +149,10 @@ function wrapper(inner: string): string {
 export async function sendInterestConfirmation(
   data: InterestSubmissionData
 ): Promise<void> {
+  if (process.env.PLAYWRIGHT_TEST === "1" || process.env.NODE_ENV === "test") {
+    return;
+  }
+
   const locale = toLocale(data);
   const isNl = locale === "nl";
 
@@ -182,6 +186,10 @@ export async function sendInterestConfirmation(
 export async function sendInterestNotification(
   data: InterestSubmissionData
 ): Promise<void> {
+  if (process.env.PLAYWRIGHT_TEST === "1" || process.env.NODE_ENV === "test") {
+    return;
+  }
+
   const locale = toLocale(data);
   const isNl = locale === "nl";
 
