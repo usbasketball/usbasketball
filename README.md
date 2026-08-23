@@ -66,6 +66,7 @@ Open [http://localhost:3000](http://localhost:3000). The app is available under 
 | `npm run db:migrate` | Create/apply a development migration |
 | `npm run db:deploy` | Apply pending migrations (production) |
 | `npm run db:studio` | Open Prisma Studio |
+| `npm run generate:registration-link` | Generate a signed, expiring link for the private `/register` page |
 
 ## Project Structure
 
@@ -83,6 +84,7 @@ i18n/                  routing + request (locale detection)
 lib/                   auth0 client, prisma client, contentful client + schedule fetch, server actions, site config, SEO helpers
 messages/              en.json, nl.json
 prisma/                schema.prisma
+scripts/               generate-registration-link.mjs (signed /register links)
 proxy.ts               Auth0 middleware (/auth/*) + next-intl middleware
 next.config.ts         next-intl plugin (+ standalone output when not on Vercel)
 ```
@@ -96,6 +98,26 @@ The app is deployed to Vercel with native Git integration. No Docker setup is re
 Login is handled by Auth0 Universal Login via `@auth0/nextjs-auth0`. The `/auth/login`, `/auth/logout` and `/auth/callback` routes are intercepted by the Auth0 middleware in `proxy.ts`; there are no auth route handlers. Server code reads the session with `auth0.getSession()` from the singleton in `lib/auth.ts`. Login and logout links must be plain `<a>` tags (not next-intl `Link`) so they navigate as full-page redirects.
 
 The only protected page is `/me`, which redirects to `/login` when no session exists. The login page is a gateway that starts the Auth0 flow with a locale-aware `returnTo`.
+
+## Private registration page (/register)
+
+The `/register` page is gated by expiring signed links. `proxy.ts` verifies the `expires`/`token` query parameters with `lib/registration-link.ts`: the token must be a hex HMAC-SHA256 signature of the `expires` timestamp under `REGISTRATION_SECRET`, and the timestamp must not have passed.
+
+Generate a link (defaults to 72 hours when hours is omitted):
+
+```bash
+npm run generate:registration-link -- 72
+```
+
+To point the link at a Vercel preview deployment instead of production (`NEXT_PUBLIC_SITE_URL`):
+
+```bash
+NEXT_PUBLIC_SITE_URL="https://<preview-url>.vercel.app" npm run generate:registration-link -- 72
+```
+
+The script reads `REGISTRATION_SECRET` from `.env.local`; set it there and in Vercel env vars for deployed environments. Treat generated links as bearer tokens — anyone who has one can register until it expires.
+
+In opencode, the `register-link` skill (`.agents/skills/register-link/`) walks an agent through resolving the right environment and generating the link; skills are registered via `.opencode/opencode.json`.
 
 ## Contentful (training schedule)
 
