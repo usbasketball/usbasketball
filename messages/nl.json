@@ -234,7 +234,8 @@
     "title": "Ledenregistratie",
     "intro": "Je bent op de privé-registratiepagina van US Basketball gekomen. Vul hieronder het formulier in om je registratie af te ronden.",
     "formUnavailable": "Het registratieformulier is momenteel niet beschikbaar. Neem contact op met het bestuur via bestuur@usbasketball.nl.",
-    "formError": "Het registratieformulier kon niet worden geladen. Ververs de pagina of probeer het later opnieuw."
+    "formError": "Het registratieformulier kon niet worden geladen. Ververs de pagina of probeer het later opnieuw.",
+    "invalidLink": "Deze registratielink is ongeldig of verlopen. Neem contact op met het bestuur via secretaris@usbasketball.nl voor een nieuwe link."
   },
   "Login": {
     "title": "Inloggen",
