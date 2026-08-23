@@ -234,7 +234,8 @@
     "title": "Member registration",
     "intro": "You've reached the private registration page of US Basketball. Fill in the form below to complete your registration.",
     "formUnavailable": "The registration form is currently unavailable. Please contact the board at bestuur@usbasketball.nl.",
-    "formError": "The registration form could not be loaded. Please refresh the page or try again later."
+    "formError": "The registration form could not be loaded. Please refresh the page or try again later.",
+    "invalidLink": "This registration link is invalid or has expired. Please contact the board at secretaris@usbasketball.nl for a new link."
   },
   "Login": {
     "title": "Log in",
