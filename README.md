@@ -1,6 +1,6 @@
 # US Basketball NL
 
-Website for the US Basketball NL basketball club: public pages (home, about, training schedule, membership, privacy), a member signup form, and a private account page with password change. Fully localized in English and Dutch.
+Website for the US Basketball NL basketball club: public pages (home, about, training schedule, membership, privacy), a member signup form, and a private account page. Fully localized in English and Dutch.
 
 ## Tech Stack
 
@@ -9,7 +9,7 @@ Website for the US Basketball NL basketball club: public pages (home, about, tra
 | Framework | Next.js 16 (App Router) + TypeScript |
 | Styling | Tailwind CSS v4 |
 | i18n | next-intl (locale routing, EN + NL) |
-| Auth | Auth.js v5 (NextAuth) — email + password |
+| Auth | Auth0 (`@auth0/nextjs-auth0`) — Universal Login |
 | DB | PostgreSQL + Prisma ORM (client generated into `lib/generated`) |
 | CMS | Contentful (training schedule content) |
 | Deploy | Vercel (native Git integration) |
@@ -30,11 +30,13 @@ Prerequisites: Node.js 20+ and access to a PostgreSQL database (e.g. Neon).
    cp .env.example .env
    ```
 
-   Then fill in `.env` — at minimum `DATABASE_URL` and `AUTH_SECRET`. Generate a strong auth secret with:
+   Then fill in `.env` — at minimum `DATABASE_URL` and the `AUTH0_*` variables. Generate the session-encryption secret with:
 
    ```bash
-   npx auth secret
+   openssl rand -hex 32
    ```
+
+   In your Auth0 dashboard, create a **Regular Web Application** and register `<APP_BASE_URL>/auth/callback` under Allowed Callback URLs, plus `<APP_BASE_URL>` (and the locale variants `/en`, `/nl` used as logout return paths) under Allowed Logout URLs.
 
 3. Generate the Prisma client and set up the database:
 
@@ -74,17 +76,14 @@ app/
     (private)/me/      account page (requires login)
     layout.tsx         locale-aware root layout (Geist font, header, footer, JSON-LD)
     not-found.tsx
-  api/auth/[...nextauth]/route.ts
   api/revalidate/route.ts   Contentful webhook → revalidate the schedule
   sitemap.ts, robots.ts, llms.txt
-components/            header, footer, locale switcher, forms (signup/login/password), JSON-LD, schedule content
+components/            header, footer, locale switcher, forms (signup), JSON-LD, schedule content
 i18n/                  routing + request (locale detection)
-lib/                   prisma client, contentful client + schedule fetch, server actions, site config, SEO helpers
+lib/                   auth0 client, prisma client, contentful client + schedule fetch, server actions, site config, SEO helpers
 messages/              en.json, nl.json
 prisma/                schema.prisma
-types/                 Auth.js module augmentation (Session type)
-auth.ts, auth.config.ts
-proxy.ts               next-intl middleware
+proxy.ts               Auth0 middleware (/auth/*) + next-intl middleware
 next.config.ts         next-intl plugin (+ standalone output when not on Vercel)
 ```
 
@@ -92,10 +91,16 @@ next.config.ts         next-intl plugin (+ standalone output when not on Vercel)
 
 The app is deployed to Vercel with native Git integration. No Docker setup is required.
 
+## Authentication (Auth0)
+
+Login is handled by Auth0 Universal Login via `@auth0/nextjs-auth0`. The `/auth/login`, `/auth/logout` and `/auth/callback` routes are intercepted by the Auth0 middleware in `proxy.ts`; there are no auth route handlers. Server code reads the session with `auth0.getSession()` from the singleton in `lib/auth.ts`. Login and logout links must be plain `<a>` tags (not next-intl `Link`) so they navigate as full-page redirects.
+
+The only protected page is `/me`, which redirects to `/login` when no session exists. The login page is a gateway that starts the Auth0 flow with a locale-aware `returnTo`.
+
 ## Contentful (training schedule)
 
 The `/schedule` page shows the Wednesday and Friday training schedules, sourced from Contentful so the club can update them without code changes. UI labels are translated via `messages/`; Contentful only stores schedule data (single-language).
 
 ## Environment Variables
 
-See `.env.example` for the full list: `DATABASE_URL`, `AUTH_SECRET`, `AUTH_URL`, `NEXT_PUBLIC_SITE_URL`, `NEXT_PUBLIC_SITE_NAME`, `NEXT_PUBLIC_CONTACT_EMAIL`, `CONTENTFUL_*`.
+See `.env.example` for the full list: `DATABASE_URL`, `AUTH0_*`, `APP_BASE_URL`, `NEXT_PUBLIC_SITE_URL`, `NEXT_PUBLIC_SITE_NAME`, `NEXT_PUBLIC_CONTACT_EMAIL`, `CONTENTFUL_*`.
