@@ -239,41 +239,17 @@
   },
   "Login": {
     "title": "Inloggen",
-    "intro": "Log in met het e-mailadres en wachtwoord waarmee je je hebt ingeschreven.",
-    "email": "E-mailadres",
-    "password": "Wachtwoord",
-    "submit": "Inloggen",
-    "signupLink": "Nog geen lid? Laat hier je interesse achter",
-    "errors": {
-      "invalid_credentials": "Ongeldig e-mailadres of wachtwoord.",
-      "generic": "Er is iets misgegaan. Probeer het opnieuw."
-    }
+    "intro": "Log in veilig in met je account om toegang te krijgen tot het ledengebied.",
+    "signIn": "Inloggen",
+    "signupLink": "Nog geen lid? Laat hier je interesse achter"
   },
   "Me": {
     "title": "Mijn account",
     "welcome": "Welkom, {name}!",
     "profile": {
       "title": "Jouw gegevens",
-      "firstName": "Voornaam",
-      "lastName": "Achternaam",
-      "email": "E-mailadres",
-      "team": "Team",
-      "since": "Lid sinds"
-    },
-    "password": {
-      "title": "Wachtwoord wijzigen",
-      "current": "Huidig wachtwoord",
-      "new": "Nieuw wachtwoord",
-      "confirm": "Bevestig nieuw wachtwoord",
-      "submit": "Wachtwoord wijzigen",
-      "success": "Je wachtwoord is gewijzigd.",
-      "errors": {
-        "not_authenticated": "Je moet eerst inloggen.",
-        "mismatch": "De nieuwe wachtwoorden komen niet overeen.",
-        "too_short": "Je nieuwe wachtwoord moet minimaal 8 tekens lang zijn.",
-        "wrong_current": "Het huidige wachtwoord is onjuist.",
-        "generic": "Er is iets misgegaan. Probeer het opnieuw."
-      }
+      "name": "Naam",
+      "email": "E-mailadres"
     },
     "logout": "Uitloggen"
   },

@@ -21,7 +21,7 @@
 | Framework | Next.js (App Router) + TypeScript |
 | Styling | Tailwind CSS |
 | i18n | next-intl (locale routing + translations) |
-| Auth | Auth.js v5 (NextAuth) — email + password (credentials) |
+| Auth | Auth0 (`@auth0/nextjs-auth0`) — Universal Login |
 | DB | PostgreSQL on Neon (free tier) + Prisma ORM |
 | Email | Resend (optional: welcome/notification emails) |
 | Analytics | GA4 (via `@next/third-parties`) + `@vercel/analytics` (Core Web Vitals) |
@@ -41,15 +41,13 @@
 /privacy             → privacy policy (text-heavy)
 /signup              → registration form
 /login               → sign in
-/me                  → private account page (sign in required): first/last name, change password
+/me                  → private account page (sign in required): profile from the Auth0 session
 ```
 
 ## 4. Data Model (Prisma)
 
-- **User** — `id, email (unique), passwordHash, firstName, lastName, phone, team?, status (PENDING | ACTIVE | FORMER), joinedAt, deregisteredAt`
-- Signup creates a User with a hashed password; login works immediately.
-- **Password change:** `/me` lets the member set a new password — the stored `passwordHash` is re-hashed (bcrypt/argon2) and updated in place; session stays valid.
-- **V1 note (no admin panel):** members auto-activate on signup. The `status` field exists so an admin can be added later without a migration. If you'd rather have an approval step, signups stay PENDING and can't log in until you flip them in the DB — say the word.
+- **InterestSubmission** — interest-form submissions (`id, name, email, birthDate, position, interest, gender, lastLevel?, lastSeason?, background?, locale, createdAt`).
+- **Auth:** member identities live in Auth0; the app keeps no user table. The former `User` model (email + bcrypt password) was removed when auth moved to Auth0 Universal Login. `/me` shows profile data from the Auth0 session (name, email).
 
 ## 5. SEO & GEO Strategy
 
@@ -94,6 +92,6 @@ next.config.ts
 
 1. **Setup** — Next.js + TS + Tailwind + i18n scaffold, Prisma + Neon wired up
 2. **Public pages** — content + design, SEO basics, structured data, llms.txt
-3. **Signup + Auth** — form → DB, Auth.js login/logout, `/me` account page with password change
+3. **Signup + Auth** — form → DB, Auth0 login/logout (Universal Login), `/me` account page
 4. **Tracking** — GA4, Vercel Analytics, consent banner, GEO referral monitoring
 5. **Launch** — deploy to Vercel, connect Search Console, verify GEO signals

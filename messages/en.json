@@ -239,41 +239,17 @@
   },
   "Login": {
     "title": "Log in",
-    "intro": "Log in with the email address and password you used to register.",
-    "email": "Email address",
-    "password": "Password",
-    "submit": "Log in",
-    "signupLink": "Not a member yet? Leave your interest here",
-    "errors": {
-      "invalid_credentials": "Invalid email address or password.",
-      "generic": "Something went wrong. Please try again."
-    }
+    "intro": "Log in securely with your account to access the member area.",
+    "signIn": "Log in",
+    "signupLink": "Not a member yet? Leave your interest here"
   },
   "Me": {
     "title": "My account",
     "welcome": "Welcome, {name}!",
     "profile": {
       "title": "Your details",
-      "firstName": "First name",
-      "lastName": "Last name",
-      "email": "Email address",
-      "team": "Team",
-      "since": "Member since"
-    },
-    "password": {
-      "title": "Change password",
-      "current": "Current password",
-      "new": "New password",
-      "confirm": "Confirm new password",
-      "submit": "Change password",
-      "success": "Your password has been changed.",
-      "errors": {
-        "not_authenticated": "You need to log in first.",
-        "mismatch": "The new passwords do not match.",
-        "too_short": "Your new password must be at least 8 characters long.",
-        "wrong_current": "The current password is incorrect.",
-        "generic": "Something went wrong. Please try again."
-      }
+      "name": "Name",
+      "email": "Email address"
     },
     "logout": "Log out"
   },

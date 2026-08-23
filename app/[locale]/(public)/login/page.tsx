@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { pageMetadata } from "@/lib/seo";
-import { LoginForm } from "@/components/login-form";
+import { buttonClass } from "@/lib/field-styles";
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -33,7 +33,10 @@ export default async function LoginPage({ params }: Props) {
       <p className="mt-4 leading-relaxed text-ink-muted">{t("intro")}</p>
 
       <div className="mt-8 border border-line bg-white p-6">
-        <LoginForm />
+        {/* Auth0 routes must not use next-intl Link (client-side navigation). */}
+        <a href={`/auth/login?returnTo=/${locale}/me`} className={buttonClass}>
+          {t("signIn")}
+        </a>
       </div>
 
       <p className="mt-6 text-center text-sm text-ink-muted">
