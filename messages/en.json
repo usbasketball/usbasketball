@@ -37,6 +37,10 @@
     "me": {
       "title": "My account",
       "description": "Your personal member account at US Basketball."
+    },
+    "tasks": {
+      "title": "Task schedule",
+      "description": "The task schedule of US Basketball."
     }
   },
   "Nav": {
@@ -252,6 +256,10 @@
       "email": "Email address"
     },
     "logout": "Log out"
+  },
+  "Tasks": {
+    "title": "Task schedule",
+    "comingSoon": "This page is coming soon."
   },
   "Training": {
     "title": "Training schedule",

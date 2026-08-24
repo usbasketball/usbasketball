@@ -37,6 +37,10 @@
     "me": {
       "title": "Mijn account",
       "description": "Jouw persoonlijke ledenaccount bij US Basketbal."
+    },
+    "tasks": {
+      "title": "Takenschema",
+      "description": "Het takenschema van US Basketbal."
     }
   },
   "Nav": {
@@ -252,6 +256,10 @@
       "email": "E-mailadres"
     },
     "logout": "Uitloggen"
+  },
+  "Tasks": {
+    "title": "Takenschema",
+    "comingSoon": "Deze pagina is binnenkort beschikbaar."
   },
   "Training": {
     "title": "Trainingsschema",
