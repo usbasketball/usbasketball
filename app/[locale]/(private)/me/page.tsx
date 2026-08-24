@@ -59,7 +59,7 @@ export default async function MePage({ params }: Props) {
       <div className="mt-10">
         {/* Auth0 routes must not use next-intl Link (client-side navigation). */}
         <a
-          href={`/auth/logout?returnTo=/${locale}`}
+          href="/auth/logout"
           className="border border-line px-4 py-2 text-sm font-semibold uppercase tracking-wide text-ink transition-colors hover:bg-paper"
         >
           {t("logout")}

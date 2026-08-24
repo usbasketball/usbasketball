@@ -16,6 +16,11 @@ const nextConfig: NextConfig = {
         destination: "/signup",
         permanent: true,
       },
+      { 
+        source: "/takenschema",
+        destination: "/tasks",
+        permanent: true 
+      },
       {
         source: "/:locale(en|nl)/informatie",
         destination: "/:locale/membership",
@@ -24,6 +29,11 @@ const nextConfig: NextConfig = {
       {
         source: "/:locale(en|nl)/aanmeldformulier",
         destination: "/:locale/signup",
+        permanent: true,
+      },
+      {
+        source: "/:locale(en|nl)/takenschema",
+        destination: "/:locale/tasks",
         permanent: true,
       },
     ];
