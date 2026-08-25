@@ -13,8 +13,8 @@ export async function Header() {
     { href: "/about" as const, label: t("about") },
     { href: "/membership" as const, label: t("membership") },
     { href: "/schedule" as const, label: t("schedule") },
-    ...(session ? [{ href: "/tasks", label: t("tasks") }] : []),
-    ...(session ? [{ href: "/alv", label: t("alv") }] : []),
+    ...(isLoggedIn ? [{ href: "/tasks", label: t("tasks") }] : []),
+    ...(isLoggedIn ? [{ href: "/alv", label: t("alv") }] : []),
     { href: "/faq" as const, label: t("faq") },
   ];
 

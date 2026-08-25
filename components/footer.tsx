@@ -2,6 +2,7 @@ import Image from "next/image";
 import { getLocale, getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { getSiteName, siteConfig } from "@/lib/site";
+import { auth0, authEnabled } from "@/lib/auth";
 
 function InstagramIcon() {
   return (
@@ -42,13 +43,18 @@ export async function Footer() {
   const siteName = getSiteName(locale);
   const year = new Date().getFullYear();
 
+  const session = authEnabled() ? await auth0.getSession() : null;
+  const isLoggedIn = Boolean(session);
+
   const navLinks = [
     { href: "/about" as const, label: nav("about") },
     { href: "/membership" as const, label: nav("membership") },
     { href: "/schedule" as const, label: nav("schedule") },
     { href: "/faq" as const, label: nav("faq") },
-    { href: "/signup" as const, label: nav("signup") },
-    { href: "/me" as const, label: nav("account") },
+    ...(isLoggedIn ? [] : [{ href: "/signup" as const, label: nav("signup") }]),
+    ...(isLoggedIn ? [{ href: "/tasks", label: t("tasks") }] : []),
+    ...(isLoggedIn ? [{ href: "/alv", label: t("alv") }] : []),
+    ...(isLoggedIn ? [{ href: "/me", label: nav("account") }] : []),
   ];
 
   return (
