@@ -9,9 +9,10 @@ import { getSiteName } from "@/lib/site";
 
 type MobileHeaderProps = {
   items: Array<{ href: string; label: string }>;
+  isLoggedIn: boolean;
 };
 
-export function MobileHeader({ items }: MobileHeaderProps) {
+export function MobileHeader({ items, isLoggedIn }: MobileHeaderProps) {
   const locale = useLocale();
   const siteName = getSiteName(locale);
   const [hidden, setHidden] = useState(false);
@@ -62,7 +63,7 @@ export function MobileHeader({ items }: MobileHeaderProps) {
             priority
           />
         </Link>
-        <MobileNav items={items} open={menuOpen} onOpenChange={setMenuOpen} />
+        <MobileNav items={items} open={menuOpen} onOpenChange={setMenuOpen} isLoggedIn={isLoggedIn} />
       </div>
     </header>
   );

@@ -1,9 +1,13 @@
 import { getTranslations } from "next-intl/server";
 import { MobileHeader } from "@/components/mobile-header";
 import { LeftNav } from "@/components/left-nav";
+import { auth0, authEnabled } from "@/lib/auth";
 
 export async function Header() {
   const t = await getTranslations("Nav");
+
+  const session = authEnabled() ? await auth0.getSession() : null;
+  const isLoggedIn = Boolean(session);
 
   const items = [
     { href: "/about" as const, label: t("about") },
@@ -15,9 +19,9 @@ export async function Header() {
   return (
     <>
       {/* Mobile & tablet: top bar with hamburger, hides on scroll down */}
-      <MobileHeader items={items} />
+      <MobileHeader items={items} isLoggedIn={isLoggedIn} />
       {/* Desktop: collapsed left nav */}
-      <LeftNav />
+      <LeftNav isLoggedIn={isLoggedIn} />
     </>
   );
 }

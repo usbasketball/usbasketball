@@ -48,7 +48,7 @@ export async function Footer() {
     { href: "/schedule" as const, label: nav("schedule") },
     { href: "/faq" as const, label: nav("faq") },
     { href: "/signup" as const, label: nav("signup") },
-    { href: "/login" as const, label: nav("account") },
+    { href: "/me" as const, label: nav("account") },
   ];
 
   return (

@@ -35,7 +35,7 @@
       "description": "Registratieformulier voor nieuwe leden van US Basketbal."
     },
     "me": {
-      "title": "Mijn account",
+      "title": "Mijn US",
       "description": "Jouw persoonlijke ledenaccount bij US Basketbal."
     },
     "tasks": {
@@ -51,7 +51,7 @@
     "faq": "Veelgestelde vragen",
     "privacy": "Privacy",
     "signup": "Word lid",
-    "account": "Mijn account",
+    "account": "Mijn US",
     "logout": "Uitloggen",
     "login": "Inloggen",
     "openMenu": "Menu openen",
@@ -248,7 +248,7 @@
     "signupLink": "Nog geen lid? Laat hier je interesse achter"
   },
   "Me": {
-    "title": "Mijn account",
+    "title": "Mijn US",
     "welcome": "Welkom, {name}!",
     "profile": {
       "title": "Jouw gegevens",
