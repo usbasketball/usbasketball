@@ -259,7 +259,8 @@
     "profile": {
       "title": "Your details",
       "name": "Name",
-      "email": "Email address"
+      "email": "Email address",
+      "nbbNumber": "NBB number"
     },
     "logout": "Log out"
   },

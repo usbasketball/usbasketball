@@ -47,7 +47,9 @@ if (!FOYS_API_KEY) {
 }
 
 const FOYS_API = "https://api.foys.io/foys/api/v1/management/people";
-const PAGE_SIZE = 100;
+// NOTE: Foys API ignores the `skip` parameter, so pagination doesn't work.
+// Fetch all members in a single request.
+const PAGE_SIZE = 500;
 
 async function fetchAllFoysMembers() {
   const allMembers = [];
@@ -181,6 +183,7 @@ async function main() {
       email,
       app_metadata: {
         nbb_number: nbbNumber,
+        foys_user_id: member.guid,
       },
     };
 
