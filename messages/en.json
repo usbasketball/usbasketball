@@ -35,7 +35,7 @@
       "description": "Registration form for new members of US Basketball."
     },
     "me": {
-      "title": "My account",
+      "title": "My US",
       "description": "Your personal member account at US Basketball."
     },
     "tasks": {
@@ -51,7 +51,7 @@
     "faq": "FAQ",
     "privacy": "Privacy",
     "signup": "Join",
-    "account": "My account",
+    "account": "My US",
     "logout": "Log out",
     "login": "Log in",
     "openMenu": "Open menu",
@@ -248,7 +248,7 @@
     "signupLink": "Not a member yet? Leave your interest here"
   },
   "Me": {
-    "title": "My account",
+    "title": "My US",
     "welcome": "Welcome, {name}!",
     "profile": {
       "title": "Your details",

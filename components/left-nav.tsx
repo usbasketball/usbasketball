@@ -40,7 +40,7 @@ function CloseIcon() {
   );
 }
 
-export function LeftNav() {
+export function LeftNav({ isLoggedIn }: { isLoggedIn: boolean }) {
   const t = useTranslations("Nav");
   const locale = useLocale();
   const siteName = getSiteName(locale);
@@ -114,22 +114,42 @@ export function LeftNav() {
             </nav>
             <div className="space-y-5 border-t border-white/10 px-5 py-5">
               <div className="flex items-center justify-between gap-2">
-                <Link
-                  href="/login"
-                  onClick={() => setOpen(false)}
-                  className="text-sm font-semibold uppercase tracking-wide text-white/70 transition-colors hover:text-white"
-                >
-                  {t("login")}
-                </Link>
+                {isLoggedIn ? (
+                  <Link
+                    href="/me"
+                    onClick={() => setOpen(false)}
+                    className="text-sm font-semibold uppercase tracking-wide text-white/70 transition-colors hover:text-white"
+                  >
+                    {t("account")}
+                  </Link>
+                ) : (
+                  <a
+                    href="/auth/login"
+                    onClick={() => setOpen(false)}
+                    className="text-sm font-semibold uppercase tracking-wide text-white/70 transition-colors hover:text-white"
+                  >
+                    {t("login")}
+                  </a>
+                )}
                 <LocaleSwitcher variant="dark" />
               </div>
-              <Link
-                href="/signup"
-                onClick={() => setOpen(false)}
-                className="block bg-white px-5 py-3 text-center text-sm font-semibold uppercase tracking-wide text-ink transition-colors hover:bg-ink hover:text-white"
-              >
-                {t("signup")}
-              </Link>
+              {isLoggedIn ? (
+                <a
+                  href="/auth/logout"
+                  onClick={() => setOpen(false)}
+                  className="block bg-white px-5 py-3 text-center text-sm font-semibold uppercase tracking-wide text-ink transition-colors hover:bg-ink hover:text-white"
+                >
+                  {t("logout")}
+                </a>
+              ) : (
+                <Link
+                  href="/signup"
+                  onClick={() => setOpen(false)}
+                  className="block bg-white px-5 py-3 text-center text-sm font-semibold uppercase tracking-wide text-ink transition-colors hover:bg-ink hover:text-white"
+                >
+                  {t("signup")}
+                </Link>
+              )}
             </div>
           </>
         ) : (

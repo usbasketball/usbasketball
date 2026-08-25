@@ -9,6 +9,7 @@ type MobileNavProps = {
   items: Array<{ href: string; label: string }>;
   open: boolean;
   onOpenChange: (open: boolean) => void;
+  isLoggedIn: boolean;
 };
 
 function MenuIcon() {
@@ -43,7 +44,7 @@ function CloseIcon() {
   );
 }
 
-export function MobileNav({ items, open, onOpenChange }: MobileNavProps) {
+export function MobileNav({ items, open, onOpenChange, isLoggedIn }: MobileNavProps) {
   const t = useTranslations("Nav");
 
   return (
@@ -81,23 +82,43 @@ export function MobileNav({ items, open, onOpenChange }: MobileNavProps) {
           </nav>
 
           <div className="mt-6 flex items-center justify-between gap-4">
-            <Link
-              href="/login"
-              onClick={() => onOpenChange(false)}
-              className="text-sm font-semibold uppercase tracking-wide text-white/70 transition-colors hover:text-white"
-            >
-              {t("login")}
-            </Link>
+            {isLoggedIn ? (
+              <Link
+                href="/me"
+                onClick={() => onOpenChange(false)}
+                className="text-sm font-semibold uppercase tracking-wide text-white/70 transition-colors hover:text-white"
+              >
+                {t("account")}
+              </Link>
+            ) : (
+              <a
+                href="/auth/login"
+                onClick={() => onOpenChange(false)}
+                className="text-sm font-semibold uppercase tracking-wide text-white/70 transition-colors hover:text-white"
+              >
+                {t("login")}
+              </a>
+            )}
             <LocaleSwitcher variant="dark" />
           </div>
 
-          <Link
-            href="/signup"
-            onClick={() => onOpenChange(false)}
-            className="mt-4 inline-flex w-full items-center justify-center bg-white px-5 py-3 text-sm font-semibold uppercase tracking-wide text-ink transition-colors hover:bg-ink hover:text-white"
-          >
-            {t("signup")}
-          </Link>
+          {isLoggedIn ? (
+            <a
+              href="/auth/logout"
+              onClick={() => onOpenChange(false)}
+              className="mt-4 inline-flex w-full items-center justify-center bg-white px-5 py-3 text-sm font-semibold uppercase tracking-wide text-ink transition-colors hover:bg-ink hover:text-white"
+            >
+              {t("logout")}
+            </a>
+          ) : (
+            <Link
+              href="/signup"
+              onClick={() => onOpenChange(false)}
+              className="mt-4 inline-flex w-full items-center justify-center bg-white px-5 py-3 text-sm font-semibold uppercase tracking-wide text-ink transition-colors hover:bg-ink hover:text-white"
+            >
+              {t("signup")}
+            </Link>
+          )}
         </div>
       </div>
     </div>
