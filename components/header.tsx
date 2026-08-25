@@ -13,6 +13,8 @@ export async function Header() {
     { href: "/about" as const, label: t("about") },
     { href: "/membership" as const, label: t("membership") },
     { href: "/schedule" as const, label: t("schedule") },
+    ...(session ? [{ href: "/tasks", label: t("tasks") }] : []),
+    ...(session ? [{ href: "/alv", label: t("alv") }] : []),
     { href: "/faq" as const, label: t("faq") },
   ];
 
@@ -21,7 +23,7 @@ export async function Header() {
       {/* Mobile & tablet: top bar with hamburger, hides on scroll down */}
       <MobileHeader items={items} isLoggedIn={isLoggedIn} />
       {/* Desktop: collapsed left nav */}
-      <LeftNav isLoggedIn={isLoggedIn} />
+      <LeftNav items={items} isLoggedIn={isLoggedIn} />
     </>
   );
 }

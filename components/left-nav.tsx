@@ -40,18 +40,16 @@ function CloseIcon() {
   );
 }
 
-export function LeftNav({ isLoggedIn }: { isLoggedIn: boolean }) {
+type LeftNavProps = {
+  items: Array<{ href: string; label: string }>;
+  isLoggedIn: boolean;
+};
+
+export function LeftNav({ items, isLoggedIn }: LeftNavProps) {
   const t = useTranslations("Nav");
   const locale = useLocale();
   const siteName = getSiteName(locale);
   const [open, setOpen] = useState(false);
-
-  const items = [
-    { href: "/about", label: t("about") },
-    { href: "/membership", label: t("membership") },
-    { href: "/schedule", label: t("schedule") },
-    { href: "/faq", label: t("faq") },
-  ];
 
   return (
     <>
