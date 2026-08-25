@@ -52,8 +52,8 @@ export async function Footer() {
     { href: "/schedule" as const, label: nav("schedule") },
     { href: "/faq" as const, label: nav("faq") },
     ...(isLoggedIn ? [] : [{ href: "/signup" as const, label: nav("signup") }]),
-    ...(isLoggedIn ? [{ href: "/tasks", label: t("tasks") }] : []),
-    ...(isLoggedIn ? [{ href: "/alv", label: t("alv") }] : []),
+    ...(isLoggedIn ? [{ href: "/tasks", label: nav("tasks") }] : []),
+    ...(isLoggedIn ? [{ href: "/alv", label: nav("alv") }] : []),
     ...(isLoggedIn ? [{ href: "/me", label: nav("account") }] : []),
   ];
 
