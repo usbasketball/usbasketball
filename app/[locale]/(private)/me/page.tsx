@@ -53,6 +53,12 @@ export default async function MePage({ params }: Props) {
             <dt className="font-medium text-ink">{t("profile.email")}</dt>
             <dd className="text-ink-muted">{user.email ?? "-"}</dd>
           </div>
+          {"nbb_number" in user ? (
+            <div className="grid grid-cols-2 gap-4 px-6 py-4">
+              <dt className="font-medium text-ink">{t("profile.nbbNumber")}</dt>
+              <dd className="text-ink-muted">{String(user.nbb_number)}</dd>
+            </div>
+          ) : null}
         </dl>
       </section>
 
