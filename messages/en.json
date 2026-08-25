@@ -38,6 +38,10 @@
       "title": "My US",
       "description": "Your personal member account at US Basketball."
     },
+    "alv": {
+      "title": "ALV notes",
+      "description": "The minutes of former general members' meetings (ALV) of US Basketball, for members."
+    },
     "tasks": {
       "title": "Task schedule",
       "description": "The task schedule of US Basketball."
@@ -48,6 +52,7 @@
     "about": "About",
     "membership": "Membership",
     "schedule": "Training schedule",
+    "alv": "ALV notes",
     "faq": "FAQ",
     "privacy": "Privacy",
     "signup": "Join",
@@ -256,6 +261,13 @@
       "email": "Email address"
     },
     "logout": "Log out"
+  },
+  "AlvNotes": {
+    "title": "GA notes",
+    "intro": "An overview of the minutes of past General Assembly (GA) meetings.",
+    "empty": "No GA notes are available yet. Please check back later.",
+    "unknownYear": "Unknown year",
+    "openDocument": "Open PDF"
   },
   "Tasks": {
     "title": "Task schedule",
