@@ -183,6 +183,7 @@ async function main() {
       email,
       app_metadata: {
         nbb_number: nbbNumber,
+        foys_user_id: member.guid,
       },
     };
 
