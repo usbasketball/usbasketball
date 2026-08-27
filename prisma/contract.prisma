@@ -1,0 +1,139 @@
+enum TeamType {
+  VSE1
+  VSE2
+  VSE3
+  VSE4
+  VSE5
+  VSE6
+  MSE1
+  MSE2
+  MSE3
+  MSE4
+  MSE5
+  MSE6
+  V3x3
+}
+
+enum Discipline {
+  DISCIPLINE_5x5
+  DISCIPLINE_3x3
+}
+
+enum FieldType {
+  CENTER_COURT
+  VELD_1
+  VELD_2
+  VELD_3
+}
+
+enum MatchStatus {
+  CANCELLED
+  FINAL
+  PLANNED
+  WITHDRAWN
+}
+
+enum ClubMembershipType {
+  COMPETITION
+  RECREATIONAL
+}
+
+model CompetitionTeam {
+  id          String     @id @default(uuid())
+  foysTeamId  Int        @unique @map("foys_team_id")
+  name        String?
+  season      String
+  teamType    TeamType   @map("team_type")
+  discipline  Discipline @default(DISCIPLINE_5x5)
+
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   temporal.updatedAt() @map("updated_at")
+
+  @@index([teamType])
+  @@index([season])
+  @@map("competition_teams")
+}
+
+model InterestSubmission {
+  id          String   @id @default(uuid())
+  name        String
+  email       String
+  birthDate   DateTime @map("birth_date")
+  position    String
+  interest    String
+  gender      String
+  lastLevel   String?  @map("last_level")
+  lastSeason  String?  @map("last_season")
+  background  String?
+  locale      String   @default("nl")
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  @@index([email])
+  @@map("interest_submissions")
+}
+
+model Match {
+  id                  String   @id @default(uuid())
+  foysMatchId         Int      @unique @map("foys_match_id")
+  status              MatchStatus
+  date                DateTime
+  startTime           String?  @map("start_time")
+  isFriendly          Boolean  @default(false) @map("is_friendly")
+  homeScore           Int?     @map("home_score")
+  awayScore           Int?     @map("away_score")
+  homeTeamFoysId      Int      @map("home_team_foys_id")
+  awayTeamFoysId      Int      @map("away_team_foys_id")
+  awayTeamName        String?  @map("away_team_name")
+  awayOrganisationId  String?  @map("away_organisation_id")
+  awayOrganisationName String? @map("away_organisation_name")
+  competitionId       Int?     @map("competition_id")
+  competitionTypeName String?  @map("competition_type_name")
+  field               FieldType? 
+
+  createdAt           DateTime @default(now()) @map("created_at")
+  updatedAt           temporal.updatedAt() @map("updated_at")
+
+  @@index([homeTeamFoysId])
+  @@index([date])
+  @@index([status])
+  @@map("matches")
+}
+
+model User {
+  id                String  @id @default(uuid())
+  auth0Sub          String? @unique @map("auth0_sub")
+  email             String  @unique
+  firstName         String? @map("first_name")
+  lastNamePrefix    String? @map("last_name_prefix")
+  lastName          String? @map("last_name")
+  nbbNumber         String? @unique @map("nbb_number")
+  foysUserId        String? @unique @map("foys_user_id")
+  refereeLevel      String? @map("referee_level")
+  memberSince       DateTime? @map("member_since")
+
+  memberships       ClubMembership[]
+
+  createdAt         DateTime @default(now()) @map("created_at")
+  updatedAt         temporal.updatedAt() @map("updated_at")
+
+  @@map("users")
+}
+
+model ClubMembership {
+  id              String          @id @default(uuid())
+  userId          String          @map("user_id")
+  season          String
+  primaryTeam     TeamType?       @map("primary_team")
+  registeredTeam  TeamType?       @map("registered_team")
+  membershipType  ClubMembershipType  @map("membership_type")
+  cancelledAt  DateTime?       @map("cancelled_at")
+
+  user            User            @relation(fields: [userId], references: [id])
+
+  createdAt       DateTime        @default(now()) @map("created_at")
+  updatedAt       temporal.updatedAt() @map("updated_at")
+
+  @@unique([userId, season])
+  @@index([season])
+  @@map("club_memberships")
+}

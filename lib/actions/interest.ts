@@ -7,7 +7,7 @@ import {
   sendInterestConfirmation,
   sendInterestNotification,
 } from "@/lib/email";
-import { prisma } from "@/lib/prisma";
+import { db } from "@/lib/prisma";
 
 export type ActionState = {
   error?: string;
@@ -183,19 +183,17 @@ export async function submitInterest(
 
   let submission;
   try {
-    submission = await prisma.interestSubmission.create({
-      data: {
-        name,
-        email,
-        birthDate: birth,
-        position,
-        interest,
-        gender,
-        lastLevel,
-        lastSeason,
-        background,
-        locale,
-      },
+    submission = await db.orm.public.InterestSubmission.create({
+      name,
+      email,
+      birthDate: birth,
+      position,
+      interest,
+      gender,
+      lastLevel,
+      lastSeason,
+      background,
+      locale,
     });
   } catch (error) {
     Sentry.captureException(error, {

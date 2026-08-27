@@ -1,20 +1,18 @@
-import { PrismaClient } from "@/lib/generated/prisma/client";
-import { PrismaPg } from "@prisma/adapter-pg";
+import postgres from "@prisma/orm-postgres/runtime";
+import type { Contract } from "@/prisma/contract";
+import contractJson from "@/prisma/contract.json" with { type: "json" };
 
-function createPrismaClient() {
-  const connectionString =
-    process.env.DATABASE_URL ??
-    "postgresql://user:password@localhost:5432/usbasketballnl?schema=public";
-
-  return new PrismaClient({ adapter: new PrismaPg(connectionString) });
-}
+type Db = ReturnType<typeof postgres<Contract>>;
 
 const globalForPrisma = globalThis as unknown as {
-  prisma?: ReturnType<typeof createPrismaClient>;
+  db?: Db;
 };
 
-export const prisma = globalForPrisma.prisma ?? createPrismaClient();
+export const db = globalForPrisma.db ?? postgres<Contract>({
+  contractJson,
+  url: process.env.DATABASE_URL,
+});
 
 if (process.env.NODE_ENV !== "production") {
-  globalForPrisma.prisma = prisma;
+  globalForPrisma.db = db;
 }
