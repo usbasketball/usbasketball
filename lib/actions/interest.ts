@@ -116,14 +116,10 @@ async function verifyTurnstile(token: string): Promise<boolean> {
   return isValid;
 }
 
-function isAtLeast18(birthDate: Date): boolean {
-  const now = new Date();
-  const cutoff = new Date(
-    now.getFullYear() - 18,
-    now.getMonth(),
-    now.getDate()
-  );
-  return birthDate <= cutoff;
+function isAtLeast18(birthDate: Temporal.PlainDate): boolean {
+  const today = Temporal.Now.plainDateISO();
+  const cutoff = today.add({ years: -18 });
+  return Temporal.PlainDate.compare(birthDate, cutoff) <= 0;
 }
 
 export async function submitInterest(
@@ -159,10 +155,7 @@ export async function submitInterest(
   if (!EMAIL_REGEX.test(email)) {
     return { error: "invalid_email" };
   }
-  const birth = new Date(`${birthDate}T00:00:00`);
-  if (Number.isNaN(birth.getTime())) {
-    return { error: "invalid_birth_date" };
-  }
+  const birth = Temporal.PlainDate.from(birthDate);
   if (!isAtLeast18(birth)) {
     return { error: "underage" };
   }
@@ -186,7 +179,7 @@ export async function submitInterest(
     submission = await db.orm.public.InterestSubmission.create({
       name,
       email,
-      birthDate: birth,
+      birthDate: Temporal.PlainDateTime.from(`${birthDate}T00:00:00`),
       position,
       interest,
       gender,

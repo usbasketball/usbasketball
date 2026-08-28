@@ -46,7 +46,7 @@ model CompetitionTeam {
   teamType    TeamType   @map("team_type")
   discipline  Discipline @default(DISCIPLINE_5x5)
 
-  createdAt   DateTime @default(now()) @map("created_at")
+  createdAt   Timestamp @default(now()) @map("created_at")
   updatedAt   temporal.updatedAt() @map("updated_at")
 
   @@index([teamType])
@@ -58,7 +58,7 @@ model InterestSubmission {
   id          String   @id @default(uuid())
   name        String
   email       String
-  birthDate   DateTime @map("birth_date")
+  birthDate   Timestamp @map("birth_date")
   position    String
   interest    String
   gender      String
@@ -66,7 +66,7 @@ model InterestSubmission {
   lastSeason  String?  @map("last_season")
   background  String?
   locale      String   @default("nl")
-  createdAt   DateTime @default(now()) @map("created_at")
+  createdAt   Timestamp @default(now()) @map("created_at")
 
   @@index([email])
   @@map("interest_submissions")
@@ -76,7 +76,7 @@ model Match {
   id                  String   @id @default(uuid())
   foysMatchId         Int      @unique @map("foys_match_id")
   status              MatchStatus
-  date                DateTime
+  date                Timestamp
   startTime           String?  @map("start_time")
   isFriendly          Boolean  @default(false) @map("is_friendly")
   homeScore           Int?     @map("home_score")
@@ -90,7 +90,7 @@ model Match {
   competitionTypeName String?  @map("competition_type_name")
   field               FieldType? 
 
-  createdAt           DateTime @default(now()) @map("created_at")
+  createdAt           Timestamp @default(now()) @map("created_at")
   updatedAt           temporal.updatedAt() @map("updated_at")
 
   @@index([homeTeamFoysId])
@@ -109,11 +109,11 @@ model User {
   nbbNumber         String? @unique @map("nbb_number")
   foysUserId        String? @unique @map("foys_user_id")
   refereeLevel      String? @map("referee_level")
-  memberSince       DateTime? @map("member_since")
+  memberSince       Timestamp? @map("member_since")
 
   memberships       ClubMembership[]
 
-  createdAt         DateTime @default(now()) @map("created_at")
+  createdAt         Timestamp @default(now()) @map("created_at")
   updatedAt         temporal.updatedAt() @map("updated_at")
 
   @@map("users")
@@ -126,11 +126,11 @@ model ClubMembership {
   primaryTeam     TeamType?       @map("primary_team")
   registeredTeam  TeamType?       @map("registered_team")
   membershipType  ClubMembershipType  @map("membership_type")
-  cancelledAt  DateTime?       @map("cancelled_at")
+  cancelledAt  Timestamp?       @map("cancelled_at")
 
   user            User            @relation(fields: [userId], references: [id])
 
-  createdAt       DateTime        @default(now()) @map("created_at")
+  createdAt       Timestamp        @default(now()) @map("created_at")
   updatedAt       temporal.updatedAt() @map("updated_at")
 
   @@unique([userId, season])

@@ -16,7 +16,7 @@ function getResend(): Resend {
 export type InterestSubmissionData = {
   name: string;
   email: string;
-  birthDate: Date;
+  birthDate: Temporal.PlainDateTime;
   position: string;
   interest: string;
   gender: string;
