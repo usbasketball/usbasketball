@@ -49,6 +49,10 @@
     "confidentialCounsellor": {
       "title": "Confidential counsellors",
       "description": "Meet the confidential counsellors of US Basketball and find out how to get in touch with them."
+    },
+    "committees": {
+      "title": "Board & committees",
+      "description": "Meet the board and committees of US Basketball and find out what each role does."
     }
   },
   "Nav": {
@@ -60,6 +64,7 @@
     "alv": "GA notes",
     "faq": "FAQ",
     "confidentialCounsellor": "Confidential counsellor",
+    "committees": "Board & committees",
     "privacy": "Privacy",
     "signup": "Join",
     "account": "My US",
@@ -92,6 +97,8 @@
     "intro": "Since 1951 U.S. Basketball has been one of the basketball clubs in Amsterdam. Our motto is \"if you can't beat us, join US\". Consider yourself warned: U.S. will feel like an extra family! After trainings and matches you'll find many members in the clubhouse for the third half, or in the stands cheering on the other teams. A wonderful mix of competition and cosiness where everyone feels at home.",
     "options": {
       "cta": "See membership fees",
+      "committeesCta": "Meet the board & committees",
+      "committeesIntro": "The club is run by a dedicated board and committees of volunteers. Curious about who does what and how you can help out?",
       "competition": {
         "title": "Competition teams",
         "intro": "All competition teams train 75 minutes on Wednesday evening; some teams also train on Friday evening. Home games are played on Sundays at the Amstelcampushal.",
@@ -298,6 +305,65 @@
     "emailLabel": "Email",
     "emailPlaceholder": "TBD - confidential counsellor email",
     "contact": "Contact"
+  },
+  "Committees": {
+    "title": "Board & committees",
+    "intro": "US Basketball is run by volunteers. Meet the board and the committees that keep the club running — and find out what each role involves.",
+    "roles": {
+      "board": {
+        "name": "Board",
+        "description": "Oversees the overall management, leadership, and operations of the club."
+      },
+      "coaches": {
+        "name": "Coaches & Trainers",
+        "description": "Responsible for leading team practices, player development, and coaching games."
+      },
+      "omni": {
+        "name": "OMNI",
+        "description": "Represents U.S. Basketball at the broader U.S. OMNI association level."
+      },
+      "borrel": {
+        "name": "Borrel Committee",
+        "description": "Organizes social drinks, gatherings, and events for members."
+      },
+      "trustPerson": {
+        "name": "Trust Person (Vertrouwenspersoon)",
+        "description": "Serves as a confidential point of contact for members regarding safety, well-being, or interpersonal issues."
+      },
+      "tc": {
+        "name": "Technical Committee (TC)",
+        "description": "Organizes incoming talents, team compositions, player placements, and sports-technical matters."
+      },
+      "sponsor": {
+        "name": "Sponsor Committee",
+        "description": "Handles sponsorship relations, fundraising, and partner opportunities."
+      },
+      "socials": {
+        "name": "Socials",
+        "description": "Manages social media channels, promotions, and public updates for the club."
+      },
+      "refereeCourse": {
+        "name": "Referee Course",
+        "description": "Coordinates referee training, certification, and rule workshops."
+      },
+      "kasco": {
+        "name": "KASCO (Kascommissie)",
+        "description": "Audit committee that checks the financial health and bookkeeping of U.S. Basketball."
+      },
+      "omni5kamp": {
+        "name": "OMNI 5-Kamp",
+        "description": "Coordinates involvement and activities for the annual multi-sport OMNI 5-Kamp tournament."
+      },
+      "zaaldienst": {
+        "name": "Zaaldienst",
+        "description": "Manages game-day gym duties, hall supervision, and court operations."
+      },
+      "itus": {
+        "name": "ITUS Committee",
+        "description": "Organizes the annual ITUS tournament."
+      }
+    },
+    "apply": "If you are interested in joining any of these roles or committees, you can apply by emailing <email>bestuur@usbasketball.nl</email>."
   },
   "Training": {
     "title": "Training schedule",

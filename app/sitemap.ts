@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 import { routing } from "@/i18n/routing";
 import { siteConfig } from "@/lib/site";
 
-const pathnames = ["", "/about", "/schedule", "/membership", "/faq", "/privacy", "/signup"];
+const pathnames = ["", "/about", "/committees", "/schedule", "/membership", "/faq", "/privacy", "/signup", "/confidential-counsellor"];
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const entries: MetadataRoute.Sitemap = [];

@@ -49,6 +49,10 @@
     "confidentialCounsellor": {
       "title": "Vertrouwenspersonen",
       "description": "Maak kennis met de vertrouwenspersonen van US Basketball en lees hoe je contact met hen opneemt."
+    },
+    "committees": {
+      "title": "Bestuur & commissies",
+      "description": "Maak kennis met het bestuur en de commissies van US Basketball en ontdek wat elke rol inhoudt."
     }
   },
   "Nav": {
@@ -60,6 +64,7 @@
     "alv": "ALV-notulen",
     "faq": "Veelgestelde vragen",
     "confidentialCounsellor": "Vertrouwenspersoon",
+    "committees": "Bestuur & commissies",
     "privacy": "Privacy",
     "signup": "Word lid",
     "account": "Mijn US",
@@ -92,6 +97,8 @@
     "intro": "Sinds 1951 is U.S. Basketball een van de basketbalclubs in Amsterdam. Ons motto is \"if you can't beat us, join US\". Wees gewaarschuwd: U.S. zal voelen als een extra familie! Na trainingen en wedstrijden vind je veel leden in de kantine voor de derde helft, of op de tribune om de andere teams aan te moedigen. Een heerlijke mix tussen competitie en gezelligheid waar iedereen zich op zijn gemak voelt.",
     "options": {
       "cta": "Bekijk de contributie",
+      "committeesCta": "Maak kennis met het bestuur & commissies",
+      "committeesIntro": "De club wordt gerund door een toegewijd bestuur en commissies van vrijwilligers. Benieuwd wie wat doet en hoe jij kunt helpen?",
       "competition": {
         "title": "Competitieteams",
         "intro": "Alle competitiespelende teams trainen op woensdagavond 75 minuten; sommige teams trainen ook op vrijdagavond. Thuiswedstrijden spelen we op zondag in de Amstelcampushal.",
@@ -298,6 +305,65 @@
     "emailLabel": "E-mail",
     "emailPlaceholder": "Nog in te vullen - e-mail vertrouwenspersoon",
     "contact": "Contact"
+  },
+  "Committees": {
+    "title": "Bestuur & commissies",
+    "intro": "US Basketball wordt gerund door vrijwilligers. Maak kennis met het bestuur en de commissies die de club draaiende houden — en ontdek wat elke rol inhoudt.",
+    "roles": {
+      "board": {
+        "name": "Bestuur",
+        "description": "Houdt toezicht op het algemene beheer, de leiding en de dagelijkse gang van zaken van de club."
+      },
+      "coaches": {
+        "name": "Coaches & Trainers",
+        "description": "Verantwoordelijk voor het leiden van teamtrainingen, de ontwikkeling van spelers en het coachen van wedstrijden."
+      },
+      "omni": {
+        "name": "OMNI",
+        "description": "Vertegenwoordigt U.S. Basketball op het niveau van de bredere U.S. OMNI-vereniging."
+      },
+      "borrel": {
+        "name": "Borrelcommissie",
+        "description": "Organiseert gezellige borrels, bijeenkomsten en evenementen voor leden."
+      },
+      "trustPerson": {
+        "name": "Vertrouwenspersoon",
+        "description": "Dient als vertrouwelijk aanspreekpunt voor leden bij vragen over veiligheid, welzijn of interpersoonlijke kwesties."
+      },
+      "tc": {
+        "name": "Technische Commissie (TC)",
+        "description": "Organiseert instromende talenten, teamsamenstellingen, spelersplaatsingen en sporttechnische zaken."
+      },
+      "sponsor": {
+        "name": "Sponsorcommissie",
+        "description": "Beheert sponsorrelaties, fondsenwerving en samenwerkingsmogelijkheden."
+      },
+      "socials": {
+        "name": "Socials",
+        "description": "Beheert de socialmediakanalen, promoties en publieke berichtgeving van de club."
+      },
+      "refereeCourse": {
+        "name": "Scheidsrechterscursus",
+        "description": "Coördineert scheidsrechterstraining, certificering en regelworkshops."
+      },
+      "kasco": {
+        "name": "KASCO (Kascommissie)",
+        "description": "Auditcommissie die de financiële gezondheid en boekhouding van U.S. Basketball controleert."
+      },
+      "omni5kamp": {
+        "name": "OMNI 5-Kamp",
+        "description": "Coördineert de betrokkenheid en activiteiten rond het jaarlijkse multi-sport OMNI 5-Kamp-toernooi."
+      },
+      "zaaldienst": {
+        "name": "Zaaldienst",
+        "description": "Beheert de wedstrijddagen in de zaal, toezicht in de hal en de sporthaloperaties."
+      },
+      "itus": {
+        "name": "ITUS-commissie",
+        "description": "Organiseert het jaarlijkse ITUS-toernooi."
+      }
+    },
+    "apply": "Ben je geïnteresseerd om deel te nemen aan een van deze functies of commissies? Meld je dan aan door een e-mail te sturen naar <email>bestuur@usbasketball.nl</email>."
   },
   "Training": {
     "title": "Trainingsschema",
