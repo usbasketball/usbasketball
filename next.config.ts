@@ -36,6 +36,16 @@ const nextConfig: NextConfig = {
         destination: "/:locale/tasks",
         permanent: true,
       },
+      {
+        source: "/vertrouwenspersoon",
+        destination: "/confidential-counsellor",
+        permanent: true,
+      },
+      {
+        source: "/:locale(en|nl)/vertrouwenspersoon",
+        destination: "/:locale/confidential-counsellor",
+        permanent: true,
+      },
     ];
   },
 };

@@ -45,6 +45,10 @@
     "tasks": {
       "title": "Task schedule",
       "description": "The task schedule of US Basketball."
+    },
+    "confidentialCounsellor": {
+      "title": "Confidential counsellors",
+      "description": "Meet the confidential counsellors of US Basketball and find out how to get in touch with them."
     }
   },
   "Nav": {
@@ -55,6 +59,7 @@
     "tasks": "Task schedule",
     "alv": "GA notes",
     "faq": "FAQ",
+    "confidentialCounsellor": "Confidential counsellor",
     "privacy": "Privacy",
     "signup": "Join",
     "account": "My US",
@@ -274,6 +279,25 @@
   "Tasks": {
     "title": "Task schedule",
     "comingSoon": "This page is coming soon."
+  },
+  "ConfidentialCounsellor": {
+    "title": "Confidential counsellors",
+    "intro": "Every player should feel safe and at home at US Basketball, on and off the court. Our confidential counsellors (vertrouwenspersonen) are there for you as a listening ear and to help you when something is not right. You can reach out to them with any question, worry or unsafe situation, and your contact is always treated confidentially.",
+    "whatWeDo": {
+      "title": "What can you turn to them for?",
+      "p": "You can approach a confidential counsellor when you experience undesirable behaviour such as bullying, intimidation, discrimination, aggression or harassment — or if you simply would like to talk about something that is troubling you.",
+      "note": "The confidential counsellors are bound to confidentiality. Contact with them is separate from the board and has no consequences for your membership or your team."
+    },
+    "people": {
+      "title": "Our confidential counsellors"
+    },
+    "roles": {
+      "dames": "Dames",
+      "heren": "Heren"
+    },
+    "emailLabel": "Email",
+    "emailPlaceholder": "TBD - confidential counsellor email",
+    "contact": "Contact"
   },
   "Training": {
     "title": "Training schedule",
