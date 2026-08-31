@@ -121,6 +121,7 @@ export function LeftNav({ items, isLoggedIn }: LeftNavProps) {
                     {t("account")}
                   </Link>
                 ) : (
+                  // eslint-disable-next-line @next/next/no-html-link-for-pages -- Auth0 route, intentionally a plain <a>
                   <a
                     href="/auth/login"
                     onClick={() => setOpen(false)}
@@ -132,6 +133,7 @@ export function LeftNav({ items, isLoggedIn }: LeftNavProps) {
                 <LocaleSwitcher variant="dark" />
               </div>
               {isLoggedIn ? (
+                // eslint-disable-next-line @next/next/no-html-link-for-pages -- Auth0 route, intentionally a plain <a>
                 <a
                   href="/auth/logout"
                   onClick={() => setOpen(false)}

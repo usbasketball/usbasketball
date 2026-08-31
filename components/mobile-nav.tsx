@@ -85,6 +85,7 @@ export function MobileNavOverlay({ items, open, onOpenChange, isLoggedIn }: Mobi
                 {t("account")}
               </Link>
             ) : (
+              // eslint-disable-next-line @next/next/no-html-link-for-pages -- Auth0 route, intentionally a plain <a>
               <a
                 href="/auth/login"
                 onClick={() => onOpenChange(false)}
@@ -98,6 +99,7 @@ export function MobileNavOverlay({ items, open, onOpenChange, isLoggedIn }: Mobi
 
           <div className="mt-4">
             {isLoggedIn ? (
+              // eslint-disable-next-line @next/next/no-html-link-for-pages -- Auth0 route, intentionally a plain <a>
               <a
                 href="/auth/logout"
                 onClick={() => onOpenChange(false)}
