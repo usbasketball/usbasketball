@@ -86,6 +86,16 @@ export default async function AboutPage({ params }: Props) {
         >
           {t("options.cta")}
         </Link>
+
+        <p className="mt-10 leading-relaxed text-ink-muted">
+          {t("options.committeesIntro")}
+        </p>
+        <Link
+          href="/committees"
+          className="mt-3 inline-flex items-center justify-center border border-accent px-6 py-3 text-sm font-semibold uppercase tracking-widest text-accent transition-colors hover:bg-accent hover:text-white"
+        >
+          {t("options.committeesCta")}
+        </Link>
       </section>
 
       <p className="mt-12 border-t border-line pt-6 text-sm italic text-ink-muted">
