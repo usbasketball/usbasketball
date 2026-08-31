@@ -285,7 +285,9 @@
   },
   "Tasks": {
     "title": "Task schedule",
-    "comingSoon": "This page is coming soon."
+    "empty": "No task schedule is available yet.",
+    "download": "Download PDF",
+    "pdfTitle": "Task schedule PDF"
   },
   "ConfidentialCounsellor": {
     "title": "Confidential counsellors",
