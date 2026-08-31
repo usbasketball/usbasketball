@@ -48,15 +48,15 @@ export async function Footer() {
 
   const navLinks = [
     { href: "/about" as const, label: nav("about") },
-    { href: "/committees" as const, label: nav("committees") },
-    { href: "/membership" as const, label: nav("membership") },
     { href: "/schedule" as const, label: nav("schedule") },
-    { href: "/faq" as const, label: nav("faq") },
-    { href: "/confidential-counsellor" as const, label: nav("confidentialCounsellor") },
-    ...(isLoggedIn ? [] : [{ href: "/signup" as const, label: nav("signup") }]),
+    { href: "/membership" as const, label: nav("membership") },
     ...(isLoggedIn ? [{ href: "/tasks", label: nav("tasks") }] : []),
     ...(isLoggedIn ? [{ href: "/alv", label: nav("alv") }] : []),
     ...(isLoggedIn ? [{ href: "/me", label: nav("account") }] : []),
+    { href: "/confidential-counsellor" as const, label: nav("confidentialCounsellor") },
+    { href: "/committees" as const, label: nav("committees") },
+    { href: "/faq" as const, label: nav("faq") },
+    ...(isLoggedIn ? [] : [{ href: "/signup" as const, label: nav("signup") }]),
   ];
 
   return (

@@ -11,13 +11,13 @@ export async function Header() {
 
   const items = [
     { href: "/about" as const, label: t("about") },
-    { href: "/committees" as const, label: t("committees") },
     { href: "/membership" as const, label: t("membership") },
     { href: "/schedule" as const, label: t("schedule") },
     ...(isLoggedIn ? [{ href: "/tasks", label: t("tasks") }] : []),
     ...(isLoggedIn ? [{ href: "/alv", label: t("alv") }] : []),
-    { href: "/faq" as const, label: t("faq") },
     { href: "/confidential-counsellor" as const, label: t("confidentialCounsellor") },
+    { href: "/committees" as const, label: t("committees") },
+    { href: "/faq" as const, label: t("faq") },
   ];
 
   return (
