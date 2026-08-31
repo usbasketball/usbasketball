@@ -285,7 +285,9 @@
   },
   "Tasks": {
     "title": "Takenschema",
-    "comingSoon": "Deze pagina is binnenkort beschikbaar."
+    "empty": "Er is nog geen takenschema beschikbaar.",
+    "download": "PDF downloaden",
+    "pdfTitle": "Takenschema PDF"
   },
   "ConfidentialCounsellor": {
     "title": "Vertrouwenspersonen",
