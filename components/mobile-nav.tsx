@@ -1,5 +1,7 @@
 "use client";
 
+import { useSyncExternalStore } from "react";
+import { createPortal } from "react-dom";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { LocaleSwitcher } from "@/components/locale-switcher";
@@ -44,44 +46,36 @@ function CloseIcon() {
   );
 }
 
-export function MobileNav({ items, open, onOpenChange, isLoggedIn }: MobileNavProps) {
+type MobileNavOverlayProps = MobileNavProps;
+
+export function MobileNavOverlay({ items, open, onOpenChange, isLoggedIn }: MobileNavOverlayProps) {
   const t = useTranslations("Nav");
 
   return (
-    <div>
-      <button
-        type="button"
-        aria-expanded={open}
-        aria-label={t(open ? "closeMenu" : "openMenu")}
-        onClick={() => onOpenChange(!open)}
-        className="flex h-11 w-11 items-center justify-center border border-white/20 text-white transition-colors hover:bg-white/10"
-      >
-        {open ? <CloseIcon /> : <MenuIcon />}
-      </button>
+    <div
+      className={`fixed inset-x-0 bottom-0 top-20 z-50 overflow-y-auto border-b border-white/10 bg-black shadow-lg transition-opacity duration-300 ease-in-out ${
+        open
+          ? "opacity-100"
+          : "pointer-events-none opacity-0"
+      }`}
+    >
+      <div className="mx-auto flex min-h-full max-w-6xl flex-col px-4 py-6 sm:px-6">
+        <nav className="flex flex-col">
+          {items.map((item) => (
+            <ActiveLink
+              key={item.href}
+              href={item.href}
+              onClick={() => onOpenChange(false)}
+              className="border-b border-white/10 py-4 text-base font-semibold uppercase tracking-wide text-white/70 transition-colors hover:text-white"
+              activeClassName="border-b border-white/10 bg-white/10 py-4 text-base font-semibold uppercase tracking-wide text-white"
+            >
+              {item.label}
+            </ActiveLink>
+          ))}
+        </nav>
 
-      <div
-        className={`absolute inset-x-0 top-20 overflow-hidden border-b border-white/10 bg-black shadow-lg transition-all duration-300 ease-in-out ${
-          open
-            ? "max-h-[480px] opacity-100"
-            : "pointer-events-none max-h-0 opacity-0"
-        }`}
-      >
-        <div className="mx-auto max-w-6xl px-4 py-6 sm:px-6">
-          <nav className="flex flex-col">
-            {items.map((item) => (
-              <ActiveLink
-                key={item.href}
-                href={item.href}
-                onClick={() => onOpenChange(false)}
-                className="border-b border-white/10 py-4 text-base font-semibold uppercase tracking-wide text-white/70 transition-colors hover:text-white"
-                activeClassName="border-b border-white/10 bg-white/10 py-4 text-base font-semibold uppercase tracking-wide text-white"
-              >
-                {item.label}
-              </ActiveLink>
-            ))}
-          </nav>
-
-          <div className="mt-6 flex items-center justify-between gap-4">
+        <div className="mt-auto pt-6">
+          <div className="flex items-center justify-between gap-4">
             {isLoggedIn ? (
               <Link
                 href="/me"
@@ -102,25 +96,68 @@ export function MobileNav({ items, open, onOpenChange, isLoggedIn }: MobileNavPr
             <LocaleSwitcher variant="dark" />
           </div>
 
-          {isLoggedIn ? (
-            <a
-              href="/auth/logout"
-              onClick={() => onOpenChange(false)}
-              className="mt-4 inline-flex w-full items-center justify-center bg-white px-5 py-3 text-sm font-semibold uppercase tracking-wide text-ink transition-colors hover:bg-ink hover:text-white"
-            >
-              {t("logout")}
-            </a>
-          ) : (
-            <Link
-              href="/signup"
-              onClick={() => onOpenChange(false)}
-              className="mt-4 inline-flex w-full items-center justify-center bg-white px-5 py-3 text-sm font-semibold uppercase tracking-wide text-ink transition-colors hover:bg-ink hover:text-white"
-            >
-              {t("signup")}
-            </Link>
-          )}
+          <div className="mt-4">
+            {isLoggedIn ? (
+              <a
+                href="/auth/logout"
+                onClick={() => onOpenChange(false)}
+                className="inline-flex w-full items-center justify-center bg-white px-5 py-3 text-sm font-semibold uppercase tracking-wide text-ink transition-colors hover:bg-ink hover:text-white"
+              >
+                {t("logout")}
+              </a>
+            ) : (
+              <Link
+                href="/signup"
+                onClick={() => onOpenChange(false)}
+                className="inline-flex w-full items-center justify-center bg-white px-5 py-3 text-sm font-semibold uppercase tracking-wide text-ink transition-colors hover:bg-ink hover:text-white"
+              >
+                {t("signup")}
+              </Link>
+            )}
+          </div>
         </div>
       </div>
+    </div>
+  );
+}
+
+export function MobileNav({ items, open, onOpenChange, isLoggedIn }: MobileNavProps) {
+  const t = useTranslations("Nav");
+
+  // The header carries `translate-y-*`/opacity classes for its hide-on-scroll
+  // animation. A value on the CSS `translate` property makes the header the
+  // containing block for `position: fixed` descendants, which would collapse a
+  // `fixed` overlay to the header's height. Portaling the overlay to <body>
+  // keeps it relative to the viewport regardless of the header's transform.
+  const mounted = useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false,
+  );
+
+  return (
+    <div>
+      <button
+        type="button"
+        aria-expanded={open}
+        aria-label={t(open ? "closeMenu" : "openMenu")}
+        onClick={() => onOpenChange(!open)}
+        className="flex h-11 w-11 items-center justify-center border border-white/20 text-white transition-colors hover:bg-white/10"
+      >
+        {open ? <CloseIcon /> : <MenuIcon />}
+      </button>
+
+      {mounted
+        ? createPortal(
+            <MobileNavOverlay
+              items={items}
+              open={open}
+              onOpenChange={onOpenChange}
+              isLoggedIn={isLoggedIn}
+            />,
+            document.body,
+          )
+        : null}
     </div>
   );
 }
