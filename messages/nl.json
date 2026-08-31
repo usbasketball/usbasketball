@@ -45,6 +45,10 @@
     "tasks": {
       "title": "Takenschema",
       "description": "Het takenschema van US Basketbal."
+    },
+    "confidentialCounsellor": {
+      "title": "Vertrouwenspersonen",
+      "description": "Maak kennis met de vertrouwenspersonen van US Basketball en lees hoe je contact met hen opneemt."
     }
   },
   "Nav": {
@@ -55,6 +59,7 @@
     "tasks": "Takenschema",
     "alv": "ALV-notulen",
     "faq": "Veelgestelde vragen",
+    "confidentialCounsellor": "Vertrouwenspersoon",
     "privacy": "Privacy",
     "signup": "Word lid",
     "account": "Mijn US",
@@ -274,6 +279,25 @@
   "Tasks": {
     "title": "Takenschema",
     "comingSoon": "Deze pagina is binnenkort beschikbaar."
+  },
+  "ConfidentialCounsellor": {
+    "title": "Vertrouwenspersonen",
+    "intro": "Iedere speler moet zich bij US Basketball veilig en thuis voelen, zowel op als buiten het veld. Onze vertrouwenspersonen staan voor je klaar als luisterend oor en om je te helpen wanneer er iets niet goed zit. Je kunt bij hen terecht met elke vraag, zorg of onveilige situatie, en je contact wordt altijd vertrouwelijk behandeld.",
+    "whatWeDo": {
+      "title": "Waarvoor kun je bij hen terecht?",
+      "p": "Je kunt bij een vertrouwenspersoon terecht wanneer je te maken hebt met ongewenst gedrag zoals pesten, intimidatie, discriminatie, agressie of seksuele intimidatie — of gewoon omdat je ergens over wilt praten dat je bezighoudt.",
+      "note": "De vertrouwenspersonen zijn gebonden aan geheimhouding. Contact met hen staat los van het bestuur en heeft geen gevolgen voor je lidmaatschap of je team."
+    },
+    "people": {
+      "title": "Onze vertrouwenspersonen"
+    },
+    "roles": {
+      "dames": "Dames",
+      "heren": "Heren"
+    },
+    "emailLabel": "E-mail",
+    "emailPlaceholder": "Nog in te vullen - e-mail vertrouwenspersoon",
+    "contact": "Contact"
   },
   "Training": {
     "title": "Trainingsschema",
