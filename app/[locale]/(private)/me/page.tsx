@@ -33,7 +33,7 @@ export default async function MePage({ params }: Props) {
 
   const user = session.user;
   const name = user.name ?? user.nickname ?? "";
-  const nbbNumber = await fetchMyNbbNumber();
+  const nbbNumber = await fetchMyNbbNumber(session.tokenSet?.idToken);
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6">
