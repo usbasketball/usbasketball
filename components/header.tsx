@@ -11,6 +11,7 @@ export async function Header() {
 
   const items = [
     { href: "/about" as const, label: t("about") },
+    { href: "/committees" as const, label: t("committees") },
     { href: "/membership" as const, label: t("membership") },
     { href: "/schedule" as const, label: t("schedule") },
     ...(isLoggedIn ? [{ href: "/tasks", label: t("tasks") }] : []),

@@ -48,6 +48,7 @@ export async function Footer() {
 
   const navLinks = [
     { href: "/about" as const, label: nav("about") },
+    { href: "/committees" as const, label: nav("committees") },
     { href: "/membership" as const, label: nav("membership") },
     { href: "/schedule" as const, label: nav("schedule") },
     { href: "/faq" as const, label: nav("faq") },
