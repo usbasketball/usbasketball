@@ -3,6 +3,7 @@ import { getTranslations } from "next-intl/server";
 import { redirect } from "@/i18n/navigation";
 import { auth0, authEnabled } from "@/lib/auth";
 import { pageMetadata } from "@/lib/seo";
+import { fetchMyNbbNumber } from "@/lib/graphql-me";
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -32,6 +33,7 @@ export default async function MePage({ params }: Props) {
 
   const user = session.user;
   const name = user.name ?? user.nickname ?? "";
+  const nbbNumber = await fetchMyNbbNumber();
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6">
@@ -53,10 +55,10 @@ export default async function MePage({ params }: Props) {
             <dt className="font-medium text-ink">{t("profile.email")}</dt>
             <dd className="text-ink-muted">{user.email ?? "-"}</dd>
           </div>
-          {"nbb_number" in user ? (
+          {nbbNumber ? (
             <div className="grid grid-cols-2 gap-4 px-6 py-4">
               <dt className="font-medium text-ink">{t("profile.nbbNumber")}</dt>
-              <dd className="text-ink-muted">{String(user.nbb_number)}</dd>
+              <dd className="text-ink-muted">{nbbNumber}</dd>
             </div>
           ) : null}
         </dl>
