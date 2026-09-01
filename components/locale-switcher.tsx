@@ -5,11 +5,6 @@ import { useLocale } from "next-intl";
 import { usePathname, useRouter } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
 
-const LABELS: Record<string, string> = {
-  en: "English",
-  nl: "Nederlands",
-};
-
 type LocaleSwitcherProps = {
   variant?: "light" | "dark";
 };
@@ -22,8 +17,8 @@ export function LocaleSwitcher({
   const pathname = usePathname();
   const [isPending, startTransition] = useTransition();
 
-  function onSelectChange(event: React.ChangeEvent<HTMLSelectElement>) {
-    const nextLocale = event.target.value;
+  function switchLocale(nextLocale: string) {
+    if (nextLocale === locale) return;
     startTransition(() => {
       router.replace(pathname, { locale: nextLocale });
     });
@@ -32,22 +27,34 @@ export function LocaleSwitcher({
   const isDark = variant === "dark";
 
   return (
-    <select
+    <div
+      className={`inline-flex items-center gap-1 rounded-none text-sm font-medium ${
+        isDark ? "text-white" : "text-ink"
+      }`}
       aria-label="Language"
-      defaultValue={locale}
-      onChange={onSelectChange}
-      disabled={isPending}
-      className={
-        isDark
-          ? "rounded-none border border-white/20 bg-black/40 px-2 py-1.5 text-sm text-white focus:outline-none focus:ring-2 focus:ring-white"
-          : "rounded-none border border-line bg-white px-2 py-1.5 text-sm text-ink focus:outline-none focus:ring-2 focus:ring-accent"
-      }
     >
-      {routing.locales.map((loc) => (
-        <option key={loc} value={loc}>
-          {LABELS[loc] ?? loc}
-        </option>
-      ))}
-    </select>
+      {routing.locales.map((loc) => {
+        const isActive = loc === locale;
+        return (
+          <button
+            key={loc}
+            type="button"
+            onClick={() => switchLocale(loc)}
+            disabled={isPending}
+            className={`px-2 py-1 uppercase transition-colors ${
+              isActive
+                ? isDark
+                  ? "bg-white/20 text-white"
+                  : "bg-accent text-white"
+                : isDark
+                  ? "text-white/60 hover:text-white"
+                  : "text-ink/50 hover:text-ink"
+            }`}
+          >
+            {loc}
+          </button>
+        );
+      })}
+    </div>
   );
 }
