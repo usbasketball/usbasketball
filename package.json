@@ -1,5 +1,5 @@
 {
-  "name": "usbasketballnl",
+  "name": "usbasketball",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -11,9 +11,7 @@
     "test": "vitest run",
     "test:e2e": "playwright test",
     "postinstall": "prisma contract emit",
-    "db:generate": "prisma contract emit",
-    "generate:registration-link": "node scripts/generate-registration-link.mjs",
-    "backfill:auth0-users": "node scripts/backfill-auth0-users.mjs"
+    "db:generate": "prisma contract emit"
   },
   "dependencies": {
     "@auth0/nextjs-auth0": "^4.27.0",
