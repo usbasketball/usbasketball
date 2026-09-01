@@ -73,7 +73,7 @@ Open [http://localhost:3000](http://localhost:3000). The app is available under 
 app/
   [locale]/
     (public)/          home, about, schedule, membership, privacy, signup, login
-    (private)/me/      account page (requires login)
+    (private)/.        account, tasks, ALV notes (requires login)
     layout.tsx         locale-aware root layout (Geist font, header, footer, JSON-LD)
     not-found.tsx
   api/revalidate/route.ts   Contentful webhook → revalidate the schedule
@@ -101,7 +101,7 @@ The only protected page is `/me`, which redirects to `/login` when no session ex
 
 The `/register` page is gated by expiring signed links. It verifies the `expires`/`token` query parameters with `lib/registration-link.ts`: the token must be a hex HMAC-SHA256 signature of the `expires` timestamp under `REGISTRATION_SECRET`, and the timestamp must not have passed.
 
-The link generator (an HMAC-SHA256 signing script) lives in a separate repo/service, not here. `REGISTRATION_SECRET` must match on both sides; set it in Vercel env vars for deployed environments. Treat generated links as bearer tokens — anyone who has one can register until it expires.
+The link generator (an HMAC-SHA256 signing script) lives in the [usbasketball/bestuur](https://github.com/usbasketball/bestuur) repo/service. `REGISTRATION_SECRET` must match on both sides; set it in Vercel env vars for deployed environments. Treat generated links as bearer tokens — anyone who has one can register until it expires.
 
 ## Contentful (training schedule)
 
