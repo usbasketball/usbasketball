@@ -45,6 +45,7 @@ async function fetchTasksPdf(): Promise<TasksPdf | null> {
       content_type: "takenschemaPdf",
       include: 2,
       limit: 1,
+      order: ["-sys.updatedAt"],
     });
 
     const entry = result.items[0];
