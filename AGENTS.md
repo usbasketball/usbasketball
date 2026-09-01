@@ -8,7 +8,7 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 <!-- END:nextjs-agent-rules -->
 
-# Project: US Basketball NL
+# Project: US Basketball Amsterdam
 
 Next.js 16 (App Router) + TypeScript + Tailwind v4, next-intl (EN/NL), Auth0 (`@auth0/nextjs-auth0`), Prisma 7 + PostgreSQL, Contentful (CMS).
 

@@ -1,6 +1,6 @@
-# US Basketball NL
+# US Basketball Amsterdam
 
-Website for the US Basketball NL basketball club: public pages (home, about, training schedule, membership, privacy), a member signup form, and a private account page. Fully localized in English and Dutch.
+Website for the US Basketball Amsterdam basketball club: public pages (home, about, training schedule, membership, privacy), a member signup form, and a private account page. Fully localized in English and Dutch.
 
 ## Tech Stack
 
