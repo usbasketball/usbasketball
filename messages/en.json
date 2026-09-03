@@ -210,7 +210,7 @@
     }
   },
   "Consent": {
-    "message": "We use anonymous analytics to improve the website experience and make it easier to use. Do you allow this?",
+    "message": "We use anonymous analytics to help us improve the website and make it easier for members and visitors to use. Do you allow this?",
     "accept": "Yes, allow",
     "decline": "No thanks"
   },
