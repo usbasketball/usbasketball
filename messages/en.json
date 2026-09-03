@@ -209,6 +209,11 @@
       }
     }
   },
+  "Consent": {
+    "message": "We use anonymous analytics to help us improve the website and make it easier for members and visitors to use. Do you allow this?",
+    "accept": "Yes, allow",
+    "decline": "No thanks"
+  },
   "Signup": {
     "title": "Interest form",
     "intro": "Interested in playing basketball at US? Fill in the form below! Please note that US only has senior (18+) teams.",

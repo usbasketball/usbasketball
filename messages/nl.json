@@ -209,6 +209,11 @@
       }
     }
   },
+  "Consent": {
+    "message": "We gebruiken anonieme analytics om de website te verbeteren en hem makkelijker te maken voor leden en bezoekers. Sta je hieraan toe?",
+    "accept": "Ja, toestaan",
+    "decline": "Nee, bedankt"
+  },
   "Signup": {
     "title": "Interesseformulier",
     "intro": "Heb jij interesse om bij US te komen basketballen? Vul dan het onderstaande formulier in! Houd er rekening mee dat wij bij US alleen senioren (18+) teams hebben.",
