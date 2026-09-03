@@ -1,11 +1,11 @@
-import { Analytics } from "@vercel/analytics/react";
-import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
 import { Bebas_Neue, Inter } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getMessages, getTranslations } from "next-intl/server";
-import { Header } from "@/components/header";
+import { AnalyticsGate } from "@/components/AnalyticsGate";
+import { ConsentBanner } from "@/components/ConsentBanner";
 import { Footer } from "@/components/footer";
+import { Header } from "@/components/header";
 import { JsonLd } from "@/components/json-ld";
 import { routing } from "@/i18n/routing";
 import { organizationJsonLd, siteConfig, websiteJsonLd } from "@/lib/site";
@@ -60,11 +60,11 @@ export default async function LocaleLayout({
             <main className="flex-1">{children}</main>
             <Footer />
           </div>
+          <ConsentBanner />
         </NextIntlClientProvider>
         <JsonLd data={organizationJsonLd(locale)} />
         <JsonLd data={websiteJsonLd(locale)} />
-        <Analytics />
-        <SpeedInsights />
+        <AnalyticsGate />
       </body>
     </html>
   );
