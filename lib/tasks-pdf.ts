@@ -43,9 +43,9 @@ async function fetchTasksPdf(): Promise<TasksPdf | null> {
   try {
     const result = await contentfulClient.getEntries({
       content_type: "takenschemaPdf",
-      include: 2,
+      include: 1,
       limit: 1,
-      order: ["-sys.updatedAt"],
+      order: ["-sys.createdAt"],
     });
 
     const entry = result.items[0];
