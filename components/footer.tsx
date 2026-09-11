@@ -52,6 +52,7 @@ export async function Footer() {
     { href: "/membership" as const, label: nav("membership") },
     ...(isLoggedIn ? [{ href: "/tasks", label: nav("tasks") }] : []),
     ...(isLoggedIn ? [{ href: "/alv", label: nav("alv") }] : []),
+    ...(isLoggedIn ? [{ href: "/learning", label: nav("learning") }] : []),
     ...(isLoggedIn ? [{ href: "/me", label: nav("account") }] : []),
     { href: "/confidential-counsellor" as const, label: nav("confidentialCounsellor") },
     { href: "/committees" as const, label: nav("committees") },

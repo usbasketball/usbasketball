@@ -53,6 +53,10 @@
     "committees": {
       "title": "Bestuur & commissies",
       "description": "Maak kennis met het bestuur en de commissies van US Basketball en ontdek wat elke rol inhoudt."
+    },
+    "learning": {
+      "title": "Leermateriaal",
+      "description": "Uitlegvideo's."
     }
   },
   "Nav": {
@@ -71,7 +75,8 @@
     "logout": "Uitloggen",
     "login": "Inloggen",
     "openMenu": "Menu openen",
-    "closeMenu": "Menu sluiten"
+    "closeMenu": "Menu sluiten",
+    "learning": "Leermateriaal"
   },
   "Home": {
     "hero": {
@@ -443,5 +448,16 @@
   },
   "LocaleSwitcher": {
     "label": "Taal"
+  },
+  "Learning": {
+    "title": "Leermateriaal",
+    "scoreboard": {
+      "big": {
+        "title": "Uitleg groot scorebord"
+      },
+      "small": {
+        "title": "Uitleg klein scorebord"
+      }
+    }
   }
 }
