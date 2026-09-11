@@ -53,6 +53,10 @@
     "committees": {
       "title": "Board & committees",
       "description": "Meet the board and committees of US Basketball and find out what each role does."
+    },
+    "learning": {
+      "title": "Learning materials",
+      "description": "How-to videos."
     }
   },
   "Nav": {
@@ -65,6 +69,7 @@
     "faq": "FAQ",
     "confidentialCounsellor": "Confidential counsellor",
     "committees": "Board & committees",
+    "learning": "Learning materials",
     "privacy": "Privacy",
     "signup": "Join",
     "account": "My US",
@@ -293,6 +298,17 @@
     "empty": "No task schedule is available yet.",
     "download": "Download PDF",
     "pdfTitle": "Task schedule PDF"
+  },
+  "Learning": {
+    "title": "Learning materials",
+    "scoreboard": {
+      "big": {
+        "title": "Big scoreboard explanation"
+      },
+      "small": {
+        "title": "Small scoreboard explanation"
+      }
+    }
   },
   "ConfidentialCounsellor": {
     "title": "Confidential counsellors",

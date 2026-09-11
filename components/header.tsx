@@ -15,6 +15,7 @@ export async function Header() {
     { href: "/schedule" as const, label: t("schedule") },
     ...(isLoggedIn ? [{ href: "/tasks", label: t("tasks") }] : []),
     ...(isLoggedIn ? [{ href: "/alv", label: t("alv") }] : []),
+    ...(isLoggedIn ? [{ href: "/learning", label: t("learning") }] : []),
     { href: "/confidential-counsellor" as const, label: t("confidentialCounsellor") },
     { href: "/committees" as const, label: t("committees") },
     { href: "/faq" as const, label: t("faq") },
