@@ -451,7 +451,10 @@
   },
   "Learning": {
     "title": "Leermateriaal",
-    "scoreboard": {
+    "scorer": {
+      "title": "Uitleg Digitaal Wedstrijdformulier"
+    },
+    "timer": {
       "big": {
         "title": "Uitleg groot scorebord"
       },

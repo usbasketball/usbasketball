@@ -301,7 +301,10 @@
   },
   "Learning": {
     "title": "Learning materials",
-    "scoreboard": {
+    "scorer": {
+      "title": "Digital match form explanation"
+    },
+    "timer": {
       "big": {
         "title": "Big scoreboard explanation"
       },
