@@ -2,6 +2,7 @@ import { revalidateTag } from "next/cache";
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 import { TRAINING_SCHEDULE_TAG } from "@/lib/schedule";
+import { ALV_DOCUMENTS_TAG } from "@/lib/alv-documents";
 import { ALV_NOTES_TAG } from "@/lib/alv-notes";
 import { TASKS_PDF_TAG } from "@/lib/tasks-pdf";
 
@@ -27,6 +28,7 @@ function handleRequest(request: NextRequest): NextResponse {
   }
 
   revalidateTag(TRAINING_SCHEDULE_TAG, "max");
+  revalidateTag(ALV_DOCUMENTS_TAG, "max");
   revalidateTag(ALV_NOTES_TAG, "max");
   revalidateTag(TASKS_PDF_TAG, "max");
   return NextResponse.json({ revalidated: true });

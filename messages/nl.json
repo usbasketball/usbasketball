@@ -39,8 +39,8 @@
       "description": "Jouw persoonlijke ledenaccount bij US Basketbal."
     },
     "alv": {
-      "title": "ALV-notulen",
-      "description": "De notulen van voormalige ALV's (algemene ledenvergaderingen) van US Basketbal, voor leden."
+      "title": "ALV-documenten",
+      "description": "De documenten en notulen van de algemene ledenvergadering (ALV) van US Basketbal, voor leden."
     },
     "tasks": {
       "title": "Takenschema",
@@ -287,11 +287,18 @@
     "logout": "Uitloggen"
   },
   "AlvNotes": {
-    "title": "ALV-notulen",
-    "intro": "Een overzicht van de notulen van eerdere algemene ledenvergaderingen (ALV).",
-    "empty": "Er zijn nog geen ALV-notulen beschikbaar. Kom later terug.",
-    "unknownYear": "Onbekend jaar",
-    "openDocument": "Open PDF"
+    "title": "ALV-documenten",
+    "intro": "Een overzicht van de documenten en notulen van algemene ledenvergaderingen (ALV).",
+    "nextAlv": {
+      "title": "Documenten voor de volgende ALV",
+      "titleYear": "ALV-documenten {year}",
+      "empty": "Er zijn nog geen documenten voor de volgende ALV beschikbaar. Kom later terug."
+    },
+    "notes": {
+      "title": "Notulen van eerdere ALV's",
+      "empty": "Er zijn nog geen notulen beschikbaar. Kom later terug."
+    },
+    "unknownYear": "Onbekend jaar"
   },
   "Tasks": {
     "title": "Takenschema",
