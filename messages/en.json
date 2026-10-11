@@ -222,7 +222,14 @@
   "Signup": {
     "title": "Interest form",
     "intro": "Interested in playing basketball at US? Fill in the form below! Please note that US only has senior (18+) teams.",
-    "capacityNote": "Thanks for your interest in joining US! Our committee is made up entirely of volunteers and members, so capacity is limited. Feel free to fill in the form; once spots open up we'll get in touch.",
+    "capacityNote": {
+      "title": "Mid-season update — Limited availability",
+      "p1": "We are currently mid-season and recruiting is almost complete. Open spots are very limited:",
+      "menSpot": "Men: H1 and free training members (recreational) who train at Du Midi hall.",
+      "womenSpot": "Women: D1 and D6.",
+      "p2": "You are still welcome to fill out the form, but only candidates who are a good fit for these remaining spots may receive a response from our Technical Committee.",
+      "p3": "For other teams and levels, recruitment will reopen towards the end of this season (around May) or at the start of next season (around September)."
+    },
     "name": "Full name",
     "namePlaceholder": "First and last name",
     "lastLevel": "Last played level",

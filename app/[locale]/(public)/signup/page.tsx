@@ -30,8 +30,16 @@ export default async function SignupPage({ params }: Props) {
       </h1>
       <p className="mt-4 leading-relaxed text-ink-muted">{t("intro")}</p>
 
-      <div className="mt-6 border-l-4 border-accent bg-paper/60 p-4 text-sm leading-relaxed text-ink">
-        {t("capacityNote")}
+      {/* TODO: Make capacity notes configurable via CMS (e.g. Contentful) without code changes */}
+      <div className="mt-6 border-l-4 border-accent bg-paper/60 p-4 text-sm leading-relaxed text-ink space-y-2">
+        <p className="font-semibold text-ink">{t("capacityNote.title")}</p>
+        <p>{t("capacityNote.p1")}</p>
+        <ul className="list-disc pl-5 space-y-1">
+          <li>{t("capacityNote.menSpot")}</li>
+          <li>{t("capacityNote.womenSpot")}</li>
+        </ul>
+        <p>{t("capacityNote.p2")}</p>
+        <p className="text-ink-muted">{t("capacityNote.p3")}</p>
       </div>
 
       <div className="mt-8 border border-line bg-white p-6">
