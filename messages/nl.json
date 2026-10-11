@@ -222,7 +222,14 @@
   "Signup": {
     "title": "Interesseformulier",
     "intro": "Heb jij interesse om bij US te komen basketballen? Vul dan het onderstaande formulier in! Houd er rekening mee dat wij bij US alleen senioren (18+) teams hebben.",
-    "capacityNote": "Bedankt voor je interesse om bij US aan te sluiten! Onze commissie bestaat volledig uit vrijwilligers en leden, waardoor we beperkte capaciteit hebben. Vul het formulier gerust in; zodra er plekken vrijkomen nemen we contact met je op.",
+    "capacityNote": {
+      "title": "Update halverwege het seizoen — Beperkte beschikbaarheid",
+      "p1": "We zitten momenteel halverwege het seizoen en de werving is bijna afgerond. Er zijn nog maar zeer beperkt plekken beschikbaar:",
+      "menSpot": "Heren: H1 en vrije training (recreanten) die trainen in de Du Midi-hal.",
+      "womenSpot": "Dames: D1 en D6.",
+      "p2": "Je bent nog steeds van harte welkom om het formulier in te vullen, maar alleen spelers die goed aansluiten bij deze openstaande plekken ontvangen mogelijk een reactie van onze Technische Commissie.",
+      "p3": "Voor andere teams en niveaus opent de werving weer aan het einde van dit seizoen (rond mei) of bij de start van volgend seizoen (rond september)."
+    },
     "name": "Volledige naam",
     "namePlaceholder": "Voor- en achternaam",
     "lastLevel": "Laatst gespeelde niveau",
