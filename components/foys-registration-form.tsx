@@ -1,74 +1,24 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 
 const FOYS_BASE = "https://registration-form.foys.tech";
 
-// Loaded sequentially: Bootstrap JS needs jQuery + Popper, and the Foys app
-// needs its vendor bundle before app.js.
 const FOYS_SCRIPTS = [
-  { id: "foys-jquery", src: "https://code.jquery.com/jquery-3.2.1.slim.min.js" },
-  {
-    id: "foys-popper",
-    src: "https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js",
-  },
-  {
-    id: "foys-bootstrap-js",
-    src: "https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js",
-  },
-  { id: "foys-chunk-vendors", src: `${FOYS_BASE}/chunk-vendors.js` },
-  { id: "foys-app", src: `${FOYS_BASE}/app.js` },
-] as const;
+  "https://code.jquery.com/jquery-3.2.1.slim.min.js",
+  "https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js",
+  "https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js",
+  `${FOYS_BASE}/chunk-vendors.js`,
+  `${FOYS_BASE}/app.js`,
+];
 
-function loadScript(id: string, src: string): Promise<void> {
-  return new Promise((resolve, reject) => {
-    let script = document.getElementById(id) as HTMLScriptElement | null;
-    if (!script) {
-      script = document.createElement("script");
-      script.id = id;
-      script.src = src;
-      script.async = true;
-      document.head.appendChild(script);
-    }
-    if (script.dataset.loaded === "true") {
-      resolve();
-      return;
-    }
-    script.addEventListener(
-      "load",
-      () => {
-        script.dataset.loaded = "true";
-        resolve();
-      },
-      { once: true }
-    );
-    script.addEventListener(
-      "error",
-      () => {
-        // Drop the dead element so a later mount can retry the load.
-        script?.remove();
-        reject(new Error(`Failed to load ${src}`));
-      },
-      { once: true }
-    );
-  });
-}
-
-// The Foys stylesheets include Bootstrap's reboot, which would restyle the
-// site chrome (body font/colors, margins on bare p/h/ul elements). This block
-// is rendered after the <link> tags, so on equal specificity it wins the
-// cascade regardless of load order:
-// 1. Guards restoring the Tailwind preflight baseline for the page around the
-//    form.
-// 2. Theme overrides scoped to .foys-form that map the widget onto the site's
-//    design tokens (ink #414141, muted #6f6f6f, line #d9d7d4, accent #000,
-//    hover #1a1a1a, sharp corners, Inter/ Bebas Neue).
 const FOYS_FORM_STYLES = `
   body {
+    margin: 0;
     background: #ffffff;
     color: #414141;
-    font-family: var(--font-sans);
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, sans-serif;
     -webkit-font-smoothing: antialiased;
   }
   h1, h2, h3, h4, h5, h6, p, ul, ol, dl, figure, blockquote {
@@ -81,7 +31,7 @@ const FOYS_FORM_STYLES = `
 
   .foys-form {
     color: #414141;
-    font-family: var(--font-sans);
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, sans-serif;
     font-size: 0.875rem;
   }
   .foys-form p, .foys-form ul, .foys-form ol {
@@ -96,7 +46,7 @@ const FOYS_FORM_STYLES = `
     list-style: decimal;
   }
   .foys-form h1, .foys-form h2 {
-    font-family: var(--font-display);
+    font-family: "Bebas Neue", Impact, sans-serif;
     text-transform: uppercase;
     letter-spacing: 0.025em;
   }
@@ -177,45 +127,101 @@ const FOYS_FORM_STYLES = `
   }
 `;
 
+function escapeHtmlAttribute(value: string) {
+  return value
+    .replaceAll("&", "&amp;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#39;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;");
+}
+
+function getFoysDocument(configuration: string) {
+  const scriptUrls = JSON.stringify(FOYS_SCRIPTS);
+
+  return `<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="${FOYS_BASE}/chunk-vendors.css">
+    <link rel="stylesheet" href="${FOYS_BASE}/app.css">
+    <link rel="stylesheet" href="${FOYS_BASE}/foys-bootstrap.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap-vue@2.23.1/dist/bootstrap-vue.min.css">
+    <style>${FOYS_FORM_STYLES}</style>
+  </head>
+  <body>
+    <div class="foys-form">
+      <registration-form-entry configuration="${escapeHtmlAttribute(configuration)}"></registration-form-entry>
+    </div>
+    <script>
+      (() => {
+        const notifyParent = (message) => window.parent.postMessage(message, "*");
+        const sendHeight = () => notifyParent({
+          type: "foys-height",
+          height: Math.ceil(document.documentElement.getBoundingClientRect().height)
+        });
+        new ResizeObserver(sendHeight).observe(document.documentElement);
+        window.addEventListener("load", sendHeight);
+
+        (async () => {
+          for (const src of ${scriptUrls}) {
+            await new Promise((resolve, reject) => {
+              const script = document.createElement("script");
+              script.src = src;
+              script.onload = resolve;
+              script.onerror = () => reject(new Error("Failed to load " + src));
+              document.head.appendChild(script);
+            });
+          }
+          sendHeight();
+        })().catch(() => notifyParent({ type: "foys-error" }));
+      })();
+    </script>
+  </body>
+</html>`;
+}
+
 export function FoysRegistrationForm({ configuration }: { configuration: string }) {
   const t = useTranslations("Register");
+  const iframeRef = useRef<HTMLIFrameElement>(null);
   const [failed, setFailed] = useState(false);
+  const [height, setHeight] = useState(600);
+  const srcDoc = useMemo(() => getFoysDocument(configuration), [configuration]);
 
   useEffect(() => {
-    let disposed = false;
+    const handleMessage = (event: MessageEvent<unknown>) => {
+      if (event.source !== iframeRef.current?.contentWindow) return;
+      if (typeof event.data !== "object" || event.data === null) return;
 
-    let chain: Promise<void> = Promise.resolve();
-    for (const { id, src } of FOYS_SCRIPTS) {
-      chain = chain.then(() => loadScript(id, src));
-    }
-    chain.catch(() => {
-      if (!disposed) setFailed(true);
-    });
-
-    return () => {
-      disposed = true;
+      const data = event.data as { type?: unknown; height?: unknown };
+      if (data.type === "foys-error") {
+        setFailed(true);
+      } else if (
+        data.type === "foys-height" &&
+        typeof data.height === "number" &&
+        Number.isFinite(data.height)
+      ) {
+        setHeight(Math.max(200, Math.min(Math.ceil(data.height), 4000)));
+      }
     };
+
+    window.addEventListener("message", handleMessage);
+    return () => window.removeEventListener("message", handleMessage);
   }, []);
 
+  if (failed) {
+    return <p className="text-sm leading-relaxed text-ink-muted">{t("formError")}</p>;
+  }
+
   return (
-    <>
-      <link rel="stylesheet" href={`${FOYS_BASE}/chunk-vendors.css`} />
-      <link rel="stylesheet" href={`${FOYS_BASE}/app.css`} />
-      <link rel="stylesheet" href={`${FOYS_BASE}/foys-bootstrap.min.css`} />
-      <link
-        rel="stylesheet"
-        href="https://unpkg.com/bootstrap-vue@2.23.1/dist/bootstrap-vue.min.css"
-      />
-
-      <style dangerouslySetInnerHTML={{ __html: FOYS_FORM_STYLES }} />
-
-      {failed ? (
-        <p className="text-sm leading-relaxed text-ink-muted">{t("formError")}</p>
-      ) : (
-        <div className="foys-form">
-          <registration-form-entry configuration={configuration} />
-        </div>
-      )}
-    </>
+    <iframe
+      ref={iframeRef}
+      title={t("title")}
+      srcDoc={srcDoc}
+      sandbox="allow-scripts allow-forms allow-popups allow-popups-to-escape-sandbox"
+      loading="lazy"
+      style={{ display: "block", width: "100%", height, border: 0 }}
+    />
   );
 }
