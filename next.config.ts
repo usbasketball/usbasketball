@@ -54,7 +54,8 @@ const withNextIntl = createNextIntlPlugin();
 
 export default withSentryConfig(withNextIntl(nextConfig), {
   org: "usbasketball",
-  project: "usbasketballnl",
+  project: "usbasketball",
+  sentryUrl: "https://de.sentry.io",
   authToken: process.env.SENTRY_AUTH_TOKEN,
   tunnelRoute: "/sentry-tunnel",
   silent: !process.env.CI,
