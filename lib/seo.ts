@@ -5,7 +5,8 @@ import { getSiteName, siteConfig } from "@/lib/site";
 const OG_IMAGE = "/images/hero.jpg";
 
 export function localizedAlternates(
-  pathname: string
+  pathname: string,
+  locale: string
 ): NonNullable<Metadata["alternates"]> {
   const base = pathname === "/" ? "" : pathname;
   const languages: Record<string, string> = {
@@ -15,7 +16,7 @@ export function localizedAlternates(
     languages[locale] = `${siteConfig.url}/${locale}${base}`;
   }
   return {
-    canonical: languages[routing.defaultLocale],
+    canonical: languages[locale],
     languages,
   };
 }
@@ -45,7 +46,7 @@ export function pageMetadata({
   return {
     title,
     description,
-    alternates: localizedAlternates(pathname),
+    alternates: localizedAlternates(pathname, locale),
     openGraph: {
       type: "website",
       siteName,
