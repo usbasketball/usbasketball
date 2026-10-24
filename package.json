@@ -16,7 +16,7 @@
   "dependencies": {
     "@auth0/nextjs-auth0": "^4.27.0",
     "@contentful/rich-text-react-renderer": "^16.2.2",
-    "@prisma/orm-postgres": "8.0.0-rc.8",
+    "@prisma/orm-postgres": "8.0.0-rc.18",
     "@sentry/nextjs": "^10.70.0",
     "@vercel/analytics": "^2.0.1",
     "@vercel/speed-insights": "^2.0.0",
