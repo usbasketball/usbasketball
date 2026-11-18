@@ -138,20 +138,20 @@
       "matchRows": {
         "two": {
           "label": "Trains 2x per week",
-          "amount": "€330,-"
+          "amount": "€350,-"
         },
         "onehalf": {
           "label": "Trains 1.5x per week",
-          "amount": "€300,-"
+          "amount": "€320,-"
         },
         "one": {
           "label": "Trains 1x per week",
-          "amount": "€270,-"
+          "amount": "€285,-"
         }
       },
       "recTitle": "Recreational member",
       "recIntro": "Training only, without playing matches.",
-      "recAmount": "€170,-",
+      "recAmount": "€180,-",
       "studentNote": "Students get 10% discount on their membership fee at US.",
       "timing": {
         "full": "Joining between 1 August and 31 December: full season membership fee.",
@@ -439,7 +439,7 @@
       },
       "fees": {
         "question": "What are the membership fees?",
-        "answer": "Competition members pay €330 (trains 2× per week), €300 (1.5× per week) or €270 (1× per week) per season. Recreational members who train without playing matches pay €170 per season."
+        "answer": "Competition members pay €350 (trains 2× per week), €320 (1.5× per week) or €285 (1× per week) per season. Recreational members who train without playing matches pay €180 per season."
       },
       "student": {
         "question": "Is there a student discount?",
