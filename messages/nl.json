@@ -138,20 +138,20 @@
       "matchRows": {
         "two": {
           "label": "2x per week trainen",
-          "amount": "€330,-"
+          "amount": "€350,-"
         },
         "onehalf": {
           "label": "1,5x per week trainen",
-          "amount": "€300,-"
+          "amount": "€320,-"
         },
         "one": {
           "label": "1x per week trainen",
-          "amount": "€270,-"
+          "amount": "€285,-"
         }
       },
       "recTitle": "Recreant (trainend lid)",
       "recIntro": "Alleen trainen, geen wedstrijden spelen.",
-      "recAmount": "€170,-",
+      "recAmount": "€180,-",
       "studentNote": "Studenten krijgen 10% korting op hun contributie bij US.",
       "timing": {
         "full": "Aanmelden tussen 1 augustus en 31 december: volledig seizoen contributie.",
@@ -425,7 +425,7 @@
       },
       "fees": {
         "question": "Wat kost het lidmaatschap?",
-        "answer": "Competitieleden betalen €330 (2× per week trainen), €300 (1,5× per week) of €270 (1× per week) per seizoen. Recreanten die alleen trainen en geen wedstrijden spelen betalen €170 per seizoen."
+        "answer": "Competitieleden betalen €350 (2× per week trainen), €320 (1,5× per week) of €285 (1× per week) per seizoen. Recreanten die alleen trainen en geen wedstrijden spelen betalen €180 per seizoen."
       },
       "student": {
         "question": "Is er studentenkorting?",
