@@ -23,7 +23,6 @@ flowchart LR
   proxy <--> auth0[(Auth0)]
   pages --> contentful[(Contentful)]
   contentful -- publish webhook --> reval
-  pages --> bestuur[(Bestuur GraphQL)]
   action --> turnstile[(Cloudflare Turnstile)]
   action --> pg[(PostgreSQL)]
   action --> resend[(Resend)]
@@ -39,7 +38,6 @@ flowchart LR
 | PostgreSQL | Interest form submissions | `lib/prisma.ts`, `prisma/contract.prisma` |
 | Resend | Interest form emails | `lib/email.ts` |
 | Cloudflare Turnstile | Bot protection on the interest form | `components/turnstile.tsx`, `lib/actions/interest.ts` |
-| Bestuur GraphQL | The member's NBB number on `/me` | `lib/graphql-me.ts` |
 | Foys | Membership registration form, embedded | `components/foys-registration-form.tsx` |
 | Sentry | Errors, traces, logs | `instrumentation*.ts`, `sentry.*.config.ts`, `next.config.ts` |
 | Umami | Page analytics, consent-gated | `components/AnalyticsGate.tsx` |
@@ -150,7 +148,7 @@ The one write path, and the template for future forms:
 
 All configuration is environment variables, documented in `.env.example`. Two conventions matter:
 
-- **Unset-safe.** Auth0, Contentful, Turnstile, Umami and the bestuur URL may all be missing; the build and the public pages must still work. New integrations should follow the same pattern (a guard function or a nullable client).
+- **Unset-safe.** Auth0, Contentful, Turnstile and Umami may all be missing; the build and the public pages must still work. New integrations should follow the same pattern (a guard function or a nullable client).
 - **Public vs. server.** Only `NEXT_PUBLIC_*` values reach the browser. `lib/site.ts` reads the public ones once and exports them as `siteConfig`.
 
 ## Build, test and deploy
