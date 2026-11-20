@@ -288,8 +288,7 @@
     "profile": {
       "title": "Your details",
       "name": "Name",
-      "email": "Email address",
-      "nbbNumber": "NBB number"
+      "email": "Email address"
     },
     "logout": "Log out"
   },

@@ -98,7 +98,6 @@ lib/
   contentful.ts        guarded Contentful client
   schedule.ts, alv-documents.ts, alv-notes.ts, tasks-pdf.ts   cached Contentful fetchers
   email.ts             Resend emails for the interest form
-  graphql-me.ts        NBB number lookup against the bestuur GraphQL API
   registration-link.ts HMAC verification for /register links
   site.ts, seo.ts      site config, JSON-LD and metadata helpers
 messages/              en.json, nl.json
@@ -118,8 +117,6 @@ The app is deployed to Vercel with native Git integration. No Docker setup is re
 Login is handled by Auth0 Universal Login via `@auth0/nextjs-auth0`. The `/auth/login`, `/auth/logout` and `/auth/callback` routes are intercepted by the Auth0 middleware in `proxy.ts`; there are no auth route handlers. Server code reads the session with `auth0.getSession()` from the singleton in `lib/auth.ts`. Login and logout links must be plain `<a>` tags (not next-intl `Link`) so they navigate as full-page redirects.
 
 The protected pages are `/me` (profile), `/tasks` (task roster PDF) and `/alv` (general meeting documents and notes). Each one checks the session itself and redirects to `/login` when there is none; a new private page must do the same. The login page is a gateway that starts the Auth0 flow with a locale-aware `returnTo`. When the `AUTH0_*` variables are unset, `/auth/*` responds with 503 and the rest of the site keeps working.
-
-`/me` also shows the member's NBB number, fetched from the bestuur GraphQL API (`BESTUUR_GRAPHQL_URL`) using the user's Auth0 ID token as a bearer token.
 
 ## Interest form (/signup)
 
@@ -163,7 +160,6 @@ See `.env.example` for the full, commented list. In short:
 | Email | `RESEND_API_KEY`, `EMAIL_FROM` |
 | Turnstile | `NEXT_PUBLIC_TURNSTILE_SITE_KEY`, `TURNSTILE_SECRET`, `TURNSTILE_HOSTNAMES` |
 | Registration | `REGISTRATION_SECRET`, `FOYS_REGISTRATION_FORM_NL_ID`, `FOYS_REGISTRATION_FORM_EN_ID` |
-| Bestuur API | `BESTUUR_GRAPHQL_URL` |
 | Analytics and consent | `NEXT_PUBLIC_UMAMI_WEBSITE_ID`, `NEXT_PUBLIC_UMAMI_SCRIPT_URL`, `NEXT_PUBLIC_CMP_CONSENT_COOKIE_NAME`, `NEXT_PUBLIC_COOKIE_DOMAIN` |
 | Sentry | `SENTRY_AUTH_TOKEN` |
 

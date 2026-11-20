@@ -288,8 +288,7 @@
     "profile": {
       "title": "Jouw gegevens",
       "name": "Naam",
-      "email": "E-mailadres",
-      "nbbNumber": "NBB-nummer"
+      "email": "E-mailadres"
     },
     "logout": "Uitloggen"
   },
