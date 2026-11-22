@@ -14,6 +14,12 @@ const FOYS_SCRIPTS = [
 ];
 
 const FOYS_FORM_STYLES = `
+  /* The parent sizes this iframe to its content, so the frame must never show
+     its own scrollbar: a scrollbar narrows the layout, changes text wrapping
+     and content height, and sets off a resize loop. */
+  html, body {
+    overflow: hidden;
+  }
   body {
     margin: 0;
     background: #ffffff;
@@ -159,9 +165,9 @@ function getFoysDocument(configuration: string) {
         const notifyParent = (message) => window.parent.postMessage(message, "*");
         const sendHeight = () => notifyParent({
           type: "foys-height",
-          height: Math.ceil(document.documentElement.getBoundingClientRect().height)
+          height: Math.ceil(document.body.getBoundingClientRect().height)
         });
-        new ResizeObserver(sendHeight).observe(document.documentElement);
+        new ResizeObserver(sendHeight).observe(document.body);
         window.addEventListener("load", sendHeight);
 
         (async () => {
@@ -202,7 +208,9 @@ export function FoysRegistrationForm({ configuration }: { configuration: string 
         typeof data.height === "number" &&
         Number.isFinite(data.height)
       ) {
-        setHeight(Math.max(200, Math.min(Math.ceil(data.height), 4000)));
+        const next = Math.max(200, Math.min(Math.ceil(data.height), 20000));
+        // Ignore sub-2px jitter so measurement noise can't cause a resize loop.
+        setHeight((current) => (Math.abs(current - next) < 2 ? current : next));
       }
     };
 
