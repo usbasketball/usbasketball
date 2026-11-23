@@ -23,7 +23,7 @@ npm run typecheck
 
 When you touch code that has tests (`*.test.ts(x)` next to the source, Playwright specs in `e2e/`), also run `npm run test`. CI runs typecheck, unit tests and Playwright, but not lint.
 
-`ARCHITECTURE.md` describes how the app is structured. Read `docs/CRITICAL_PATHS.md` before changing the proxy, auth, the interest form, `/register`, the Contentful fetchers or the consent logic, and update it when their behaviour changes.
+`ARCHITECTURE.md` describes how the app is structured.
 
 ## Conventions
 
