@@ -224,6 +224,10 @@
     "currentDeclined": "Huidige keuze: analytics geweigerd.",
     "close": "Sluiten"
   },
+  "VideoEmbed": {
+    "notice": "Deze video wordt gehost door {provider}. Als je hem laadt, wordt je IP-adres met hen gedeeld.",
+    "load": "Video laden: {title}"
+  },
   "Signup": {
     "title": "Interesseformulier",
     "intro": "Heb jij interesse om bij US te komen basketballen? Vul dan het onderstaande formulier in! Houd er rekening mee dat wij bij US alleen senioren (18+) teams hebben.",

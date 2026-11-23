@@ -33,3 +33,11 @@ test("footer link reopens the banner and declining is saved", async ({ page }) =
   await page.reload();
   await expect(page.getByRole("button", { name: "Yes, allow" })).toBeHidden();
 });
+
+test("learning videos load nothing from third parties until clicked", async ({ page }) => {
+  await page.goto("/en/learning");
+  await expect(page.locator("iframe")).toHaveCount(0);
+
+  await page.getByRole("button", { name: /Load video/ }).first().click();
+  await expect(page.locator("iframe")).toHaveCount(1);
+});

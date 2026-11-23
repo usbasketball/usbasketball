@@ -224,6 +224,10 @@
     "currentDeclined": "Current choice: analytics declined.",
     "close": "Close"
   },
+  "VideoEmbed": {
+    "notice": "This video is hosted by {provider}. Loading it shares your IP address with them.",
+    "load": "Load video: {title}"
+  },
   "Signup": {
     "title": "Interest form",
     "intro": "Interested in playing basketball at US? Fill in the form below! Please note that US only has senior (18+) teams.",
