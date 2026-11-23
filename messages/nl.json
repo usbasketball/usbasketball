@@ -210,14 +210,23 @@
       },
       "cookies": {
         "title": "Cookies en analytics",
-        "p": "Deze website maakt gebruik van cookies. Analytische cookies (zoals GA4) worden alleen geplaatst nadat je toestemming geeft via de cookiebanner. Je kunt je toestemming op elk moment intrekken."
+        "p": "Deze website maakt gebruik van cookies. Analytische cookies (Umami) worden alleen geplaatst nadat je toestemming geeft via de cookiebanner. Je kunt je toestemming op elk moment intrekken."
       }
     }
   },
   "Consent": {
     "message": "We gebruiken anonieme analytics om de website te verbeteren en hem makkelijker te maken voor leden en bezoekers. Sta je hieraan toe?",
     "accept": "Ja, toestaan",
-    "decline": "Nee, bedankt"
+    "decline": "Nee, bedankt",
+    "settings": "Cookie-instellingen",
+    "title": "Toestemmingsinstellingen",
+    "currentAllowed": "Huidige keuze: analytics toegestaan.",
+    "currentDeclined": "Huidige keuze: analytics geweigerd.",
+    "close": "Sluiten"
+  },
+  "VideoEmbed": {
+    "notice": "Deze video wordt gehost door {provider}. Als je hem laadt, wordt je IP-adres met hen gedeeld.",
+    "load": "Video laden: {title}"
   },
   "Signup": {
     "title": "Interesseformulier",

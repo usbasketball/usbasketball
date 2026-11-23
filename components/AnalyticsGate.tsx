@@ -1,31 +1,21 @@
 "use client";
 
 import Script from "next/script";
-import { useEffect, useState } from "react";
-import { hasAnalyticsConsent } from "@/components/analytics-consent";
+import { useConsent } from "@/components/consent-provider";
 
 const UMAMI_SCRIPT_URL =
   process.env.NEXT_PUBLIC_UMAMI_SCRIPT_URL ?? "https://cloud.umami.is/script.js";
 
+/**
+ * Renders the Umami script only after an explicit analytics opt-in. Consent
+ * comes from the server-seeded provider, so returning visitors get the script
+ * in the first HTML and everyone else gets nothing.
+ */
 export function AnalyticsGate() {
-  const [enabled, setEnabled] = useState(false);
-
-  useEffect(() => {
-    const update = () => {
-      setEnabled(process.env.NODE_ENV === "production" && hasAnalyticsConsent());
-    };
-
-    update();
-    window.addEventListener("analytics-consent-changed", update);
-
-    return () => {
-      window.removeEventListener("analytics-consent-changed", update);
-    };
-  }, []);
-
+  const { has } = useConsent();
   const websiteId = process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID;
 
-  if (!enabled || !websiteId) {
+  if (process.env.NODE_ENV !== "production" || !websiteId || !has("analytics")) {
     return null;
   }
 

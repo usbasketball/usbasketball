@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
+import { VideoEmbed } from "@/components/video-embed";
 import { pageMetadata } from "@/lib/seo";
 
 type Props = {
@@ -32,40 +33,34 @@ export default async function LearningPage({ params }: Props) {
 
       <section className="mt-10">
         <h2 className="text-xl font-bold text-ink">{t("scorer.title")}</h2>
-        <div className="mt-4 aspect-video overflow-hidden border border-line bg-black">
-          <iframe
+        <div className="mt-4">
+          <VideoEmbed
             src="https://www.youtube-nocookie.com/embed/uxj8TrQrejM"
             title={t("scorer.title")}
-            allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
-            referrerPolicy="strict-origin-when-cross-origin"
-            className="h-full w-full"
-          />
+            provider="YouTube"
+            />
         </div>
       </section>
 
       <section className="mt-12">
         <h2 className="text-xl font-bold text-ink">{t("timer.big.title")}</h2>
-        <div className="mt-4 aspect-video overflow-hidden border border-line bg-black">
-          <iframe
+        <div className="mt-4">
+          <VideoEmbed
             src={`https://player.vimeo.com/video/1226066822${VIMEO_PARAMS}`}
             title={t("timer.big.title")}
-            allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
-            referrerPolicy="strict-origin-when-cross-origin"
-            className="h-full w-full"
-          />
+            provider="Vimeo"
+            />
         </div>
       </section>
 
       <section className="mt-12">
         <h2 className="text-xl font-bold text-ink">{t("timer.small.title")}</h2>
-        <div className="mt-4 aspect-video overflow-hidden border border-line bg-black">
-          <iframe
+        <div className="mt-4">
+          <VideoEmbed
             src={`https://player.vimeo.com/video/1226066832${VIMEO_PARAMS}`}
             title={t("timer.small.title")}
-            allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
-            referrerPolicy="strict-origin-when-cross-origin"
-            className="h-full w-full"
-          />
+            provider="Vimeo"
+            />
         </div>
       </section>
     </div>

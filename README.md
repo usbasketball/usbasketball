@@ -160,7 +160,7 @@ See `.env.example` for the full, commented list. In short:
 | Email | `RESEND_API_KEY`, `EMAIL_FROM` |
 | Turnstile | `NEXT_PUBLIC_TURNSTILE_SITE_KEY`, `TURNSTILE_SECRET`, `TURNSTILE_HOSTNAMES` |
 | Registration | `REGISTRATION_SECRET`, `FOYS_REGISTRATION_FORM_NL_ID`, `FOYS_REGISTRATION_FORM_EN_ID` |
-| Analytics and consent | `NEXT_PUBLIC_UMAMI_WEBSITE_ID`, `NEXT_PUBLIC_UMAMI_SCRIPT_URL`, `NEXT_PUBLIC_CMP_CONSENT_COOKIE_NAME`, `NEXT_PUBLIC_COOKIE_DOMAIN` |
+| Analytics and consent | `NEXT_PUBLIC_UMAMI_WEBSITE_ID`, `NEXT_PUBLIC_UMAMI_SCRIPT_URL`, `NEXT_PUBLIC_COOKIE_DOMAIN` |
 | Sentry | `SENTRY_AUTH_TOKEN` |
 
 `NEXT_PUBLIC_SITE_URL` must be set in production: canonical URLs, the sitemap and structured data fall back to `http://localhost:3000` without it.
