@@ -142,7 +142,7 @@ The one write path, and the template for future forms:
 ## Observability and privacy
 
 - Sentry is initialised for the browser (`instrumentation-client.ts`), Node (`sentry.server.config.ts`) and edge (`sentry.edge.config.ts`), with 10% trace sampling in production and console output forwarded as logs. Browser events go through the `/sentry-tunnel` route on the site's own domain. Server-side failures in the interest form are tagged `feature: interest_form` or `interest_form_turnstile`.
-- Analytics is opt-in. `ConsentBanner` writes a first-party consent cookie; `AnalyticsGate` injects the Umami script only in production and only after consent. The two communicate through an `analytics-consent-changed` window event.
+- Analytics is opt-in. The root layout reads the first-party `usbasketball_consent` cookie on the server (`lib/consent-server.ts`) and seeds `ConsentProvider`, so the banner and the Umami script are correct in the first HTML. `ConsentBanner` writes the cookie, `AnalyticsGate` renders the Umami script only in production and only when `useConsent().has("analytics")`, and the footer's cookie-settings button reopens the banner to change or withdraw consent (withdrawal reloads the page). Categories live in `lib/consent.ts`.
 
 ## Configuration
 

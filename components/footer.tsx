@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { getLocale, getTranslations } from "next-intl/server";
+import { ConsentSettingsButton } from "@/components/ConsentSettingsButton";
 import { Link } from "@/i18n/navigation";
 import { getSiteName, siteConfig } from "@/lib/site";
 import { auth0, authEnabled } from "@/lib/auth";
@@ -129,6 +130,7 @@ export async function Footer() {
         <Link href="/privacy" className="ml-2 transition-colors hover:text-white">
           {t("privacy")}
         </Link>
+        <ConsentSettingsButton className="ml-2 transition-colors hover:text-white" />
       </div>
     </footer>
   );

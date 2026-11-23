@@ -4,10 +4,12 @@ import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getMessages, getTranslations } from "next-intl/server";
 import { AnalyticsGate } from "@/components/AnalyticsGate";
 import { ConsentBanner } from "@/components/ConsentBanner";
+import { ConsentProvider } from "@/components/consent-provider";
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 import { JsonLd } from "@/components/json-ld";
 import { routing } from "@/i18n/routing";
+import { readConsent } from "@/lib/consent-server";
 import { organizationJsonLd, siteConfig, websiteJsonLd } from "@/lib/site";
 import "../globals.css";
 
@@ -47,6 +49,7 @@ export default async function LocaleLayout({
 }) {
   const locale = await getLocale();
   const messages = await getMessages();
+  const initialConsent = await readConsent();
 
   return (
     <html
@@ -55,16 +58,18 @@ export default async function LocaleLayout({
     >
       <body className="flex min-h-full flex-col bg-white text-ink">
         <NextIntlClientProvider messages={messages}>
-          <Header />
-          <div className="flex flex-1 flex-col lg:pl-20">
-            <main className="flex-1">{children}</main>
-            <Footer />
-          </div>
-          <ConsentBanner />
+          <ConsentProvider initialConsent={initialConsent}>
+            <Header />
+            <div className="flex flex-1 flex-col lg:pl-20">
+              <main className="flex-1">{children}</main>
+              <Footer />
+            </div>
+            <ConsentBanner />
+            <AnalyticsGate />
+          </ConsentProvider>
         </NextIntlClientProvider>
         <JsonLd data={organizationJsonLd(locale)} />
         <JsonLd data={websiteJsonLd(locale)} />
-        <AnalyticsGate />
       </body>
     </html>
   );
