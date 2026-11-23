@@ -7,8 +7,6 @@ Website for the US Basketball Amsterdam basketball club ([usbasketball.nl](https
 | Document | Contents |
 |---|---|
 | [ARCHITECTURE.md](ARCHITECTURE.md) | How the app is structured: layers, request lifecycle, integrations, conventions |
-| [docs/CRITICAL_PATHS.md](docs/CRITICAL_PATHS.md) | The code paths that matter most: dependencies, failure modes, known issues, test coverage |
-| [docs/FIX_PLAN.md](docs/FIX_PLAN.md) | Planned fixes for the known issues, grouped into pull requests |
 | [AGENTS.md](AGENTS.md) | Working conventions for contributors and coding agents |
 
 ## Tech Stack

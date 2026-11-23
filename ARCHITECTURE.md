@@ -1,6 +1,6 @@
 # Architecture
 
-How the usbasketball.nl codebase is put together: what runs where, how a request flows, where data lives, and the rules the code follows. For setup and commands see [README.md](README.md). For failure modes and known issues per path see [docs/CRITICAL_PATHS.md](docs/CRITICAL_PATHS.md); for the work planned on those issues see [docs/FIX_PLAN.md](docs/FIX_PLAN.md).
+How the usbasketball.nl codebase is put together: what runs where, how a request flows, where data lives, and the rules the code follows. For setup and commands see [README.md](README.md).
 
 ## At a glance
 
