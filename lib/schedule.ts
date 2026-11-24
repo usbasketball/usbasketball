@@ -1,57 +1,42 @@
-import type { Document } from "@contentful/rich-text-types";
-import { unstable_cache } from "next/cache";
-import { contentfulClient } from "@/lib/contentful";
+import type { TrainingSchedule as TrainingScheduleDoc } from "@/payload-types";
+import { TRAINING_SCHEDULE_TAG } from "@/lib/cms-tags";
+import { cmsRead } from "@/lib/payload";
 
-export const TRAINING_SCHEDULE_TAG = "training-schedule";
+export { TRAINING_SCHEDULE_TAG };
+
+export type ScheduleRichText = NonNullable<TrainingScheduleDoc["firstHalf"]>;
 
 export type TrainingSchedule = {
   season: string | null;
-  firstHalf: Document | null;
-  secondHalf: Document | null;
-  friday: Document | null;
-  fridayLastUpdatedAt: Date | null;
+  firstHalf: ScheduleRichText | null;
+  secondHalf: ScheduleRichText | null;
+  friday: ScheduleRichText | null;
+  // ISO string: unstable_cache round-trips values through JSON.
+  fridayLastUpdatedAt: string | null;
 };
 
-function toDocument(value: unknown): Document | null {
-  return value && typeof value === "object" ? (value as Document) : null;
-}
-
-function parseDate(value: unknown): Date | null {
+function parseDate(value: unknown): string | null {
   const raw = String(value ?? "");
   if (!raw) return null;
   const date = new Date(raw);
-  return Number.isNaN(date.getTime()) ? null : date;
+  return Number.isNaN(date.getTime()) ? null : date.toISOString();
 }
 
-async function fetchTrainingSchedule(): Promise<TrainingSchedule | null> {
-  if (!contentfulClient) return null;
-
-  try {
-    const result = await contentfulClient.getEntries({
-      content_type: "trainingSchedules",
-      limit: 1,
+export const getTrainingSchedule = cmsRead<TrainingSchedule | null>(
+  "training-schedule",
+  TRAINING_SCHEDULE_TAG,
+  async (payload) => {
+    const doc = await payload.findGlobal({
+      slug: "training-schedule",
+      depth: 0,
     });
-    const entry = result.items[0];
-    if (!entry) return null;
-
-    const fields = entry.fields as Record<string, unknown>;
     return {
-      season: String(fields.season ?? "").trim() || null,
-      firstHalf: toDocument(fields.wednesdaySchedule1stHalf),
-      secondHalf: toDocument(fields.wednesdayTrainingSchedule2ndHalf),
-      friday: toDocument(fields.fridayTrainingSchedule),
-      fridayLastUpdatedAt: parseDate(fields.fridayTrainingScheduleLastUpdatedAt),
+      season: doc.season?.trim() || null,
+      firstHalf: doc.firstHalf ?? null,
+      secondHalf: doc.secondHalf ?? null,
+      friday: doc.friday ?? null,
+      fridayLastUpdatedAt: parseDate(doc.fridayLastUpdatedAt),
     };
-  } catch (error) {
-    console.error("Failed to fetch training schedule from Contentful", error);
-    return null;
-  }
-}
-
-export const getTrainingSchedule = unstable_cache(
-  fetchTrainingSchedule,
-  ["training-schedule"],
-  {
-    tags: [TRAINING_SCHEDULE_TAG],
-  }
+  },
+  null
 );
