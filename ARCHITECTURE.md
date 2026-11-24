@@ -14,15 +14,17 @@ flowchart LR
     proxy[proxy.ts<br/>Auth0 + next-intl]
     pages[Server components<br/>app/locale/*]
     action[Server action<br/>submitInterest]
-    reval[/api/revalidate/]
+    admin[Payload admin<br/>app/payload/admin]
   end
 
   visitor --> proxy --> pages
   pages --> action
 
   proxy <--> auth0[(Auth0)]
-  pages --> contentful[(Contentful)]
-  contentful -- publish webhook --> reval
+  pages --> payload[(Payload CMS)]
+  admin -- save: revalidate tags --> payload
+  payload --> pg
+  payload --> blob[(Vercel Blob)]
   action --> turnstile[(Cloudflare Turnstile)]
   action --> pg[(PostgreSQL)]
   action --> resend[(Resend)]
@@ -34,7 +36,7 @@ flowchart LR
 | Service | Used for | Code |
 |---|---|---|
 | Auth0 | Login (Universal Login), session cookies | `lib/auth.ts`, `proxy.ts` |
-| Contentful | Training schedule, ALV documents and notes, task roster PDF | `lib/contentful.ts` and the four fetchers |
+| Payload CMS | Training schedule, ALV documents and notes, task roster PDF; admin at `/admin` | `payload.config.ts`, `payload/`, `lib/payload.ts` and the four fetchers |
 | PostgreSQL | Interest form submissions | `lib/prisma.ts`, `prisma/contract.prisma` |
 | Resend | Interest form emails | `lib/email.ts` |
 | Cloudflare Turnstile | Bot protection on the interest form | `components/turnstile.tsx`, `lib/actions/interest.ts` |
@@ -62,13 +64,13 @@ Dependencies point downward: pages import components and `lib/`; components impo
 | Route | Group | Notes |
 |---|---|---|
 | `/`, `/about`, `/committees`, `/confidential-counsellor`, `/faq`, `/learning`, `/membership`, `/privacy` | `(public)` | Static content from `messages/` |
-| `/schedule` | `(public)` | Rich text from Contentful |
+| `/schedule` | `(public)` | Rich text from Payload |
 | `/signup` | `(public)` | Interest form |
 | `/register` | `(public)` | Foys form, only with a valid signed link |
 | `/login` | `(public)` | Gateway to `/auth/login` |
 | `/me`, `/tasks`, `/alv` | `(private)` | Require an Auth0 session |
 | `/auth/login`, `/auth/logout`, `/auth/callback` | none | No files: handled by the Auth0 middleware in `proxy.ts` |
-| `/api/revalidate` | none | Contentful webhook |
+| `/admin`, `/api/*` | `(payload)` | Payload admin and REST API; own root layout, skipped by `proxy.ts` |
 | `/sitemap.xml`, `/robots.txt`, `/llms.txt` | none | Generated metadata routes |
 
 All pages sit under `app/[locale]/`. The route groups `(public)` and `(private)` only organise files; they do not add a URL segment or any behaviour. `app/[locale]/[...rest]/page.tsx` catches unknown paths so the 404 page is localized. `app/[locale]/layout.tsx` is the root layout (there is no `app/layout.tsx`): fonts, header, footer, consent banner, JSON-LD and the analytics gate.
@@ -93,7 +95,7 @@ Styling is Tailwind v4 with theme tokens defined in `app/globals.css` (`ink`, `p
 - Locales `en` and `nl`, defined once in `i18n/routing.ts`.
 - All UI strings live in `messages/en.json` and `messages/nl.json`, namespaced per page or component. Server code uses `getTranslations` / `getFormatter`; client components use `useTranslations`.
 - Links and redirects go through `i18n/navigation.ts` so the locale prefix is added automatically. The exception is the Auth0 routes, which are plain `<a>` tags because they must be full-page navigations and have no locale.
-- Contentful content is single-language. Emails pick their language from the locale submitted with the form.
+- CMS content is single-language. Emails pick their language from the locale submitted with the form.
 
 ## Authentication and access
 
@@ -110,16 +112,18 @@ PostgreSQL, accessed through experimental Prisma 8 contracts. `prisma/contract.p
 
 The contract defines `InterestSubmission`, `User`, `ClubMembership`, `CompetitionTeam` and `Match`. This app only uses `InterestSubmission`; the other models are not referenced by any code here.
 
-### Contentful
+### Payload CMS
 
-One guarded client (`lib/contentful.ts`, `null` when unconfigured) and four fetchers that share one shape:
+Payload runs inside the same Next.js app: the admin and REST API live in the `app/(payload)/` route group (its own root layout, excluded from `proxy.ts`), the schema in `payload.config.ts` and `payload/`. Its tables sit in the `payload` schema of the same PostgreSQL database, separate from Prisma's `public` tables. Uploads (PDFs) go to Vercel Blob. Editors authenticate through Auth0 (`payload/auth0-strategy.ts`, allowlist in `PAYLOAD_ADMIN_EMAILS`).
 
-- fetch one content type and map its fields to a small typed object,
-- catch all errors and return `null` or `[]`,
-- wrap the function in `unstable_cache` with a tag and no expiry,
-- export the tag so `app/api/revalidate/route.ts` can invalidate it.
+Four fetchers share one shape through `cmsRead` in `lib/payload.ts`:
 
-Pages render an empty state for `null`/`[]`. Content only refreshes when Contentful calls the webhook on publish, or on a new deploy.
+- read one global or collection with the Payload Local API and map it to a small typed object,
+- wrap the read in `unstable_cache` with a tag and no expiry,
+- return the empty value (`null` or `[]`) when Payload is unconfigured (`payloadEnabled()`) or the read fails, without caching either case,
+- tags are defined in `lib/cms-tags.ts`; an `afterChange` hook on the source collection or global revalidates them.
+
+Pages render an empty state for `null`/`[]`. Content refreshes as soon as an editor saves, or on a new deploy.
 
 ### Static content
 
@@ -148,7 +152,7 @@ The one write path, and the template for future forms:
 
 All configuration is environment variables, documented in `.env.example`. Two conventions matter:
 
-- **Unset-safe.** Auth0, Contentful, Turnstile and Umami may all be missing; the build and the public pages must still work. New integrations should follow the same pattern (a guard function or a nullable client).
+- **Unset-safe.** Auth0, Payload, Turnstile and Umami may all be missing; the build and the public pages must still work. New integrations should follow the same pattern (a guard function or a nullable client).
 - **Public vs. server.** Only `NEXT_PUBLIC_*` values reach the browser. `lib/site.ts` reads the public ones once and exports them as `siteConfig`.
 
 ## Build, test and deploy
@@ -166,4 +170,4 @@ The working rules for contributors and coding agents are in [AGENTS.md](AGENTS.m
 - Navigate with `@/i18n/navigation`, never `next/navigation`; write redirects as `return redirect({ href, locale })`.
 - Use the `auth0` and `db` singletons; never construct a client in a page or component.
 - Put server actions in `lib/actions/` and return translatable error keys.
-- Give every Contentful fetcher a cache tag and register it in the revalidate route.
+- Give every CMS fetcher a cache tag (`lib/cms-tags.ts`) and revalidate it from an `afterChange` hook on its collection or global.
