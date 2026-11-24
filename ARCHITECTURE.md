@@ -35,6 +35,7 @@ flowchart LR
 |---|---|---|
 | Auth0 | Login (Universal Login), session cookies | `lib/auth.ts`, `proxy.ts` |
 | Contentful | Training schedule, ALV documents and notes, task roster PDF | `lib/contentful.ts` and the four fetchers |
+| Payload CMS | Admin at `/admin`; content imported from Contentful, not yet read by the site | `payload.config.ts`, `payload/` |
 | PostgreSQL | Interest form submissions | `lib/prisma.ts`, `prisma/contract.prisma` |
 | Resend | Interest form emails | `lib/email.ts` |
 | Cloudflare Turnstile | Bot protection on the interest form | `components/turnstile.tsx`, `lib/actions/interest.ts` |
@@ -69,6 +70,7 @@ Dependencies point downward: pages import components and `lib/`; components impo
 | `/me`, `/tasks`, `/alv` | `(private)` | Require an Auth0 session |
 | `/auth/login`, `/auth/logout`, `/auth/callback` | none | No files: handled by the Auth0 middleware in `proxy.ts` |
 | `/api/revalidate` | none | Contentful webhook |
+| `/admin`, `/api/*` | `(payload)` | Payload admin and REST API; own root layout, skipped by `proxy.ts` |
 | `/sitemap.xml`, `/robots.txt`, `/llms.txt` | none | Generated metadata routes |
 
 All pages sit under `app/[locale]/`. The route groups `(public)` and `(private)` only organise files; they do not add a URL segment or any behaviour. `app/[locale]/[...rest]/page.tsx` catches unknown paths so the 404 page is localized. `app/[locale]/layout.tsx` is the root layout (there is no `app/layout.tsx`): fonts, header, footer, consent banner, JSON-LD and the analytics gate.
@@ -120,6 +122,10 @@ One guarded client (`lib/contentful.ts`, `null` when unconfigured) and four fetc
 - export the tag so `app/api/revalidate/route.ts` can invalidate it.
 
 Pages render an empty state for `null`/`[]`. Content only refreshes when Contentful calls the webhook on publish, or on a new deploy.
+
+### Payload CMS (being introduced)
+
+Payload runs inside the same Next.js app: the admin and REST API live in the `app/(payload)/` route group (its own root layout, excluded from `proxy.ts`), the schema in `payload.config.ts` and `payload/`. Its tables sit in the `payload` schema of the same PostgreSQL database, separate from Prisma's `public` tables, and uploads go to Vercel Blob. Editors authenticate through Auth0 (`payload/auth0-strategy.ts`, allowlist in `PAYLOAD_ADMIN_EMAILS`). The public pages do not read from it yet; saving in the admin revalidates the cache tags in `lib/cms-tags.ts` (the same tags the Contentful fetchers use).
 
 ### Static content
 
