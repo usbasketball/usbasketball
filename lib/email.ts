@@ -152,7 +152,7 @@ export async function sendInterestConfirmation(
   const locale = toLocale(data);
   const isNl = locale === "nl";
 
-  // TODO: Make mid-season capacity notes / recruitment updates configurable via CMS (e.g. Contentful) without code changes
+  // TODO: Make mid-season capacity notes / recruitment updates configurable via CMS (e.g. Payload) without code changes
   const intro = isNl
     ? `<p>Hoi ${escapeHtml(data.name)},</p>
        <p>Bedankt voor je interesse in U.S. Basketbal! We hebben je aanmelding ontvangen.</p>
