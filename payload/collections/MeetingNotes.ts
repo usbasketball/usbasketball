@@ -1,11 +1,16 @@
 import type { CollectionConfig } from "payload";
 import { ALV_NOTES_TAG } from "@/lib/cms-tags";
+import { writeAccess } from "../access";
+import { CMS_PERMISSIONS } from "../permissions";
 import { revalidateTags } from "../revalidate";
 
 export const MeetingNotes: CollectionConfig = {
   slug: "meeting-notes",
   admin: { useAsTitle: "title" },
-  access: { read: ({ req }) => Boolean(req.user) },
+  access: {
+    read: ({ req }) => Boolean(req.user),
+    ...writeAccess(CMS_PERMISSIONS.alv),
+  },
   hooks: {
     afterChange: [
       ({ doc }) => {

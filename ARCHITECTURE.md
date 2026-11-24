@@ -36,7 +36,7 @@ flowchart LR
 | Service | Used for | Code |
 |---|---|---|
 | Auth0 | Login (Universal Login), session cookies | `lib/auth.ts`, `proxy.ts` |
-| Payload CMS | Training schedule, ALV documents and notes, task roster PDF; admin at `/admin` | `payload.config.ts`, `payload/`, `lib/payload.ts` and the four fetchers |
+| Payload CMS | Training schedule, ALV documents and notes, task roster PDF, recruitment notice (signup page + confirmation email); admin at `/admin` | `payload.config.ts`, `payload/`, `lib/payload.ts` and the four fetchers |
 | PostgreSQL | Interest form submissions | `lib/prisma.ts`, `prisma/contract.prisma` |
 | Resend | Interest form emails | `lib/email.ts` |
 | Cloudflare Turnstile | Bot protection on the interest form | `components/turnstile.tsx`, `lib/actions/interest.ts` |
@@ -101,7 +101,7 @@ Styling is Tailwind v4 with theme tokens defined in `app/globals.css` (`ink`, `p
 
 - `lib/auth.ts` exports the `Auth0Client` singleton and `authEnabled()`, which is true only when all four `AUTH0_*` variables are set. Every use of the client is guarded by it, so the app runs without Auth0 configured (`/auth/*` then returns 503).
 - Sessions are encrypted cookies managed by the SDK; this app stores no user records.
-- Authorization is binary: a page either requires a session or does not. There are no roles. Each private page performs the check itself.
+- Authorization is binary: a page either requires a session or does not. There are no roles in the app. Each private page performs the check itself. The exception is the CMS admin: editing needs an Auth0 permission (`write:cms_recruitment` for the recruitment notice), read from the access token (needs `AUTH0_AUDIENCE`) and enforced by `payload/access.ts`.
 - `/register` uses a different mechanism because its audience has no account yet: an expiring HMAC-signed link (`lib/registration-link.ts`), with the secret shared with bestuur.
 
 ## Data and content
