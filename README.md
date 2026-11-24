@@ -18,7 +18,7 @@ Website for the US Basketball Amsterdam basketball club ([usbasketball.nl](https
 | i18n | next-intl (locale routing, EN + NL, default NL) |
 | Auth | Auth0 (`@auth0/nextjs-auth0` v4), Universal Login |
 | DB | PostgreSQL + Prisma 8 contracts (`@prisma/orm-postgres`) |
-| CMS | Contentful (training schedule, ALV documents and notes, task roster PDF) |
+| CMS | Contentful (training schedule, ALV documents and notes, task roster PDF); Payload CMS is being introduced at `/admin` |
 | Email | Resend (interest form confirmation and notification) |
 | Bot protection | Cloudflare Turnstile (interest form) |
 | Monitoring | Sentry (errors, traces, logs; EU region) |
@@ -83,6 +83,7 @@ app/
     [...rest]/         catch-all that renders the localized 404
     layout.tsx         locale-aware root layout (Inter + Bebas Neue, header, footer,
                        consent banner, JSON-LD, analytics gate)
+  (payload)/           Payload admin (/admin) and REST API (/api/*), own root layout
   api/revalidate/      Contentful webhook: revalidates all Contentful cache tags
   llms.txt/            plain-text club summary for AI crawlers
   sitemap.ts, robots.ts, global-error.tsx
@@ -141,6 +142,15 @@ Contentful holds the content the club updates without code changes:
 
 UI labels are translated via `messages/`; Contentful content is single-language. Results are cached with no expiry and refreshed only by the webhook: configure a Contentful webhook on publish events that POSTs to `<SITE_URL>/api/revalidate` with `CONTENTFUL_WEBHOOK_SECRET` in the `x-webhook-secret` header.
 
+## Payload CMS (admin, not yet used for reads)
+
+Payload is embedded in the app at `/admin`. The public pages still read Contentful; a follow-up change switches them over. Until then Payload only needs to be set up and populated.
+
+- **Access.** Editors sign in with the same Auth0 login as members. Only emails in `PAYLOAD_ADMIN_EMAILS` (comma-separated) are let in, their Auth0 email must be verified, and a Payload user is created for each on startup. There are no Payload passwords. The admin "Log out" button ends the Auth0 session.
+- **Storage.** Payload uses `DATABASE_URL` but keeps its tables in a separate `payload` Postgres schema. Migrations in `payload/migrations/` apply automatically on first start in production; in development Payload syncs the schema itself. PDFs are uploads in `media`, stored in Vercel Blob (`BLOB_READ_WRITE_TOKEN`; locally they go to `./media`).
+- **Content.** Global `training-schedule`, global `tasks-pdf`, collections `alv-documents` and `meeting-notes`.
+- **Import.** `POST /api/import-contentful` (signed in as an editor) copies the existing Contentful content into Payload. It is a dry run unless called with `?dryRun=false`, needs `CONTENTFUL_*` set, and can be re-run safely. It is temporary and is removed after cutover.
+
 ## Database
 
 The schema is defined in `prisma/contract.prisma` (experimental Prisma 8 contracts). After editing it, run `npm run db:generate`. Application code uses the `db` singleton from `@/lib/prisma`. This app currently only writes `InterestSubmission`.
@@ -155,6 +165,7 @@ See `.env.example` for the full, commented list. In short:
 | Auth0 | `AUTH0_DOMAIN`, `AUTH0_CLIENT_ID`, `AUTH0_CLIENT_SECRET`, `AUTH0_SECRET`, `APP_BASE_URL` |
 | Site | `NEXT_PUBLIC_SITE_URL`, `NEXT_PUBLIC_SITE_NAME`, `NEXT_PUBLIC_CONTACT_EMAIL`, `NEXT_PUBLIC_SECRETARIAT_EMAIL`, `NEXT_PUBLIC_TC_EMAIL` |
 | Contentful | `CONTENTFUL_SPACE_ID`, `CONTENTFUL_ENVIRONMENT`, `CONTENTFUL_ACCESS_TOKEN`, `CONTENTFUL_WEBHOOK_SECRET` |
+| Payload CMS | `PAYLOAD_SECRET`, `PAYLOAD_ADMIN_EMAILS`, `BLOB_READ_WRITE_TOKEN` |
 | Email | `RESEND_API_KEY`, `EMAIL_FROM` |
 | Turnstile | `NEXT_PUBLIC_TURNSTILE_SITE_KEY`, `TURNSTILE_SECRET`, `TURNSTILE_HOSTNAMES` |
 | Registration | `REGISTRATION_SECRET`, `FOYS_REGISTRATION_FORM_NL_ID`, `FOYS_REGISTRATION_FORM_EN_ID` |

@@ -15,6 +15,10 @@ const eslintConfig = defineConfig([
     // Prisma 8 generated artifacts:
     "prisma/contract.json",
     "prisma/contract.d.ts",
+    // Payload generated artifacts:
+    "payload/migrations/**",
+    "payload-types.ts",
+    "app/(payload)/admin/importMap.js",
   ]),
 ]);
 
