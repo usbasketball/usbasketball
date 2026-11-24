@@ -5,7 +5,7 @@ export const auth0 = new Auth0Client({
 });
 
 // Keep the app functional (and buildable) without Auth0 credentials, mirroring
-// the guarded Contentful client. The SDK throws at request time when unset.
+// the guarded Payload client. The SDK throws at request time when unset.
 export function authEnabled() {
   return Boolean(
     process.env.AUTH0_DOMAIN &&

@@ -20,7 +20,6 @@
   },
   "dependencies": {
     "@auth0/nextjs-auth0": "^4.27.0",
-    "@contentful/rich-text-react-renderer": "^16.2.2",
     "@payloadcms/db-postgres": "3.94.1",
     "@payloadcms/next": "3.94.1",
     "@payloadcms/richtext-lexical": "3.94.1",
@@ -29,7 +28,6 @@
     "@sentry/nextjs": "^10.70.0",
     "@vercel/analytics": "^2.0.1",
     "@vercel/speed-insights": "^2.0.0",
-    "contentful": "^11.12.9",
     "dotenv": "^17.4.2",
     "graphql": "16.15.0",
     "next": "16.4.6",

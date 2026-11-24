@@ -18,7 +18,7 @@ Website for the US Basketball Amsterdam basketball club ([usbasketball.nl](https
 | i18n | next-intl (locale routing, EN + NL, default NL) |
 | Auth | Auth0 (`@auth0/nextjs-auth0` v4), Universal Login |
 | DB | PostgreSQL + Prisma 8 contracts (`@prisma/orm-postgres`) |
-| CMS | Contentful (training schedule, ALV documents and notes, task roster PDF); Payload CMS is being introduced at `/admin` |
+| CMS | Payload CMS, embedded at `/admin` (training schedule, ALV documents and notes, task roster PDF) |
 | Email | Resend (interest form confirmation and notification) |
 | Bot protection | Cloudflare Turnstile (interest form) |
 | Monitoring | Sentry (errors, traces, logs; EU region) |
@@ -41,7 +41,7 @@ Prerequisites: Node.js 22 (the version CI uses) and, for the interest form, acce
    cp .env.example .env
    ```
 
-   Every integration is optional locally: without Auth0, Contentful, Turnstile or database settings the app still builds and serves the public pages, and the affected features show an empty or unavailable state. To use login, fill in the `AUTH0_*` variables and generate the session secret with:
+   Every integration is optional locally: without Auth0, Payload, Turnstile or database settings the app still builds and serves the public pages, and the affected features show an empty or unavailable state. To use login, fill in the `AUTH0_*` variables and generate the session secret with:
 
    ```bash
    openssl rand -hex 32
@@ -84,7 +84,6 @@ app/
     layout.tsx         locale-aware root layout (Inter + Bebas Neue, header, footer,
                        consent banner, JSON-LD, analytics gate)
   (payload)/           Payload admin (/admin) and REST API (/api/*), own root layout
-  api/revalidate/      Contentful webhook: revalidates all Contentful cache tags
   llms.txt/            plain-text club summary for AI crawlers
   sitemap.ts, robots.ts, global-error.tsx
 components/            navigation, footer, interest form, Turnstile widget, Foys registration
@@ -94,8 +93,8 @@ lib/
   actions/interest.ts  server action behind the interest form
   auth.ts              Auth0 client singleton + authEnabled()
   prisma.ts            database singleton (`db`)
-  contentful.ts        guarded Contentful client
-  schedule.ts, alv-documents.ts, alv-notes.ts, tasks-pdf.ts   cached Contentful fetchers
+  payload.ts, cms-tags.ts   unset-safe Payload client, `cmsRead` cache helper, cache tags
+  schedule.ts, alv-documents.ts, alv-notes.ts, tasks-pdf.ts   cached Payload fetchers
   email.ts             Resend emails for the interest form
   registration-link.ts HMAC verification for /register links
   site.ts, seo.ts      site config, JSON-LD and metadata helpers
@@ -129,27 +128,28 @@ The `/register` page is gated by expiring signed links. It verifies the `expires
 
 The link generator (an HMAC-SHA256 signing script) lives in the [usbasketball/bestuur](https://github.com/usbasketball/bestuur) repo/service. `REGISTRATION_SECRET` must match on both sides; set it in Vercel env vars for deployed environments. Treat generated links as bearer tokens — anyone who has one can register until it expires.
 
-## Contentful
+## Content (Payload CMS)
 
-Contentful holds the content the club updates without code changes:
+Payload is embedded in the app. Editors manage the content the club updates without code changes at `/admin`:
 
-| Content | Content type | Page |
+| Content | Payload | Page |
 |---|---|---|
-| Wednesday and Friday training schedules | `trainingSchedules` | `/schedule` |
-| Documents for the upcoming ALV | `alvDocumenten` | `/alv` |
-| ALV notes archive | `meetingNote` | `/alv` |
-| Task roster PDF | `takenschemaPdf` | `/tasks` |
+| Wednesday and Friday training schedules | global `training-schedule` | `/schedule` |
+| Documents for the upcoming ALV | collection `alv-documents` | `/alv` |
+| ALV notes archive | collection `meeting-notes` | `/alv` |
+| Task roster PDF | global `tasks-pdf` | `/tasks` |
 
-UI labels are translated via `messages/`; Contentful content is single-language. Results are cached with no expiry and refreshed only by the webhook: configure a Contentful webhook on publish events that POSTs to `<SITE_URL>/api/revalidate` with `CONTENTFUL_WEBHOOK_SECRET` in the `x-webhook-secret` header.
+PDFs are uploads in the `media` collection, stored in Vercel Blob (`BLOB_READ_WRITE_TOKEN`; without it local dev writes to `./media`).
 
-## Payload CMS (admin, not yet used for reads)
+**Access.** Editors sign in with the same Auth0 login as members. Only emails listed in `PAYLOAD_ADMIN_EMAILS` (comma-separated) are let in, their Auth0 email must be verified, and a Payload user is created for each on startup. There are no Payload passwords, and the admin "Log out" button ends the Auth0 session. Payload's REST API requires an editor session; the site itself reads content through the Local API.
 
-Payload is embedded in the app at `/admin`. The public pages still read Contentful; a follow-up change switches them over. Until then Payload only needs to be set up and populated.
+**Storage.** Payload uses `DATABASE_URL` but keeps its tables in a separate `payload` Postgres schema, away from Prisma's. Migrations in `payload/migrations/` are applied automatically on first start in production; in development Payload syncs the schema itself.
 
-- **Access.** Editors sign in with the same Auth0 login as members. Only emails in `PAYLOAD_ADMIN_EMAILS` (comma-separated) are let in, their Auth0 email must be verified, and a Payload user is created for each on startup. There are no Payload passwords. The admin "Log out" button ends the Auth0 session.
-- **Storage.** Payload uses `DATABASE_URL` but keeps its tables in a separate `payload` Postgres schema. Migrations in `payload/migrations/` apply automatically on first start in production; in development Payload syncs the schema itself. PDFs are uploads in `media`, stored in Vercel Blob (`BLOB_READ_WRITE_TOKEN`; locally they go to `./media`).
-- **Content.** Global `training-schedule`, global `tasks-pdf`, collections `alv-documents` and `meeting-notes`.
-- **Import.** `POST /api/import-contentful` (signed in as an editor) copies the existing Contentful content into Payload. It is a dry run unless called with `?dryRun=false`, needs `CONTENTFUL_*` set, and can be re-run safely. It is temporary and is removed after cutover.
+**Import.** `POST /api/import-contentful` (signed in as an editor) copies the existing Contentful content into Payload. It is a dry run unless called with `?dryRun=false`, needs `CONTENTFUL_*` set, and can be re-run safely. Remove it, together with the `CONTENTFUL_*` variables, once cutover is done.
+
+**Caching.** Reads are cached with no expiry and refreshed when an editor saves: each collection/global invalidates its cache tag from an `afterChange` hook, so there is no webhook to configure.
+
+UI labels are translated via `messages/`; CMS content is single-language.
 
 ## Database
 
@@ -164,7 +164,6 @@ See `.env.example` for the full, commented list. In short:
 | Database | `DATABASE_URL` |
 | Auth0 | `AUTH0_DOMAIN`, `AUTH0_CLIENT_ID`, `AUTH0_CLIENT_SECRET`, `AUTH0_SECRET`, `APP_BASE_URL` |
 | Site | `NEXT_PUBLIC_SITE_URL`, `NEXT_PUBLIC_SITE_NAME`, `NEXT_PUBLIC_CONTACT_EMAIL`, `NEXT_PUBLIC_SECRETARIAT_EMAIL`, `NEXT_PUBLIC_TC_EMAIL` |
-| Contentful | `CONTENTFUL_SPACE_ID`, `CONTENTFUL_ENVIRONMENT`, `CONTENTFUL_ACCESS_TOKEN`, `CONTENTFUL_WEBHOOK_SECRET` |
 | Payload CMS | `PAYLOAD_SECRET`, `PAYLOAD_ADMIN_EMAILS`, `BLOB_READ_WRITE_TOKEN` |
 | Email | `RESEND_API_KEY`, `EMAIL_FROM` |
 | Turnstile | `NEXT_PUBLIC_TURNSTILE_SITE_KEY`, `TURNSTILE_SECRET`, `TURNSTILE_HOSTNAMES` |
