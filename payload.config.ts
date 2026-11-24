@@ -12,7 +12,6 @@ import { AlvDocuments } from "./payload/collections/AlvDocuments";
 import { MeetingNotes } from "./payload/collections/MeetingNotes";
 import { Media } from "./payload/collections/Media";
 import { Users } from "./payload/collections/Users";
-import { importContentfulEndpoint } from "./payload/endpoints/importContentful";
 import { migrations } from "./payload/migrations";
 import { TasksPdf } from "./payload/globals/TasksPdf";
 import { TrainingSchedule } from "./payload/globals/TrainingSchedule";
@@ -29,8 +28,6 @@ export default buildConfig({
   },
   collections: [Users, Media, AlvDocuments, MeetingNotes],
   globals: [TrainingSchedule, TasksPdf],
-  // Temporary: one-off Contentful import. Remove after cutover.
-  endpoints: [importContentfulEndpoint],
   editor: lexicalEditor({
     features: ({ defaultFeatures }) => [
       ...defaultFeatures,

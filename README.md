@@ -145,8 +145,6 @@ PDFs are uploads in the `media` collection, stored in Vercel Blob (`BLOB_READ_WR
 
 **Storage.** Payload uses `DATABASE_URL` but keeps its tables in a separate `payload` Postgres schema, away from Prisma's. Migrations in `payload/migrations/` are applied automatically on first start in production; in development Payload syncs the schema itself.
 
-**Import.** `POST /api/import-contentful` (signed in as an editor) copies the existing Contentful content into Payload. It is a dry run unless called with `?dryRun=false`, needs `CONTENTFUL_*` set, and can be re-run safely. Remove it, together with the `CONTENTFUL_*` variables, once cutover is done.
-
 **Caching.** Reads are cached with no expiry and refreshed when an editor saves: each collection/global invalidates its cache tag from an `afterChange` hook, so there is no webhook to configure.
 
 UI labels are translated via `messages/`; CMS content is single-language.
