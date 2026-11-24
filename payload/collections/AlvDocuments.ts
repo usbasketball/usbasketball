@@ -1,12 +1,17 @@
 import type { CollectionConfig } from "payload";
 import { ALV_DOCUMENTS_TAG } from "@/lib/cms-tags";
+import { writeAccess } from "../access";
+import { CMS_PERMISSIONS } from "../permissions";
 import { revalidateTags } from "../revalidate";
 
 export const AlvDocuments: CollectionConfig = {
   slug: "alv-documents",
   labels: { singular: "ALV documents", plural: "ALV documents" },
   admin: { useAsTitle: "year" },
-  access: { read: ({ req }) => Boolean(req.user) },
+  access: {
+    read: ({ req }) => Boolean(req.user),
+    ...writeAccess(CMS_PERMISSIONS.alv),
+  },
   hooks: {
     afterChange: [
       ({ doc }) => {

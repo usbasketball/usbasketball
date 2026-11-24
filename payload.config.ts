@@ -13,6 +13,7 @@ import { MeetingNotes } from "./payload/collections/MeetingNotes";
 import { Media } from "./payload/collections/Media";
 import { Users } from "./payload/collections/Users";
 import { migrations } from "./payload/migrations";
+import { RecruitmentNotice } from "./payload/globals/RecruitmentNotice";
 import { TasksPdf } from "./payload/globals/TasksPdf";
 import { TrainingSchedule } from "./payload/globals/TrainingSchedule";
 
@@ -27,7 +28,7 @@ export default buildConfig({
     },
   },
   collections: [Users, Media, AlvDocuments, MeetingNotes],
-  globals: [TrainingSchedule, TasksPdf],
+  globals: [TrainingSchedule, TasksPdf, RecruitmentNotice],
   editor: lexicalEditor({
     features: ({ defaultFeatures }) => [
       ...defaultFeatures,

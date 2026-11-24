@@ -1,5 +1,6 @@
 import { Resend } from "resend";
 
+import { getRecruitmentNotice, pickNotice, type NoticeContent } from "@/lib/recruitment-notice";
 import { siteConfig } from "@/lib/site";
 
 const fromAddress =
@@ -146,32 +147,32 @@ function wrapper(inner: string): string {
   `;
 }
 
+function noticeHtml(notice: NoticeContent): string {
+  const spots = notice.spots.length
+    ? `<ul style="margin:8px 0 16px 20px;padding:0;">${notice.spots
+        .map((s) => `<li><strong>${escapeHtml(s.label)}:</strong> ${escapeHtml(s.text)}</li>`)
+        .join("")}</ul>`
+    : "";
+  return `<p><strong>${escapeHtml(notice.title)}</strong><br />${escapeHtml(notice.intro)}</p>${spots}${notice.outro
+    .map((p) => `<p>${escapeHtml(p)}</p>`)
+    .join("")}`;
+}
+
 export async function sendInterestConfirmation(
   data: InterestSubmissionData
 ): Promise<void> {
   const locale = toLocale(data);
   const isNl = locale === "nl";
 
-  // TODO: Make mid-season capacity notes / recruitment updates configurable via CMS (e.g. Payload) without code changes
-  const intro = isNl
+  const cms = pickNotice(await getRecruitmentNotice(), locale);
+  const greeting = isNl
     ? `<p>Hoi ${escapeHtml(data.name)},</p>
-       <p>Bedankt voor je interesse in U.S. Basketbal! We hebben je aanmelding ontvangen.</p>
-       <p><strong>Belangrijke update halverwege het seizoen:</strong><br />
-       We zitten momenteel halverwege het seizoen en de werving is bijna afgerond. Er zijn nog maar zeer beperkt plekken beschikbaar:</p>
-       <ul style="margin:8px 0 16px 20px;padding:0;">
-         <li><strong>Heren:</strong> H1 en vrije training (recreanten) die trainen in de Du Midi-hal.</li>
-         <li><strong>Dames:</strong> D1 en D6.</li>
-       </ul>
-       <p>Alleen spelers die goed aansluiten bij deze openstaande plekken ontvangen mogelijk een reactie van onze Technische Commissie. Voor overige teams en niveaus opent de werving weer aan het einde van dit seizoen (rond mei) of bij de start van volgend seizoen (rond september).</p>`
+       <p>Bedankt voor je interesse in U.S. Basketbal! We hebben je aanmelding ontvangen.</p>`
     : `<p>Hi ${escapeHtml(data.name)},</p>
-       <p>Thanks for your interest in US Basketball! We have received your submission.</p>
-       <p><strong>Important mid-season update:</strong><br />
-       We are currently mid-season and recruitment is almost complete. Spots are very limited:</p>
-       <ul style="margin:8px 0 16px 20px;padding:0;">
-         <li><strong>Men:</strong> H1 and free training members (recreational) who train at Du Midi hall.</li>
-         <li><strong>Women:</strong> D1 and D6.</li>
-       </ul>
-       <p>Only applicants who match our remaining openings may receive a response from our Technical Committee. For other teams and levels, recruitment will reopen towards the end of this season (around May) or at the start of next season (around September).</p>`;
+       <p>Thanks for your interest in US Basketball! We have received your submission.</p>`;
+  const notice =
+    cms ? noticeHtml(cms) : "";
+  const intro = `${greeting}${notice}`;
 
   const outro = isNl
     ? `<p>De informatie die je hebt ingevuld kan worden ingezien door het bestuur en de technische commissie van U.S. Basketball en wordt alleen gebruikt om een geschikt team voor je te zoeken.</p>`

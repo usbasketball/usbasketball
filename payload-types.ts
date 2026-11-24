@@ -94,10 +94,12 @@ export interface Config {
   globals: {
     'training-schedule': TrainingSchedule;
     'tasks-pdf': TasksPdf;
+    'recruitment-notice': RecruitmentNotice;
   };
   globalsSelect: {
     'training-schedule': TrainingScheduleSelect<false> | TrainingScheduleSelect<true>;
     'tasks-pdf': TasksPdfSelect<false> | TasksPdfSelect<true>;
+    'recruitment-notice': RecruitmentNoticeSelect<false> | RecruitmentNoticeSelect<true>;
   };
   locale: null;
   widgets: {
@@ -160,6 +162,7 @@ export interface User {
 export interface Media {
   id: number;
   alt?: string | null;
+  _objectKey?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -312,6 +315,7 @@ export interface UsersSelect<T extends boolean = true> {
  */
 export interface MediaSelect<T extends boolean = true> {
   alt?: T;
+  _objectKey?: T;
   updatedAt?: T;
   createdAt?: T;
   url?: T;
@@ -459,6 +463,55 @@ export interface TasksPdf {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "recruitment-notice".
+ */
+export interface RecruitmentNotice {
+  id: number;
+  /**
+   * Show the capacity note on the signup page and in the confirmation email.
+   */
+  enabled?: boolean | null;
+  en: {
+    title: string;
+    intro: string;
+    spots?:
+      | {
+          /**
+           * E.g. Men / Women
+           */
+          label: string;
+          text: string;
+          id?: string | null;
+        }[]
+      | null;
+    /**
+     * Separate paragraphs with a blank line.
+     */
+    outro?: string | null;
+  };
+  nl: {
+    title: string;
+    intro: string;
+    spots?:
+      | {
+          /**
+           * E.g. Men / Women
+           */
+          label: string;
+          text: string;
+          id?: string | null;
+        }[]
+      | null;
+    /**
+     * Separate paragraphs with a blank line.
+     */
+    outro?: string | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "training-schedule_select".
  */
 export interface TrainingScheduleSelect<T extends boolean = true> {
@@ -477,6 +530,44 @@ export interface TrainingScheduleSelect<T extends boolean = true> {
  */
 export interface TasksPdfSelect<T extends boolean = true> {
   file?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "recruitment-notice_select".
+ */
+export interface RecruitmentNoticeSelect<T extends boolean = true> {
+  enabled?: T;
+  en?:
+    | T
+    | {
+        title?: T;
+        intro?: T;
+        spots?:
+          | T
+          | {
+              label?: T;
+              text?: T;
+              id?: T;
+            };
+        outro?: T;
+      };
+  nl?:
+    | T
+    | {
+        title?: T;
+        intro?: T;
+        spots?:
+          | T
+          | {
+              label?: T;
+              text?: T;
+              id?: T;
+            };
+        outro?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

@@ -1,10 +1,15 @@
 import type { GlobalConfig } from "payload";
 import { TRAINING_SCHEDULE_TAG } from "@/lib/cms-tags";
+import { writeAccess } from "../access";
+import { CMS_PERMISSIONS } from "../permissions";
 import { revalidateTags } from "../revalidate";
 
 export const TrainingSchedule: GlobalConfig = {
   slug: "training-schedule",
-  access: { read: ({ req }) => Boolean(req.user) },
+  access: {
+    read: ({ req }) => Boolean(req.user),
+    update: writeAccess(CMS_PERMISSIONS.schedule).update,
+  },
   hooks: {
     afterChange: [
       ({ doc }) => {
