@@ -24,7 +24,8 @@ export const auth0Strategy: AuthStrategy = {
 
     const session = await auth0.getSession();
     const email = session?.user?.email?.toLowerCase();
-    if (!email || session?.user?.email_verified === false) return { user: null };
+    // Fail closed: the claim must be present and true, not merely not-false.
+    if (!email || session?.user?.email_verified !== true) return { user: null };
     if (!allowed.includes(email)) return { user: null };
 
     const existing = await payload.find({
